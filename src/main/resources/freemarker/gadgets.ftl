@@ -1,3 +1,44 @@
+<#macro showEvents>
+    <ul>
+    <#list events as event>
+        <#if event.type = "topic">
+            <@showTopicEvent event />
+        </#if>
+        <#if event.type = "plan">
+            <@showPlanEvent event />
+        </#if>
+        <#if event.type = "post">
+            <@showPostEvent event />
+        </#if>
+    </#list>
+    </ul>
+</#macro>
+
+<#macro showTopicEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a topic: <a href="http://www.tissue.com/u2/plan/topics/${event.object.id}">${event.object.title}</a> 
+        at: ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showPlanEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a plan in <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}"> ${event.target.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showPostEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a post: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+
 <#macro showPagedNav>
     <#if (pagedData.totalPages > 1)>
     <div>

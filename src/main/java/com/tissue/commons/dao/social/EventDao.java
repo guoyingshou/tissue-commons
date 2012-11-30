@@ -6,4 +6,5 @@ import java.util.List;
 public interface EventDao {
     Event addEvent(Event event);
     List<Event> getFriendsEvents(String userId);
+    List<Event> getRelatedEvents(String userId);
 }

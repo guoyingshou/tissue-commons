@@ -39,6 +39,7 @@ public class EventDaoImpl implements EventDao {
             eventDoc.field("type", event.getType());
             eventDoc.field("actor", new ORecordId(ridActor));
             eventDoc.field("object", event.getObject());
+            eventDoc.field("target", event.getTarget());
 
             List<User> users = event.getNotifies();
             if(users != null) {
@@ -62,9 +63,33 @@ public class EventDaoImpl implements EventDao {
         return event;
     }
 
+    public List<Event> getRelatedEvents(String userId) {
+        List<Event> events = null;
+
+        String ridUser = OrientIdentityUtil.decode(userId);
+
+        String sql = "select from event where actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies";
+
+        System.out.println("sql: " + sql);
+        OGraphDatabase db = dataSource.getDB();
+        try {
+            OSQLSynchQuery<ODocument> q = new OSQLSynchQuery(sql);
+            List<ODocument> eventsDoc = db.query(q);
+            events = EventConverter.buildEvents(eventsDoc);
+        }
+        catch(Exception exc) {
+            //to do
+            exc.printStackTrace();
+        }
+        finally {
+            db.close();
+        }
+        return events;
+    }
     public List<Event> getFriendsEvents(String userId) {
         List<Event> events = new ArrayList();
 
+        /**
         String ridUser = OrientIdentityUtil.decode(userId);
 
         String sqlFriend = "select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser;
@@ -100,6 +125,7 @@ public class EventDaoImpl implements EventDao {
         finally {
             db.close();
         }
+        */
         return events;
     }
 }
