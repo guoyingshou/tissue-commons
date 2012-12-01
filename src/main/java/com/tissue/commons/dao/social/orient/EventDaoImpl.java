@@ -30,26 +30,9 @@ public class EventDaoImpl implements EventDao {
 
     public Event addEvent(Event event) {
 
-        String ridActor = OrientIdentityUtil.decode(event.getActor().getId());
-
         OGraphDatabase db = dataSource.getDB();
         try {
-            ODocument eventDoc = new ODocument("Event");
-            eventDoc.field("published", event.getPublished());
-            eventDoc.field("type", event.getType());
-            eventDoc.field("actor", new ORecordId(ridActor));
-            eventDoc.field("object", event.getObject());
-            eventDoc.field("target", event.getTarget());
-
-            List<User> users = event.getNotifies();
-            if(users != null) {
-                Set<ORecordId> notifiesDoc = new HashSet();
-                for(User user : users) {
-                    String ridUser = OrientIdentityUtil.decode(user.getId());
-                    notifiesDoc.add(new ORecordId(ridUser));
-                }
-                eventDoc.field("notifies", notifiesDoc);
-            }
+            ODocument eventDoc = EventConverter.convertEvent(event);
             eventDoc.save();
             event.setId(OrientIdentityUtil.encode(eventDoc.getIdentity().toString()));
         }
@@ -67,10 +50,8 @@ public class EventDaoImpl implements EventDao {
         List<Event> events = null;
 
         String ridUser = OrientIdentityUtil.decode(userId);
-
         String sql = "select from event where actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies";
 
-        System.out.println("sql: " + sql);
         OGraphDatabase db = dataSource.getDB();
         try {
             OSQLSynchQuery<ODocument> q = new OSQLSynchQuery(sql);

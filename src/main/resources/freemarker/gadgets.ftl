@@ -7,8 +7,17 @@
         <#if event.type = "plan">
             <@showPlanEvent event />
         </#if>
-        <#if event.type = "post">
-            <@showPostEvent event />
+        <#if event.type = "concept">
+            <@showConceptEvent event />
+        </#if>
+        <#if event.type = "note">
+            <@showNoteEvent event />
+        </#if>
+        <#if event.type = "tutorial">
+            <@showTutorialEvent event />
+        </#if>
+        <#if event.type = "question">
+            <@showQuestionEvent event />
         </#if>
     </#list>
     </ul>
@@ -30,13 +39,39 @@
     </li>
 </#macro>
 
-<#macro showPostEvent event>
+<#macro showConceptEvent event>
     <li>
         <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a post: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        created a concept: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
+
+<#macro showNoteEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a note: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showTutorialEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a tutorial: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showQuestionEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        asked a question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+
 
 
 <#macro showPagedNav>

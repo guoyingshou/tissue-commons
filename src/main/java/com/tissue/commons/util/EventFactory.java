@@ -5,6 +5,7 @@ import com.tissue.domain.profile.User;
 import com.tissue.domain.plan.Topic;
 import com.tissue.domain.plan.Plan;
 import com.tissue.domain.plan.Post;
+import com.tissue.domain.plan.Answer;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -85,7 +86,7 @@ public class EventFactory {
         }
 
         Event event = new Event();
-        event.setType("post");
+        event.setType(post.getType());
         event.setPublished(post.getCreateTime());
         event.setActor(actor);
         event.setObject(object);
@@ -95,5 +96,48 @@ public class EventFactory {
         return event;
     }
 
+    public static Event createEvent(Answer answer) {
+        User actor = answer.getUser();
+
+        Map object = new HashMap();
+        object.put("id", answer.getQuestion().getId());
+        object.put("title", answer.getQuestion().getTitle());
+
+        Map target = new HashMap();
+        target.put("id", answer.getQuestion().getPlan().getTopic().getId());
+        target.put("title", answer.getQuestion().getPlan().getTopic().getTitle());
+
+        //retrieve all users that need to be notified
+        List<User> notifies = new ArrayList();
+        User questionOwner = answer.getQuestion().getUser();
+
+        System.out.println("actor: " + actor);
+        System.out.println("owner: " + questionOwner);
+
+        if(!actor.getId().equals(questionOwner.getId())) {
+            notifies.add(questionOwner);
+        }
+        //a newly created plan may have no members
+        List<User>  members = answer.getQuestion().getPlan().getMembers();
+        if(members != null) {
+            for(User user : members) {
+                if(!actor.getId().equals(user.getId())) {
+                    notifies.add(user);
+                }
+            }
+        }
+
+        Event event = new Event();
+        event.setType("answer");
+        event.setPublished(answer.getCreateTime());
+        event.setActor(actor);
+
+        event.setObject(object);
+        event.setTarget(target);
+
+        event.setNotifies(notifies);
  
+        return event;
+
+    }
 }
