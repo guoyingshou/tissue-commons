@@ -16,10 +16,25 @@
         <#if event.type = "tutorial">
             <@showTutorialEvent event />
         </#if>
-        <#if event.type = "question">
+        <#if event.type = "postMessage">
+            <@showPostMessageEvent event />
+        </#if>
+         <#if event.type = "postMessageComment">
+            <@showPostMessageCommentEvent event />
+        </#if>
+         <#if event.type = "question">
             <@showQuestionEvent event />
         </#if>
-    </#list>
+         <#if event.type = "questionComment">
+            <@showQuestionCommentEvent event />
+        </#if>
+        <#if event.type = "answer">
+            <@showAnswerEvent event />
+        </#if>
+        <#if event.type = "answerComment">
+            <@showAnswerCommentEvent event />
+        </#if>
+     </#list>
     </ul>
 </#macro>
 
@@ -63,10 +78,51 @@
     </li>
 </#macro>
 
+<#macro showPostMessageEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        leave a message to: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showPostMessageCommentEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        has commented a message in: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+
 <#macro showQuestionEvent event>
     <li>
         <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
         asked a question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showQuestionCommentEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        has commented a question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showAnswerEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        answer a question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showAnswerCommentEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        has commented an answer in question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
