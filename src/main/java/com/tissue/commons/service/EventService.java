@@ -14,8 +14,8 @@ public class EventService {
     @Autowired
     private EventDao eventDao;
 
-    public List<Event> getRelatedEvents(String userId) {
-        return eventDao.getRelatedEvents(userId);
+    public List<Event> getTopicRelatedEvents(String userId) {
+        return eventDao.getTopicRelatedEvents(userId);
     }
 
     public List<Event> getFriendsEvents(String userId) {

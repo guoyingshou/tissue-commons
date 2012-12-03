@@ -2,6 +2,7 @@ package com.tissue.commons.util;
 
 import com.tissue.domain.social.Event;
 import com.tissue.domain.profile.User;
+import com.tissue.domain.profile.Invitation;
 import com.tissue.domain.plan.Topic;
 import com.tissue.domain.plan.Plan;
 import com.tissue.domain.plan.Post;
@@ -53,6 +54,47 @@ public class EventFactory {
  
         Event event = new Event();
         event.setType("plan");
+        event.setPublished(plan.getCreateTime());
+        event.setActor(actor);
+        event.setObject(object);
+        event.setTarget(target);
+        event.setNotifies(notifies);
+
+        return event;
+    }
+
+    public static Event createEvent(Plan plan, User user) {
+        User actor = user;
+
+        Map object = new HashMap();
+        object.put("id", user.getId());
+        object.put("displayName", user.getDisplayName());
+
+        Map target = new HashMap();
+        target.put("id", plan.getTopic().getId());
+        target.put("title", plan.getTopic().getTitle());
+
+        List<User> notifies = new ArrayList();
+        User topicOwner = plan.getTopic().getUser();
+        if(!actor.getId().equals(topicOwner.getId())) {
+            notifies.add(topicOwner);
+        }
+        User planOwner = plan.getUser();
+        if(!actor.getId().equals(planOwner.getId())) {
+            notifies.add(planOwner);
+        }
+        //a newly created plan may have no members
+        List<User>  members = plan.getMembers();
+        if(members != null) {
+            for(User member : members) {
+                if(!actor.getId().equals(member.getId())) {
+                    notifies.add(member);
+                }
+            }
+        }
+
+        Event event = new Event();
+        event.setType("members");
         event.setPublished(plan.getCreateTime());
         event.setActor(actor);
         event.setObject(object);
@@ -308,6 +350,42 @@ public class EventFactory {
         event.setNotifies(notifies);
  
         return event;
-
     }
+
+    /**
+     * Generate 2 event for an accepted invitation.
+     * acceptEvent: invitee has accepted the invitation from invitor; 
+     * acceptedEvent: invitor's invitation has been accepted by invitee.
+     */
+    public static List<Event> createEvents(Invitation invitation) {
+        List<Event> events = new ArrayList();
+
+        User invitor = invitation.getInvitor();
+        User invitee = invitation.getInvitee();
+
+        Map object1 = new HashMap();
+        object1.put("id", invitor.getId());
+        object1.put("displayName", invitor.getDisplayName());
+
+        Event event1 = new Event();
+        event1.setType("accept");
+        event1.setPublished(invitation.getUpdateTime());
+        event1.setActor(invitee);
+        event1.setObject(object1);
+        events.add(event1);
+
+        Map object2 = new HashMap();
+        object2.put("id", invitee.getId());
+        object2.put("displayName", invitee.getDisplayName());
+
+        Event event2 = new Event();
+        event2.setType("accepted");
+        event2.setPublished(invitation.getUpdateTime());
+        event2.setActor(invitor);
+        event2.setObject(object2);
+        events.add(event2);
+
+        return events;
+    }
+
 }

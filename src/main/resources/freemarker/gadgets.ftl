@@ -1,4 +1,4 @@
-<#macro showEvents>
+<#macro showTopicRelatedEvents>
     <ul>
     <#list events as event>
         <#if event.type = "topic">
@@ -6,6 +6,9 @@
         </#if>
         <#if event.type = "plan">
             <@showPlanEvent event />
+        </#if>
+         <#if event.type = "members">
+            <@showPlanMembersEvent event />
         </#if>
         <#if event.type = "concept">
             <@showConceptEvent event />
@@ -50,6 +53,14 @@
     <li>
         <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
         created a plan in <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}"> ${event.target.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showPlanMembersEvent event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        joined a plan in <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}"> ${event.target.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
@@ -123,6 +134,40 @@
     <li>
         <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
         has commented an answer in question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showFriendsEvents>
+    <ul>
+    <#list events as event>
+ 
+        <#if event.type = 'accept'>
+            <@showAcceptEvents event />
+        </#if>
+        <#if event.type = 'accepted'>
+            <@showAcceptedEvents event />
+        </#if>
+
+    </#list>
+</#macro>
+
+<#macro showAcceptEvents event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        become a friend with <a href="http://www.tissue.com/u1/profile/users/${event.object.id}">${event.object.displayName}</a> 
+        at : ${event.published?datetime}
+    </li>
+</#macro>
+
+<#macro showAcceptedEvents event>
+    <li>
+        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        <#if viewer.id = event.object.id>
+            has accepted my invitation
+        <#else>
+            become a friend with <a href="http://www.tissue.com/u1/profile/users/${event.object.id}">${event.object.displayName}</a> 
+        </#if>
         at : ${event.published?datetime}
     </li>
 </#macro>
