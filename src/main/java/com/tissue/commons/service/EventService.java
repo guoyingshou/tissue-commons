@@ -22,4 +22,9 @@ public class EventService {
         return eventDao.getFriendsEvents(userId);
     }
 
+    public List<Event> getLatestEvents() {
+        return eventDao.getLatestEvents();
+    }
+
+
 }

@@ -92,4 +92,28 @@ public class EventDaoImpl implements EventDao {
         return events;
  
     }
+
+    public List<Event> getLatestEvents() {
+        List<Event> events = null;
+
+        String sql = "select from event where type in ['topic', 'plan', 'members'] order by createTime desc limit 50";
+
+        System.out.println(sql);
+        OGraphDatabase db = dataSource.getDB();
+        try {
+            OSQLSynchQuery<ODocument> q = new OSQLSynchQuery(sql);
+            List<ODocument> eventsDoc = db.query(q);
+
+            events = EventConverter.buildEvents(eventsDoc);
+        }
+        catch(Exception exc) {
+            //to do
+            exc.printStackTrace();
+        }
+        finally {
+            db.close();
+        }
+        return events;
+ 
+    }
 }

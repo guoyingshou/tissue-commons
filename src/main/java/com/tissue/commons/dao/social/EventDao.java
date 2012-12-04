@@ -7,4 +7,5 @@ public interface EventDao {
     void addEvent(Event ... event);
     List<Event> getTopicRelatedEvents(String userId);
     List<Event> getFriendsEvents(String userId);
+    List<Event> getLatestEvents();
 }

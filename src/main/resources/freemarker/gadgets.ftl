@@ -41,6 +41,22 @@
     </ul>
 </#macro>
 
+<#macro showLatestEvents>
+    <ul>
+    <#list events as event>
+        <#if event.type = "topic">
+            <@showTopicEvent event />
+        </#if>
+        <#if event.type = "plan">
+            <@showPlanEvent event />
+        </#if>
+         <#if event.type = "members">
+            <@showPlanMembersEvent event />
+        </#if>
+     </#list>
+    </ul>
+</#macro>
+
 <#macro showTopicEvent event>
     <li>
         <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
