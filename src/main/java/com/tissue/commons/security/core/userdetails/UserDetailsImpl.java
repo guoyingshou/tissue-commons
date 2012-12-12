@@ -7,14 +7,6 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.GrantedAuthority;
 
-/**
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize.Inclusion;
-
-@JsonIgnoreProperties(ignoreUnknown=true)
-@JsonSerialize(include=Inclusion.NON_NULL)
-*/
 public class UserDetailsImpl implements UserDetails {
 
     public static enum Gender {

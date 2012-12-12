@@ -131,6 +131,10 @@ public class EventFactory {
             }
         }
 
+        System.out.println("generating event...");
+        System.out.println("type: " + post.getType());
+        System.out.println("time: " + post.getCreateTime());
+
         Event event = new Event();
         event.setType(post.getType());
         event.setPublished(post.getCreateTime());

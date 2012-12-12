@@ -14,12 +14,9 @@
             <li><a href="http://www.tissue.com/u2/plan/exploreTopics">actions</a></li>
         </ul>
         <ul class="action">
-            <#if canInvite>
+            <#if canInvite??>
             <li><a href="http://www.tissue.com/u1/profile/users/${owner.id}/invites">invite</a></li>
             </#if>
-            <#--
-            <li><a href="http://www.tissue.com/u1/profile/users/${owner.id}/messages">send message</a></li>
-            -->
         </ul>
     </div>
 </#macro>
@@ -49,7 +46,7 @@
     </div>
 </#macro>
 
-<#macro topicLogo>
+<#macro topicLogo topic>
   <h1><a href="http://www.tissue.com/u2/plan/topics/${topic.id}">${topic.title}</a></h1>
   <div>
       <ul class="menu">
@@ -58,7 +55,10 @@
           <li><a class="ajx" href="/u2/plan/topics/${topic.id}/question">Questions</a></li>
           <li><a class="ajx" href="/u2/plan/topics/${topic.id}/tutorial">Tutorials</a></li>
       </ul>
-      <ul class="action">
+
+      <#--
+      <#if viewer??>
+      <ul id="topicActionMenu" class="action">
           <li>
               <#if topic.activePlan??>
                   <#if topic.activePlan.isOwnerOrMember(viewer.id)>
@@ -71,18 +71,57 @@
               </#if>
           </li>
       </ul>
+      </#if>
+      <script type="text/javascript">
+          $(document).ready(function() {
+              $('#topicActionMenu a.ajx').on('click', function(e) {
+                  e.preventDefault();
+                  $('#content').load(this.href);
+              });
+          });
+      </script>
+      -->
   </div>
 </#macro>
 
 <#macro showActivePlan>
-    <div>
-        <h4>Active Plan</h4>
-        <#if topic.activePlan??>
-            <p><a class="ajx" href="<@spring.url '/plan/plans/${topic.activePlan.id}'/>">${topic.activePlan.createTime?date}</a></p>
-            <p>duration: ${topic.activePlan.duration} Months</p>
-            <p>created by: ${topic.activePlan.user.displayName}</p>
+    <div id="activePlan">
+    <#if activePlan??>
+        <#if viewer??>
+            <#if activePlan.isOwnerOrMember(viewer.id)>
+                <a class="ajx" href="<@spring.url '/plan/plans/${activePlan.id}/posts'/>">new post</a>
+            <#else>
+                <a href="<@spring.url '/plan/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
+            </#if> 
         </#if>
+
+        <h4>Active Study Group</h4>
+        <div class="groupInfo">
+            <p><a href="<@spring.url '/plan/plans/${activePlan.id}'/>">${activePlan.createTime?date}</a></p>
+            <p>duration: ${activePlan.duration} Months</p>
+            <p>created by: ${activePlan.user.displayName}</p>
+        </div>
+        <#if activePlan.members??>
+        <div class="groupMembers">
+            <#list activePlan.members as member>
+                ${member.displayName}
+            </#list>
+        </div>
+        </#if>
+     <#else>
+        <a class="ajx" href="<@spring.url '/plan/topics/${topic.id}/plans'/>">create plan</a>
+    </#if>
     </div>
+
+    <script type="text/javascript">
+          $(document).ready(function() {
+              $('#activePlan a.ajx').on('click', function(e) {
+                  e.preventDefault();
+                  $('#content').load(this.href);
+              });
+          });
+    </script>
+ 
 </#macro>
 
 <#macro showDeadPlans>
