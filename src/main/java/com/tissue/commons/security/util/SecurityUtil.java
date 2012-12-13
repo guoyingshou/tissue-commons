@@ -1,6 +1,5 @@
 package com.tissue.commons.security.util;
 
-import com.tissue.commons.security.Viewer;
 import com.tissue.commons.security.core.userdetails.UserDetailsImpl;
 
 import org.springframework.security.core.context.SecurityContextHolder;
