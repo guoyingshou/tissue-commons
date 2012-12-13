@@ -46,7 +46,7 @@
     </div>
 </#macro>
 
-<#macro topicLogo topic>
+<#macro topicLogo>
   <h1><a href="http://www.tissue.com/u2/plan/topics/${topic.id}">${topic.title}</a></h1>
   <div>
       <ul class="menu">
@@ -55,32 +55,6 @@
           <li><a class="ajx" href="/u2/plan/topics/${topic.id}/question">Questions</a></li>
           <li><a class="ajx" href="/u2/plan/topics/${topic.id}/tutorial">Tutorials</a></li>
       </ul>
-
-      <#--
-      <#if viewer??>
-      <ul id="topicActionMenu" class="action">
-          <li>
-              <#if topic.activePlan??>
-                  <#if topic.activePlan.isOwnerOrMember(viewer.id)>
-                      <a class="ajx" href="<@spring.url '/plan/plans/${topic.activePlan.id}/posts'/>">new post</a>
-                  <#else>
-                      <a href="<@spring.url '/plan/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">join</a>
-                  </#if>
-              <#else>
-                  <a class="ajx" href="<@spring.url '/plan/topics/${topic.id}/plans'/>">create plan</a>
-              </#if>
-          </li>
-      </ul>
-      </#if>
-      <script type="text/javascript">
-          $(document).ready(function() {
-              $('#topicActionMenu a.ajx').on('click', function(e) {
-                  e.preventDefault();
-                  $('#content').load(this.href);
-              });
-          });
-      </script>
-      -->
   </div>
 </#macro>
 

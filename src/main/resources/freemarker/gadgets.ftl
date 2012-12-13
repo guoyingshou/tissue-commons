@@ -350,74 +350,64 @@
 </#macro>
 
 
+<#macro showPager>
+    <#assign pages = (pager.total / pager.size)?ceiling />
+    <#if (pages > 1)>
+        <div class="pager">
+           <#if (pager.current > 1)>
+              <a href="?page=${pager.current-1}&size=${pager.size}">prev</a>
+           </#if>
 
+           <#if (pages < 7)>
+              <#list 1..pages as page>
+                  <#if (page = pager.current)>
+                      <span class="cur">
+                  <#else> 
+                      <span>
+                  </#if>
+                  <a href="?page=${page}&size=${pager.size}">${page}</a></span>
+              </#list>
+           <#else>
+              <#if (pager.current < 5)>
+                  <#list 1..5 as page>
+                      <#if (page = pager.current)>
+                          <span class="cur">
+                      <#else>
+                          <span>
+                      </#if>
+                          <a href="?page=${page}&size=${pager.size}">${page}</a></span>
+                  </#list>
+                  ...<span>${pages}</span>
+              <#else>
+                  <#if ((pager.current +3) >= pages)>
+                      <span>1</span>...
+                      <#list (pages - 4)..pages as page>
+                          <#if (page = pager.current)>
+                              <span class="cur">
+                          <#else>
+                              <span>
+                          </#if> 
+                          <a href="?page=${page}&size=${pager.size}">${page}</a></span>
+                      </#list>
+                  <#else>
+                      <span>1</span>...
+                      <#list (pager.current - 2)..(pager.current +2) as page>
+                          <#if (page = pager.current)>
+                              <span class="cur">
+                          <#else>
+                              <span>
+                          </#if>
+                          <a href="?page=${page}&size=${pager.size}">${page}</a></span>
+                      </#list>
+                      ...<span>${pages}</span>
+                  </#if>
+              </#if>
+           </#if>
 
-
-
-<#macro showPagedNav>
-    <#if (pagedData.totalPages > 1)>
-    <div>
-        <#if (pagedData.currentPage > 1)>
-        <span>
-            <a href="?page=${pagedData.currentPage -1}&pageSize=${pagedData.pageSize}<#if type??>&type=${type}</#if><#if currentPlan??>&plan=${currentPlan.id}</#if>">prev</a>
-        </span> 
-        <#if (pagedData.startPage !=1)>
-        <span>
-            <a href="?page=1&pageSize=${pagedData.pageSize}<#if type??>&type=${type}</#if><#if currentPlan??>&plan=${currentPlan.id}</#if>">1</a></span><span>...</span>
-        </#if>
-        </#if>
-
-        <#list pagedData.pagesList as page>
-        
-        <#if (page = pagedData.currentPage)>
-        <span class="selected">
-            <a href="?page=${page}&pageSize=${pagedData.pageSize}<#if type??>&type=${type}</#if><#if currentPlan??>&plan=${currentPlan.id}</#if>">${page}</a>
-        </span>
-        <#else>
-        <span>
-            <a href="?page=${page}&pageSize=${pagedData.pageSize}<#if type??>&type=${type}</#if><#if currentPlan??>&plan=${currentPlan.id}</#if>">${page}</a>
-        </span>
-        </#if>
-
-       </#list>
-
-       <#if (pagedData.endPage < pagedData.totalPages)>
-       <span>...</span>
-       <span>
-           <a href="?page=${pagedData.totalPages}&pageSize=${pagedData.pageSize}<#if type??>&type=${type}</#if><#if currentPlan??>&plan=${currentPlan.id}</#if>">${pagedData.totalPages}</a>
-       </span>
-       </#if>
-       <#if (pagedData.currentPage < pagedData.totalPages) >
-       <span>
-           <a href="?page=${pagedData.currentPage + 1}&pageSize=${pagedData.pageSize}<#if type??>&type=${type}</#if><#if currentPlan??>&plan=${currentPlan.id}</#if>">next</a>
-       </span>
-       </#if>
-    </div>
+           <#if (pager.current < pages)>
+              <a href="?page=${pager.current+1}&size=${pager.size}">next</a>
+           </#if>
+        </div>
     </#if>
 </#macro>
 
-<#macro showPagedTopics>
-    <div class="pagedTopics">
-        <ul>
-            <#list pagedData.pagedItems as topic>
-                <li>
-                   <a href="http://www.tissue.com/u2/plan/topics/${topic.id}">${topic.title}</a>
-                </li>
-            </#list>
-        </u>
-    </div>
-    <@showPagedNav />
-</#macro>
-
-<#macro showPagedPosts>
-    <div class="pagedPosts">
-        <ul>
-            <#list pagedData.pagedItems as post>
-                <li>
-                   <a href="?post=${post.id}">${post.title}</a>
-                </li>
-            </#list>
-        </u>
-    </div>
-    <@showPagedNav />
-</#macro>
