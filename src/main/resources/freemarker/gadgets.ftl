@@ -201,10 +201,12 @@
 </#macro>
 
 <#macro showPostDetail>
-<div id="postDetail">
-    <h3>title: ${post.title}</h3>
-    <p class="author">user: ${post.user.displayName}</p>
-    <p class="entry">content: ${post.content}</p>
+    <div class="article">
+        <h3>title: ${post.title}</h3>
+        <p class="author">user: ${post.user.displayName}</p>
+        <p class="entry">content: ${post.content}</p>
+        <p><a class="edit" href="#">edit</a></p>
+    </div>
 
     <div class="message">
         <#if post.messages??>
@@ -241,15 +243,16 @@
     </div>
 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-    <form id="messageForm" action="<@spring.url '/plan/posts/${post.id}/messages' />" method="post"> 
-        <fieldset>
-            <legend>Leave a message</legend>
-            <textarea id="messagecontent" name="content" cols="60" rows="20"></textarea>
-            <input type="submit" value="submit" />
-        </fieldset>
-    </form>
+    <div class="action">
+        <form id="messageForm" action="<@spring.url '/plan/posts/${post.id}/messages' />" method="post"> 
+            <fieldset>
+                <legend>Leave a message</legend>
+                <textarea id="messagecontent" name="content" cols="60" rows="20"></textarea>
+                <input type="submit" value="submit" />
+            </fieldset>
+        </form>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function() {
                 CKEDITOR.replace('messagecontent');
 
@@ -259,22 +262,29 @@
                     $target.toggle();
                     return false;
                 });
+
+                $('a.edit').on('click', function() {
+                    var url = "<@spring.url '/plan/posts/${post.id}/edit'/>";
+                    $('#content').load(url);
+                   
+                });
             });
-    </script>
-
+        </script>
+    </div>
     </#if>
-</div>
-
 </#macro>
 
 
 <#macro showQuestionDetail>
-<div id="questionDetail">
-    <h3>title: ${post.title}</h3>
-    <p class="author">user: ${post.user.displayName}</p>
-    <p class="entry">content: ${post.content}</p>
+    <div class="article">
+        <h3>title: ${post.title}</h3>
+        <p class="author">user: ${post.user.displayName}</p>
+        <p class="entry">content: ${post.content}</p>
+        <p><a class="edit" href="#">edit</a></p>
+    </div>
+
     <#if post.comments??>
-        <div>
+    <div class="commentList">
             <h2>comments: </h2>
             <ul>
                 <#list post.comments as questionComment>
@@ -283,18 +293,18 @@
                    </li>
                 </#list>
             </ul>
-        </div>
+    </div>
     </#if>
 
-    <div>
+    <div class="commentAction">
         <p><a class="comment" href="#">comment</a></p>
-        <form class="commentForm" action="<@spring.url '/plan/questions/${post.id}/comments'/>" method="post">
+        <form class="commentForm" action="<@spring.url '/plan/posts/${post.id}/comments'/>" method="post">
             <textarea name="content"></textarea>
             <input type="submit" value="submit" />
         </form>
     </div>
  
-    <div class="answers">
+    <div class="answersList">
         <#if post.answers??>
             <h2>answers: </h2>
             <ul>
@@ -326,15 +336,16 @@
         </#if>
     </div>
 
-    <form id="answerForm" action="<@spring.url '/plan/posts/${post.id}/answers'/>" method="post" > 
-        <fieldset>
-            <legend>Your Answer </legend>
-            <textarea id="answer" name="content" cols="60" rows="20"></textarea>
-            <input type="submit" value="submit" />
-        </fieldset>
-    </form>
+    <div class="answerAction">
+        <form id="answerForm" action="<@spring.url '/plan/posts/${post.id}/answers'/>" method="post" > 
+            <fieldset>
+                <legend>Your Answer </legend>
+                <textarea id="answer" name="content" cols="60" rows="20"></textarea>
+                <input type="submit" value="submit" />
+            </fieldset>
+        </form>
 
-    <script type="text/javascript">
+        <script type="text/javascript">
             $(document).ready(function() {
                 CKEDITOR.replace('answer');
 
@@ -344,11 +355,16 @@
                     $target.toggle();
                     return false;
                 });
-            });
-    </script>
-</div>
-</#macro>
 
+                $('a.edit').on('click', function() {
+                    var url = "<@spring.url '/plan/posts/${post.id}/edit'/>";
+                    $('#content').load(url);
+                });
+
+            });
+        </script>
+    </div>
+</#macro>
 
 <#macro showPager>
     <#assign pages = (pager.total / pager.size)?ceiling />
