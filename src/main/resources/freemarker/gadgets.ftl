@@ -205,7 +205,7 @@
         <h3>title: ${post.title}</h3>
         <p class="author">user: ${post.user.displayName}</p>
         <p class="entry">content: ${post.content}</p>
-        <p><a class="edit" href="#">edit</a></p>
+        <p><a class="edit" href="<@spring.url '/plan/posts/${post.id}/edit' />">edit</a></p>
     </div>
 
     <div class="message">
@@ -262,12 +262,6 @@
                     $target.toggle();
                     return false;
                 });
-
-                $('a.edit').on('click', function() {
-                    var url = "<@spring.url '/plan/posts/${post.id}/edit'/>";
-                    $('#content').load(url);
-                   
-                });
             });
         </script>
     </div>
@@ -280,7 +274,7 @@
         <h3>title: ${post.title}</h3>
         <p class="author">user: ${post.user.displayName}</p>
         <p class="entry">content: ${post.content}</p>
-        <p><a class="edit" href="#">edit</a></p>
+        <p><a class="edit" href="<@spring.url '/plan/posts/${post.id}/edit' />">edit</a></p>
     </div>
 
     <#if post.comments??>
@@ -355,12 +349,6 @@
                     $target.toggle();
                     return false;
                 });
-
-                $('a.edit').on('click', function() {
-                    var url = "<@spring.url '/plan/posts/${post.id}/edit'/>";
-                    $('#content').load(url);
-                });
-
             });
         </script>
     </div>

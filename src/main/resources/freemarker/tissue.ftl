@@ -47,13 +47,14 @@
 </#macro>
 
 <#macro topicLogo>
-  <h1><a href="http://www.tissue.com/u2/plan/topics/${topic.id}">${topic.title}</a></h1>
+  <h1><a href="http://www.tissue.com/u2/plan/topics/${topic.id}/posts">${topic.title}</a></h1>
   <div>
       <ul class="menu">
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/concept">Concepts</a></li>
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/note">Notes</a></li>
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/question">Questions</a></li>
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/tutorial">Tutorials</a></li>
+          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/concept/posts">Concepts</a></li>
+          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/note/posts">Notes</a></li>
+          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/question/posts">Questions</a></li>
+          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/tutorial/posts">Tutorials</a></li>
+          <li><a class="ajx" href="/u2/plan/topics/${topic.id}">Objective</a></li>
       </ul>
   </div>
 </#macro>
