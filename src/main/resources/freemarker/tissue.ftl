@@ -41,7 +41,44 @@
             <li><a href="http://www.tissue.com/u2/plan/exploreTimeline">Timeline</a></li>
         </ul>
         <ul class="action">
-            <li><a href="http://www.tissue.com/u2/plan/topics">New Topic</a></li>
+            <li><a class="topicForm" href="<@spring.url '/plan/topics' />">New Topic</a></li>
+            <div class="topicForm" style="display: none">
+                <form action="<@spring.url '/plan/topics' />" method="post">
+                    <fieldset class="topic">
+                        <legend>your topic</legend>
+                        <ul>
+                            <li>
+                               <label for="title">title</label>
+                               <input type="input" id="title" name="title" />
+                            </li>
+                            <li>
+                               <label for="topiccontent">objective</label>
+                               <textarea id="topiccontent" name="content"></textarea>
+                            </li>
+                            <li>
+                               <label for="tags">tags</label>
+                               <input type="input" id="tags" name="tags" />
+                            </li>
+                            <li>
+                               <input type="submit" value="submit" />
+                            </li>
+                        </ul>
+                    </fieldset>
+                </form>
+            </div>
+
+            <script type="text/javascript">
+                     $(document).ready(function() {
+                         $('a.topicForm').on('click', function(e) {
+                             e.preventDefault();
+                             var $f = $('div.topicForm').show();
+                             $('#contentInner').replaceWith($f);
+                             if(!CKEDITOR.instances.topiccontent) {
+                                 CKEDITOR.replace('topiccontent');
+                             }
+                         });
+                     });
+            </script>
         </ul>
     </div>
 </#macro>
@@ -64,7 +101,46 @@
     <#if activePlan??>
         <#if viewer??>
             <#if activePlan.isOwnerOrMember(viewer.id)>
-                <a class="ajx" href="<@spring.url '/plan/plans/${activePlan.id}/posts'/>">new post</a>
+                <a class="postForm" href="<@spring.url '/plan/plans/${activePlan.id}/posts'/>">new post</a>
+                <div class="postForm" style="display: none">
+                    <form action="<@spring.url '/plan/plans/${activePlan.id}/posts'/>" method="post">
+                        <fieldset>
+                            <legend>please select post type</legend>
+                            <label>Concept  <input type="radio" name="type" value="concept"/></label>
+                            <label>Note  <input type="radio" name="type" value="note"/></label>
+                            <label>Question  <input type="radio" name="type" value="question"/></label>
+                            <label>Tutorial  <input type="radio" name="type" value="tutorial"/></label>
+                        </fieldset>
+                        <fieldset class="post">
+                            <legend>your post</legend>
+                            <ul>
+                                <li>
+                                    <label for="title">title</label>
+                                    <input type="input" id="title" name="title" />
+                                </li>
+                                <li>
+                                    <label for="postcontent">content</label>
+                                    <textarea id="postcontent" name="content"></textarea>
+                                </li>
+                                <li>
+                                    <input type="submit" value="submit" />
+                                </li>
+                            </ul>
+                        </fieldset>
+                    </form>
+                 </div>
+                 <script type="text/javascript">
+                     $(document).ready(function() {
+                         $('a.postForm').on('click', function(e) {
+                             e.preventDefault();
+                             var $f = $('div.postForm').show();
+                             $('#contentInner').replaceWith($f);
+                             if(!CKEDITOR.instances.postcontent){
+                                 CKEDITOR.replace('postcontent');
+                             }
+                         });
+                     });
+                 </script>
             <#else>
                 <a href="<@spring.url '/plan/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
             </#if> 
@@ -83,20 +159,39 @@
             </#list>
         </div>
         </#if>
-     <#else>
-        <a class="ajx" href="<@spring.url '/plan/topics/${topic.id}/plans'/>">create plan</a>
+    <#else>
+        <a class="planForm" href="<@spring.url '/plan/topics/${topic.id}/plans'/>">create plan</a>
+        <div id="planForm" style="display: none">
+            <form action="<@spring.url '/plan/topics/${topic.id}/plans' />" method="post">
+                <fieldset>
+                    <legend>please select a duration</legend>
+                    <ul>
+                        <li>
+                            <label><input type="radio" name="duration" value="1"/>1 Mon</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="duration" value="3"/>3 Mon</label>
+                        </li>
+                        <li>
+                            <label><input type="radio" name="duration" value="6"/>6 Mon</label>
+                        </li>
+                    </ul>
+                </fieldset>
+                <input type="submit" value="submit" />
+            </form>
+        </div>
+                 <script type="text/javascript">
+                     $(document).ready(function() {
+                         $('a.planForm').on('click', function(e) {
+                             e.preventDefault();
+                             var $f = $('div#planForm').show();
+                             $('#contentInner').replaceWith($f);
+                         });
+                     });
+                 </script>
     </#if>
     </div>
 
-    <script type="text/javascript">
-          $(document).ready(function() {
-              $('#activePlan a.ajx').on('click', function(e) {
-                  e.preventDefault();
-                  $('#content').load(this.href);
-              });
-          });
-    </script>
- 
 </#macro>
 
 <#macro showDeadPlans>
