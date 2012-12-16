@@ -215,7 +215,21 @@
                 <#list post.messages as msg>
                     <li>
                         <div>
-                            <div>${msg.content}</div>
+                            <div class="msg-content">
+                                <div id="c${msg.id}">${msg.content}</div>
+                                
+                                <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+                                <div class="msg-action">
+                                    <a id="${msg.id}" class="msg-edit" href="#">edit</a>
+                                    <a class="comment" href="#">comment</a> 
+                                    <form style="display: none" class="commentForm" action= "<@spring.url '/plan/posts/${post.id}/messages/${msg.id}/comments'/>" method="post">
+                                        <textarea name="content"></textarea>
+                                        <input type="submit" value="submit" />
+                                    </form>
+                                </div>
+                                </#if>
+
+                            </div>
 
                             <div>
                                 <#if msg.comments??>
@@ -227,21 +241,21 @@
                                 </#if>
                             </div>
                         </div>
-                        <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-                        <div>
-                            <p><a class="comment" href="#">comment</a></p>
-                            <form class="commentForm" action= "<@spring.url '/plan/posts/${post.id}/messages/${msg.id}/comments'/>" method="post">
-                                    <textarea name="content"></textarea>
-                                    <input type="submit" value="submit" />
-                            </form>
-                        </div>
-                        </#if>
+
                     </li>
                 </#list>
             </ul>
         </#if>
     </div>
 
+    <div id="template" style="display: none">
+        <form method="post">
+           <textarea name="content"></textarea>
+           <input type="submit" value="submit" />
+        </form>
+        <a href="#">cancel</a>
+    </div>
+ 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
     <div class="action">
         <form id="messageForm" action="<@spring.url '/plan/posts/${post.id}/messages' />" method="post"> 
@@ -254,15 +268,51 @@
 
         <script type="text/javascript">
             $(document).ready(function() {
+
                 CKEDITOR.replace('messagecontent');
 
-                $('.commentForm').hide();
-                $('a.comment').on('click', function() {
-                    $target = $(this).parent().next();
-                    $target.toggle();
-                    return false;
+                var prefix = "<@spring.url '/plan/posts/${post.id}/messages/' />";
+                var postfix = "/comments";
+                var saved;
+
+                $('a.comment').on('click', function(e) {
+                    e.preventDefault();
+                    $(this).next().toggle();
                 });
-            });
+
+                $('a.msg-edit').on('click', function(e) {
+                    e.preventDefault();
+                    
+                    $('a.msg-edit, a.comment').hide();
+
+                    var id = this.id;
+
+                    var targetId = 'div#c' + id;
+                    saved = $(targetId); 
+
+                    var n = $('#template').clone();
+
+                    n.attr('id', 'c'+id);
+                    var url = prefix + id + postfix;
+                    n.attr('action', url);
+
+                    var txt = $('textarea', n);
+                    var editorId = 'editor' + id;
+                    txt.attr('id', editorId);
+                    txt.html(saved.html());
+
+                    $(targetId).replaceWith(n);
+                    CKEDITOR.replace(editorId);
+                    
+                    n.show();
+
+                    $('a', $(targetId)).on('click', function(e) {
+                        e.preventDefault();
+                        n.replaceWith(saved);
+                        $('a.msg-edit, a.comment').show();
+                    });
+                });
+             });
         </script>
     </div>
     </#if>
