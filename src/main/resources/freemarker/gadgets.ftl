@@ -213,104 +213,141 @@
             <h2>Messages: </h2>
             <ul>
                 <#list post.messages as msg>
-                    <li>
-                        <div>
-                            <div class="msg-content">
-                                <div id="c${msg.id}">${msg.content}</div>
-                                
-                                <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-                                <div class="msg-action">
-                                    <a id="${msg.id}" class="msg-edit" href="#">edit</a>
-                                    <a class="comment" href="#">comment</a> 
-                                    <form style="display: none" class="commentForm" action= "<@spring.url '/plan/posts/${post.id}/messages/${msg.id}/comments'/>" method="post">
-                                        <textarea name="content"></textarea>
-                                        <input type="submit" value="submit" />
-                                    </form>
+                    <li id="msg-item-${msg.id}">
+                        <div class="msg-item">
+                            <div>${msg.content}</div>
+                            <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+                            <div class="msg-item-action">
+                                <div>
+                                    <a data-id="${msg.id}" class="msg-edit" href="#">edit</a>
+                                    <a data-id="${msg.id}" class="msg-comment" href="#">comment</a>
                                 </div>
-                                </#if>
-
                             </div>
-
-                            <div>
-                                <#if msg.comments??>
-                                    <ul>
-                                        <#list msg.comments as comment>
-                                            <li>${comment.content}</li>
-                                        </#list>
-                                    </ul>
-                                </#if>
-                            </div>
+                            </#if>
                         </div>
 
+                        <ul id="c-${msg.id}">
+                        <#if msg.comments??>
+                            <#list msg.comments as comment>
+                                <li>${comment.content}</li>
+                            </#list>
+                        </#if>
+                        </ul>
                     </li>
                 </#list>
             </ul>
         </#if>
     </div>
 
-    <div id="template" style="display: none">
-        <form method="post">
-           <textarea name="content"></textarea>
-           <input type="submit" value="submit" />
-        </form>
-        <a href="#">cancel</a>
-    </div>
- 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
     <div class="action">
         <form id="messageForm" action="<@spring.url '/plan/posts/${post.id}/messages' />" method="post"> 
             <fieldset>
                 <legend>Leave a message</legend>
-                <textarea id="messagecontent" name="content" cols="60" rows="20"></textarea>
+                <textarea id="mcedit" name="content" cols="60" rows="20"></textarea>
                 <input type="submit" value="submit" />
             </fieldset>
         </form>
 
         <script type="text/javascript">
             $(document).ready(function() {
+                var prefix = "<@spring.url '/plan/messages/' />";
 
-                CKEDITOR.replace('messagecontent');
+                function X(container, saved, cur) {
+                    this.container = container;
+                    this.saved = saved;
+                    this.cur = cur;
+                    this.restore = function() {
+                        cur.detach();
+                        container.prepend(saved);
+                    }
+                }
 
-                var prefix = "<@spring.url '/plan/posts/${post.id}/messages/' />";
-                var postfix = "/comments";
-                var saved;
+                function buildForm() {
+                    return $('<form method="post"><textarea name="content"></textarea><input type="submit" value="submit" /></form>');
+                }
 
-                $('a.comment').on('click', function(e) {
-                    e.preventDefault();
-                    $(this).next().toggle();
-                });
+                var stack = new Array();
 
                 $('a.msg-edit').on('click', function(e) {
                     e.preventDefault();
+
+                    var url = prefix + $(this).data("id");
+
+                    var x = stack.pop();
+                    if(x) {
+                        x.restore();
+                    }
+
+                    saved = $(this).parentsUntil('li', 'div.msg-item');
+                    container = saved.closest('li');
+                    saved.detach();
                     
-                    $('a.msg-edit, a.comment').hide();
+                    var cur = buildForm();
+                    cur.append('<a class="edit-cancel" href="#">cancel</a>');
+                    $('textarea', cur).attr("id", "tmp").html(saved.children().first().html());
+                    cur.prependTo(container);
 
-                    var id = this.id;
+                    stack.push(new X(container, saved, cur));
 
-                    var targetId = 'div#c' + id;
-                    saved = $(targetId); 
+                    cur.show();
+                    CKEDITOR.replace('tmp');
 
-                    var n = $('#template').clone();
-
-                    n.attr('id', 'c'+id);
-                    var url = prefix + id + postfix;
-                    n.attr('action', url);
-
-                    var txt = $('textarea', n);
-                    var editorId = 'editor' + id;
-                    txt.attr('id', editorId);
-                    txt.html(saved.html());
-
-                    $(targetId).replaceWith(n);
-                    CKEDITOR.replace(editorId);
-                    
-                    n.show();
-
-                    $('a', $(targetId)).on('click', function(e) {
+                    $('a.edit-cancel').on('click', function(e) {
                         e.preventDefault();
-                        n.replaceWith(saved);
-                        $('a.msg-edit, a.comment').show();
+                        cur.remove();
+                        var x = stack.pop();
+                        if(x) {
+                            x.restore();
+                        }
                     });
+
+                    cur.submit(function(e) {
+                        e.preventDefault();
+
+                        var content = CKEDITOR.instances.tmp.getData();
+                        $.ajax({
+                            type: "POST",
+                            url: url,
+                            data: {content: content}
+                        }).done(function(res) {
+                            var x = stack.pop();
+                            if(x) {
+                                x.saved.children().first().html(content);
+                                x.restore();
+                            }
+                        });
+                    });
+
+                });
+
+                $('a.msg-comment').on('click', function(e) {
+                    e.preventDefault();
+
+                    var nxt = $(this).next();
+                    if(nxt.length != 0) {
+                        nxt.remove();
+                    }
+                    else {
+                        var url = "<@spring.url '/plan/messages/' />" + $(this).data("id") + "/comments";
+                        var f = buildForm();
+                        $(this).after(f);
+                        f.submit(function(e) {
+                            e.preventDefault();
+                            var content = $('textarea', f).val();
+                            var p = $('ul', $(this).closest('li'));
+                            console.log(p);
+                            $.ajax({
+                                type: "POST",
+                                url:url,
+                                data: {content: content}
+                            }).done(function(res) {
+                                console.log("content: " + content);
+                                p.append("<li>" + content + "</li>");
+                                f.remove();
+                            });
+                        });
+                    }
                 });
              });
         </script>
