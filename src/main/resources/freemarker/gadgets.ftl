@@ -215,18 +215,16 @@
                 <#list post.messages as msg>
                     <li id="msg-item-${msg.id}">
                         <div class="msg-item">
-                            <div>${msg.content}</div>
+                            <div data-action="<@spring.url '/plan/messages/${msg.id}' />">${msg.content}</div>
                             <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
                             <div class="msg-item-action">
-                                <div>
                                     <a data-id="${msg.id}" class="msg-edit" href="#">edit</a>
-                                    <a data-id="${msg.id}" class="msg-comment" href="#">comment</a>
-                                </div>
+                                    <a data-action="<@spring.url '/plan/messages/${msg.id}/comments' />" class="msg-comment" href="#">comment</a>
                             </div>
                             </#if>
                         </div>
 
-                        <ul id="c-${msg.id}">
+                        <ul data-id="${msg.id}">
                         <#if msg.comments??>
                             <#list msg.comments as comment>
                                 <li>${comment.content}</li>
@@ -248,111 +246,32 @@
                 <input type="submit" value="submit" />
             </fieldset>
         </form>
-
-        <script type="text/javascript">
-            $(document).ready(function() {
-                var prefix = "<@spring.url '/plan/messages/' />";
-
-                function X(container, saved, cur) {
-                    this.container = container;
-                    this.saved = saved;
-                    this.cur = cur;
-                    this.restore = function() {
-                        cur.detach();
-                        container.prepend(saved);
-                    }
-                }
-
-                function buildForm() {
-                    return $('<form method="post"><textarea name="content"></textarea><input type="submit" value="submit" /></form>');
-                }
-
-                var stack = new Array();
-
-                $('a.msg-edit').on('click', function(e) {
-                    e.preventDefault();
-
-                    var url = prefix + $(this).data("id");
-
-                    var x = stack.pop();
-                    if(x) {
-                        x.restore();
-                    }
-
-                    saved = $(this).parentsUntil('li', 'div.msg-item');
-                    container = saved.closest('li');
-                    saved.detach();
-                    
-                    var cur = buildForm();
-                    cur.append('<a class="edit-cancel" href="#">cancel</a>');
-                    $('textarea', cur).attr("id", "tmp").html(saved.children().first().html());
-                    cur.prependTo(container);
-
-                    stack.push(new X(container, saved, cur));
-
-                    cur.show();
-                    CKEDITOR.replace('tmp');
-
-                    $('a.edit-cancel').on('click', function(e) {
-                        e.preventDefault();
-                        cur.remove();
-                        var x = stack.pop();
-                        if(x) {
-                            x.restore();
-                        }
-                    });
-
-                    cur.submit(function(e) {
-                        e.preventDefault();
-
-                        var content = CKEDITOR.instances.tmp.getData();
-                        $.ajax({
-                            type: "POST",
-                            url: url,
-                            data: {content: content}
-                        }).done(function(res) {
-                            var x = stack.pop();
-                            if(x) {
-                                x.saved.children().first().html(content);
-                                x.restore();
-                            }
-                        });
-                    });
-
-                });
-
-                $('a.msg-comment').on('click', function(e) {
-                    e.preventDefault();
-
-                    var nxt = $(this).next();
-                    if(nxt.length != 0) {
-                        nxt.remove();
-                    }
-                    else {
-                        var url = "<@spring.url '/plan/messages/' />" + $(this).data("id") + "/comments";
-                        var f = buildForm();
-                        $(this).after(f);
-                        f.submit(function(e) {
-                            e.preventDefault();
-                            var content = $('textarea', f).val();
-                            var p = $('ul', $(this).closest('li'));
-                            console.log(p);
-                            $.ajax({
-                                type: "POST",
-                                url:url,
-                                data: {content: content}
-                            }).done(function(res) {
-                                console.log("content: " + content);
-                                p.append("<li>" + content + "</li>");
-                                f.remove();
-                            });
-                        });
-                    }
-                });
-             });
-        </script>
     </div>
     </#if>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('a.msg-edit').on('click', function(e) {
+                e.preventDefault();
+                var msk = $('<div></div>');
+                var item = $(this).parent().prev();
+                showMask(msk);
+                showDialog(item, msk);
+            });
+
+            $('a.msg-comment').on('click', function(e) {
+                e.preventDefault();
+                var action = $(this).data("action");
+                var msk = $('<div></div>');
+                var item = $('<div></div>');
+                var where = $('ul', $(this).closest("li"));
+                item.data("action", action);
+                showMask(msk);
+                showDialog(item, msk, where);
+            });
+
+        });
+    </script>
 </#macro>
 
 
