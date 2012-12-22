@@ -3,14 +3,14 @@
     <head>
         <title>${title}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
-        <script type="text/javascript" src="http://www.tissue.com/js/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="/jquery/jquery-1.8.3.min.js"></script>
         <#if myscripts??>
         <#list myscripts as myscript>
         <script type="text/javascript" src="${myscript}"></script>
         </#list>
         </#if>
          
-        <link type="text/css" rel="stylesheet" href="http://www.tissue.com/resources/css/common.css"></link>
+        <link type="text/css" rel="stylesheet" href="/tissue/css/common.css"></link>
         <#if mystyles??>
         <#list mystyles as style>
         <link rel='stylesheet' type='text/css' media='screen' href='${style}' />

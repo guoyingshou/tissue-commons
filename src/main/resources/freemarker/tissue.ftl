@@ -32,6 +32,7 @@
 </#macro>
 
 <#macro exploreLogo>
+
     <h1>Tissue Network</h1>
     <div>
         <ul class="menu">
@@ -40,44 +41,43 @@
             <li><a href="http://www.tissue.com/u2/plan/exploreTags">Tags</a></li>
             <li><a href="http://www.tissue.com/u2/plan/exploreTimeline">Timeline</a></li>
         </ul>
+
+        <div id="topicDia" style="display: none">
+            <form action="<@spring.url '/plan/topics' />" method="post">
+                <fieldset>
+                    <legend>Your Topic</legend>
+                    <ul>
+                        <li>
+                            <label for="title">title</label>
+                            <input type="input" id="title" name="title" />
+                        </li>
+                        <li>
+                            <label for="editor">Objective</label>
+                            <textarea id="editor" name="content"></textarea>
+                        </li>
+                        <li>
+                            <label for="tags">tags</label>
+                            <input type="input" id="tags" name="tags" />
+                        </li>
+                        <li>
+                            <input type="submit" value="submit" />
+                        </li>
+                    </ul>
+                </fieldset>
+            </form>
+            <div><a href="#" class="cancel">cancel</a></div>
+        </div>
+
         <ul class="action">
-            <li><a class="topicForm" href="<@spring.url '/plan/topics' />">New Topic</a></li>
-            <div class="topicForm" style="display: none">
-                <form action="<@spring.url '/plan/topics' />" method="post">
-                    <fieldset class="topic">
-                        <legend>your topic</legend>
-                        <ul>
-                            <li>
-                               <label for="title">title</label>
-                               <input type="input" id="title" name="title" />
-                            </li>
-                            <li>
-                               <label for="topiccontent">objective</label>
-                               <textarea id="topiccontent" name="content"></textarea>
-                            </li>
-                            <li>
-                               <label for="tags">tags</label>
-                               <input type="input" id="tags" name="tags" />
-                            </li>
-                            <li>
-                               <input type="submit" value="submit" />
-                            </li>
-                        </ul>
-                    </fieldset>
-                </form>
-            </div>
+            <li><a class="topicForm" href="#">New Topic</a></li>
 
             <script type="text/javascript">
-                     $(document).ready(function() {
-                         $('a.topicForm').on('click', function(e) {
-                             e.preventDefault();
-                             var $f = $('div.topicForm').show();
-                             $('#contentInner').replaceWith($f);
-                             if(!CKEDITOR.instances.topiccontent) {
-                                 CKEDITOR.replace('topiccontent');
-                             }
-                         });
-                     });
+
+                $(document).on('click', 'a.topicForm', function(e) {
+                    e.preventDefault();
+                    $('#contentInner').newTopicDialog();
+                });
+
             </script>
         </ul>
     </div>
@@ -97,50 +97,49 @@
 </#macro>
 
 <#macro showActivePlan>
+
     <div id="activePlan">
     <#if activePlan??>
         <#if viewer??>
             <#if activePlan.isOwnerOrMember(viewer.id)>
-                <a class="postForm" href="<@spring.url '/plan/plans/${activePlan.id}/posts'/>">new post</a>
-                <div class="postForm" style="display: none">
-                    <form action="<@spring.url '/plan/plans/${activePlan.id}/posts'/>" method="post">
-                        <fieldset>
-                            <legend>please select post type</legend>
-                            <label>Concept  <input type="radio" name="type" value="concept"/></label>
-                            <label>Note  <input type="radio" name="type" value="note"/></label>
-                            <label>Question  <input type="radio" name="type" value="question"/></label>
-                            <label>Tutorial  <input type="radio" name="type" value="tutorial"/></label>
-                        </fieldset>
-                        <fieldset class="post">
-                            <legend>your post</legend>
-                            <ul>
-                                <li>
-                                    <label for="title">title</label>
-                                    <input type="input" id="title" name="title" />
-                                </li>
-                                <li>
-                                    <label for="postcontent">content</label>
-                                    <textarea id="postcontent" name="content"></textarea>
-                                </li>
-                                <li>
-                                    <input type="submit" value="submit" />
-                                </li>
-                            </ul>
-                        </fieldset>
-                    </form>
-                 </div>
-                 <script type="text/javascript">
-                     $(document).ready(function() {
-                         $('a.postForm').on('click', function(e) {
-                             e.preventDefault();
-                             var $f = $('div.postForm').show();
-                             $('#contentInner').replaceWith($f);
-                             if(!CKEDITOR.instances.postcontent){
-                                 CKEDITOR.replace('postcontent');
-                             }
-                         });
-                     });
-                 </script>
+            <div id="postDia" style="display: none">
+                <form method="post" action="<@spring.url '/plan/plans/${activePlan.id}/posts'/>">
+                    <fieldset>
+                        <legend>Post Type</legend>
+                        <label>Concept <input type="radio" name="type" value="concept" /></label>
+                        <label>Note <input type="radio" name="type" value="note" /></label>
+                        <label>Question <input type="radio" name="type" value="question" /></label>
+                        <label>Tutorial <input type="radio" name="type" value="tutorial" /></label>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Your Post</legend>
+                        <ul>
+                            <li>
+                                <label for="title">title</label>
+                                <input type="input" id="title" name="title" />
+                            </li>
+                            <li>
+                                <label for="editor">content</label>
+                                <textarea id="editor" name="content"></textarea>
+                            </li>
+                            <li>
+                                <input type="submit" value="submit" />
+                            </li>
+                        </ul>
+                    </fieldset>
+                </form>
+                <div><a href="#" class="cancel">cancel</a></div>
+            </div>
+
+            <a class="postForm" data-action="<@spring.url '/plan/plans/${activePlan.id}/posts'/>" href="#">new post</a>
+
+            <script type="text/javascript">
+                $(document).on('click', 'a.postForm', function(e) {
+                    e.preventDefault();
+                    //$('#contentInner').newPostDialog($(this).data("action"));
+                    $('#contentInner').newPostDialog();
+                });
+            </script>
             <#else>
                 <a href="<@spring.url '/plan/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
             </#if> 
@@ -160,35 +159,38 @@
         </div>
         </#if>
     <#else>
-        <a class="planForm" href="<@spring.url '/plan/topics/${topic.id}/plans'/>">create plan</a>
-        <div id="planForm" style="display: none">
+        <div id="planDia" style="display: none">
             <form action="<@spring.url '/plan/topics/${topic.id}/plans' />" method="post">
                 <fieldset>
-                    <legend>please select a duration</legend>
+                    <legend>Please Select A Duration</legend>
                     <ul>
                         <li>
-                            <label><input type="radio" name="duration" value="1"/>1 Mon</label>
+                            <label><input type="radio" name="duration" value="1" />1 Mon</label>
                         </li>
                         <li>
-                            <label><input type="radio" name="duration" value="3"/>3 Mon</label>
+                            <label><input type="radio" name="duration" value="3" />3 Mon</label>
                         </li>
                         <li>
-                            <label><input type="radio" name="duration" value="6"/>6 Mon</label>
+                            <label><input type="radio" name="duration" value="6" />6 Mon</label>
                         </li>
                     </ul>
                 </fieldset>
                 <input type="submit" value="submit" />
             </form>
+            <div><a href="#" class="cancel">cancel</a></div>
         </div>
-                 <script type="text/javascript">
-                     $(document).ready(function() {
-                         $('a.planForm').on('click', function(e) {
-                             e.preventDefault();
-                             var $f = $('div#planForm').show();
-                             $('#contentInner').replaceWith($f);
-                         });
-                     });
-                 </script>
+
+        <a class="planForm" href="#">create plan</a>
+
+        <script type="text/javascript">
+            $(document).on('click', 'a.planForm', function(e) {
+                e.preventDefault();
+                var options = {
+                    name: "planForm"
+                };
+                $('#planDia').newPlanDialog();
+            });
+        </script>
     </#if>
     </div>
 

@@ -201,77 +201,91 @@
 </#macro>
 
 <#macro showPostDetail>
+
     <div class="article">
-        <h3>title: ${post.title}</h3>
-        <p class="author">user: ${post.user.displayName}</p>
-        <p class="entry">content: ${post.content}</p>
-        <p><a class="edit" href="<@spring.url '/plan/posts/${post.id}/edit' />">edit</a></p>
+        <h3 class="article-title">${post.title}</h3>
+        <div class="article-author">${post.user.displayName}</div>
+        <div class="article-content">${post.content}</div>
+        <a class="post-edit" data-action="<@spring.url '/plan/posts/${post.id}' />" href="#">edit</a>
     </div>
 
-    <div class="message">
-        <#if post.messages??>
-            <h2>Messages: </h2>
-            <ul>
-                <#list post.messages as msg>
-                    <li id="msg-item-${msg.id}">
-                        <div class="msg-item">
-                            <div data-action="<@spring.url '/plan/messages/${msg.id}' />">${msg.content}</div>
-                            <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-                            <div class="msg-item-action">
-                                    <a data-id="${msg.id}" class="msg-edit" href="#">edit</a>
-                                    <a data-action="<@spring.url '/plan/messages/${msg.id}/comments' />" class="msg-comment" href="#">comment</a>
-                            </div>
-                            </#if>
-                        </div>
+    <h2>Messages: </h2>
 
-                        <ul data-id="${msg.id}">
-                        <#if msg.comments??>
-                            <#list msg.comments as comment>
-                                <li>${comment.content}</li>
-                            </#list>
-                        </#if>
-                        </ul>
-                    </li>
-                </#list>
+    <ul class="messages">
+    <#if post.messages??>
+        <#list post.messages as msg>
+        <li class="messageItem">
+
+            <div>${msg.content}</div>
+
+            <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+            <a data-action="<@spring.url '/plan/messages/${msg.id}' />" class="one-item-edit" href="#">edit</a>
+            <a data-id="${msg.id}" class="msg-comment-add" href="#">comment</a>
+            </#if>
+
+            <ul class="messageComments-${msg.id}">
+            <#if msg.comments??>
+            <#list msg.comments as comment>
+                <li class="messageCommentItem">
+                    <div>${comment.content}</div>
+                    <a class="one-item-edit" data-action="<@spring.url '/plan/messageComments/${comment.id}' />" href="#">edit</a>
+                    <a class="msg-comment-del" data-action="<@spring.url '/plan/messageComments/${comment.id}/delete' />" href="#">delete</a>
+                </li>
+            </#list>
+            </#if>
             </ul>
+        </li>
+        </#list>
         </#if>
-    </div>
+    </ul>
 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-    <div class="action">
-        <form id="messageForm" action="<@spring.url '/plan/posts/${post.id}/messages' />" method="post"> 
-            <fieldset>
-                <legend>Leave a message</legend>
-                <textarea id="mcedit" name="content" cols="60" rows="20"></textarea>
-                <input type="submit" value="submit" />
-            </fieldset>
-        </form>
+    <div class="message-actions">
+        <a class="msg-add" data-action="<@spring.url '/plan/posts/${post.id}/messages' />" href="#">add message</a>
     </div>
     </#if>
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('a.msg-edit').on('click', function(e) {
-                e.preventDefault();
-                var msk = $('<div></div>');
-                var item = $(this).parent().prev();
-                showMask(msk);
-                showDialog(item, msk);
-            });
 
-            $('a.msg-comment').on('click', function(e) {
-                e.preventDefault();
-                var action = $(this).data("action");
-                var msk = $('<div></div>');
-                var item = $('<div></div>');
-                var where = $('ul', $(this).closest("li"));
-                item.data("action", action);
-                showMask(msk);
-                showDialog(item, msk, where);
-            });
-
+        $(document).on('click', 'a.post-edit', function(e) {
+            e.preventDefault();
+            $('div.article').editPostDialog($(this).data("action"));
         });
+ 
+        $(document).on('click', 'a.msg-add', function(e) {
+            e.preventDefault();
+            $('ul.messages').oneItemDialog($(this).data("action"));
+        });
+ 
+        $(document).on('click', 'a.one-item-edit', function(e) {
+            e.preventDefault();
+            $(this).prev().oneItemDialog($(this).data("action"));
+        });
+
+        $(document).on('click', 'a.msg-comment-add', function(e) {
+            e.preventDefault();
+
+            var id = $(this).data("id");
+            var url = "<@spring.url '/plan/messages/' />" + id + "/comments";
+
+            var selector = "ul.messageComments-" + id;
+            var target = $(selector);
+            if(target.length == 0) {
+                target = $('<ul class="' + selector + '"/>'); 
+            }
+            target.oneItemDialog(url);
+        });
+ 
+        <#--
+        $(document).on('click', 'a.msg-comment-del', function(e) {
+            e.preventDefault();
+
+            var action = $(this).data("action");
+            console.log(action);
+        });
+          -->
     </script>
+
 </#macro>
 
 
