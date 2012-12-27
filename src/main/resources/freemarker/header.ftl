@@ -1,3 +1,5 @@
+<#import 'spring.ftl' as spring />
+
 <!doctype html>
 <html>
     <head>
@@ -22,28 +24,34 @@
         <div id="headerWrapper">
             <div id="header">
                 <ul class="nav">
-                    <li><a href="http://www.tissue.com/u1/profile/home">Home</a></li>
-                    <li><a href="http://www.tissue.com/u2/plan/explore">Explore</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a href="http://www.tissue.com/profile/home"><@spring.message "menu.home" /></a></li>
+                    <li><a href="http://www.tissue.com/group/explore"><@spring.message "menu.explore" /></a></li>
+                    <li><a href="#"><@spring.message "menu.about" /></a></li>
                 </ul>
 
                 <#if viewer??>
                 <ul class="userbox">
                     <li>
-                    <a href="http://www.tissue.com/u1/profile/invitations">Invitations<#if invitationsCount??>(${invitationsCount})</#if></a>
+                    <a href="http://www.tissue.com/profile/invitations"><@spring.message "menu.invitations" /><#if invitationsCount??>(${invitationsCount})</#if></a>
                     </li>
-                    <li><a href="http://www.tissue.com/u1/profile/friends">Friends</a></li>
+                    <li><a href="http://www.tissue.com/profile/friends"><@spring.message "menu.friends" /></a></li>
+                    <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
-                    <li><a href="?locale=zh_CN">Chinese</a></li>
-                    <li><a href="http://www.tissue.com/u1/profile/users/${viewer.id}">${viewer.displayName}</a></li>
-                    <li><a href="http://www.tissue.com/u1/profile/signout">sign out</a></li>
+                    <#else>
+                    <li><a href="?locale=zh_CN">中文</a></li>
+                    </#if>
+                    <li><a href="http://www.tissue.com/profile/users/${viewer.id}">${viewer.displayName}</a></li>
+                    <li><a href="http://www.tissue.com/profile/signout"><@spring.message "menu.signout" /></a></li>
                 </ul>
                 <#else>
                 <ul class="userbox">
+                    <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
-                    <li><a href="?locale=zh_CN">Chinese</a></li>
-                    <li><a href="http://www.tissue.com/u1/profile/dashboard">sign in</a></li>
-                    <li><a href="http://www.tissue.com/u1/profile/signup">sign up</a></li>
+                    <#else>
+                    <li><a href="?locale=zh_CN">中文</a></li>
+                    </#if>
+                    <li><a href="http://www.tissue.com/profile/dashboard"><@spring.message "menu.signin" /></a></li>
+                    <li><a href="http://www.tissue.com/profile/signup"><@spring.message "menu.signup" /></a></li>
                 </ul>
                 </#if>
             </div>

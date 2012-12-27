@@ -10,12 +10,12 @@
     <h1>${owner.displayName}</h1>
     <div>
         <ul class="menu">
-            <li><a href="http://www.tissue.com/u2/plan/explore">about me</a></li>
-            <li><a href="http://www.tissue.com/u2/plan/exploreTopics">actions</a></li>
+            <li><a href="/group/explore">about me</a></li>
+            <li><a href="/group/exploreTopics">actions</a></li>
         </ul>
         <ul class="action">
             <#if canInvite??>
-            <li><a href="http://www.tissue.com/u1/profile/users/${owner.id}/invites">invite</a></li>
+            <li><a href="<@spring.url '/users/${owner.id}/invites' />">invite</a></li>
             </#if>
         </ul>
     </div>
@@ -25,8 +25,8 @@
     <h1>Tissue Network</h1>
     <div>
         <ul class="menu">
-            <li><a href="http://www.tissue.com/u1/profile/dashboard">NewsFeeds</a></li>
-            <li><a href="http://www.tissue.com/u1/profile/actions">Actions</a></li>
+            <li><a href="/profile/dashboard">NewsFeeds</a></li>
+            <li><a href="/profile/actions">Actions</a></li>
         </ul>
     </div>
 </#macro>
@@ -36,14 +36,14 @@
     <h1>Tissue Network</h1>
     <div>
         <ul class="menu">
-            <li><a href="http://www.tissue.com/u2/plan/explore">Trends</a></li>
-            <li><a href="http://www.tissue.com/u2/plan/exploreTopics">Topics</a></li>
-            <li><a href="http://www.tissue.com/u2/plan/exploreTags">Tags</a></li>
-            <li><a href="http://www.tissue.com/u2/plan/exploreTimeline">Timeline</a></li>
+            <li><a href="<@spring.url '/explore' />">Trends</a></li>
+            <li><a href="<@spring.url '/exploreTopics' />">Topics</a></li>
+            <li><a href="<@spring.url '/exploreTags' />">Tags</a></li>
+            <li><a href="<@spring.url '/exploreTimeline' />">Timeline</a></li>
         </ul>
 
         <div id="topicDia" style="display: none">
-            <form action="<@spring.url '/plan/topics' />" method="post">
+            <form action="<@spring.url '/topics' />" method="post">
                 <fieldset>
                     <legend>Your Topic</legend>
                     <ul>
@@ -84,14 +84,14 @@
 </#macro>
 
 <#macro topicLogo>
-  <h1><a href="http://www.tissue.com/u2/plan/topics/${topic.id}/posts">${topic.title}</a></h1>
+  <h1><a href="<@spring.url '/topics/${topic.id}/posts' />">${topic.title}</a></h1>
   <div>
       <ul class="menu">
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/concept/posts">Concepts</a></li>
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/note/posts">Notes</a></li>
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/question/posts">Questions</a></li>
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}/tutorial/posts">Tutorials</a></li>
-          <li><a class="ajx" href="/u2/plan/topics/${topic.id}">Objective</a></li>
+          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/concept/posts' />">Concepts</a></li>
+          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/note/posts' />">Notes</a></li>
+          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/question/posts' />">Questions</a></li>
+          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/tutorial/posts' />">Tutorials</a></li>
+          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}">Objective' /></a></li>
       </ul>
   </div>
 </#macro>
@@ -103,7 +103,7 @@
         <#if viewer??>
             <#if activePlan.isOwnerOrMember(viewer.id)>
             <div id="postDia" style="display: none">
-                <form method="post" action="<@spring.url '/plan/plans/${activePlan.id}/posts'/>">
+                <form method="post" action="<@spring.url '/plans/${activePlan.id}/posts'/>">
                     <fieldset>
                         <legend>Post Type</legend>
                         <label>Concept <input type="radio" name="type" value="concept" /></label>
@@ -131,7 +131,7 @@
                 <div><a href="#" class="cancel">cancel</a></div>
             </div>
 
-            <a class="postForm" data-action="<@spring.url '/plan/plans/${activePlan.id}/posts'/>" href="#">new post</a>
+            <a class="postForm" data-action="<@spring.url '/plans/${activePlan.id}/posts'/>" href="#">new post</a>
 
             <script type="text/javascript">
                 $(document).on('click', 'a.postForm', function(e) {
@@ -141,13 +141,13 @@
                 });
             </script>
             <#else>
-                <a href="<@spring.url '/plan/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
+                <a href="<@spring.url '/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
             </#if> 
         </#if>
 
         <h4>Active Study Group</h4>
         <div class="groupInfo">
-            <p><a href="<@spring.url '/plan/plans/${activePlan.id}'/>">${activePlan.createTime?date}</a></p>
+            <p><a href="<@spring.url '/plans/${activePlan.id}'/>">${activePlan.createTime?date}</a></p>
             <p>duration: ${activePlan.duration} Months</p>
             <p>created by: ${activePlan.user.displayName}</p>
         </div>
@@ -160,7 +160,7 @@
         </#if>
     <#else>
         <div id="planDia" style="display: none">
-            <form action="<@spring.url '/plan/topics/${topic.id}/plans' />" method="post">
+            <form action="<@spring.url '/topics/${topic.id}/plans' />" method="post">
                 <fieldset>
                     <legend>Please Select A Duration</legend>
                     <ul>
@@ -203,9 +203,9 @@
         <ul>
         <#list topic.deadPlans as plan>
             <li>
-                <p class="ajx"><a href="<@spring.url '/plan/plans/${plan.id}' />">${plan.createTime?date}</a></p>
+                <p class="ajx"><a href="<@spring.url '/plans/${plan.id}' />">${plan.createTime?date}</a></p>
                 <p>duration: ${plan.duration} Months</p>
-                <p>created by : <a href="http://www.tissue.com/u1/profile/users/${plan.user.id}" target="_top">${plan.user.displayName}</a></p>
+                <p>created by : <a href="/profile/users/${plan.user.id}" target="_top">${plan.user.displayName}</a></p>
             </li>
         </#list>
         </ul>

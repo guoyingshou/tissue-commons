@@ -59,64 +59,64 @@
 
 <#macro showTopicEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a topic: <a href="http://www.tissue.com/u2/plan/topics/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a topic: <a href="/group/topics/${event.object.id}">${event.object.title}</a> 
         at: ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showPlanEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a plan in <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}"> ${event.target.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a plan in <a href="/group/topics/${event.target.id}"> ${event.target.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showPlanMembersEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        joined a plan in <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}"> ${event.target.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        joined a plan in <a href="/group/topics/${event.target.id}"> ${event.target.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showConceptEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a concept: <a href="http://www.tissue.com/u2/plan/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a concept: <a href="/group/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showNoteEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a note: <a href="http://www.tissue.com/u2/plan/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a note: <a href="/group/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showTutorialEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a tutorial: <a href="http://www.tissue.com/u2/plan/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        created a tutorial: <a href="/group/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showPostMessageEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        leave a message to: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.id}-${event.actor.displayName}</a> 
+        leave a message to: <a href="/group/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showPostMessageCommentEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        has commented a message in: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        has commented a message in: <a href="/group/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
@@ -124,32 +124,32 @@
 
 <#macro showQuestionEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        asked a question: <a href="http://www.tissue.com/u2/plan/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        asked a question: <a href="/group/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showQuestionCommentEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        has commented a question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        has commented a question: <a href="/group/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showAnswerEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        answer a question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        answer a question: <a href="/group/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showAnswerCommentEvent event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        has commented an answer in question: <a href="http://www.tissue.com/u2/plan/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        has commented an answer in question: <a href="/group/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
@@ -170,19 +170,19 @@
 
 <#macro showAcceptEvents event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        become a friend with <a href="http://www.tissue.com/u1/profile/users/${event.object.id}">${event.object.displayName}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        become a friend with <a href="/profile/users/${event.object.id}">${event.object.displayName}</a> 
         at : ${event.published?datetime}
     </li>
 </#macro>
 
 <#macro showAcceptedEvents event>
     <li>
-        <a href="http://www.tissue.com/u1/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
+        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
         <#if viewer.id = event.object.id>
             has accepted my invitation
         <#else>
-            become a friend with <a href="http://www.tissue.com/u1/profile/users/${event.object.id}">${event.object.displayName}</a> 
+            become a friend with <a href="/profile/users/${event.object.id}">${event.object.displayName}</a> 
         </#if>
         at : ${event.published?datetime}
     </li>
@@ -193,8 +193,8 @@
 <ul id="postList">
    <#list posts as post>
        <li>
-           <span><a href="/u2/plan/posts/${post.id}" class="post">${post.title}</a></span>
-           <span><a href="/u1/profile/users/${post.user.id}">${post.user.displayName}</a></span>
+           <span><a href="http://www.tissue.com/group/posts/${post.id}" class="post">${post.title}</a></span>
+           <span><a href="http://www.tissue.com/profile/users/${post.user.id}">${post.user.displayName}</a></span>
        </li>
    </#list>
 </ul>
@@ -206,7 +206,7 @@
         <h3 class="article-title">${post.title}</h3>
         <div class="article-author">${post.user.displayName}</div>
         <div class="article-content">${post.content}</div>
-        <a class="post-edit" data-action="<@spring.url '/plan/posts/${post.id}' />" href="#">edit</a>
+        <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">edit</a>
     </div>
 
     <h2>Messages: </h2>
@@ -219,7 +219,7 @@
             <div>${msg.content}</div>
 
             <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-            <a data-action="<@spring.url '/plan/messages/${msg.id}' />" class="one-item-edit" href="#">edit</a>
+            <a data-action="<@spring.url '/messages/${msg.id}' />" class="one-item-edit" href="#">edit</a>
             <a data-id="${msg.id}" class="msg-comment-add" href="#">comment</a>
             </#if>
 
@@ -228,8 +228,8 @@
             <#list msg.comments as comment>
                 <li class="messageCommentItem">
                     <div>${comment.content}</div>
-                    <a class="one-item-edit" data-action="<@spring.url '/plan/messageComments/${comment.id}' />" href="#">edit</a>
-                    <a class="msg-comment-del" data-action="<@spring.url '/plan/messageComments/${comment.id}/delete' />" href="#">delete</a>
+                    <a class="one-item-edit" data-action="<@spring.url '/messageComments/${comment.id}' />" href="#">edit</a>
+                    <a class="msg-comment-del" data-action="<@spring.url '/messageComments/${comment.id}/delete' />" href="#">delete</a>
                 </li>
             </#list>
             </#if>
@@ -241,7 +241,7 @@
 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
     <div class="message-actions">
-        <a class="msg-add" data-action="<@spring.url '/plan/posts/${post.id}/messages' />" href="#">add message</a>
+        <a class="msg-add" data-action="<@spring.url '/posts/${post.id}/messages' />" href="#">add message</a>
     </div>
     </#if>
 
@@ -266,7 +266,7 @@
             e.preventDefault();
 
             var id = $(this).data("id");
-            var url = "<@spring.url '/plan/messages/' />" + id + "/comments";
+            var url = "<@spring.url '/messages/' />" + id + "/comments";
 
             var selector = "ul.messageComments-" + id;
             var target = $(selector);
@@ -294,7 +294,7 @@
         <h3>title: ${post.title}</h3>
         <p class="author">user: ${post.user.displayName}</p>
         <p class="entry">content: ${post.content}</p>
-        <p><a class="edit" href="<@spring.url '/plan/posts/${post.id}/edit' />">edit</a></p>
+        <p><a class="edit" href="<@spring.url '/posts/${post.id}/edit' />">edit</a></p>
     </div>
 
     <#if post.comments??>
@@ -312,7 +312,7 @@
 
     <div class="commentAction">
         <p><a class="comment" href="#">comment</a></p>
-        <form class="commentForm" action="<@spring.url '/plan/posts/${post.id}/comments'/>" method="post">
+        <form class="commentForm" action="<@spring.url '/posts/${post.id}/comments'/>" method="post">
             <textarea name="content"></textarea>
             <input type="submit" value="submit" />
         </form>
@@ -339,7 +339,7 @@
                         </div>
                         <div>
                             <p><a class="comment" href="#">comment</a></p>
-                            <form class="commentForm" action= "<@spring.url '/plan/posts/${post.id}/answers/${answer.id}/comments'/>" method="post">
+                            <form class="commentForm" action= "<@spring.url '/posts/${post.id}/answers/${answer.id}/comments'/>" method="post">
                                     <textarea name="content"></textarea>
                                     <input type="submit" value="submit" />
                             </form>
@@ -351,7 +351,7 @@
     </div>
 
     <div class="answerAction">
-        <form id="answerForm" action="<@spring.url '/plan/posts/${post.id}/answers'/>" method="post" > 
+        <form id="answerForm" action="<@spring.url '/posts/${post.id}/answers'/>" method="post" > 
             <fieldset>
                 <legend>Your Answer </legend>
                 <textarea id="answer" name="content" cols="60" rows="20"></textarea>

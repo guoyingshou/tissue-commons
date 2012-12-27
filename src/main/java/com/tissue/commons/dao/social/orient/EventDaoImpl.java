@@ -50,7 +50,7 @@ public class EventDaoImpl implements EventDao {
         List<Event> events = null;
 
         String ridUser = OrientIdentityUtil.decode(userId);
-        String sql = "select from event where type not in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies)";
+        String sql = "select from event where type not in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies) order by createTime desc limit 35";
 
         OGraphDatabase db = dataSource.getDB();
         try {
