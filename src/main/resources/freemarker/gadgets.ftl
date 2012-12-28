@@ -1,3 +1,5 @@
+<#import 'spring.ftl' as spring />
+
 <#macro showTopicRelatedEvents>
     <ul>
     <#list events as event>
@@ -10,14 +12,8 @@
          <#if event.type = "members">
             <@showPlanMembersEvent event />
         </#if>
-        <#if event.type = "concept">
-            <@showConceptEvent event />
-        </#if>
-        <#if event.type = "note">
-            <@showNoteEvent event />
-        </#if>
-        <#if event.type = "tutorial">
-            <@showTutorialEvent event />
+        <#if event.type = "concept" || event.type = "note" || event.type = "tutorial">
+            <@showPostEvent event />
         </#if>
         <#if event.type = "postMessage">
             <@showPostMessageEvent event />
@@ -25,10 +21,10 @@
          <#if event.type = "postMessageComment">
             <@showPostMessageCommentEvent event />
         </#if>
-         <#if event.type = "question">
+        <#if event.type = "question">
             <@showQuestionEvent event />
         </#if>
-         <#if event.type = "questionComment">
+          <#if event.type = "questionComment">
             <@showQuestionCommentEvent event />
         </#if>
         <#if event.type = "answer">
@@ -59,68 +55,39 @@
 
 <#macro showTopicEvent event>
     <li>
-        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a topic: <a href="/group/topics/${event.object.id}">${event.object.title}</a> 
-        at: ${event.published?datetime}
+        <@spring.messageArgs "i18n.event.topicMessage" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPlanEvent event>
     <li>
-        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a plan in <a href="/group/topics/${event.target.id}"> ${event.target.title}</a> 
-        at : ${event.published?datetime}
+        <@spring.messageArgs "i18n.event.planMessage" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPlanMembersEvent event>
     <li>
-        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        joined a plan in <a href="/group/topics/${event.target.id}"> ${event.target.title}</a> 
-        at : ${event.published?datetime}
+        <@spring.messageArgs "i18n.event.memberMessage" event.messageArgs />
     </li>
 </#macro>
 
-<#macro showConceptEvent event>
+<#macro showPostEvent event>
     <li>
-        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a concept: <a href="/group/posts/${event.object.id}">${event.object.title}</a> 
-        at : ${event.published?datetime}
-    </li>
-</#macro>
-
-<#macro showNoteEvent event>
-    <li>
-        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a note: <a href="/group/posts/${event.object.id}">${event.object.title}</a> 
-        at : ${event.published?datetime}
-    </li>
-</#macro>
-
-<#macro showTutorialEvent event>
-    <li>
-        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        created a tutorial: <a href="/group/posts/${event.object.id}">${event.object.title}</a> 
-        at : ${event.published?datetime}
+        <@spring.messageArgs "i18n.event.postMessage" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPostMessageEvent event>
     <li>
-        <a href="/profile/users/${event.actor.id}">${event.id}-${event.actor.displayName}</a> 
-        leave a message to: <a href="/group/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
-        at : ${event.published?datetime}
+        <@spring.messageArgs "i18n.event.postMessageMessage" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPostMessageCommentEvent event>
     <li>
-        <a href="/profile/users/${event.actor.id}">${event.actor.displayName}</a> 
-        has commented a message in: <a href="/group/topics/${event.target.id}/posts/${event.object.id}">${event.object.title}</a> 
-        at : ${event.published?datetime}
+        <@spring.messageArgs "i18n.event.postMessageCommentMessage" event.messageArgs />
     </li>
 </#macro>
-
 
 <#macro showQuestionEvent event>
     <li>
