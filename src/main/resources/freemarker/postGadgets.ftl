@@ -19,7 +19,18 @@
         <div class="post-content">${post.content}</div>
         <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">edit</a>
     </div>
+    <script type="text/javascript">
+        $(document).on('click', 'a.post-edit', function(e) {
+            e.preventDefault();
+            var options = {
+                type: "${post.type}",
+                url: $(this).data("action")
+            };
 
+            $(this).closest('div').editPostDialog(options);
+        });
+    </script>
+ 
     <h2>Messages: </h2>
 
     <ul class="messages">
@@ -30,8 +41,8 @@
             <div>${msg.content}</div>
 
             <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-            <a data-action="<@spring.url '/messages/${msg.id}' />" class="one-item-edit" href="#">edit</a>
-            <a data-id="${msg.id}" class="msg-comment-add" href="#">comment</a>
+            <a class="one-item-edit" data-action="<@spring.url '/messages/${msg.id}' />" href="#">edit</a>
+            <a class="msg-comment-add" data-id="${msg.id}" href="#">comment</a>
             </#if>
 
             <ul class="messageComments-${msg.id}">
@@ -49,35 +60,7 @@
         </#list>
         </#if>
     </ul>
-
-    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-    <div>
-        <a class="msg-add" data-action="<@spring.url '/posts/${post.id}/messages' />" href="#">add message</a>
-    </div>
-    </#if>
-
     <script type="text/javascript">
-
-        $(document).on('click', 'a.post-edit', function(e) {
-            e.preventDefault();
-            var options = {
-                type: "${post.type}",
-                url: $(this).data("action")
-            };
-
-            $(this).closest('div').editPostDialog(options);
-        });
- 
-        $(document).on('click', 'a.msg-add', function(e) {
-            e.preventDefault();
-            $('ul.messages').oneItemDialog($(this).data("action"));
-        });
- 
-        $(document).on('click', 'a.one-item-edit', function(e) {
-            e.preventDefault();
-            $(this).prev().oneItemDialog($(this).data("action"));
-        });
-
         $(document).on('click', 'a.msg-comment-add', function(e) {
             e.preventDefault();
 
@@ -92,6 +75,26 @@
             target.oneItemDialog(url);
         });
 
+        $(document).on('click', 'a.msg-comment-del', function(e) {
+            e.preventDefault();
+        });
+    </script>
+
+    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+    <a class="msg-add" data-action="<@spring.url '/posts/${post.id}/messages' />" href="#">add message</a>
+    <script type="text/javascript">
+        $(document).on('click', 'a.msg-add', function(e) {
+            e.preventDefault();
+            $('ul.messages').oneItemDialog($(this).data("action"));
+        });
+    </script>
+    </#if>
+
+    <script type="text/javascript">
+        $(document).on('click', 'a.one-item-edit', function(e) {
+            e.preventDefault();
+            $(this).prev().oneItemDialog($(this).data("action"));
+        });
     </script>
 
 </#macro>
