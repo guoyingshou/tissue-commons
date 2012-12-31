@@ -55,37 +55,37 @@
 
 <#macro showTopicEvent event>
     <li>
-        <@spring.messageArgs "i18n.event.topicMessage" event.messageArgs />
+        <@spring.messageArgs "i18n.event.topic" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPlanEvent event>
     <li>
-        <@spring.messageArgs "i18n.event.planMessage" event.messageArgs />
+        <@spring.messageArgs "i18n.event.plan" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPlanMembersEvent event>
     <li>
-        <@spring.messageArgs "i18n.event.memberMessage" event.messageArgs />
+        <@spring.messageArgs "i18n.event.members" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPostEvent event>
     <li>
-        <@spring.messageArgs "i18n.event.postMessage" event.messageArgs />
+        <@spring.messageArgs "i18n.event.post" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPostMessageEvent event>
     <li>
-        <@spring.messageArgs "i18n.event.postMessageMessage" event.messageArgs />
+        <@spring.messageArgs "i18n.event.postMessage" event.messageArgs />
     </li>
 </#macro>
 
 <#macro showPostMessageCommentEvent event>
     <li>
-        <@spring.messageArgs "i18n.event.postMessageCommentMessage" event.messageArgs />
+        <@spring.messageArgs "i18n.event.postMessageComment" event.messageArgs />
     </li>
 </#macro>
 

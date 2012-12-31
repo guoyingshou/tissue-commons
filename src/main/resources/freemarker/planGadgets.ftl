@@ -2,7 +2,7 @@
 <#import 'formGadgets.ftl' as formGadgets />
 
 <#macro showActivePlan>
-    <div id="activePlan">
+    <div id="active-group">
     <#if activePlan??>
         <#if viewer??>
             <#if activePlan.isOwnerOrMember(viewer.id)>
@@ -10,27 +10,27 @@
             <#assign plan = activePlan in formGadgets />
             <@formGadgets.postForm />
 
-            <a class="postForm" data-action="<@spring.url '/plans/${activePlan.id}/posts'/>" href="#">new post</a>
+            <a class="icon-post" data-action="<@spring.url '/plans/${activePlan.id}/posts'/>" href="#">new post</a>
 
             <script type="text/javascript">
-                $(document).on('click', 'a.postForm', function(e) {
+                $(document).on('click', 'a.icon-post', function(e) {
                     e.preventDefault();
-                    $('#contentInner').newPostDialog();
+                    $('#content').newPostDialog();
                 });
             </script>
             <#else>
-                <a href="<@spring.url '/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
+                <a class="icon-join" href="<@spring.url '/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
             </#if> 
         </#if>
 
         <h4>Active Study Group</h4>
-        <div class="groupInfo">
+        <div class="group-info">
             <p><a href="<@spring.url '/plans/${activePlan.id}'/>">${activePlan.createTime?date}</a></p>
             <p>duration: ${activePlan.duration} Months</p>
             <p>created by: ${activePlan.user.displayName}</p>
         </div>
         <#if activePlan.members??>
-        <div class="groupMembers">
+        <div class="group-members">
             <#list activePlan.members as member>
                 ${member.displayName}
             </#list>
