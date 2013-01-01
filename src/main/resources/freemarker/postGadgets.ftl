@@ -43,6 +43,7 @@
             <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
             <a class="one-item-edit" data-action="<@spring.url '/messages/${msg.id}' />" href="#">edit</a>
             <a class="msg-comment-add" data-id="${msg.id}" href="#">comment</a>
+            <a class="del" data-action="<@spring.url '/messages/${msg.id}/delete' />" href="#">delete</a>
             </#if>
 
             <ul class="message-comments-${msg.id}">
@@ -51,7 +52,7 @@
                 <li class="message-comment-item">
                     <div>${comment.content}</div>
                     <a class="one-item-edit" data-action="<@spring.url '/messageComments/${comment.id}' />" href="#">edit</a>
-                    <a class="msg-comment-del" data-action="<@spring.url '/messageComments/${comment.id}/delete' />" href="#">delete</a>
+                    <a class="del" data-action="<@spring.url '/messageComments/${comment.id}/delete' />" href="#">delete</a>
                 </li>
             </#list>
             </#if>
@@ -75,9 +76,6 @@
             target.oneItemDialog(url);
         });
 
-        $(document).on('click', 'a.msg-comment-del', function(e) {
-            e.preventDefault();
-        });
     </script>
 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
@@ -94,6 +92,11 @@
         $(document).on('click', 'a.one-item-edit', function(e) {
             e.preventDefault();
             $(this).prev().oneItemDialog($(this).data("action"));
+        });
+
+        $(document).on('click', 'a.del', function(e) {
+            e.preventDefault();
+            $(this).delDialog($(this).data("action"));
         });
     </script>
 
@@ -135,7 +138,7 @@
         <li>
             <div>${questionComment.content}</div>
             <a class="one-item-edit" data-action="<@spring.url '/questionComments/${questionComment.id}' />" href="#">edit</a>
-            <a class="question-comment-del" data-action="<@spring.url '/questionComments/${questionComment.id}/delete' />" href="#">delete</a>
+            <a class="del" data-action="<@spring.url '/questionComments/${questionComment.id}/delete' />" href="#">delete</a>
          </li>
          </#list>
     </ul>
@@ -151,6 +154,7 @@
 
             <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
             <a class="one-item-edit" data-action="<@spring.url '/answers/${answer.id}' />" href="#">edit</a>
+            <a class="del" data-action="<@spring.url '/answers/${answer.id}/delete' />" href="#">delete</a>
             <a class="answer-comment-add" data-id="${answer.id}" href="#">comment</a>
             </#if>
 
@@ -160,7 +164,7 @@
                 <li class="answer-comment-item">
                     <div>${comment.content}</div>
                     <a class="one-item-edit" data-action="<@spring.url '/answerComments/${comment.id}' />" href="#">edit</a>
-                    <a class="answer-comment-del" data-action="<@spring.url '/answerComments/${comment.id}/delete' />" href="#">delete</a>
+                    <a class="del" data-action="<@spring.url '/answerComments/${comment.id}/delete' />" href="#">delete</a>
                 </li>
             </#list>
             </#if>
@@ -185,10 +189,6 @@
             target.oneItemDialog(url);
         });
 
-        $(document).on('click', 'a.answer-comment-del', function(e) {
-            e.preventDefault();
-        });
-
     </script>
 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
@@ -206,6 +206,12 @@
             e.preventDefault();
             $(this).prev().oneItemDialog($(this).data("action"));
         });
+
+        $(document).on('click', 'a.del', function(e) {
+            e.preventDefault();
+            $(this).delDialog($(this).data("action"));
+        });
+
     </script>
 
 </#macro>

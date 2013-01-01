@@ -143,3 +143,12 @@
         <a href="#" class="cancel">cancel</a>
     </div>
 </#macro>
+
+<#macro confirmForm>
+    <form id="confirmForm" style="display:none">
+        <div>
+            <input type="submit" name="ok" value="OK" />
+            <input type="submit" name="cancel" value="Cancel" />
+        </div>
+    </form>
+</#macro>
