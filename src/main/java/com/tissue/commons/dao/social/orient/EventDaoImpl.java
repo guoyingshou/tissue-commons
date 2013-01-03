@@ -46,11 +46,11 @@ public class EventDaoImpl implements EventDao {
         }
     }
 
-    public List<Event> getTopicRelatedEvents(String userId) {
+    public List<Event> getTopicRelatedEvents(String userId, int num) {
         List<Event> events = null;
 
         String ridUser = OrientIdentityUtil.decode(userId);
-        String sql = "select from event where type not in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies) order by createTime desc limit 35";
+        String sql = "select from event where type not in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies) order by published desc limit " + num;
 
         OGraphDatabase db = dataSource.getDB();
         try {
@@ -69,11 +69,11 @@ public class EventDaoImpl implements EventDao {
         return events;
     }
 
-    public List<Event> getFriendsEvents(String userId) {
+    public List<Event> getFriendsEvents(String userId, int num) {
         List<Event> events = null;
 
         String ridUser = OrientIdentityUtil.decode(userId);
-        String sql = "select from event where type in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ")";
+        String sql = "select from event where type in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") order by published desc limit " + num;
 
         OGraphDatabase db = dataSource.getDB();
         try {
@@ -93,10 +93,10 @@ public class EventDaoImpl implements EventDao {
  
     }
 
-    public List<Event> getLatestEvents() {
+    public List<Event> getLatestEvents(int num) {
         List<Event> events = null;
 
-        String sql = "select from event where type in ['topic', 'plan', 'members'] order by createTime desc limit 50";
+        String sql = "select from event where type in ['topic', 'plan', 'members'] order by published desc limit " + num;
 
         System.out.println(sql);
         OGraphDatabase db = dataSource.getDB();

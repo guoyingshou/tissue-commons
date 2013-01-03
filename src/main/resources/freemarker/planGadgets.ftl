@@ -37,6 +37,7 @@
         </div>
         </#if>
     <#else>
+        <#if viewer??>
         <@formGadgets.planForm />
         <a class="planForm" href="#">create plan</a>
         <script type="text/javascript">
@@ -45,6 +46,7 @@
                 $('#planDia').newPlanDialog();
             });
         </script>
+        </#if>
     </#if>
     </div>
 </#macro>

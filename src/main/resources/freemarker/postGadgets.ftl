@@ -15,22 +15,25 @@
 
     <div>
         <h3 class="post-title">${post.title}</h3>
-        <div class="post-author">${post.user.displayName}</div>
         <div class="post-content">${post.content}</div>
-        <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">edit</a>
-    </div>
-    <script type="text/javascript">
-        $(document).on('click', 'a.post-edit', function(e) {
-            e.preventDefault();
-            var options = {
-                type: "${post.type}",
-                url: $(this).data("action")
-            };
+        <div class="post-author">${post.user.displayName} published: ${post.createTime?datetime}</div>
 
-            $(this).closest('div').editPostDialog(options);
-        });
-    </script>
- 
+        <#if viewer?? && post.plan.isActive() && post.isOwner(viewer.id)>
+        <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">edit</a>
+        <script type="text/javascript">
+            $(document).on('click', 'a.post-edit', function(e) {
+                e.preventDefault();
+                var options = {
+                    type: "${post.type}",
+                    url: $(this).data("action")
+                };
+
+                $(this).closest('div').editPostDialog(options);
+            });
+        </script>
+        </#if>
+    </div>
+
     <h2>Messages: </h2>
 
     <ul class="messages">
@@ -39,11 +42,15 @@
         <li class="message-item">
 
             <div>${msg.content}</div>
+            <div>${msg.user.displayName}  published: ${msg.createTime?datetime}</div>
+
+            <#if viewer?? && post.plan.isActive() && msg.isOwner(viewer.id)>
+            <a class="one-item-edit" data-action="<@spring.url '/messages/${msg.id}' />" href="#">edit</a>
+            <a class="del" data-action="<@spring.url '/messages/${msg.id}/delete' />" href="#">delete</a>
+            </#if>
 
             <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
-            <a class="one-item-edit" data-action="<@spring.url '/messages/${msg.id}' />" href="#">edit</a>
             <a class="msg-comment-add" data-id="${msg.id}" href="#">comment</a>
-            <a class="del" data-action="<@spring.url '/messages/${msg.id}/delete' />" href="#">delete</a>
             </#if>
 
             <ul class="message-comments-${msg.id}">
@@ -51,8 +58,12 @@
             <#list msg.comments as comment>
                 <li class="message-comment-item">
                     <div>${comment.content}</div>
+                    <div> ${comment.user.displayName}    published: ${comment.createTime?datetime}</div>
+
+                    <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
                     <a class="one-item-edit" data-action="<@spring.url '/messageComments/${comment.id}' />" href="#">edit</a>
                     <a class="del" data-action="<@spring.url '/messageComments/${comment.id}/delete' />" href="#">delete</a>
+                    </#if>
                 </li>
             </#list>
             </#if>
@@ -61,6 +72,8 @@
         </#list>
         </#if>
     </ul>
+
+    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
     <script type="text/javascript">
         $(document).on('click', 'a.msg-comment-add', function(e) {
             e.preventDefault();
@@ -75,8 +88,8 @@
             }
             target.oneItemDialog(url);
         });
-
     </script>
+    </#if>
 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
     <a class="msg-add" data-action="<@spring.url '/posts/${post.id}/messages' />" href="#">add message</a>
@@ -85,13 +98,10 @@
             e.preventDefault();
             $('ul.messages').oneItemDialog($(this).data("action"));
         });
-    </script>
-    </#if>
 
-    <script type="text/javascript">
         $(document).on('click', 'a.one-item-edit', function(e) {
             e.preventDefault();
-            $(this).prev().oneItemDialog($(this).data("action"));
+            $(this).prev().prev().oneItemDialog($(this).data("action"));
         });
 
         $(document).on('click', 'a.del', function(e) {
@@ -99,46 +109,54 @@
             $(this).delDialog($(this).data("action"));
         });
     </script>
+    </#if>
 
 </#macro>
 
 <#macro showQuestionDetail>
     <div class="question">
         <h3 class="post-title">${post.title}</h3>
-        <div class="post-author">${post.user.displayName}</div>
         <div class="post-content">${post.content}</div>
+        <div class="post-author">${post.user.displayName} published: ${post.createTime?datetime}</div>
 
+        <#if viewer?? && post.plan.isActive() && post.isOwner(viewer.id)>
         <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">edit</a>
+        <script type="text/javascript">
+            $(document).on('click', 'a.post-edit', function(e) {
+                e.preventDefault();
+                var options = {
+                    type: "${post.type}",
+                    url: $(this).data("action")
+                };
+                $(this).closest('div').editPostDialog(options);
+            });
+        </script>
+        </#if>
+        
+        <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
         <a class="question-comment-add" data-action="<@spring.url '/posts/${post.id}/questionComments' />" href="#">comment</a></p>
-    </div>
-
-    <script type="text/javascript">
-
-        $(document).on('click', 'a.post-edit', function(e) {
-            e.preventDefault();
-            var options = {
-                type: "${post.type}",
-                url: $(this).data("action")
-            };
-            $(this).closest('div').editPostDialog(options);
-        });
-
-        $(document).on('click', 'a.question-comment-add', function(e) {
-            e.preventDefault();
+        <script type="text/javascript">
+            $(document).on('click', 'a.question-comment-add', function(e) {
+                e.preventDefault();
             
-            var url = $(this).data("action");
-            $('ul.post-comments').oneItemDialog(url);
-        });
-
-    </script>
+                var url = $(this).data("action");
+                $('ul.post-comments').oneItemDialog(url);
+            });
+        </script>
+         </#if>
+    </div>
 
     <#if post.comments??>
     <ul class="question-comments">
         <#list post.comments as questionComment>
         <li>
             <div>${questionComment.content}</div>
+            <div>${questionComment.user.displayName} published: ${questionComment.createTime?datetime}</div>
+
+            <#if viewer?? && post.plan.isActive() && questionComment.isOwner(viewer.id)>
             <a class="one-item-edit" data-action="<@spring.url '/questionComments/${questionComment.id}' />" href="#">edit</a>
             <a class="del" data-action="<@spring.url '/questionComments/${questionComment.id}/delete' />" href="#">delete</a>
+            </#if>
          </li>
          </#list>
     </ul>
@@ -151,10 +169,14 @@
         <li class="answer-item">
 
             <div>${answer.content}</div>
+            <div>${answer.user.displayName} published: ${answer.createTime?datetime}</div>
 
-            <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+            <#if viewer?? && post.plan.isActive() && answer.isOwner(viewer.id)>
             <a class="one-item-edit" data-action="<@spring.url '/answers/${answer.id}' />" href="#">edit</a>
             <a class="del" data-action="<@spring.url '/answers/${answer.id}/delete' />" href="#">delete</a>
+            </#if>
+
+            <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
             <a class="answer-comment-add" data-id="${answer.id}" href="#">comment</a>
             </#if>
 
@@ -163,8 +185,12 @@
             <#list answer.comments as comment>
                 <li class="answer-comment-item">
                     <div>${comment.content}</div>
+                    <div>${comment.user.displayName} published: ${comment.createTime?datetime}</div>
+
+                    <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
                     <a class="one-item-edit" data-action="<@spring.url '/answerComments/${comment.id}' />" href="#">edit</a>
                     <a class="del" data-action="<@spring.url '/answerComments/${comment.id}/delete' />" href="#">delete</a>
+                    </#if>
                 </li>
             </#list>
             </#if>
@@ -174,6 +200,7 @@
         </#if>
     </ul>
 
+    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
     <script type="text/javascript">
         $(document).on('click', 'a.answer-comment-add', function(e) {
             e.preventDefault();
@@ -188,8 +215,8 @@
             }
             target.oneItemDialog(url);
         });
-
     </script>
+    </#if>
 
     <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
     <a class="answer-add" data-action="<@spring.url '/posts/${post.id}/answers' />" href="#">add answer</a>
@@ -198,21 +225,18 @@
             e.preventDefault();
             $('ul.answers').oneItemDialog($(this).data("action"));
         });
-    </script>
-    </#if>
 
-    <script type="text/javascript">
         $(document).on('click', 'a.one-item-edit', function(e) {
             e.preventDefault();
-            $(this).prev().oneItemDialog($(this).data("action"));
+            $(this).prev().prev().oneItemDialog($(this).data("action"));
         });
 
         $(document).on('click', 'a.del', function(e) {
             e.preventDefault();
             $(this).delDialog($(this).data("action"));
         });
-
     </script>
+    </#if>
 
 </#macro>
 
