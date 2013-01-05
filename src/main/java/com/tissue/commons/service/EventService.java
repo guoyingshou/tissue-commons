@@ -26,5 +26,8 @@ public class EventService {
         return eventDao.getLatestEvents(num);
     }
 
+    public void test(String tid) {
+        eventDao.test(tid);
+    }
 
 }

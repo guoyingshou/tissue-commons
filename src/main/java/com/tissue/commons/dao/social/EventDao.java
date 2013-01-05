@@ -8,4 +8,5 @@ public interface EventDao {
     List<Event> getTopicRelatedEvents(String userId, int num);
     List<Event> getFriendsEvents(String userId, int num);
     List<Event> getLatestEvents(int num);
+    void test(String tid);
 }

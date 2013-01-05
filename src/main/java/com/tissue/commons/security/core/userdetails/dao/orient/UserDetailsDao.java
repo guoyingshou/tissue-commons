@@ -20,7 +20,7 @@ import com.orientechnologies.orient.core.record.impl.ODocument;
 @Component
 public class UserDetailsDao {
 
-    private String byUsername = "select from user where username = ?";
+    private String byUsername = "select from User where username = ?";
 
     @Autowired
     private OrientDataSource dataSource;
@@ -54,22 +54,6 @@ public class UserDetailsDao {
         }
 
         return user;
-
-        /**
-        UserDetailsImpl result = null;
-
-        BasicDBObject query = new BasicDBObject();
-	    query.put("username", username);
-
-	    DBObject found = getCollection().findOne(query);
-	    if(found != null) {
-            String id = found.get("_id").toString();
-            found.removeField("_id");
-	        result = mapper.convertValue(found, UserDetailsImpl.class);
-            result.setId(id);
-	    }
-        return result;
-        */
     }
 
 }

@@ -1,6 +1,7 @@
 <#import 'spring.ftl' as spring />
 
 <#macro showTopicRelatedEvents>
+    <#if events??>
     <ul>
     <#list events as event>
         <#if event.type = "topic">
@@ -35,9 +36,11 @@
         </#if>
      </#list>
     </ul>
+    </#if>
 </#macro>
 
 <#macro showLatestEvents>
+    <#if events??>
     <ul>
     <#list events as event>
         <#if event.type = "topic">
@@ -51,6 +54,7 @@
         </#if>
      </#list>
     </ul>
+    </#if>
 </#macro>
 
 <#macro showTopicEvent event>
