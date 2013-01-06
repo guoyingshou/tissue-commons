@@ -14,6 +14,7 @@
             <li><a href="<@spring.url '/exploreTimeline' />"><@spring.message "i18n.explore.menu.timeline" /></a></li>
         </ul>
 
+        <#if viewer??>
         <ul class="action">
             <li><a class="topicForm" href="#"><@spring.message "i18n.explore.action.createTopic" /></a></li>
             <li><@formGadgets.topicForm /></li>
@@ -26,5 +27,6 @@
                 </script>
             </li>
         </ul>
+        </#if>
     </div>
 </#macro>

@@ -38,6 +38,7 @@ public class EventDaoImpl implements EventDao {
     @Autowired
     private OrientDataSource dataSource;
 
+    /**
     public void addEvent(Event ... events) {
 
         OGraphDatabase db = dataSource.getDB();
@@ -55,13 +56,15 @@ public class EventDaoImpl implements EventDao {
             db.close();
         }
     }
+    */
 
     public List<Event> getTopicRelatedEvents(String userId, int num) {
         List<Event> events = null;
 
         String ridUser = OrientIdentityUtil.decode(userId);
-        String sql = "select from event where type not in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies) order by published desc limit " + num;
+        //String sql = "select from event where type not in ['accept', 'accepted'] and (actor in (select union(in[label='friend'].out, out[label='friend'].in) from " + ridUser + ") or " + ridUser + " in notifies) order by published desc limit " + num;
 
+        String sql = "select from edgetopic where out in (select union(in[
         OGraphDatabase db = dataSource.getDB();
         try {
             OSQLSynchQuery<ODocument> q = new OSQLSynchQuery(sql);
