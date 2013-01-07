@@ -5,7 +5,7 @@
     <div id="active-group">
     <#if activePlan??>
         <#if viewer??>
-            <#if activePlan.isOwnerOrMember(viewer.id)>
+            <#if activePlan.isOwner(viewer.id) || activePlan.isMember(viewer.id)>
 
             <#assign plan = activePlan in formGadgets />
             <@formGadgets.postForm />

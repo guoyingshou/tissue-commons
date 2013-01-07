@@ -49,7 +49,7 @@
             <a class="del" data-action="<@spring.url '/messages/${msg.id}/delete' />" href="#">delete</a>
             </#if>
 
-            <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+            <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
             <a class="msg-comment-add" data-id="${msg.id}" href="#">comment</a>
             </#if>
 
@@ -73,7 +73,7 @@
         </#if>
     </ul>
 
-    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+    <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
     <script type="text/javascript">
         $(document).on('click', 'a.msg-comment-add', function(e) {
             e.preventDefault();
@@ -91,7 +91,7 @@
     </script>
     </#if>
 
-    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+    <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
     <a class="msg-add" data-action="<@spring.url '/posts/${post.id}/messages' />" href="#">add message</a>
     <script type="text/javascript">
         $(document).on('click', 'a.msg-add', function(e) {
@@ -133,7 +133,7 @@
         </script>
         </#if>
         
-        <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+        <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
         <a class="question-comment-add" data-action="<@spring.url '/posts/${post.id}/questionComments' />" href="#">comment</a></p>
         <script type="text/javascript">
             $(document).on('click', 'a.question-comment-add', function(e) {
@@ -176,7 +176,7 @@
             <a class="del" data-action="<@spring.url '/answers/${answer.id}/delete' />" href="#">delete</a>
             </#if>
 
-            <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+            <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
             <a class="answer-comment-add" data-id="${answer.id}" href="#">comment</a>
             </#if>
 
@@ -200,7 +200,7 @@
         </#if>
     </ul>
 
-    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+    <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
     <script type="text/javascript">
         $(document).on('click', 'a.answer-comment-add', function(e) {
             e.preventDefault();
@@ -218,7 +218,7 @@
     </script>
     </#if>
 
-    <#if viewer?? && post.plan.isActive() && post.plan.isOwnerOrMember(viewer.id)>
+    <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
     <a class="answer-add" data-action="<@spring.url '/posts/${post.id}/answers' />" href="#">add answer</a>
     <script type="text/javascript">
         $(document).on('click', 'a.answer-add', function(e) {

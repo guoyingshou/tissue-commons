@@ -1,7 +1,7 @@
 package com.tissue.commons.service;
 
-import com.tissue.domain.social.Event;
-import com.tissue.commons.dao.social.EventDao;
+import com.tissue.domain.social.Activity;
+import com.tissue.commons.dao.social.ActivityDao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,15 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 
 @Component
-public class EventService {
+public class ActivityService {
 
     @Autowired
-    private EventDao eventDao;
+    private ActivityDao activityDao;
 
-    public List<Event> getTopicRelatedEvents(String userId, int num) {
-        return eventDao.getTopicRelatedEvents(userId, num);
+    public List<Activity> getTopicRelatedActivities(String userId, int num) {
+        return activityDao.getTopicRelatedActivities(userId, num);
     }
 
+    /**
     public List<Event> getFriendsEvents(String userId, int num) {
         return eventDao.getFriendsEvents(userId, num);
     }
@@ -29,5 +30,6 @@ public class EventService {
     public void test(String tid) {
         eventDao.test(tid);
     }
+    */
 
 }
