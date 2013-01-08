@@ -140,14 +140,14 @@
                 e.preventDefault();
             
                 var url = $(this).data("action");
-                $('ul.post-comments').oneItemDialog(url);
+                $('ul.question-comments').oneItemDialog(url);
             });
         </script>
          </#if>
     </div>
 
-    <#if post.comments??>
     <ul class="question-comments">
+        <#if post.comments??>
         <#list post.comments as questionComment>
         <li>
             <div>${questionComment.content}</div>
@@ -157,10 +157,10 @@
             <a class="one-item-edit" data-action="<@spring.url '/questionComments/${questionComment.id}' />" href="#">edit</a>
             <a class="del" data-action="<@spring.url '/questionComments/${questionComment.id}/delete' />" href="#">delete</a>
             </#if>
-         </li>
-         </#list>
+        </li>
+        </#list>
+        </#if>
     </ul>
-    </#if>
 
     <h2>Answers: </h2>
     <ul class="answers">
