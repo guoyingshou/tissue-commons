@@ -1,12 +1,12 @@
-package com.tissue.commons.dao.social.orient;
+package com.tissue.commons.social.dao.orient;
 
 import com.tissue.core.converter.ActivityConverter;
 import com.tissue.core.util.OrientIdentityUtil;
 import com.tissue.core.util.OrientDataSource;
-import com.tissue.commons.dao.social.ActivityDao;
-import com.tissue.domain.social.Activity;
-import com.tissue.domain.social.ActivityObject;
-import com.tissue.domain.profile.User;
+import com.tissue.core.social.Activity;
+import com.tissue.core.social.ActivityObject;
+import com.tissue.core.profile.User;
+import com.tissue.commons.social.dao.ActivityDao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;

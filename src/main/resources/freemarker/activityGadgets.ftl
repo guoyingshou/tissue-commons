@@ -10,13 +10,16 @@
         published: ${activity.published?datetime} 
         <br/>
 
-        actor: ${activity.actor.displayName} 
+        who: ${activity.who.displayName} 
         <br/>
         
-        object: ${activity.object.displayName!"no displayName"}
+        what: ${activity.what.displayName!"no displayName"}
         <br/>
 
-        target: ${activity.target.displayName!"no target displayName"}
+        to: ${activity.to.displayName!"no displayName"}
+        <br/>
+
+        where: ${activity.where.displayName!"no displayName"}
         <br/><br/>
         </li>
      </#list>

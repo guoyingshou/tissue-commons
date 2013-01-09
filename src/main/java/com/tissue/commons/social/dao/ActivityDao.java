@@ -1,7 +1,7 @@
-package com.tissue.commons.dao.social;
+package com.tissue.commons.social.dao;
 
-import com.tissue.domain.social.Activity;
-import com.tissue.domain.social.ActivityObject;
+import com.tissue.core.social.Activity;
+import com.tissue.core.social.ActivityObject;
 import java.util.List;
 
 public interface ActivityDao {
