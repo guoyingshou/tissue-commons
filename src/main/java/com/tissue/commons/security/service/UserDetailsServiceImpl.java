@@ -1,7 +1,7 @@
-package com.tissue.commons.security.core.userdetails.service;
+package com.tissue.commons.security.service;
 
-import com.tissue.commons.security.core.userdetails.dao.orient.UserDetailsDao;
-import com.tissue.commons.security.core.userdetails.UserDetailsImpl;
+import com.tissue.core.security.dao.UserDetailsDao;
+import com.tissue.core.security.UserDetailsImpl;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

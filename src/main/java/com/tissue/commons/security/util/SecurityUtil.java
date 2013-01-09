@@ -1,6 +1,6 @@
 package com.tissue.commons.security.util;
 
-import com.tissue.commons.security.core.userdetails.UserDetailsImpl;
+import com.tissue.core.security.UserDetailsImpl;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;

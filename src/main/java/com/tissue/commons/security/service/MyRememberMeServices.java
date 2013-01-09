@@ -1,4 +1,4 @@
-package com.tissue.commons.security.rememberme;
+package com.tissue.commons.security.service;
 
 import org.springframework.security.web.authentication.rememberme.AbstractRememberMeServices;
 import org.springframework.security.web.authentication.rememberme.InvalidCookieException;
