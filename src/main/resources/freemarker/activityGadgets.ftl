@@ -1,6 +1,6 @@
 <#import 'spring.ftl' as spring />
 
-<#macro showTopicRelatedActivities>
+<#macro showActivities>
     <#if activities??>
     <ul>
     <#list activities as activity>
