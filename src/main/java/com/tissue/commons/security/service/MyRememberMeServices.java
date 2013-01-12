@@ -55,8 +55,6 @@ public class MyRememberMeServices extends AbstractRememberMeServices {
 
         UserDetails userDetails = getUserDetailsService().loadUserByUsername(cookieTokens[0]);
 
-        System.out.println("+++++++++++++++++" + userDetails);
-
         // Check signature of token matches remaining details.
         // Must do this after user lookup, as we need the DAO-derived password.
         // If efficiency was a major issue, just add in a UserCache implementation,

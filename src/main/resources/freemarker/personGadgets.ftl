@@ -3,10 +3,10 @@
     <div>
         <h1><a href="<@spring.url '/users/${owner.id}' />">${owner.displayName}</a></h1>
         <ul class="profile-menu">
-            <li><a href="<@spring.url '/users/${owner.id}' />">Info</a></li>
-            <li><a href="<@spring.url '/users/${owner.id}/feed' />">Feed</a></li>
+            <li><a href="<@spring.url '/users/${owner.id}' />">Articles</a></li>
+            <li><a href="<@spring.url '/users/${owner.id}/status' />">Status</a></li>
             <li><a href="<@spring.url '/users/${owner.id}/resume' />">Resume</a></li>
-            <li><a href="<@spring.url '/users/${owner.id}/impressions' />">Friends Impression</a></li>
+            <li><a href="<@spring.url '/users/${owner.id}/impressions' />">Impressions</a></li>
         </ul>
         <ul class="action">
             <#if canInvite??>
@@ -20,8 +20,8 @@
     <h1>Tissue Network</h1>
     <div>
         <ul class="menu">
-            <li><a href="/profile/dashboard">NewsFeeds</a></li>
-            <li><a href="/profile/actions">Actions</a></li>
+            <li><a href="<@spring.url '/dashboard' />">NewsFeeds</a></li>
+            <li><a href="<@spring.url '/actions' />">Actions</a></li>
         </ul>
     </div>
 </#macro>

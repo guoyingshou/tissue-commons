@@ -60,7 +60,7 @@
             <li>
                 <p class="ajx"><a href="<@spring.url '/plans/${plan.id}' />">${plan.createTime?date}</a></p>
                 <p>duration: ${plan.duration} Months</p>
-                <p>created by : <a href="/profile/users/${plan.user.id}" target="_top">${plan.user.displayName}</a></p>
+                <p>created by : <a href="/social/users/${plan.user.id}" target="_top">${plan.user.displayName}</a></p>
             </li>
         </#list>
         </ul>

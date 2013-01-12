@@ -1,5 +1,66 @@
 <#import 'spring.ftl' as spring />
 
+<#macro signupForm>
+    <div id="signupForm" style="display: none">
+        <form action="<@spring.url '/signup' />" method="post">
+            <fieldset> 
+                <legend>Create your free personal account</legend>
+                <ul>
+                    <li>
+                        <label for="username">Username</label>
+                        <input type="input" id="username" name="username" value="" />
+                        <#--
+                        <@spring.formInput path="account.username" attributes="id='username' class='ac'" />
+                        <p><@spring.showErrors "" /></p>
+                        -->
+                    </li>
+
+                    <li>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" value="" />
+                        <#--
+                        <@spring.formPasswordInput path="account.password" attributes="id='password' class='ac'" />
+                        <p><@spring.showErrors "" /></p>
+                        -->
+                    </li>
+
+                    <li>
+                        <label for="confirm">Confirm Password</label>
+                        <input type="password" id="confirm" name="confirm" value="" />
+
+                        <#--
+                        <@spring.formPasswordInput path="account.confirm" attributes="id='confirm' class='ac'" />
+                        <p><@spring.showErrors "" /></p>
+                        -->
+                    </li>
+
+                    <li>
+                        <label for="displayName">DisplayName</label>
+                        <input type="input" id="displayName" name="displayName" value="" />
+                        <#--
+                        <@spring.formInput path="account.displayName" attributes="id='displayName' class='ac'" />
+                        <p><@spring.showErrors "" /></p>
+                        -->
+                    </li>
+
+                    <li>
+                        <label for="email">Email</label>
+                        <input type="input" id="email" name="email" value="" />
+                        <#--
+                        <@spring.formInput path="account.email" attributes="id='email' class='ac'" />
+                        <p><@spring.showErrors "" /></p>
+                        -->
+                    </li>
+
+                    <li>
+                        <input type="submit" value="create an account" />
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+    </div>
+</#macro>
+
 <#macro topicForm>
     <div id="topicForm" style="display: none">
         <form action="<@spring.url '/topics' />" method="post">
