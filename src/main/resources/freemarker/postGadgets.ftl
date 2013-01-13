@@ -4,8 +4,8 @@
 <ul id="postList">
    <#list posts as post>
        <li>
-           <span><a href="http://www.tissue.com/group/posts/${post.id}" class="post">${post.title}</a></span>
-           <span><a href="http://www.tissue.com/profile/users/${post.user.id}">${post.user.displayName}</a></span>
+           <span><a href="/group/posts/${post.id}" class="post">${post.title}</a></span>
+           <span><a href="/social/users/${post.user.id}">${post.user.displayName}</a></span>
        </li>
    </#list>
 </ul>
@@ -106,7 +106,7 @@
 
         $(document).on('click', 'a.del', function(e) {
             e.preventDefault();
-            $(this).delDialog($(this).data("action"));
+            $(this).delDialog();
         });
     </script>
     </#if>
@@ -233,7 +233,7 @@
 
         $(document).on('click', 'a.del', function(e) {
             e.preventDefault();
-            $(this).delDialog($(this).data("action"));
+            $(this).delDialog();
         });
     </script>
     </#if>

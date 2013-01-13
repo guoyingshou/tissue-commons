@@ -56,9 +56,31 @@
                         <input type="submit" value="create an account" />
                     </li>
                 </ul>
+                <a class="cancel" href="#">cancel</a>
             </fieldset>
         </form>
     </div>
+</#macro>
+
+<#macro signinForm>
+<div id="signinForm">
+    <form action="<@spring.url '/jsc'/>" method="post">
+        <legend>Sign In</legend>
+        <ul>
+            <li>
+                <label for="username">User Name</label>
+                <input type="text" id="username" name="j_username" size="20" maxlength="50" />
+            </li>
+            <li>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="j_password" size="20" maxlength="50" />
+            </li>
+            <li>
+                <input type="submit" value="Login"/>
+            </li>
+        </ul>
+    </form>
+</div>
 </#macro>
 
 <#macro topicForm>

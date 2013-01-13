@@ -36,7 +36,10 @@
                 <#if viewer??>
                 <ul class="userbox">
                     <li>
-                    <a href="/social/invitations"><@spring.message "i18n.common.menu.invitations" /><#if invitationsCount??>(${invitationsCount})</#if></a>
+                        <a href="/social/invitations">
+                            <@spring.message "i18n.common.menu.invitations" />
+                            - ${viewer.invitationsReceived?size}
+                        </a>
                     </li>
                     <li><a href="/social/friends"><@spring.message "i18n.common.menu.friends" /></a></li>
                     <#if locale == 'zh_CN'>

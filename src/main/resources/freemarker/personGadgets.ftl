@@ -30,7 +30,7 @@
     <div>
         ${owner.resume!''}
     </div>
-    <#if owner.isSame(viewer.id)>
+    <#if viewer?? && owner.isSame(viewer.id)>
         <a class="edit-resume" href="<@spring.url '/users/${owner.id}/resume' />">edit</a>
         <@formGadgets.oneItemForm />
         <script type="text/javascript">
@@ -52,6 +52,7 @@
         </#if>
     </ul>
 
+    <#if viewer?? && viewer.isFriend(owner.id)>
         <a class="add-impression" href="<@spring.url '/users/${owner.id}/impressions' />">add impression</a>
         <@formGadgets.oneItemForm />
         <script type="text/javascript">
@@ -61,5 +62,6 @@
                 $(this).prev().oneItemDialog(url);
             });
         </script>
+    </#if>
 
 </#macro>
