@@ -2,15 +2,23 @@
 <#macro personLogo>
     <div>
         <h1><a href="<@spring.url '/users/${owner.id}' />">${owner.displayName}</a></h1>
-        <ul class="profile-menu">
+        <ul class="submenu-more">
             <li><a href="<@spring.url '/users/${owner.id}' />">Articles</a></li>
             <li><a href="<@spring.url '/users/${owner.id}/status' />">Status</a></li>
             <li><a href="<@spring.url '/users/${owner.id}/resume' />">Resume</a></li>
             <li><a href="<@spring.url '/users/${owner.id}/impressions' />">Impressions</a></li>
+            <li><a href="<@spring.url '/users/${owner.id}/friends' />"><@spring.message "i18n.common.menu.friends" /></a></li>
         </ul>
-        <ul class="action">
-            <#if canInvite??>
-            <li><a href="<@spring.url '/users/${owner.id}/invites' />">invite</a></li>
+        <ul class="submenu-action">
+            <#if viewer?? && viewer.canInvite(owner.id)>
+            <li><a class="invite" href="<@spring.url '/users/${owner.id}/invites' />">invite</a></li>
+            <@formGadgets.inviteForm />
+            <script type="text/javascript">
+                $(document).on('click', 'a.invite', function(e) {
+                    e.preventDefault();
+                    $(this).inviteDialog();
+                });
+            </script>
             </#if>
         </ul>
     </div>
@@ -30,7 +38,7 @@
     <div>
         ${owner.resume!''}
     </div>
-    <#if viewer?? && owner.isSame(viewer.id)>
+    <#if viewer?? && viewer.isSelf(owner.id)>
         <a class="edit-resume" href="<@spring.url '/users/${owner.id}/resume' />">edit</a>
         <@formGadgets.oneItemForm />
         <script type="text/javascript">

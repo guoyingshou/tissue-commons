@@ -41,7 +41,9 @@
                             - ${viewer.invitationsReceived?size}
                         </a>
                     </li>
+                    <#--
                     <li><a href="/social/friends"><@spring.message "i18n.common.menu.friends" /></a></li>
+                    -->
                     <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
                     <#else>

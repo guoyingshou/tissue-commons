@@ -83,6 +83,25 @@
 </div>
 </#macro>
 
+<#macro inviteForm>
+    <div id="inviteForm" style="display: none">
+        <form>
+            <ul>
+                <li>
+                    <label for="letter">invitation letter</label>
+                </li>
+                <li>
+                    <textarea id="letter" name="content"></textarea></p>
+                </li>
+                <li>
+                    <input type="submit" name="submit" value="submit" />
+                </li>
+            </ul>
+        </form>
+        <a href="#" class="cancel">cancel</a>
+    </div>
+</#macro>
+
 <#macro topicForm>
     <div id="topicForm" style="display: none">
         <form action="<@spring.url '/topics' />" method="post">
