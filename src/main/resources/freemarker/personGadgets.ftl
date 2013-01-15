@@ -3,11 +3,31 @@
     <div>
         <h1><a href="<@spring.url '/users/${owner.id}' />">${owner.displayName}</a></h1>
         <ul class="submenu-more">
-            <li><a href="<@spring.url '/users/${owner.id}' />">Articles</a></li>
-            <li><a href="<@spring.url '/users/${owner.id}/status' />">Status</a></li>
-            <li><a href="<@spring.url '/users/${owner.id}/resume' />">Resume</a></li>
-            <li><a href="<@spring.url '/users/${owner.id}/impressions' />">Impressions</a></li>
-            <li><a href="<@spring.url '/users/${owner.id}/friends' />"><@spring.message "i18n.common.menu.friends" /></a></li>
+            <li>
+                <a href="<@spring.url '/users/${owner.id}' />">
+                    <@spring.message "i18n.user.menu.articles" />
+                </a>
+            </li>
+            <li>
+                <a href="<@spring.url '/users/${owner.id}/status' />">
+                    <@spring.message "i18n.user.menu.status" />
+                </a>
+            </li>
+            <li>
+                <a href="<@spring.url '/users/${owner.id}/resume' />">
+                    <@spring.message "i18n.user.menu.resume" />
+                </a>
+            </li>
+            <li>
+                <a href="<@spring.url '/users/${owner.id}/impressions' />">
+                    <@spring.message "i18n.user.menu.impressions" />
+                </a>
+            </li>
+            <li>
+                <a href="<@spring.url '/users/${owner.id}/friends' />">
+                    <@spring.message "i18n.user.menu.friends" />
+                </a>
+            </li>
         </ul>
         <ul class="submenu-action">
             <#if viewer?? && viewer.canInvite(owner.id)>
@@ -25,13 +45,17 @@
 </#macro>
 
 <#macro dashboardLogo>
-    <h1>Tissue Network</h1>
+    <h1>
+        <@spring.message "i18n.common.sitename" />
+    </h1>
+    <#--
     <div>
         <ul class="menu">
             <li><a href="<@spring.url '/dashboard' />">NewsFeeds</a></li>
             <li><a href="<@spring.url '/actions' />">Actions</a></li>
         </ul>
     </div>
+    -->
 </#macro>
 
 <#macro showResume>

@@ -30,7 +30,7 @@
                 <ul class="nav">
                     <li><a href="/social/home"><@spring.message "i18n.common.menu.home" /></a></li>
                     <li><a href="/group/explore"><@spring.message "i18n.common.menu.explore" /></a></li>
-                    <li><a href="#"><@spring.message "i18n.common.menu.about" /></a></li>
+                    <li><a href="/social/about"><@spring.message "i18n.common.menu.about" /></a></li>
                 </ul>
 
                 <#if viewer??>
@@ -41,9 +41,6 @@
                             - ${viewer.invitationsReceived?size}
                         </a>
                     </li>
-                    <#--
-                    <li><a href="/social/friends"><@spring.message "i18n.common.menu.friends" /></a></li>
-                    -->
                     <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
                     <#else>

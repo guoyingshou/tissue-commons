@@ -1,4 +1,5 @@
 <#import 'spring.ftl' as spring />
+<#import 'formGadgets.ftl' as formGadgets />
 
 <#macro layout title="">
     <#include "header.ftl">
@@ -8,6 +9,28 @@
     <#include "footer.ftl">
 </#macro>
 
+<#macro showAbout>
+    <ul>
+        <#if abouts??>
+        <#list abouts as about>
+        <li>${about.content}</li>
+        </#list>
+        </#if>
+    </ul>
+
+    <#if viewer??>
+        <a class="add-about" href="<@spring.url '/about' />">add</a>
+        <@formGadgets.oneItemForm />
+        <script type="text/javascript">
+            $(document).on('click', 'a.add-about', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $(this).prev().oneItemDialog(url);
+            });
+        </script>
+    </#if>
+
+</#macro>
 <#macro slogan>
     <div class="slogan">
         <ul>
@@ -15,7 +38,6 @@
                 在线社会化学习工具
             </li>
             <li>
-                新一代的职业人士的社交网络平台：
                 <ul>
                     <li>分享学习方法</li>
                     <li>交流学习经验</li>

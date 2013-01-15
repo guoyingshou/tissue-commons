@@ -22,10 +22,12 @@ public class ActivityService {
         return activityDao.getUserActivities(userId, num);
     }
 
-    /**
-    public List<Event> getLatestEvents(int num) {
-        return eventDao.getLatestEvents(num);
+    public List<Activity> getActivitiesForNewUser(int num) {
+        return activityDao.getActivitiesForNewUser(num);
     }
-    */
+
+    public List<Activity> getActivities(int num) {
+        return activityDao.getActivities(num);
+    }
 
 }
