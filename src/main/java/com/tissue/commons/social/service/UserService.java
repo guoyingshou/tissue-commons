@@ -40,10 +40,11 @@ public class UserService {
     /**
      * @param userId user id
      */
-    public User getUserById(String id, boolean withFriends) {
-        return userDao.getUserById(id, withFriends);
+    public User getUserById(String id, boolean withConnections) {
+        return userDao.getUserById(id, withConnections);
     }
 
+    /**
     public boolean isFriend(String userId1, String userId2) {
         return userDao.isFriend(userId1, userId2);
     }
@@ -51,5 +52,6 @@ public class UserService {
     public List<User> getFriends(String viewerId) {
         return userDao.getFriends(viewerId);
     }
+    */
 
 }
