@@ -3,8 +3,6 @@ package com.tissue.commons.social.service;
 import com.tissue.core.social.User;
 import com.tissue.core.social.Impression;
 import com.tissue.core.social.dao.UserDao;
-import com.tissue.core.social.dao.DuplicateEmailException;
-//import com.tissue.social.service.UserService;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
