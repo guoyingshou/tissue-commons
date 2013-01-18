@@ -5,14 +5,18 @@
    The messageSource used is defined in siteMessage.properties file.
 -->
 <#macro exploreLogo>
-    <h1><@spring.message "i18n.common.sitename" /></h1>
+    <h1>
+        <@spring.message "i18n.common.sitename" />
+        <span><@spring.message "i18n.common.siteslogan" />
+    </h1>
     <div>
         <ul class="menu">
-            <li><a href="<@spring.url '/explore' />"><@spring.message "i18n.explore.menu.trends" /></a></li>
-            <li><a href="<@spring.url '/exploreTopics' />"><@spring.message "i18n.explore.menu.topics" /></a></li>
-            <li><a href="<@spring.url '/exploreTags' />"><@spring.message "i18n.explore.menu.tags" /></a></li>
+            <li><a href="<@spring.url '/explore' />"><@spring.message "i18n.explore.menu.trending" /></a></li>
+            <li><a href="<@spring.url '/featured' />"><@spring.message "i18n.explore.menu.featured" /></a></li>
+            <li><a href="<@spring.url '/topics' />"><@spring.message "i18n.explore.menu.topics" /></a></li>
+            <li><a href="<@spring.url '/tags' />"><@spring.message "i18n.explore.menu.tags" /></a></li>
             <#if viewer??>
-            <li><a href="<@spring.url '/exploreTimeline' />"><@spring.message "i18n.explore.menu.timeline" /></a></li>
+            <li><a href="<@spring.url '/timeline' />"><@spring.message "i18n.explore.menu.timeline" /></a></li>
             </#if>
         </ul>
 

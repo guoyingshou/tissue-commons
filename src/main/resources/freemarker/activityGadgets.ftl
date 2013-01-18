@@ -5,7 +5,7 @@
     <ul>
     <#list activities as activity>
         <li>
-        type: ${activity.type!"type not set"} 
+        label: ${activity.label!"label not set"} 
         <br/>
         published: ${activity.published?datetime} 
         <br/>

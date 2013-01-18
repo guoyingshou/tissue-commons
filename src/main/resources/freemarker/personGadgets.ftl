@@ -44,18 +44,11 @@
     </div>
 </#macro>
 
-<#macro dashboardLogo>
+<#macro homeLogo>
     <h1>
-        <@spring.message "i18n.common.sitename" />
-    </h1>
-    <#--
-    <div>
-        <ul class="menu">
-            <li><a href="<@spring.url '/dashboard' />">NewsFeeds</a></li>
-            <li><a href="<@spring.url '/actions' />">Actions</a></li>
-        </ul>
-    </div>
-    -->
+       <@spring.message "i18n.common.sitename" />
+       <span><@spring.message "i18n.common.siteslogan" /></span>
+   </h1>
 </#macro>
 
 <#macro showResume>
