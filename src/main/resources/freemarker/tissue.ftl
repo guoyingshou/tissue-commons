@@ -9,6 +9,15 @@
     <#include "footer.ftl">
 </#macro>
 
+<#macro aboutLogo>
+  <div>
+    <h1>
+       <@spring.message "i18n.common.sitename" />
+       <span><@spring.message "i18n.common.siteslogan" /></span>
+   </h1>
+ </div>
+</#macro>
+
 <#macro showAbout>
     <ul>
         <#if abouts??>

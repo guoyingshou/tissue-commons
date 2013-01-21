@@ -45,10 +45,24 @@
 </#macro>
 
 <#macro homeLogo>
+  <div>
     <h1>
        <@spring.message "i18n.common.sitename" />
        <span><@spring.message "i18n.common.siteslogan" /></span>
    </h1>
+   <ul>
+       <li>
+           <a href="<@spring.url '/watchedfeeds' />">
+                watched
+           </a>
+       </li>
+       <li>
+           <a href="<@spring.url '/allfeeds' />">
+                all
+           </a>
+       </li>
+   </ul>
+ </div>
 </#macro>
 
 <#macro showResume>

@@ -28,7 +28,11 @@
         <div id="headerWrapper">
             <div id="header">
                 <ul class="nav">
-                    <li><a href="/social/home"><@spring.message "i18n.common.menu.home" /></a></li>
+                    <#if viewer??>
+                        <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.home" /></a></li>
+                    <#else>
+                        <li><a href="/social/home"><@spring.message "i18n.common.menu.home" /></a></li>
+                    </#if>
                     <li><a href="/group/explore"><@spring.message "i18n.common.menu.explore" /></a></li>
                     <li><a href="/social/about"><@spring.message "i18n.common.menu.about" /></a></li>
                 </ul>

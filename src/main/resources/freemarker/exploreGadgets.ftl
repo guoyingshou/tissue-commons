@@ -15,9 +15,6 @@
             <li><a href="<@spring.url '/featured' />"><@spring.message "i18n.explore.menu.featured" /></a></li>
             <li><a href="<@spring.url '/topics' />"><@spring.message "i18n.explore.menu.topics" /></a></li>
             <li><a href="<@spring.url '/tags' />"><@spring.message "i18n.explore.menu.tags" /></a></li>
-            <#if viewer??>
-            <li><a href="<@spring.url '/timeline' />"><@spring.message "i18n.explore.menu.timeline" /></a></li>
-            </#if>
         </ul>
 
         <#if viewer??>
