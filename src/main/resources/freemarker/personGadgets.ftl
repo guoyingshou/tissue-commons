@@ -1,10 +1,34 @@
 <#import 'formGadgets.ftl' as formGadgets />
+
+<#macro homeLogo>
+  <div>
+    <h1>
+       <@spring.message "i18n.common.sitename" />
+       <span><@spring.message "i18n.common.siteslogan" /></span>
+   </h1>
+   <#if viewer??>
+   <ul>
+       <li>
+           <a href="<@spring.url '/watchedfeeds' />">
+                watched
+           </a>
+       </li>
+       <li>
+           <a href="<@spring.url '/allfeeds' />">
+                all
+           </a>
+       </li>
+   </ul>
+   </#if>
+ </div>
+</#macro>
+
 <#macro personLogo>
     <div>
         <h1><a href="<@spring.url '/users/${owner.id}' />">${owner.displayName}</a></h1>
         <ul class="submenu-more">
             <li>
-                <a href="<@spring.url '/users/${owner.id}' />">
+                <a href="<@spring.url '/users/${owner.id}/posts' />">
                     <@spring.message "i18n.user.menu.articles" />
                 </a>
             </li>
@@ -28,9 +52,16 @@
                     <@spring.message "i18n.user.menu.friends" />
                 </a>
             </li>
-        </ul>
+            <#if viewer?? && owner.isSelf(viewer.id)>
+            <li>
+                <a href="<@spring.url '/invitations' />">
+                    <@spring.message "i18n.user.menu.invitations" />
+                </a>
+            </li>
+            </#if>
+         </ul>
         <ul class="submenu-action">
-            <#if viewer?? && viewer.canInvite(owner.id)>
+            <#if owner.invitable>
             <li><a class="invite" href="<@spring.url '/users/${owner.id}/invites' />">invite</a></li>
             <@formGadgets.inviteForm />
             <script type="text/javascript">
@@ -44,25 +75,14 @@
     </div>
 </#macro>
 
-<#macro homeLogo>
-  <div>
-    <h1>
-       <@spring.message "i18n.common.sitename" />
-       <span><@spring.message "i18n.common.siteslogan" /></span>
-   </h1>
-   <ul>
-       <li>
-           <a href="<@spring.url '/watchedfeeds' />">
-                watched
-           </a>
-       </li>
-       <li>
-           <a href="<@spring.url '/allfeeds' />">
-                all
-           </a>
-       </li>
-   </ul>
- </div>
+<#macro showFriends>
+    <ul>
+        <#list owner.friends as friend>
+        <li>
+            <a href="<@spring.url '/users/${friend.id}/posts' />">${friend.displayName}</a>
+        </li>
+        </#list>
+    </ul>
 </#macro>
 
 <#macro showResume>
@@ -84,8 +104,8 @@
 
 <#macro showImpressions>
     <ul>
-        <#if impressions??>
-        <#list impressions as impression>
+        <#if owner?? && owner.impressions??>
+        <#list owner.impressions as impression>
         <li>${impression.content}</li>
         </#list>
         </#if>
@@ -102,5 +122,4 @@
             });
         </script>
     </#if>
-
 </#macro>

@@ -1,11 +1,11 @@
 <#import 'spring.ftl' as spring />
 
-<#macro showPostList posts>
+<#macro showPosts posts>
 <ul id="postList">
    <#list posts as post>
        <li>
            <span><a href="/group/posts/${post.id}" class="post">${post.title}</a></span>
-           <span><a href="/social/users/${post.user.id}">${post.user.displayName}</a></span>
+           <span><a href="/social/users/${post.user.id}/posts">${post.user.displayName}</a></span>
        </li>
    </#list>
 </ul>

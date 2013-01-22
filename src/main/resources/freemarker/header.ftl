@@ -50,7 +50,7 @@
                     <#else>
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
-                    <li><a href="/social/users/${viewer.id}">${viewer.displayName}</a></li>
+                    <li><a href="/social/users/${viewer.id}/posts">${viewer.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "i18n.common.menu.signout" /></a></li>
                 </ul>
                 <#else>

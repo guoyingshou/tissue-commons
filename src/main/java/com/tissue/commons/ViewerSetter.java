@@ -24,7 +24,7 @@ public class ViewerSetter {
         if(SecurityUtil.getViewer() == null) {
             return null;    
         }
-        return userService.getUserDetailsById(SecurityUtil.getViewerId());
+        return userService.getViewer(SecurityUtil.getViewerId());
     }
 
 }

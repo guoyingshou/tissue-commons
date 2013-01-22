@@ -7,7 +7,7 @@
         <li>
         label: ${activity.label!"label not set"} 
         <br/>
-        published: ${activity.published?datetime} 
+        published: ${activity.createTime?datetime} 
         <br/>
 
         who: ${activity.who.displayName} 
