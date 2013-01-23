@@ -1,20 +1,6 @@
 <#import 'spring.ftl' as spring />
 <#import 'formGadgets.ftl' as formGadgets />
 
-<#macro showPlans>
-    <#if owner?? && owner.plans??>
-    <#list owner.plans as plan>
-        ${plan.topic.title}
-        <br/>
-        ${plan.createTime?datetime}
-        <br/>
-        ${plan.duration}
-        <br/>
-        <br/>
-    </#list>
-    </#if>
-</#macro>
-
 <#macro showActivePlan>
     <div id="active-group">
     <#if activePlan??>

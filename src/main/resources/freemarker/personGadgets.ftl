@@ -75,16 +75,6 @@
     </div>
 </#macro>
 
-<#macro showFriends>
-    <ul>
-        <#list owner.friends as friend>
-        <li>
-            <a href="<@spring.url '/users/${friend.id}/posts' />">${friend.displayName}</a>
-        </li>
-        </#list>
-    </ul>
-</#macro>
-
 <#macro showResume>
     <div>
         ${owner.resume!''}
@@ -104,8 +94,8 @@
 
 <#macro showImpressions>
     <ul>
-        <#if owner?? && owner.impressions??>
-        <#list owner.impressions as impression>
+        <#if impressions??>
+        <#list impressions as impression>
         <li>${impression.content}</li>
         </#list>
         </#if>
@@ -123,3 +113,41 @@
         </script>
     </#if>
 </#macro>
+
+<#macro showFriends>
+    <ul>
+        <#list friends as friend>
+        <li>
+            <a href="/social/users/${friend.id}/posts">${friend.displayName}</a>
+        </li>
+        </#list>
+    </ul>
+</#macro>
+
+<#macro showUsers>
+    <ul>
+        <#list users as user>
+        <li>
+            <a href="/social/users/${user.id}/posts">${user.displayName}</a>
+        </li>
+        </#list>
+    </ul>
+</#macro>
+
+<#macro showPlansOwned>
+    <#if owner?? && owner.plans??>
+    <div>
+        <h4>Topics ${owner.displayName} is learning</h4>
+        <ul>
+        <#list owner.plans as plan>
+            <li>
+                <span>${plan.topic.title}</span>
+                <span>${plan.createTime?datetime}</span>
+                <span>${plan.duration}</span>
+            </li>
+        </#list>
+        </ul>
+    </div>
+    </#if>
+</#macro>
+

@@ -1,11 +1,13 @@
 package com.tissue.commons.social.service;
 
 import com.tissue.core.social.User;
+import com.tissue.core.plan.Topic;
 import com.tissue.core.plan.Plan;
 import com.tissue.core.plan.Post;
 import com.tissue.core.social.Impression;
 import com.tissue.core.social.Invitation;
 import com.tissue.core.social.dao.UserDao;
+import com.tissue.core.plan.dao.TopicDao;
 import com.tissue.core.plan.dao.PlanDao;
 import com.tissue.core.plan.dao.PostDao;
 
@@ -19,6 +21,9 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private TopicDao topicDao;
 
     @Autowired
     private PlanDao planDao;
@@ -42,17 +47,12 @@ public class UserService {
         userDao.addImpression(impression);
     }
 
-    /**
-    public List<Impression> getImpressions(String userId) {
-        return userDao.getImpressions(userId);
-    }
-    */
-
     public User getUserById(String id) {
         return userDao.getUserById(id);
     }
 
     public User getViewer(String viewerId) {
+        System.out.println("===in userService viewerId: " + viewerId);
         User user = userDao.getUserById(viewerId);
 
         List<User> friends = userDao.getFriends(viewerId);
@@ -64,6 +64,11 @@ public class UserService {
         return user;
     }
  
+    public List<User> getFriends(String userId) {
+        return userDao.getFriends(userId);
+    }
+
+        /**
     public User getUserContainsFriends(String userId) {
         User user = userDao.getUserById(userId);
 
@@ -80,6 +85,11 @@ public class UserService {
         user.setImpressions(impressions);
 
         return user;
+    }
+        */
+
+    public List<Impression> getImpressions(String userId) {
+        return userDao.getImpressions(userId);
     }
 
     public List<Plan> getPlansByUserId(String userId) {
@@ -106,4 +116,11 @@ public class UserService {
         userDao.declineInvitation(invitationId);
     }
 
+    public List<User> getNewUsers(String ... excludingUserIds) {
+        return userDao.getNewUsers(excludingUserIds);
+    }
+
+    public List<Topic> getNewTopics(String excludingUserId, int limit) {
+        return topicDao.getNewTopics(excludingUserId, limit);
+    }
 }

@@ -6,10 +6,11 @@ import com.tissue.commons.social.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Locale;
 import java.util.Map;
 
-public class ViewerSetter {
+public class ViewerAndOwnerSetter {
 
     @Autowired
     protected UserService userService;
@@ -20,17 +21,23 @@ public class ViewerSetter {
     }
 
     @ModelAttribute("viewer")
-    public User prefetchViewer() {
-        System.out.println("in viewer setter++++++++++");
-        System.out.println(SecurityUtil.getViewer());
-        System.out.println(SecurityUtil.getViewerId());
+    public User prefetchViewer(@PathVariable("userId") String userId, Map model) {
+        User viewer = userService.getViewer(SecurityUtil.getViewerId());
 
-        System.out.println("in viewer setter++++++++++");
+        if(userId.equals(SecurityUtil.getViewerId())) {
+            model.put("owner", viewer);
+        }
+        else {
+            model.put("owner", userService.getUserById(userId));
+        }
 
         if(SecurityUtil.getViewer() == null) {
             return null;    
         }
-        return userService.getViewer(SecurityUtil.getViewerId());
+
+        return viewer;
+
+        //return userService.getViewer(SecurityUtil.getViewerId());
     }
 
 }
