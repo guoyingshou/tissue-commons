@@ -1,6 +1,7 @@
 package com.tissue.commons;
 
 import com.tissue.core.social.User;
+import com.tissue.core.plan.Topic;
 import com.tissue.commons.security.util.SecurityUtil;
 import com.tissue.commons.social.service.UserService;
 
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import java.util.Locale;
 import java.util.Map;
+import java.util.List;
 
 public class ViewerAndOwnerSetter {
 
@@ -22,6 +24,10 @@ public class ViewerAndOwnerSetter {
 
     @ModelAttribute("viewer")
     public User prefetchViewer(@PathVariable("userId") String userId, Map model) {
+
+        List<Topic> newTopics = userService.getNewTopics(SecurityUtil.getViewerId(), 10);
+        model.put("newTopics", newTopics);
+
         User viewer = userService.getViewer(SecurityUtil.getViewerId());
 
         if(userId.equals(SecurityUtil.getViewerId())) {
@@ -34,10 +40,7 @@ public class ViewerAndOwnerSetter {
         if(SecurityUtil.getViewer() == null) {
             return null;    
         }
-
         return viewer;
-
-        //return userService.getViewer(SecurityUtil.getViewerId());
     }
 
 }

@@ -18,6 +18,12 @@
                 all
            </a>
        </li>
+       <li>
+           <a href="/social/invitations">
+               <@spring.message "i18n.common.menu.invitations" />
+               - ${viewer.invitationsReceived?size}
+           </a>
+       </li>
    </ul>
    </#if>
  </div>
@@ -25,7 +31,7 @@
 
 <#macro personLogo>
     <div>
-        <h1><a href="<@spring.url '/users/${owner.id}' />">${owner.displayName}</a></h1>
+        <h1><a href="<@spring.url '/users/${owner.id}/posts' />">${owner.displayName}</a></h1>
         <ul class="submenu-more">
             <li>
                 <a href="<@spring.url '/users/${owner.id}/posts' />">
@@ -52,13 +58,6 @@
                     <@spring.message "i18n.user.menu.friends" />
                 </a>
             </li>
-            <#if viewer?? && owner.isSelf(viewer.id)>
-            <li>
-                <a href="<@spring.url '/invitations' />">
-                    <@spring.message "i18n.user.menu.invitations" />
-                </a>
-            </li>
-            </#if>
          </ul>
         <ul class="submenu-action">
             <#if owner.invitable>
@@ -149,5 +148,19 @@
         </ul>
     </div>
     </#if>
+</#macro>
+
+<#macro showNewTopics>
+    <div>
+        <h4>New Topics</h4>
+        <ul>
+        <#list newTopics as topic>
+            <li>
+                <span>${topic.title}</span>
+                <span>${topic.createTime?datetime}</span>
+            </li>
+        </#list>
+        </ul>
+    </div>
 </#macro>
 

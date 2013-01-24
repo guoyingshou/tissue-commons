@@ -39,12 +39,6 @@
 
                 <#if viewer??>
                 <ul class="userbox">
-                    <li>
-                        <a href="/social/invitations">
-                            <@spring.message "i18n.common.menu.invitations" />
-                            - ${viewer.invitationsReceived?size}
-                        </a>
-                    </li>
                     <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
                     <#else>

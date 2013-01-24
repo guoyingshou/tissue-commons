@@ -52,7 +52,6 @@ public class UserService {
     }
 
     public User getViewer(String viewerId) {
-        System.out.println("===in userService viewerId: " + viewerId);
         User user = userDao.getUserById(viewerId);
 
         List<User> friends = userDao.getFriends(viewerId);
@@ -67,26 +66,6 @@ public class UserService {
     public List<User> getFriends(String userId) {
         return userDao.getFriends(userId);
     }
-
-        /**
-    public User getUserContainsFriends(String userId) {
-        User user = userDao.getUserById(userId);
-
-        List<User> friends = userDao.getFriends(userId);
-        user.setFriends(friends);
-
-        return user;
-    }
-
-    public User getUserContainsImpressions(String userId) {
-        User user = userDao.getUserById(userId);
-
-        List<Impression> impressions = userDao.getImpressions(userId);
-        user.setImpressions(impressions);
-
-        return user;
-    }
-        */
 
     public List<Impression> getImpressions(String userId) {
         return userDao.getImpressions(userId);
@@ -116,8 +95,8 @@ public class UserService {
         userDao.declineInvitation(invitationId);
     }
 
-    public List<User> getNewUsers(String ... excludingUserIds) {
-        return userDao.getNewUsers(excludingUserIds);
+    public List<User> getNewUsers(String excludingUserId, int limit) {
+        return userDao.getNewUsers(excludingUserId, limit);
     }
 
     public List<Topic> getNewTopics(String excludingUserId, int limit) {

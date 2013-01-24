@@ -21,12 +21,6 @@ public class ViewerSetter {
 
     @ModelAttribute("viewer")
     public User prefetchViewer() {
-        System.out.println("in viewer setter++++++++++");
-        System.out.println(SecurityUtil.getViewer());
-        System.out.println(SecurityUtil.getViewerId());
-
-        System.out.println("in viewer setter++++++++++");
-
         if(SecurityUtil.getViewer() == null) {
             return null;    
         }
