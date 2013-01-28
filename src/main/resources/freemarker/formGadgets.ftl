@@ -44,6 +44,15 @@
                     </li>
 
                     <li>
+                        <label for="headline">Headline</label>
+                        <textarea id="headline" name="headline"></textarea>
+                        <#--
+                        <p><@spring.showErrors "" /></p>
+                        -->
+                    </li>
+
+
+                    <li>
                         <label for="email">Email</label>
                         <input type="input" id="email" name="email" value="" />
                         <#--

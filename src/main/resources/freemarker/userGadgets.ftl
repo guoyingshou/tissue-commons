@@ -1,3 +1,4 @@
+<#import 'spring.ftl' as spring />
 <#import 'formGadgets.ftl' as formGadgets />
 
 <#macro homeLogo>
@@ -10,12 +11,12 @@
    <ul>
        <li>
            <a href="<@spring.url '/watchedfeeds' />">
-                watched
+               <@spring.message "i18n.common.menu.watchedFeeds" />
            </a>
        </li>
        <li>
            <a href="<@spring.url '/allfeeds' />">
-                all
+               <@spring.message "i18n.common.menu.allFeeds" />
            </a>
        </li>
        <li>
@@ -31,7 +32,10 @@
 
 <#macro personLogo>
     <div>
-        <h1><a href="<@spring.url '/users/${owner.id}/posts' />">${owner.displayName}</a></h1>
+        <h1>
+            <a href="<@spring.url '/users/${owner.id}/posts' />">${owner.displayName}</a>
+            <span>${owner.headline!""}</span>
+        </h1>
         <ul class="submenu-more">
             <li>
                 <a href="<@spring.url '/users/${owner.id}/posts' />">
@@ -124,10 +128,17 @@
 </#macro>
 
 <#macro showUsers>
-    <ul>
+    <ul class="users">
         <#list users as user>
         <li>
-            <a href="/social/users/${user.id}/posts">${user.displayName}</a>
+            <div>
+                <p>
+                    <a href="/social/users/${user.id}/posts">${user.displayName}</a>
+                </p>
+                <p>
+                    ${user.headline!""}
+                </p>
+            </div>
         </li>
         </#list>
     </ul>
@@ -140,9 +151,20 @@
         <ul>
         <#list owner.plans as plan>
             <li>
-                <span>${plan.topic.title}</span>
-                <span>${plan.createTime?datetime}</span>
-                <span>${plan.duration}</span>
+                <div>${plan.topic.title}</div>
+                <div>
+                    <#if plan.months != 0>
+                        ${plan.months} <@spring.message 'i18n.common.months' />
+                    <#elseif plan.weeks != 0>
+                        ${plan.weeks} <@spring.message 'i18n.common.weeks' />
+                    <#elseif plan.days != 0>
+                        ${plan.days} <@spring.message 'i18n.common.days' />
+                    <#elseif plan.hours != 0>
+                        ${plan.hours} <@spring.message 'i18n.common.hours' />
+                    <#elseif plan.minutes != 0>
+                        ${plan.minutes} <@spring.message 'i18n.common.minutes' />
+                    </#if>
+                </div>
             </li>
         </#list>
         </ul>

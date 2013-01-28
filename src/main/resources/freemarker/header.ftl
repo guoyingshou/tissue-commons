@@ -16,6 +16,7 @@
          
         <link type="text/css" rel="stylesheet" href="/tissue/css/common.css"></link>
         <link type="text/css" rel="stylesheet" href="/tissue/css/pop.css"></link>
+        <link type="text/css" rel="stylesheet" href="/tissue/css/ico.css"></link>
 
         <#if mystyles??>
         <#list mystyles as style>
@@ -26,7 +27,7 @@
     </head>
     <body>
         <div id="headerWrapper">
-            <div id="header">
+            <div id="header" class="center">
                 <ul class="nav">
                     <#if viewer??>
                         <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.home" /></a></li>

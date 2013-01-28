@@ -4,33 +4,165 @@
     <#if activities??>
     <ul>
     <#list activities as activity>
-        <li>
-        label: ${activity.label!"label not set"} 
-        <br/>
-        published: ${activity.createTime?datetime} 
-        <br/>
 
-        who: ${activity.who.displayName} 
-        <br/>
-        
-        what: ${activity.what.displayName!"no displayName"}
-        <br/>
+        <#if activity.label = 'topic'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe004;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.topic" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
 
-        to: ${activity.to.displayName!"no displayName"}
-        <br/>
+        <#if activity.label = 'plan'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.plan" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
 
-        where: ${activity.where.displayName!"no displayName"}
-        <br/><br/>
-        </li>
+        <#if activity.label = 'members'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.members" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'concept'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.concept" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'note'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.note" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'tutorial'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.tutorial" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'question'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.question" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'postMessage'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.postMessage" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'postMessageComment'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.postMessageComment" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'questionComment'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.questionComment" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'answer'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.answer" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
+        <#if activity.label = 'answerComment'>
+            <li class="activity-item">
+                <span class="activity-icon" data-icon="&#xe001;"></span>
+                <div class="activity-ts">
+                     ${activity.createTime?datetime}
+                </div>
+                <div>
+                    <span>${activity.who.displayName}</span> 
+                    <span><@spring.messageArgs "i18n.activity.answerComment" activity.messageArgs /></span>
+                </div>
+            </li>
+        </#if>
+
      </#list>
     </ul>
     </#if>
 </#macro>
 
-<#--
-<#macro showPostEvent event>
-    <li>
-        <@spring.messageArgs "i18n.event.post" event.messageArgs />
-    </li>
-</#macro>
--->

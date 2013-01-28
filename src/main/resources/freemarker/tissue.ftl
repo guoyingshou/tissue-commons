@@ -3,7 +3,7 @@
 
 <#macro layout title="">
     <#include "header.ftl">
-    <div id="mainWrapper">
+    <div id="mainWrapper" class="center">
         <#nested>
     </div>
     <#include "footer.ftl">
@@ -42,18 +42,12 @@
 </#macro>
 <#macro slogan>
     <div class="slogan">
-        <ul>
-            <li>
-                在线社会化学习工具
-            </li>
-            <li>
-                <ul>
-                    <li>分享学习方法</li>
-                    <li>交流学习经验</li>
-                    <li>展示个人能力</li>
-                    <li>获取更多机会</li>
-                </ul>
-            </li>
-        </ul>
+        <h3>在线社会化学习工具</h3>
+        <div class="slogan-item">
+            <div>分享学习方法</div>
+            <div>交流学习经验</div>
+            <div>展示个人能力</div>
+            <div>获取更多机会</div>
+        </div>
     </div>
 </#macro>

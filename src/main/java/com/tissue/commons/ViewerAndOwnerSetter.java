@@ -25,21 +25,23 @@ public class ViewerAndOwnerSetter {
     @ModelAttribute("viewer")
     public User prefetchViewer(@PathVariable("userId") String userId, Map model) {
 
-        List<Topic> newTopics = userService.getNewTopics(SecurityUtil.getViewerId(), 10);
+        String viewerId = SecurityUtil.getViewerId();
+
+        List<Topic> newTopics = userService.getNewTopics(viewerId, 10);
         model.put("newTopics", newTopics);
 
-        User viewer = userService.getViewer(SecurityUtil.getViewerId());
+        User viewer = null;
+        if(viewerId != null) {
+            viewer = userService.getViewer(viewerId);
+        }
 
-        if(userId.equals(SecurityUtil.getViewerId())) {
+        if((viewer != null) && userId.equals(viewerId)) {
             model.put("owner", viewer);
         }
         else {
             model.put("owner", userService.getUserById(userId));
         }
 
-        if(SecurityUtil.getViewer() == null) {
-            return null;    
-        }
         return viewer;
     }
 

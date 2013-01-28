@@ -1,59 +1,23 @@
 <#import 'spring.ftl' as spring />
 <#import 'formGadgets.ftl' as formGadgets />
 
-<#macro showActivePlan>
+<#macro showLiveGroup>
     <div id="active-group">
-    <#if activePlan??>
-        <#if viewer??>
-            <#if activePlan.isOwner(viewer.id) || activePlan.isMember(viewer.id)>
-            <#assign plan = activePlan in formGadgets />
-            <@formGadgets.postForm />
-
-            <a class="icon-post" data-action="<@spring.url '/plans/${activePlan.id}/posts'/>" href="#">new post</a>
-
-            <script type="text/javascript">
-                $(document).on('click', 'a.icon-post', function(e) {
-                    e.preventDefault();
-                    $('#content').newPostDialog();
-                });
-            </script>
-            <#else>
-                <a class="icon-join" href="<@spring.url '/topics/${topic.id}/plans/${activePlan.id}/join'/>">join</a>
-            </#if> 
-        </#if>
-
-        <h4>Active Study Group</h4>
+    <#if topic.activePlan??>
+        <h4>Live Study Group</h4>
         <div class="group-info">
-            <p><a href="<@spring.url '/plans/${activePlan.id}'/>">${activePlan.createTime?date}</a></p>
-            <p>duration: ${activePlan.duration} Months</p>
-            <p>created by: ${activePlan.user.displayName}</p>
+            <p><a href="<@spring.url '/plans/${topic.activePlan.id}'/>">${topic.activePlan.createTime?date}</a></p>
+            <p>duration: ${topic.activePlan.duration} Months</p>
+            <p>created by: ${topic.activePlan.user.displayName}</p>
         </div>
-        <#if activePlan.members??>
-        <div class="group-members">
-            <#list activePlan.members as member>
-                ${member.displayName}
-            </#list>
-        </div>
-        </#if>
-    <#else>
-        <#if viewer??>
-        <@formGadgets.planForm />
-        <a class="planForm" href="#">create plan</a>
-        <script type="text/javascript">
-            $(document).on('click', 'a.planForm', function(e) {
-                e.preventDefault();
-                $('#planDia').newPlanDialog();
-            });
-        </script>
-        </#if>
     </#if>
     </div>
 </#macro>
 
-<#macro showDeadPlans>
+<#macro showArchivedGroup>
     <#if topic.deadPlans??>
     <div>
-        <h4>Finished Plans</h4>
+        <h4>Archived Group</h4>
         <ul>
         <#list topic.deadPlans as plan>
             <li>

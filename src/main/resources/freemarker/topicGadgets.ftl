@@ -1,13 +1,5 @@
-<#macro showTopics>
-    <ul>
-    <#list topics as topic>
-        <li>
-            <a href="/group/topics/${topic.id}">${topic.title}</a>
-            Created By: <a href="/social/users/${topic.user.id}/posts">${topic.user.displayName}</a>
-        </li>
-    </#list>
-    </ul>
-</#macro>
+<#import 'spring.ftl' as spring />
+<#import 'formGadgets.ftl' as formGadgets />
 
 <#macro topicLogo>
   <h1><a href="<@spring.url '/topics/${topic.id}/posts' />">${topic.title}</a></h1>
@@ -18,6 +10,58 @@
           <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/question/posts' />"><@spring.message "i18n.topic.menu.questions" /></a></li>
           <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/tutorial/posts' />"><@spring.message "i18n.topic.menu.tutorials" /></a></li>
           <li><a class="ajx" href="<@spring.url '/topics/${topic.id}' />"><@spring.message "i18n.topic.menu.objective" /></a></li>
-      </ul>
+    </ul>
+
+    <ul class="action">
+    <#if topic.activePlan??>
+        <#if viewer??>
+            <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
+
+            <#assign plan = topic.activePlan in formGadgets />
+            <@formGadgets.postForm />
+
+            <a class="icon-post" data-icon="&#xe000;" data-action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>" href="#">new post</a>
+            <script type="text/javascript">
+                $(document).on('click', 'a.icon-post', function(e) {
+                    e.preventDefault();
+                    $('#content').newPostDialog();
+                });
+            </script>
+
+            <#else>
+                <a class="icon-join" href="<@spring.url '/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">join</a>
+            </#if> 
+        </#if>
+    <#else>
+        <#if viewer??>
+        <@formGadgets.planForm />
+        <a class="planForm" href="#">create plan</a>
+        <script type="text/javascript">
+            $(document).on('click', 'a.planForm', function(e) {
+                e.preventDefault();
+                $('#planDia').newPlanDialog();
+            });
+        </script>
+        </#if>
+    </#if>
+    </u>
   </div>
 </#macro>
+
+<#macro showTopics>
+    <ul>
+    <#list topics as topic>
+        <li>
+            <div class="title">
+                <a href="/group/topics/${topic.id}">${topic.title}</a>
+            </div>
+            <div class="ts">
+                <a href="/social/users/${topic.user.id}/posts">${topic.user.displayName}</a>
+                <span>${topic.createTime?datetime}</span>
+            </div>
+        </li>
+    </#list>
+    </ul>
+</#macro>
+
+

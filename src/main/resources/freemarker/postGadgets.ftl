@@ -1,11 +1,16 @@
 <#import 'spring.ftl' as spring />
 
 <#macro showPosts posts>
-<ul id="postList">
+<ul id="posts">
    <#list posts as post>
        <li>
-           <span><a href="/group/posts/${post.id}" class="post">${post.title}</a></span>
-           <span><a href="/social/users/${post.user.id}/posts">${post.user.displayName}</a></span>
+           <div class="ts">
+               <a href="/social/users/${post.user.id}/posts">${post.user.displayName}</a>
+               <span>${post.createTime?datetime}</span>
+           </div>
+           <div class="title">
+               <a href="/group/posts/${post.id}" class="post">${post.title}</a>
+           </div>
        </li>
    </#list>
 </ul>
@@ -14,9 +19,9 @@
 <#macro showPostDetail>
 
     <div>
-        <h3 class="post-title">${post.title}</h3>
-        <div class="post-content">${post.content}</div>
-        <div class="post-author">${post.user.displayName} published: ${post.createTime?datetime}</div>
+        <div class="ts">${post.user.displayName} <span>${post.createTime?datetime}<span></div>
+        <h3 class="title">${post.title}</h3>
+        <div class="content">${post.content}</div>
 
         <#if viewer?? && post.plan.isActive() && post.isOwner(viewer.id)>
         <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">edit</a>
@@ -34,7 +39,9 @@
         </#if>
     </div>
 
+    <#if post.messages??>
     <h2>Messages: </h2>
+    </#if>
 
     <ul class="messages">
     <#if post.messages??>
@@ -115,9 +122,9 @@
 
 <#macro showQuestionDetail>
     <div class="question">
-        <h3 class="post-title">${post.title}</h3>
-        <div class="post-content">${post.content}</div>
-        <div class="post-author">${post.user.displayName} published: ${post.createTime?datetime}</div>
+        <div class="ts">${post.user.displayName} <span>${post.createTime?datetime}</span></div>
+        <h3 class="title">${post.title}</h3>
+        <div class="content">${post.content}</div>
 
         <#if viewer?? && post.plan.isActive() && post.isOwner(viewer.id)>
         <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">edit</a>
