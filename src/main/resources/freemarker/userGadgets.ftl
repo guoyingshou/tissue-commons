@@ -2,13 +2,13 @@
 <#import 'formGadgets.ftl' as formGadgets />
 
 <#macro homeLogo>
-  <div>
     <h1>
        <@spring.message "i18n.common.sitename" />
        <span><@spring.message "i18n.common.siteslogan" /></span>
    </h1>
    <#if viewer??>
-   <ul>
+   <div>
+   <ul class="menu">
        <li>
            <a href="<@spring.url '/watchedfeeds' />">
                <@spring.message "i18n.common.menu.watchedFeeds" />
@@ -26,8 +26,12 @@
            </a>
        </li>
    </ul>
+   <ul class="action">
+       <li>fdafa</li>
+       <li>bbb</li>
+   </ul>
+   </div>
    </#if>
- </div>
 </#macro>
 
 <#macro personLogo>
@@ -64,7 +68,7 @@
             </li>
          </ul>
         <ul class="submenu-action">
-            <#if owner.invitable>
+            <#if invitable>
             <li><a class="invite" href="<@spring.url '/users/${owner.id}/invites' />">invite</a></li>
             <@formGadgets.inviteForm />
             <script type="text/javascript">
@@ -202,8 +206,11 @@
         <ul>
         <#list newTopics as topic>
             <li>
-                <span>${topic.title}</span>
-                <span>${topic.createTime?datetime}</span>
+                <div class="ts">
+                     <a href="/social/users/${topic.user.id}">${topic.user.displayName}</a>
+                     <span>${topic.createTime?datetime}</span>
+                </div>
+                <div>${topic.title}</div>
             </li>
         </#list>
         </ul>

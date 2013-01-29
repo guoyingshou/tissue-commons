@@ -27,6 +27,9 @@ public class ViewerAndOwnerSetter {
 
         String viewerId = SecurityUtil.getViewerId();
 
+        boolean invitable = userService.isInvitable(viewerId, userId);
+        model.put("invitable", invitable);
+
         List<Topic> newTopics = userService.getNewTopics(viewerId, 10);
         model.put("newTopics", newTopics);
 

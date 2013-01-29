@@ -87,6 +87,10 @@ public class UserService {
         userDao.inviteFriend(fromId, toId, content);
     }
 
+    public boolean isInvitable(String userId1, String userId2) {
+        return userDao.isInvitable(userId1, userId2);
+    }
+
     public void acceptInvitation(String invitationId) {
         userDao.acceptInvitation(invitationId);
     }

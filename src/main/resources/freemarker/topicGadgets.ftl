@@ -64,10 +64,11 @@
     </ul>
 </#macro>
 
-<#macro showLiveGroup>
+<#macro showLivePlan>
     <#if topic.activePlan??>
     <#assign plan = topic.activePlan />
     <div>
+
         <h4>In progress</h4>
         <div class="plan-endtime ts">
         <#if plan.months != 0>
@@ -83,15 +84,18 @@
         </#if>
         </div>
 
-        <div class="topic-title-icon">
-            ${plan.topic.title}
+        <div>
+            ${plan.user.displayName}
         </div>
-    </div>
+        <div>
+            ${plan.user.headline!""}
+        </div>
 
+    </div>
     </#if>
 </#macro>
 
-<#macro showArchivedGroup>
+<#macro showArchivedPlans>
     <#if topic.archivedPlans??>
     <div>
         <h4>Archived</h4>
@@ -101,8 +105,11 @@
                 <div class="plan-duration ts">
                     ${plan.createTime?date} - ${plan.endTime?date}
                 </div>
-                <div class="topic-title-icon">
-                    ${plan.topic.title}
+                <div>
+                    ${plan.user.displayName}
+                </div>
+                <div>
+                    ${plan.user.headline!""}
                 </div>
             </li>
         </#list>
