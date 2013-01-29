@@ -144,15 +144,14 @@
     </ul>
 </#macro>
 
-<#macro showPlansOwned>
-    <#if owner?? && owner.plans??>
+<#macro showOwnedPlans>
+    <#if owner?? && owner.ownedPlans??>
     <div>
-        <h4>Topics ${owner.displayName} is learning</h4>
+        <h4>In progress</h4>
         <ul>
-        <#list owner.plans as plan>
+        <#list owner.ownedPlans as plan>
             <li>
-                <div>${plan.topic.title}</div>
-                <div>
+                <div class="plan-endtime ts">
                     <#if plan.months != 0>
                         ${plan.months} <@spring.message 'i18n.common.months' />
                     <#elseif plan.weeks != 0>
@@ -164,6 +163,31 @@
                     <#elseif plan.minutes != 0>
                         ${plan.minutes} <@spring.message 'i18n.common.minutes' />
                     </#if>
+                </div>
+
+                <div class="topic-title-icon">
+                    ${plan.topic.title}
+                </div>
+
+            </li>
+        </#list>
+        </ul>
+    </div>
+    </#if>
+</#macro>
+
+<#macro showArchivedPlans>
+    <#if owner?? && owner.archivedPlans??>
+    <div>
+        <h4>Archived</h4>
+        <ul>
+        <#list owner.archivedPlans as plan>
+            <li>
+                <div class="plan-duration ts">
+                    ${plan.createTime?date} - ${plan.endTime?date}
+                </div>
+                <div class="topic-title-icon">
+                    ${plan.topic.title}
                 </div>
             </li>
         </#list>

@@ -64,4 +64,51 @@
     </ul>
 </#macro>
 
+<#macro showLiveGroup>
+    <#if topic.activePlan??>
+    <#assign plan = topic.activePlan />
+    <div>
+        <h4>In progress</h4>
+        <div class="plan-endtime ts">
+        <#if plan.months != 0>
+            ${plan.months} <@spring.message 'i18n.common.months' />
+        <#elseif plan.weeks != 0>
+            ${plan.weeks} <@spring.message 'i18n.common.weeks' />
+        <#elseif plan.days != 0>
+            ${plan.days} <@spring.message 'i18n.common.days' />
+        <#elseif plan.hours != 0>
+            ${plan.hours} <@spring.message 'i18n.common.hours' />
+        <#elseif plan.minutes != 0>
+            ${plan.minutes} <@spring.message 'i18n.common.minutes' />
+        </#if>
+        </div>
+
+        <div class="topic-title-icon">
+            ${plan.topic.title}
+        </div>
+    </div>
+
+    </#if>
+</#macro>
+
+<#macro showArchivedGroup>
+    <#if topic.archivedPlans??>
+    <div>
+        <h4>Archived</h4>
+        <ul>
+        <#list topic.archivedPlans as plan>
+            <li>
+                <div class="plan-duration ts">
+                    ${plan.createTime?date} - ${plan.endTime?date}
+                </div>
+                <div class="topic-title-icon">
+                    ${plan.topic.title}
+                </div>
+            </li>
+        </#list>
+        </ul>
+    </div>
+    </#if>
+</#macro>
+
 

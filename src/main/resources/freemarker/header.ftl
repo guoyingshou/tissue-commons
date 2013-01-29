@@ -26,7 +26,7 @@
 
     </head>
     <body>
-        <div id="headerWrapper">
+        <div id="headerWrapper" class="wrapper">
             <div id="header" class="center">
                 <ul class="nav">
                     <#if viewer??>
