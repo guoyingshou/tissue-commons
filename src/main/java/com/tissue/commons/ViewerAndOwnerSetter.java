@@ -25,25 +25,31 @@ public class ViewerAndOwnerSetter {
     @ModelAttribute("viewer")
     public User prefetchViewer(@PathVariable("userId") String userId, Map model) {
 
+        boolean invitable = false;
+
         String viewerId = SecurityUtil.getViewerId();
-
-        boolean invitable = userService.isInvitable(viewerId, userId);
-        model.put("invitable", invitable);
-
         List<Topic> newTopics = userService.getNewTopics(viewerId, 10);
         model.put("newTopics", newTopics);
 
         User viewer = null;
+        User owner = null;
         if(viewerId != null) {
             viewer = userService.getViewer(viewerId);
-        }
-
-        if((viewer != null) && userId.equals(viewerId)) {
-            model.put("owner", viewer);
+            if(userId.equals(viewerId)) {
+                owner = viewer;
+            }
+            else {
+                owner = userService.getUserById(userId);
+                invitable = userService.isInvitable(viewerId, userId);
+            }
         }
         else {
-            model.put("owner", userService.getUserById(userId));
+            owner = userService.getUserById(userId);
         }
+
+        model.put("viewer", viewer);
+        model.put("owner", owner);
+        model.put("invitable", invitable);
 
         return viewer;
     }

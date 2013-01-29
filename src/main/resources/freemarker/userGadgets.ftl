@@ -27,8 +27,25 @@
        </li>
    </ul>
    <ul class="action">
-       <li>fdafa</li>
-       <li>bbb</li>
+       <li>
+           <@formGadgets.editProfileForm />
+           <a href="#" id="edit-profile">Edit</a>
+       </li>
+       <li>
+           <@formGadgets.changePassForm />
+           <a href="#" id="change-pass">Change Password</a>
+       </li>
+
+       <script type="text/javascript">
+          $(document).on('click', 'a#edit-profile', function(e) {
+              e.preventDefault();
+              $(this).editProfileDialog();
+          });
+          $(document).on('click', 'a#change-pass', function(e) {
+              e.preventDefault();
+              $(this).changePassDialog();
+          });
+       </script>
    </ul>
    </div>
    </#if>

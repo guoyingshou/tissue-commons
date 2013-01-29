@@ -39,6 +39,10 @@ public class UserService {
         return userDao.update(user);
     }
 
+    public void changePassword(User user) {
+        userDao.changePassword(user);
+    }
+
     public void addResume(String userId, String resume) {
         userDao.addResume(userId, resume);
     }

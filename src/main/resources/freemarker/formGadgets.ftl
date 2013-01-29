@@ -92,6 +92,61 @@
 </div>
 </#macro>
 
+<#macro editProfileForm>
+    <div id="editProfileForm" style="display: none">
+        <form action="<@spring.url '/users/${owner.id}' />" method="post">
+            <fieldset> 
+                <legend>Update profile</legend>
+                <ul>
+                    <li>
+                        <label for="displayName">DisplayName</label>
+                        <input type="input" id="displayName" name="displayName" value="${owner.displayName}" />
+                    </li>
+
+                    <li>
+                        <label for="headline">Headline</label>
+                        <textarea id="headline" name="headline">${owner.headline!""}</textarea>
+                    </li>
+
+                    <li>
+                        <label for="email">Email</label>
+                        <input type="input" id="email" name="email" value="${owner.email}" />
+                    </li>
+
+                    <li>
+                        <input type="submit" value="save" />
+                    </li>
+                </ul>
+                <a class="cancel" href="#">cancel</a>
+            </fieldset>
+        </form>
+    </div>
+</#macro>
+
+<#macro changePassForm>
+<div id="changePassForm" style="display: none">
+    <form action="<@spring.url '/users/${owner.id}/pass'/>" method="post">
+        <legend>Change Password</legend>
+        <ul>
+            <li>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" value="" />
+            </li>
+
+            <li>
+                <label for="confirm">Confirm Password</label>
+                <input type="password" id="confirm" name="confirm" value="" />
+            </li>
+
+            <li>
+                <input type="submit" value="Change"/>
+            </li>
+        </ul>
+        <a class="cancel" href="#">cancel</a>
+    </form>
+</div>
+</#macro>
+
 <#macro inviteForm>
     <div id="inviteForm" style="display: none">
         <form>
