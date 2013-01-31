@@ -61,33 +61,93 @@
 
 <#macro showTimeBefore ts>
    <#if ts.months != 0>
-       ${ts.months} months ago
+       ${ts.months} 
+       <#if ts.months = 1> 
+           <@spring.message "i18n.common.ts.month.before" />
+       <#else>
+           <@spring.message "i18n.common.ts.months.before" />
+       </#if>
    <#elseif ts.weeks != 0>
-       ${ts.weeks} weeks ago
+       ${ts.weeks} 
+       <#if ts.weeks = 1> 
+           <@spring.message "i18n.common.ts.week.before" />
+       <#else>
+           <@spring.message "i18n.common.ts.weeks.before" />
+       </#if>
    <#elseif ts.days != 0>
-       ${ts.days} days ago
+       ${ts.days} 
+       <#if ts.days = 1> 
+           <@spring.message "i18n.common.ts.day.before" />
+       <#else>
+           <@spring.message "i18n.common.ts.days.before" />
+       </#if>
    <#elseif ts.hours != 0>
-       ${ts.hours} hours ago
+       ${ts.hours} 
+       <#if ts.hours = 1> 
+           <@spring.message "i18n.common.ts.hour.before" />
+       <#else>
+           <@spring.message "i18n.common.ts.hours.before" />
+       </#if>
    <#elseif ts.minutes != 0>
-       ${ts.minutes} minutes ago
+       ${ts.minutes} 
+       <#if ts.minutes = 1> 
+           <@spring.message "i18n.common.ts.minute.before" />
+       <#else>
+           <@spring.message "i18n.common.ts.minutes.before" />
+       </#if>
    <#elseif ts.seconds != 0>
-       ${ts.seconds} seconds ago
+       ${ts.seconds} 
+       <#if ts.seconds = 1> 
+           <@spring.message "i18n.common.ts.second.before" />
+       <#else>
+           <@spring.message "i18n.common.ts.seconds.before" />
+       </#if>
    </#if>
 </#macro>
 
 <#macro showTimeRemaining ts>
    <#if ts.months != 0>
-       ${ts.months} months 
+       <#assign args = [ts.months] />
+       <#if ts.months == 1>
+           <@spring.messageArgs "i18n.common.ts.month" args/>
+       <#else>
+           <@spring.messageArgs "i18n.common.ts.months" args/> 
+       </#if>
    <#elseif ts.weeks != 0>
-       ${ts.weeks} weeks 
+       <#assign args = [ts.weeks] />
+       <#if ts.weeks == 1>
+           <@spring.messageArgs "i18n.common.ts.week" args/>
+       <#else>
+           <@spring.messageArgs "i18n.common.ts.weeks" args/> 
+       </#if>
    <#elseif ts.days != 0>
-       ${ts.days} days 
+       <#assign args = [ts.days] />
+       <#if ts.days == 1>
+           <@spring.messageArgs "i18n.common.ts.day" args/>
+       <#else>
+           <@spring.messageArgs "i18n.common.ts.days" args/> 
+       </#if>
    <#elseif ts.hours != 0>
-       ${ts.hours} hours 
+       <#assign args = [ts.hours] />
+       <#if ts.hours == 1>
+           <@spring.messageArgs "i18n.common.ts.hours" args/>
+       <#else>
+           <@spring.messageArgs "i18n.common.ts.hours" args/> 
+       </#if>
    <#elseif ts.minutes != 0>
-       ${ts.minutes} minutes
+       <#assign args = [ts.minutes] />
+       <#if ts.minutes == 1>
+           <@spring.messageArgs "i18n.common.ts.minutes" args/>
+       <#else>
+           <@spring.messageArgs "i18n.common.ts.minutes" args/> 
+       </#if>
    <#elseif ts.seconds !=0 >
-       ${ts.seconds} seconds
+       <#assign args = [ts.seconds] />
+       <#if ts.seconds == 1>
+           <@spring.messageArgs "i18n.common.ts.second" args/>
+       <#else>
+           <@spring.messageArgs "i18n.common.ts.seconds" args/> 
+       </#if>
    </#if>
 </#macro>
 

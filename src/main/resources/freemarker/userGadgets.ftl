@@ -30,11 +30,15 @@
    <ul class="action">
        <li>
            <@formGadgets.editProfileForm />
-           <a href="#" id="edit-profile">Edit</a>
+           <a href="#" id="edit-profile">
+               <@spring.message "i18n.common.menu.editProfile" />
+           </a>
        </li>
        <li>
            <@formGadgets.changePassForm />
-           <a href="#" id="change-pass">Change Password</a>
+           <a href="#" id="change-pass">
+               <@spring.message "i18n.common.menu.changePassword" />
+           </a>
        </li>
 
        <script type="text/javascript">
@@ -173,14 +177,14 @@
         <ul>
         <#list owner.ownedPlans as plan>
             <li>
-                <div class="plan-endtime ts">
+                <div class="topic-title-icon">
+                    ${plan.topic.title}
+                </div>
+
+                <div class="ts">
                     <a href="/group/plans/${plan.id}">
                         <@utilGadgets.showTimeRemaining plan.timeRemaining />
                     </a>
-                </div>
-
-                <div class="topic-title-icon">
-                    ${plan.topic.title}
                 </div>
 
             </li>
@@ -197,13 +201,14 @@
         <ul>
         <#list owner.archivedPlans as plan>
             <li>
-                <div class="plan-duration ts">
+                <div class="topic-title-icon">
+                    ${plan.topic.title}
+                </div>
+
+                <div class="ts">
                     <a href="/group/plans/${plan.id}">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
-                </div>
-                <div class="topic-title-icon">
-                    ${plan.topic.title}
                 </div>
             </li>
         </#list>

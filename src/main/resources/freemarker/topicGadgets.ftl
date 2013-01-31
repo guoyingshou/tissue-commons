@@ -2,15 +2,41 @@
 <#import 'formGadgets.ftl' as formGadgets />
 <#import 'utilGadgets.ftl' as utilGadgets />
 
-<#macro topicLogo>
+<#macro topicLogo title='all'>
   <h1><a href="<@spring.url '/topics/${topic.id}/posts' />">${topic.title}</a></h1>
   <div>
       <ul class="menu">
-          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/concept/posts' />"><@spring.message "i18n.topic.menu.concepts" /></a></li>
-          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/note/posts' />"><@spring.message "i18n.topic.menu.notes" /></a></li>
-          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/question/posts' />"><@spring.message "i18n.topic.menu.questions" /></a></li>
-          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}/tutorial/posts' />"><@spring.message "i18n.topic.menu.tutorials" /></a></li>
-          <li><a class="ajx" href="<@spring.url '/topics/${topic.id}' />"><@spring.message "i18n.topic.menu.objective" /></a></li>
+          <li>
+              <a class="<#if title = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id}/posts' />">
+                  <@spring.message "i18n.topic.menu.all" />
+              </a>
+          </li>
+
+          <li>
+              <a class="<#if title = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id}/concept/posts' />">
+                  <@spring.message "i18n.topic.menu.concepts" />
+              </a>
+          </li>
+          <li>
+              <a class="<#if title = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id}/note/posts' />">
+                  <@spring.message "i18n.topic.menu.notes" />
+              </a>
+          </li>
+          <li>
+              <a class="<#if title = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id}/question/posts' />">
+                  <@spring.message "i18n.topic.menu.questions" />
+              </a>
+          </li>
+          <li>
+              <a class="<#if title = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id}/tutorial/posts' />">
+                  <@spring.message "i18n.topic.menu.tutorials" />
+              </a>
+          </li>
+          <li>
+              <a class="<#if title = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id}' />">
+                  <@spring.message "i18n.topic.menu.objective" />
+              </a>
+          </li>
     </ul>
 
     <ul class="action">
@@ -53,12 +79,12 @@
     <ul>
     <#list topics as topic>
         <li>
-            <div class="title">
-                <a href="/group/topics/${topic.id}">${topic.title}</a>
-            </div>
             <div class="ts">
                 <a href="/social/users/${topic.user.id}/posts">${topic.user.displayName}</a>
-                <span>${topic.createTime?datetime}</span>
+                [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
+            </div>
+            <div class="title">
+                <a href="/group/topics/${topic.id}">${topic.title}</a>
             </div>
         </li>
     </#list>
@@ -71,7 +97,7 @@
     <div>
 
         <h4>In progress</h4>
-        <div class="plan-endtime ts">
+        <div class="ts">
             <a href="/group/plans/${topic.activePlan.id}">
                 <@utilGadgets.showTimeRemaining topic.activePlan.timeRemaining />
             </a>
