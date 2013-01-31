@@ -1,4 +1,5 @@
 <#import 'spring.ftl' as spring />
+<#import 'utilGadgets.ftl' as utilGadgets />
 
 <#macro showPosts posts>
 <ul id="posts">
@@ -6,7 +7,7 @@
        <li>
            <div class="ts">
                <a href="/social/users/${post.user.id}/posts">${post.user.displayName}</a>
-               <span>${post.createTime?datetime}</span>
+               [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
            </div>
            <div class="title">
                <a href="/group/posts/${post.id}" class="post">${post.title}</a>
@@ -17,9 +18,12 @@
 </#macro>
 
 <#macro showPostDetail>
-
     <div>
-        <div class="ts">${post.user.displayName} <span>${post.createTime?datetime}<span></div>
+        <div class="ts">
+            ${post.user.displayName} 
+            [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
+        </div>
+
         <h3 class="title">${post.title}</h3>
         <div class="content">${post.content}</div>
 
@@ -48,8 +52,11 @@
         <#list post.messages as msg>
         <li class="message-item">
 
-            <div>${msg.content}</div>
-            <div>${msg.user.displayName}  published: ${msg.createTime?datetime}</div>
+            <div class="content">${msg.content}</div>
+            <div class="ts">
+                ${msg.user.displayName}  
+                [ <@utilGadgets.showTimeBefore msg.timeBefore /> ]
+            </div>
 
             <#if viewer?? && post.plan.isActive() && msg.isOwner(viewer.id)>
             <a class="one-item-edit" data-action="<@spring.url '/messages/${msg.id}' />" href="#">edit</a>
@@ -64,8 +71,14 @@
             <#if msg.comments??>
             <#list msg.comments as comment>
                 <li class="message-comment-item">
-                    <div>${comment.content}</div>
-                    <div> ${comment.user.displayName}    published: ${comment.createTime?datetime}</div>
+                    <div class="content">${comment.content}</div>
+                    <div class="ts"> 
+                        ${comment.user.displayName} 
+                        [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
+                        <#--
+                        ${comment.createTime?datetime}
+                        -->
+                    </div>
 
                     <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
                     <a class="one-item-edit" data-action="<@spring.url '/messageComments/${comment.id}' />" href="#">edit</a>
@@ -96,9 +109,11 @@
             target.oneItemDialog(url);
         });
     </script>
+    <#--
     </#if>
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+    -->
     <a class="msg-add" data-action="<@spring.url '/posts/${post.id}/messages' />" href="#">add message</a>
     <script type="text/javascript">
         $(document).on('click', 'a.msg-add', function(e) {
@@ -122,7 +137,11 @@
 
 <#macro showQuestionDetail>
     <div class="question">
-        <div class="ts">${post.user.displayName} <span>${post.createTime?datetime}</span></div>
+        <div class="ts">
+            ${post.user.displayName} 
+            [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
+        </div>
+
         <h3 class="title">${post.title}</h3>
         <div class="content">${post.content}</div>
 
@@ -138,9 +157,7 @@
                 $(this).closest('div').editPostDialog(options);
             });
         </script>
-        </#if>
-        
-        <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+
         <a class="question-comment-add" data-action="<@spring.url '/posts/${post.id}/questionComments' />" href="#">comment</a></p>
         <script type="text/javascript">
             $(document).on('click', 'a.question-comment-add', function(e) {
@@ -157,8 +174,14 @@
         <#if post.comments??>
         <#list post.comments as questionComment>
         <li>
-            <div>${questionComment.content}</div>
-            <div>${questionComment.user.displayName} published: ${questionComment.createTime?datetime}</div>
+            <div class="content">${questionComment.content}</div>
+            <div class="ts">
+                ${questionComment.user.displayName} 
+                [ <@utilGadgets.showTimeBefore questionComment.timeBefore /> ]
+                <#--
+                ${questionComment.createTime?datetime}
+                -->
+            </div>
 
             <#if viewer?? && post.plan.isActive() && questionComment.isOwner(viewer.id)>
             <a class="one-item-edit" data-action="<@spring.url '/questionComments/${questionComment.id}' />" href="#">edit</a>
@@ -175,8 +198,14 @@
         <#list post.answers as answer>
         <li class="answer-item">
 
-            <div>${answer.content}</div>
-            <div>${answer.user.displayName} published: ${answer.createTime?datetime}</div>
+            <div class="content">${answer.content}</div>
+            <div class="ts">
+                ${answer.user.displayName} 
+                [ <@utilGadgets.showTimeBefore answer.timeBefore /> ]
+                <#--
+                ${answer.createTime?datetime}
+                -->
+            </div>
 
             <#if viewer?? && post.plan.isActive() && answer.isOwner(viewer.id)>
             <a class="one-item-edit" data-action="<@spring.url '/answers/${answer.id}' />" href="#">edit</a>
@@ -191,8 +220,11 @@
             <#if answer.comments??>
             <#list answer.comments as comment>
                 <li class="answer-comment-item">
-                    <div>${comment.content}</div>
-                    <div>${comment.user.displayName} published: ${comment.createTime?datetime}</div>
+                    <div class="conent">${comment.content}</div>
+                    <div class="ts">
+                        ${comment.user.displayName} 
+                        [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
+                    </div>
 
                     <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
                     <a class="one-item-edit" data-action="<@spring.url '/answerComments/${comment.id}' />" href="#">edit</a>
@@ -223,9 +255,7 @@
             target.oneItemDialog(url);
         });
     </script>
-    </#if>
 
-    <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
     <a class="answer-add" data-action="<@spring.url '/posts/${post.id}/answers' />" href="#">add answer</a>
     <script type="text/javascript">
         $(document).on('click', 'a.answer-add', function(e) {

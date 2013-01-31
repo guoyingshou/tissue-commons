@@ -1,5 +1,6 @@
 <#import 'spring.ftl' as spring />
 <#import 'formGadgets.ftl' as formGadgets />
+<#import 'utilGadgets.ftl' as utilGadgets />
 
 <#macro topicLogo>
   <h1><a href="<@spring.url '/topics/${topic.id}/posts' />">${topic.title}</a></h1>
@@ -71,17 +72,9 @@
 
         <h4>In progress</h4>
         <div class="plan-endtime ts">
-        <#if plan.months != 0>
-            ${plan.months} <@spring.message 'i18n.common.months' />
-        <#elseif plan.weeks != 0>
-            ${plan.weeks} <@spring.message 'i18n.common.weeks' />
-        <#elseif plan.days != 0>
-            ${plan.days} <@spring.message 'i18n.common.days' />
-        <#elseif plan.hours != 0>
-            ${plan.hours} <@spring.message 'i18n.common.hours' />
-        <#elseif plan.minutes != 0>
-            ${plan.minutes} <@spring.message 'i18n.common.minutes' />
-        </#if>
+            <a href="/group/plans/${topic.activePlan.id}">
+                <@utilGadgets.showTimeRemaining topic.activePlan.timeRemaining />
+            </a>
         </div>
 
         <div>
@@ -103,7 +96,9 @@
         <#list topic.archivedPlans as plan>
             <li>
                 <div class="plan-duration ts">
-                    ${plan.createTime?date} - ${plan.endTime?date}
+                    <a href="/group/plans/${plan.id}">
+                        ${plan.createTime?date} - ${plan.endTime?date}
+                    </a>
                 </div>
                 <div>
                     ${plan.user.displayName}

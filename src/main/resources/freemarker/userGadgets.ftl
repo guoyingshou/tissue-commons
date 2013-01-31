@@ -1,5 +1,6 @@
 <#import 'spring.ftl' as spring />
 <#import 'formGadgets.ftl' as formGadgets />
+<#import 'utilGadgets.ftl' as utilGadgets />
 
 <#macro homeLogo>
     <h1>
@@ -57,7 +58,7 @@
             <a href="<@spring.url '/users/${owner.id}/posts' />">${owner.displayName}</a>
             <span>${owner.headline!""}</span>
         </h1>
-        <ul class="submenu-more">
+        <ul class="menu">
             <li>
                 <a href="<@spring.url '/users/${owner.id}/posts' />">
                     <@spring.message "i18n.user.menu.articles" />
@@ -84,7 +85,7 @@
                 </a>
             </li>
          </ul>
-        <ul class="submenu-action">
+        <ul class="action">
             <#if invitable>
             <li><a class="invite" href="<@spring.url '/users/${owner.id}/invites' />">invite</a></li>
             <@formGadgets.inviteForm />
@@ -173,17 +174,9 @@
         <#list owner.ownedPlans as plan>
             <li>
                 <div class="plan-endtime ts">
-                    <#if plan.months != 0>
-                        ${plan.months} <@spring.message 'i18n.common.months' />
-                    <#elseif plan.weeks != 0>
-                        ${plan.weeks} <@spring.message 'i18n.common.weeks' />
-                    <#elseif plan.days != 0>
-                        ${plan.days} <@spring.message 'i18n.common.days' />
-                    <#elseif plan.hours != 0>
-                        ${plan.hours} <@spring.message 'i18n.common.hours' />
-                    <#elseif plan.minutes != 0>
-                        ${plan.minutes} <@spring.message 'i18n.common.minutes' />
-                    </#if>
+                    <a href="/group/plans/${plan.id}">
+                        <@utilGadgets.showTimeRemaining plan.timeRemaining />
+                    </a>
                 </div>
 
                 <div class="topic-title-icon">
@@ -205,7 +198,9 @@
         <#list owner.archivedPlans as plan>
             <li>
                 <div class="plan-duration ts">
-                    ${plan.createTime?date} - ${plan.endTime?date}
+                    <a href="/group/plans/${plan.id}">
+                        ${plan.createTime?date} - ${plan.endTime?date}
+                    </a>
                 </div>
                 <div class="topic-title-icon">
                     ${plan.topic.title}
@@ -225,9 +220,16 @@
             <li>
                 <div class="ts">
                      <a href="/social/users/${topic.user.id}">${topic.user.displayName}</a>
+                     <@utilGadgets.showTimeBefore topic.timeBefore />
+                     <#--
                      <span>${topic.createTime?datetime}</span>
+                     -->
                 </div>
-                <div>${topic.title}</div>
+                <div>
+                    <a href="/group/topics/${topic.id}">
+                        ${topic.title}
+                    </a>
+                </div>
             </li>
         </#list>
         </ul>

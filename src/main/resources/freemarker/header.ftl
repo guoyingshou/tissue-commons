@@ -7,7 +7,7 @@
         <title>${title}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <script type="text/javascript" src="/jquery/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="/tissue/js/pop.js"></script>
+        <script type="text/javascript" src="/tissue/js/tissue.js"></script>
         <#if myscripts??>
         <#list myscripts as myscript>
         <script type="text/javascript" src="${myscript}"></script>
@@ -15,8 +15,6 @@
         </#if>
          
         <link type="text/css" rel="stylesheet" href="/tissue/css/common.css"></link>
-        <link type="text/css" rel="stylesheet" href="/tissue/css/pop.css"></link>
-        <link type="text/css" rel="stylesheet" href="/tissue/css/ico.css"></link>
 
         <#if mystyles??>
         <#list mystyles as style>

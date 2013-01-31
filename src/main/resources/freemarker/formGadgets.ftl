@@ -1,7 +1,7 @@
 <#import 'spring.ftl' as spring />
 
 <#macro signupForm>
-    <div id="signupForm" style="display: none">
+    <div id="signupForm" class="dialog pop-normal" style="display: none">
         <form action="<@spring.url '/signup' />" method="post">
             <fieldset> 
                 <legend>Create your free personal account</legend>
@@ -93,24 +93,24 @@
 </#macro>
 
 <#macro editProfileForm>
-    <div id="editProfileForm" style="display: none">
-        <form action="<@spring.url '/users/${owner.id}' />" method="post">
+    <div id="editProfileForm" class="dialog pop-normal" style="display: none">
+        <form action="<@spring.url '/users/${viewer.id}' />" method="post">
             <fieldset> 
                 <legend>Update profile</legend>
                 <ul>
                     <li>
                         <label for="displayName">DisplayName</label>
-                        <input type="input" id="displayName" name="displayName" value="${owner.displayName}" />
+                        <input type="input" id="displayName" name="displayName" value="${viewer.displayName}" />
                     </li>
 
                     <li>
                         <label for="headline">Headline</label>
-                        <textarea id="headline" name="headline">${owner.headline!""}</textarea>
+                        <textarea id="headline" name="headline">${viewer.headline!""}</textarea>
                     </li>
 
                     <li>
                         <label for="email">Email</label>
-                        <input type="input" id="email" name="email" value="${owner.email}" />
+                        <input type="input" id="email" name="email" value="${viewer.email}" />
                     </li>
 
                     <li>
@@ -124,8 +124,8 @@
 </#macro>
 
 <#macro changePassForm>
-<div id="changePassForm" style="display: none">
-    <form action="<@spring.url '/users/${owner.id}/pass'/>" method="post">
+<div id="changePassForm" class="dialog pop-normal" style="display: none">
+    <form action="<@spring.url '/users/${viewer.id}/pass'/>" method="post">
         <legend>Change Password</legend>
         <ul>
             <li>
@@ -148,7 +148,7 @@
 </#macro>
 
 <#macro inviteForm>
-    <div id="inviteForm" style="display: none">
+    <div id="inviteForm" class="dialog pop-normal" style="display: none">
         <form>
             <ul>
                 <li>
@@ -167,7 +167,7 @@
 </#macro>
 
 <#macro topicForm>
-    <div id="topicForm" style="display: none">
+    <div id="topicForm" class="dialog pop-normal" style="display: none">
         <form action="<@spring.url '/topics' />" method="post">
             <fieldset>
                 <legend>Your Topic</legend>
@@ -195,7 +195,7 @@
 </#macro>
 
 <#macro topicEditForm>
-    <div id="topicEditForm" style="display: none">
+    <div id="topicEditForm" class="dialog pop-normal" style="display: none">
         <form>
             <ul>
                 <li>
@@ -216,7 +216,7 @@
 </#macro>
 
 <#macro planForm>
-    <div id="planForm" style="display: none">
+    <div id="planForm" class="dialog pop-medium" style="display: none">
         <form action="<@spring.url '/topics/${topic.id}/plans' />" method="post">
             <fieldset>
                 <legend>Please Select A Duration</legend>
@@ -239,7 +239,7 @@
 </#macro>
 
 <#macro postForm>
-    <div id="postForm" style="display: none">
+    <div id="postForm" class="dialog pop-normal" style="display: none">
         <form method="post" action="<@spring.url '/plans/${plan.id}/posts'/>">
             <fieldset>
                 <legend>Post Type</legend>
@@ -271,7 +271,7 @@
 </#macro>
 
 <#macro postEditForm>
-    <div id="postEditForm" style="display: none">
+    <div id="postEditForm" class="dialog pop-normal" style="display: none">
         <form method="post">
             <fieldset>
                 <legend>Your Post</legend>
@@ -295,7 +295,7 @@
 </#macro>
 
 <#macro oneItemForm>
-    <div id="oneItemForm" style="display: none">
+    <div id="oneItemForm" class="dialog pop-normal" style="display: none">
         <form>
             <ul>
                 <li>
@@ -311,7 +311,7 @@
 </#macro>
 
 <#macro confirmForm>
-    <form id="confirmForm" style="display:none">
+    <form id="confirmForm" class="dialog pop-small" style="display:none">
         <div>
             <input type="submit" name="ok" value="OK" />
             <input type="submit" name="cancel" value="Cancel" />

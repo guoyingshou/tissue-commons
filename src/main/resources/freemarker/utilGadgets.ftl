@@ -59,4 +59,35 @@
     </#if>
 </#macro>
 
+<#macro showTimeBefore ts>
+   <#if ts.months != 0>
+       ${ts.months} months ago
+   <#elseif ts.weeks != 0>
+       ${ts.weeks} weeks ago
+   <#elseif ts.days != 0>
+       ${ts.days} days ago
+   <#elseif ts.hours != 0>
+       ${ts.hours} hours ago
+   <#elseif ts.minutes != 0>
+       ${ts.minutes} minutes ago
+   <#elseif ts.seconds != 0>
+       ${ts.seconds} seconds ago
+   </#if>
+</#macro>
+
+<#macro showTimeRemaining ts>
+   <#if ts.months != 0>
+       ${ts.months} months 
+   <#elseif ts.weeks != 0>
+       ${ts.weeks} weeks 
+   <#elseif ts.days != 0>
+       ${ts.days} days 
+   <#elseif ts.hours != 0>
+       ${ts.hours} hours 
+   <#elseif ts.minutes != 0>
+       ${ts.minutes} minutes
+   <#elseif ts.seconds !=0 >
+       ${ts.seconds} seconds
+   </#if>
+</#macro>
 

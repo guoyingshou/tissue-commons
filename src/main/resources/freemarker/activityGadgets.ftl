@@ -1,4 +1,5 @@
 <#import 'spring.ftl' as spring />
+<#import 'utilGadgets.ftl' as utilGadgets />
 
 <#macro showActivities>
     <#if activities??>
@@ -8,11 +9,11 @@
         <#if activity.label = 'topic'>
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe004;"></span>
-                <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                <div class="ts">
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.topic" activity.messageArgs /></span>
                 </div>
             </li>
@@ -21,11 +22,11 @@
         <#if activity.label = 'plan'>
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                <div class="ts">
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.plan" activity.messageArgs /></span>
                 </div>
             </li>
@@ -34,11 +35,11 @@
         <#if activity.label = 'members'>
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                <div class="ts">
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.members" activity.messageArgs /></span>
                 </div>
             </li>
@@ -48,10 +49,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.concept" activity.messageArgs /></span>
                 </div>
             </li>
@@ -61,10 +62,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.note" activity.messageArgs /></span>
                 </div>
             </li>
@@ -74,10 +75,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
-                </div>
-                <div>
                     <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
+                <div>
                     <span><@spring.messageArgs "i18n.activity.tutorial" activity.messageArgs /></span>
                 </div>
             </li>
@@ -87,10 +87,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.question" activity.messageArgs /></span>
                 </div>
             </li>
@@ -100,10 +100,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.postMessage" activity.messageArgs /></span>
                 </div>
             </li>
@@ -113,10 +113,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.postMessageComment" activity.messageArgs /></span>
                 </div>
             </li>
@@ -126,10 +126,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.questionComment" activity.messageArgs /></span>
                 </div>
             </li>
@@ -139,10 +139,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.answer" activity.messageArgs /></span>
                 </div>
             </li>
@@ -152,10 +152,10 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                     ${activity.createTime?datetime}
+                    <span>${activity.who.displayName}</span> 
+                    <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span>${activity.who.displayName}</span> 
                     <span><@spring.messageArgs "i18n.activity.answerComment" activity.messageArgs /></span>
                 </div>
             </li>
