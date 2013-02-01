@@ -1,9 +1,6 @@
 <#import 'spring.ftl' as spring />
 <#import 'formGadgets.ftl' as formGadgets />
 
-<#--
-   The messageSource used is defined in siteMessage.properties file.
--->
 <#macro exploreLogo title = 'explore'>
     <h1>
         <@spring.message "i18n.common.sitename" />
@@ -12,7 +9,7 @@
     <div>
         <ul class="menu">
             <li>
-                <a class="<#if title = 'explore'>current</#if>" href="<@spring.url '/explore' />">
+                <a class="<#if title = 'trending'>current</#if>" href="<@spring.url '/explore' />">
                     <@spring.message "i18n.explore.menu.trending" />
                 </a>
             </li>

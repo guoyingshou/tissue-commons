@@ -12,7 +12,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.List;
 
-public class ViewerAndOwnerSetter {
+public class ViewerOwnerTopicSetter {
 
     @Autowired
     protected UserService userService;
@@ -23,14 +23,11 @@ public class ViewerAndOwnerSetter {
     }
 
     @ModelAttribute("viewer")
-    public User prefetchViewer(@PathVariable("userId") String userId, Map model) {
+    public User initViewer(@PathVariable("userId") String userId, Map model) {
 
         boolean invitable = false;
 
         String viewerId = SecurityUtil.getViewerId();
-        List<Topic> newTopics = userService.getNewTopics(viewerId, 10);
-        model.put("newTopics", newTopics);
-
         User viewer = null;
         User owner = null;
         if(viewerId != null) {
@@ -54,4 +51,9 @@ public class ViewerAndOwnerSetter {
         return viewer;
     }
 
+    @ModelAttribute("newTopics")
+    public List<Topic> initTopics(Map model) {
+        String viewerId = SecurityUtil.getViewerId();
+        return userService.getNewTopics(viewerId, 10);
+    }
 }

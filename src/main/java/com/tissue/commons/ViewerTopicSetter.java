@@ -11,7 +11,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.List;
 
-public class ViewerSetter {
+public class ViewerTopicSetter {
 
     @Autowired
     protected UserService userService;
@@ -22,12 +22,18 @@ public class ViewerSetter {
     }
 
     @ModelAttribute("viewer")
-    public User prefetchViewer(Map model) {
+    public User initViewer(Map model) {
         String viewerId = SecurityUtil.getViewerId();
         if(viewerId == null) {
             return null;    
         }
         return userService.getViewer(viewerId);
+    }
+
+    @ModelAttribute("newTopics")
+    public List<Topic> initTopics(Map model) {
+        String viewerId = SecurityUtil.getViewerId();
+        return userService.getNewTopics(viewerId, 10);
     }
 
 }
