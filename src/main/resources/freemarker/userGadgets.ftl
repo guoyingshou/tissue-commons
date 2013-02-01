@@ -91,7 +91,11 @@
          </ul>
         <ul class="action">
             <#if invitable>
-            <li><a class="invite" href="<@spring.url '/users/${owner.id}/invites' />">invite</a></li>
+            <li>
+                <a class="invite" href="<@spring.url '/users/${owner.id}/invites' />">
+                    <@spring.message "i18n.user.action.invite" />
+                </a>
+            </li>
             <@formGadgets.inviteForm />
             <script type="text/javascript">
                 $(document).on('click', 'a.invite', function(e) {
@@ -173,7 +177,9 @@
 <#macro showOwnedPlans>
     <#if owner?? && owner.ownedPlans??>
     <div>
-        <h4>In progress</h4>
+        <h4>
+            <@spring.message "i18n.topic.info.inProgress" />
+        </h4>
         <ul>
         <#list owner.ownedPlans as plan>
             <li>
@@ -197,7 +203,9 @@
 <#macro showArchivedPlans>
     <#if owner?? && owner.archivedPlans??>
     <div>
-        <h4>Archived</h4>
+        <h4>
+            <@spring.message "i18n.topic.info.archived" />
+        </h4>
         <ul>
         <#list owner.archivedPlans as plan>
             <li>
@@ -217,27 +225,4 @@
     </#if>
 </#macro>
 
-<#macro showNewTopics>
-    <div>
-        <h4>New Topics</h4>
-        <ul>
-        <#list newTopics as topic>
-            <li>
-                <div class="ts">
-                     <a href="/social/users/${topic.user.id}">${topic.user.displayName}</a>
-                     <@utilGadgets.showTimeBefore topic.timeBefore />
-                     <#--
-                     <span>${topic.createTime?datetime}</span>
-                     -->
-                </div>
-                <div>
-                    <a href="/group/topics/${topic.id}">
-                        ${topic.title}
-                    </a>
-                </div>
-            </li>
-        </#list>
-        </ul>
-    </div>
-</#macro>
 

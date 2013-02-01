@@ -47,22 +47,28 @@
             <#assign plan = topic.activePlan in formGadgets />
             <@formGadgets.postForm />
 
-            <a class="icon-post" data-icon="&#xe000;" data-action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>" href="#">new post</a>
+            <a id="new-post" data-action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>" href="#">
+                <@spring.message "i18n.topic.action.post" />
+            </a>
             <script type="text/javascript">
-                $(document).on('click', 'a.icon-post', function(e) {
+                $(document).on('click', 'a#new-post', function(e) {
                     e.preventDefault();
                     $('#content').newPostDialog();
                 });
             </script>
 
             <#else>
-                <a class="icon-join" href="<@spring.url '/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">join</a>
+                <a href="<@spring.url '/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">
+                    <@spring.message "i18n.topic.action.joinPlan" />
+                </a>
             </#if> 
         </#if>
     <#else>
         <#if viewer??>
         <@formGadgets.planForm />
-        <a class="planForm" href="#">create plan</a>
+        <a class="planForm" href="#">
+            <@spring.message "i18n.topic.action.createPlan" />
+        </a>
         <script type="text/javascript">
             $(document).on('click', 'a.planForm', function(e) {
                 e.preventDefault();
@@ -95,8 +101,9 @@
     <#if topic.activePlan??>
     <#assign plan = topic.activePlan />
     <div>
-
-        <h4>In progress</h4>
+        <h4>
+            <@spring.message "i18n.topic.info.plan.live" />
+        </h4>
         <div class="ts">
             <a href="/group/plans/${topic.activePlan.id}">
                 <@utilGadgets.showTimeRemaining topic.activePlan.timeRemaining />
@@ -104,12 +111,13 @@
         </div>
 
         <div>
-            ${plan.user.displayName}
+            <a href="/social/users/${plan.user.id}/posts">
+                ${plan.user.displayName}
+            </a>
         </div>
         <div>
             ${plan.user.headline!""}
         </div>
-
     </div>
     </#if>
 </#macro>
@@ -117,17 +125,21 @@
 <#macro showArchivedPlans>
     <#if topic.archivedPlans??>
     <div>
-        <h4>Archived</h4>
+        <h4>
+            <@spring.message "i18n.topic.info.plan.archive" />
+        </h4>
         <ul>
         <#list topic.archivedPlans as plan>
             <li>
-                <div class="plan-duration ts">
+                <div class="ts">
                     <a href="/group/plans/${plan.id}">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>
                 <div>
-                    ${plan.user.displayName}
+                    <a href="/social/users/${plan.user.id}/posts">
+                        ${plan.user.displayName}
+                    </a>
                 </div>
                 <div>
                     ${plan.user.headline!""}
@@ -139,4 +151,26 @@
     </#if>
 </#macro>
 
+<#macro showNewTopics>
+    <div>
+        <h4>
+            <@spring.message "i18n.topic.info.newTopics" />
+        </h4>
+        <ul>
+        <#list newTopics as topic>
+            <li>
+                <div class="ts">
+                     <a href="/social/users/${topic.user.id}">${topic.user.displayName}</a>
+                     <@utilGadgets.showTimeBefore topic.timeBefore />
+                </div>
+                <div>
+                    <a href="/group/topics/${topic.id}">
+                        ${topic.title}
+                    </a>
+                </div>
+            </li>
+        </#list>
+        </ul>
+    </div>
+</#macro>
 

@@ -10,7 +10,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe004;"></span>
                 <div class="ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -23,7 +25,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -36,7 +40,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -49,7 +55,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -62,7 +70,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -75,7 +85,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 <div>
                     <span><@spring.messageArgs "i18n.activity.tutorial" activity.messageArgs /></span>
@@ -87,7 +99,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -100,7 +114,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -113,7 +129,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -126,7 +144,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -139,7 +159,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
@@ -152,7 +174,9 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <span>${activity.who.displayName}</span> 
+                    <a href="/social/users/${activity.who.id}/posts">
+                        ${activity.who.displayName}
+                    </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
