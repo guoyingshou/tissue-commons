@@ -1,72 +1,70 @@
 <#import 'spring.ftl' as spring />
 
 <#macro signupForm>
-    <div id="signupForm" class="dialog pop-normal" style="display: none">
+    <div id="signupForm">
         <form action="<@spring.url '/signup' />" method="post">
-            <fieldset> 
-                <legend>Create your free personal account</legend>
-                <ul>
-                    <li>
-                        <label for="username">Username</label>
-                        <input type="input" id="username" name="username" value="" />
+            <legend>
+                <@spring.message "i18n.common.signup.legend" />
+            </legend>
+            <ul>
+                <li>
+                    <label for="username"><@spring.message "i18n.common.signup.label.username" /></label>
+                    <input type="input" id="username" name="username" value="" />
                         <#--
                         <@spring.formInput path="account.username" attributes="id='username' class='ac'" />
                         <p><@spring.showErrors "" /></p>
                         -->
-                    </li>
+                </li>
 
-                    <li>
-                        <label for="password">Password</label>
-                        <input type="password" id="password" name="password" value="" />
+                <li>
+                    <label for="password"><@spring.message "i18n.common.signup.label.password" /></label>
+                    <input type="password" id="password" name="password" value="" />
                         <#--
                         <@spring.formPasswordInput path="account.password" attributes="id='password' class='ac'" />
                         <p><@spring.showErrors "" /></p>
                         -->
-                    </li>
+                </li>
 
-                    <li>
-                        <label for="confirm">Confirm Password</label>
-                        <input type="password" id="confirm" name="confirm" value="" />
+                <li>
+                    <label for="confirm"><@spring.message "i18n.common.signup.label.confirm" /></label>
+                    <input type="password" id="confirm" name="confirm" value="" />
 
                         <#--
                         <@spring.formPasswordInput path="account.confirm" attributes="id='confirm' class='ac'" />
                         <p><@spring.showErrors "" /></p>
                         -->
-                    </li>
+                </li>
 
-                    <li>
-                        <label for="displayName">DisplayName</label>
-                        <input type="input" id="displayName" name="displayName" value="" />
+                <li>
+                    <label for="displayName"><@spring.message "i18n.common.signup.label.displayName" /></label>
+                    <input type="input" id="displayName" name="displayName" value="" />
                         <#--
                         <@spring.formInput path="account.displayName" attributes="id='displayName' class='ac'" />
                         <p><@spring.showErrors "" /></p>
                         -->
-                    </li>
+                </li>
 
-                    <li>
-                        <label for="headline">Headline</label>
-                        <textarea id="headline" name="headline"></textarea>
+                <li>
+                    <label for="headline"><@spring.message "i18n.common.signup.label.headline" /></label>
+                    <textarea id="headline" name="headline"></textarea>
                         <#--
                         <p><@spring.showErrors "" /></p>
                         -->
-                    </li>
+                </li>
 
-
-                    <li>
-                        <label for="email">Email</label>
-                        <input type="input" id="email" name="email" value="" />
+                <li>
+                    <label for="email"><@spring.message "i18n.common.signup.label.email" /></label>
+                    <input type="input" id="email" name="email" value="" />
                         <#--
                         <@spring.formInput path="account.email" attributes="id='email' class='ac'" />
                         <p><@spring.showErrors "" /></p>
                         -->
-                    </li>
+                </li>
 
-                    <li>
-                        <input type="submit" value="create an account" />
-                    </li>
-                </ul>
-                <a class="cancel" href="#">cancel</a>
-            </fieldset>
+                <li>
+                    <input type="submit" value='<@spring.message "i18n.common.signup.submit" />' />
+                </li>
+            </ul>
         </form>
     </div>
 </#macro>
@@ -74,18 +72,25 @@
 <#macro signinForm>
 <div id="signinForm">
     <form action="<@spring.url '/jsc'/>" method="post">
-        <legend>Sign In</legend>
+        <legend>
+            <@spring.message "i18n.common.signin.legend" />
+        </legend>
         <ul>
             <li>
-                <label for="username">User Name</label>
+                <#if error??>
+                    <@spring.message "i18n.common.signin.error" />
+                </#if>
+            </li>
+            <li>
+                <label for="username"><@spring.message "i18n.common.signin.label.username" /></label>
                 <input type="text" id="username" name="j_username" size="20" maxlength="50" />
             </li>
             <li>
-                <label for="password">Password</label>
+                <label for="password"><@spring.message "i18n.common.signin.label.password" /></label>
                 <input type="password" id="password" name="j_password" size="20" maxlength="50" />
             </li>
             <li>
-                <input type="submit" value="Login"/>
+                <input type="submit" value='<@spring.message "i18n.common.signin.submit" />'/>
             </li>
         </ul>
     </form>
