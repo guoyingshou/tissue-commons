@@ -43,6 +43,14 @@ public class UserService {
         userDao.changePassword(user);
     }
 
+    public boolean isUsernameExist(String username) {
+        return userDao.isUsernameExist(username);
+    }
+
+    public boolean isEmailExist(String email) {
+        return userDao.isEmailExist(email);
+    }
+
     public void addResume(String userId, String resume) {
         userDao.addResume(userId, resume);
     }

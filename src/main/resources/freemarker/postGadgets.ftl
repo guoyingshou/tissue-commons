@@ -69,7 +69,7 @@
 
             <div class="content">${msg.content}</div>
 
-            <#if viewer?? && post.plan.isActive() && msg.isOwner(viewer.id)>
+            <#if viewer?? && post.plan.isActive()>
                 <#if msg.isOwner(viewer.id)>
                     <a class="one-item-edit" data-action="<@spring.url '/messages/${msg.id}' />" href="#">
                         edit

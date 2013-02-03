@@ -29,7 +29,7 @@
 
     <#if viewer??>
         <a class="add-about" href="<@spring.url '/about' />">add</a>
-        <@formGadgets.oneItemForm />
+        <@formGadgets.oneItemForm/>
         <script type="text/javascript">
             $(document).on('click', 'a.add-about', function(e) {
                 e.preventDefault();
