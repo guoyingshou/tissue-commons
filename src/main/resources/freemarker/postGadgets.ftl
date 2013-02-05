@@ -1,5 +1,6 @@
 <#import 'spring.ftl' as spring />
 <#import 'utilGadgets.ftl' as utilGadgets />
+<#import 'formGadgets.ftl' as formGadgets />
 
 <#macro showPosts posts>
 <ul id="posts">
@@ -114,6 +115,10 @@
     </ul>
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+        <@formGadgets.postEditForm />
+        <@formGadgets.oneItemForm />
+        <@formGadgets.confirmForm />
+
         <script type="text/javascript">
             $(document).on('click', 'a.post-edit', function(e) {
                 e.preventDefault();
@@ -266,6 +271,10 @@
     </ul>
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+        <@formGadgets.postEditForm />
+        <@formGadgets.oneItemForm />
+        <@formGadgets.confirmForm />
+
         <script type="text/javascript">
             $(document).on('click', 'a.post-edit', function(e) {
                 e.preventDefault();

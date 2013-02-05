@@ -44,6 +44,10 @@
         <#if viewer??>
             <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
 
+            <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id}/posts/_new'/>">
+                <@spring.message "i18n.topic.action.post" />
+            </a>
+<#--
             <#assign plan = topic.activePlan in formGadgets />
             <@formGadgets.postForm />
 
@@ -56,6 +60,7 @@
                     $('#content').newPostDialog();
                 });
             </script>
+            -->
 
             <#else>
                 <a href="<@spring.url '/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">
@@ -160,7 +165,7 @@
         <#list newTopics as topic>
             <li>
                 <div class="ts">
-                     <a href="/social/users/${topic.user.id}">${topic.user.displayName}</a>
+                     <a href="/social/users/${topic.user.id}/posts">${topic.user.displayName}</a>
                      <@utilGadgets.showTimeBefore topic.timeBefore />
                 </div>
                 <div>

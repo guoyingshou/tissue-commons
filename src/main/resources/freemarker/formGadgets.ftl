@@ -1,93 +1,95 @@
 <#import 'spring.ftl' as spring />
 
 <#macro signupForm>
-    <div id="signupForm" class="account">
-        <form action="<@spring.url '/signup' />" method="post">
+    <div class="input-form account">
+        <form id="signupForm" action="<@spring.url '/signup' />" method="post">
             <legend>
-                <@spring.message "i18n.common.signup.legend" />
+                <@spring.message "i18n.user.signup.legend" />
             </legend>
 
             <ul>
                 <li>
                     <label for="username">
-                        <@spring.message "i18n.common.signup.label.username" />
-                        <span class="empty" style="display: none">Cann't by empty</span>
-                        <span class="taken" style="display: none">Username been taken</span>
+                        <@spring.message "i18n.user.signup.label.username" />
+                        <span class="error-empty" style="display: none">
+                            <@spring.message "i18n.user.signup.error.empty" />
+                        </span>
+                        <span class="error-username-taken" style="display: none">
+                            <@spring.message "i18n.user.signup.error.userExist" />
+                        </span>
                     </label>
-                    <input type="text" class="sum" data-v="0" id="username" name="username" value="" />
+                    <input type="text" class="sum" id="username" name="username" value="" />
                 </li>
 
                 <li>
                     <label for="password">
-                        <@spring.message "i18n.common.signup.label.password" />
-                        <span class="empty" style="display: none">Cann't by empty</span>
-                        <span class="short" style="display: none">Password too short</span>
+                        <@spring.message "i18n.user.signup.label.password" />
+                        <span class="error-password-invalid" style="display: none">
+                            <@spring.message "i18n.user.signup.error.passwordLength" />
+                        </span>
                     </label>
-                    <input type="password" class="sum" data-v="0" id="password" name="password" value="" />
+                    <input type="password" class="sum" id="password" name="password" value="" />
                 </li>
 
                 <li>
                     <label for="confirm">
-                        <@spring.message "i18n.common.signup.label.confirm" />
-                        <span class="mismatch" style="display: none">Password mis-match</span>
+                        <@spring.message "i18n.user.signup.label.confirm" />
+                        <span class="error-confirm-mismatch" style="display: none">
+                            <@spring.message "i18n.user.signup.error.passwordMismatch" />
+                        </span>
                     </label>
-                    <input type="password" class="sum" data-v="0" id="confirm" name="confirm" value="" />
+                    <input type="password" class="sum" id="confirm" name="confirm" value="" />
                 </li>
 
                 <li>
                     <label for="email">
-                        <@spring.message "i18n.common.signup.label.email" />
-                        <span class="empty" style="display: none">Cann't by empty</span>
-                        <span class="taken" style="display: none">Email is already taken</span>
+                        <@spring.message "i18n.user.signup.label.email" />
+                        <span class="error-empty" style="display: none">
+                            <@spring.message "i18n.user.signup.error.empty" />
+                        </span>
+                        <span class="error-email-format" style="display: none">
+                            <@spring.message "i18n.user.signup.error.emailFormat" />
+                        </span>
+                        <span class="error-email-taken" style="display: none">
+                            <@spring.message "i18n.user.signup.error.emailExist" />
+                        </span>
                     </label>
-                    <input type="text" class="sum" data-v="0" id="email" name="email" value="" />
+                    <input type="text" class="sum" id="email" name="email" value="" />
                 </li>
 
                 <li>
                     <label for="displayName">
-                        <@spring.message "i18n.common.signup.label.displayName" />
-                        <span class="empty" style="display: none">Cann't by empty</span>
+                        <@spring.message "i18n.user.signup.label.displayName" />
+                        <span class="error-empty" style="display: none">
+                            <@spring.message "i18n.user.signup.error.empty" />
+                        </span>
                     </label>
-                    <input type="text" class="sum" data-v="0" id="displayName" name="displayName" value="" />
+                    <input type="text" class="sum" id="displayName" name="displayName" value="" />
                 </li>
 
                 <li>
                     <label for="headline">
-                        <@spring.message "i18n.common.signup.label.headline" />
-                        <span class="empty" style="display: none">Cann't by empty</span>
+                        <@spring.message "i18n.user.signup.label.headline" />
+                        <span class="error-empty" style="display: none">
+                            <@spring.message "i18n.user.signup.error.empty" />
+                        </span>
                     </label>
-                    <textarea class="sum" data-v="0" id="headline" name="headline">Engineer, XX company</textarea>
+                    <textarea class="sum" id="headline" name="headline">Engineer, XX company</textarea>
                 </li>
 
                 <li>
-                    <input type="submit" disabled="true" value='<@spring.message "i18n.common.signup.submit" />' />
+                    <input type="submit" value='<@spring.message "i18n.user.signup.submit" />' />
                 </li>
             </ul>
         </form>
         <script type="text/javascript">
-
-            $('form .sum').one('keydown', function(e) {
-                $(this).val("");
+            $('.sum').one('focusin', function(e) {
+                $(this).val('');
             });
 
-            $('form .sum').on('keyup focusout', function(e) {
-                $(this).checkEmpty();
-            });
-
-            $('#username').on('focusout', function(e) {
-                $(this).checkUsernameTaken();
-            });
-
-            $('#password').on('keyup', function(e) {
-                $(this).checkLength();
-            });
-
-            $('#confirm').on('keyup', function(e) {
-                $(this).checkMatch();
-            });
-
-            $('#email').on('focusout', function(e) {
-                $(this).checkEmailTaken();
+            $('input[type="submit"]').on('click', function(e) {
+                e.preventDefault();
+                $(this).validate();
             });
 
         </script>
@@ -95,27 +97,27 @@
 </#macro>
 
 <#macro signinForm>
-<div id="signinForm" class="account">
+<div id="signinForm" class="input-form account">
     <form action="<@spring.url '/jsc'/>" method="post">
         <legend>
-            <@spring.message "i18n.common.signin.legend" />
+            <@spring.message "i18n.user.signin.legend" />
+            <#if error??>
+                <span>
+                    <@spring.message "i18n.user.signin.error" />
+                </span>
+            </#if>
         </legend>
         <ul>
             <li>
-                <#if error??>
-                    <@spring.message "i18n.common.signin.error" />
-                </#if>
-            </li>
-            <li>
-                <label for="username"><@spring.message "i18n.common.signin.label.username" /></label>
+                <label for="username"><@spring.message "i18n.user.signin.label.username" /></label>
                 <input type="text" class="sum" id="username" name="j_username" size="20" maxlength="50" />
             </li>
             <li>
-                <label for="password"><@spring.message "i18n.common.signin.label.password" /></label>
+                <label for="password"><@spring.message "i18n.user.signin.label.password" /></label>
                 <input type="password" class="sum" id="password" name="j_password" size="20" maxlength="50" />
             </li>
             <li>
-                <input type="submit" value='<@spring.message "i18n.common.signin.submit" />'/>
+                <input type="submit" value='<@spring.message "i18n.user.signin.submit" />'/>
             </li>
         </ul>
     </form>
@@ -195,7 +197,11 @@
 <#macro topicForm>
     <div id="topicForm" class="dialog pop-650" style="display: none">
         <form action="<@spring.url '/topics' />" method="post">
-                <legend>Your Topic<a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+                <legend>
+                    Your Topic
+                    <span class="op-error-info" style="display: none">error</span>
+                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+                </legend>
                 <ul>
                     <li>
                         <label for="title">title</label>
@@ -211,6 +217,7 @@
                     </li>
                     <li>
                         <input type="submit" value="submit" />
+                        <span class="tips"> All fields are required </span>
                     </li>
                 </ul>
         </form>
@@ -220,7 +227,10 @@
 <#macro topicEditForm>
     <div id="topicEditForm" class="dialog pop-650" style="display: none">
         <form>
-            <legend>Edit Topic Objective <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+            <legend>
+                Edit Topic Objective 
+                <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+            </legend>
             <ul>
                 <li>
                     <textarea id="editor" name="content"></textarea>
@@ -257,10 +267,16 @@
 </#macro>
 
 <#macro postForm>
-    <div id="postForm" class="dialog pop-650" style="display: none">
-        <form method="post" action="<@spring.url '/plans/${plan.id}/posts'/>">
+    <div class="input-form">
+        <form id="post-form" method="post" action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>">
             <fieldset class="post-type">
-                <legend>Type <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+                <legend>
+                    Type
+                    <span class="type-error-info" style="display: none">
+                        Please select a type
+                    </span>
+                </legend>
+
                 <label>Concept <input type="radio" name="type" value="concept" /></label>
                 <label>Note <input type="radio" name="type" value="note" /></label>
                 <label>Question <input type="radio" name="type" value="question" /></label>
@@ -271,11 +287,21 @@
                 <legend>Your Post</legend>
                 <ul>
                     <li>
-                        <label for="title">title</label>
+                        <label for="title">
+                            title 
+                            <span class="title-error-info" style="display: none">
+                                Title cann't by empty
+                            </span>
+                        </label>
                         <input type="input" class="sum" id="title" name="title" />
                     </li>
                     <li>
-                        <label for="editor">content</label>
+                        <label for="editor">
+                            content
+                            <span class="content-error-info" style="display: none">
+                                Content cann't by empty
+                            </span>
+                         </label>
                         <textarea id="editor" name="content"></textarea>
                     </li>
                     <li>
@@ -284,17 +310,67 @@
                 </ul>
             </fieldset>
         </form>
-    </div>
+    <script type="text/javascript">
+        CKEDITOR.replace("editor");
+
+        $(document).on('submit', 'form#post-form', function(e) {
+            e.preventDefault();
+
+            var ftype = true;
+            var ftitle = true;
+            var fcontent = true;
+
+            if($('input[name="type"]').is(':checked')) {
+                $('span.type-error-info').hide();
+                ftype = true;
+
+            }
+            else {
+                $('span.type-error-info').show();
+                ftype = false;
+            }
+
+            if($('#title').val() == "") {
+                $('span.title-error-info').show();
+                ftitle = false;
+            }
+            else {
+                $('span.title-error-info').hide();
+                ftitle = true;
+            }
+
+            var content = CKEDITOR.instances.editor.getData();
+
+            if(content == "") {
+                $('span.content-error-info').show();
+                fcontent = false;
+            }
+            else {
+                $('span.content-error-info').hide();
+                fcontent = true;
+            }
+
+            if(ftype && ftitle && fcontent) {
+                this.submit();
+            }
+
+        });
+    </script>
+
+     </div>
 </#macro>
 
 <#macro postEditForm>
     <div id="postEditForm" class="dialog pop-650" style="display: none">
         <form method="post">
-                <legend>Your post <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+                <legend>Your post 
+                    <span class="op-error-info" style="display: none">Error</span>
+                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+                </legend>
                 <ul>
                     <li>
                         <label for="title">title</label>
-                        <input type="input" id="title" name="title" />
+                        <input type="input" class="sum" id="title" name="title" />
                     </li>
                     <li>
                         <label for="editor">content</label>
@@ -327,9 +403,11 @@
 <#macro confirmForm>
     <form id="confirmForm" class="dialog pop-320" style="display:none">
         <legend>confirm<a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+        <div class="message">
+             Are you sure that you really want to delete the selected item?
+        </div>
         <div>
-            <input type="submit" name="ok" value="OK" />
-            <input type="submit" name="cancel" value="Cancel" />
+            <input type="submit" name="ok" value="Yes" />
         </div>
     </form>
 </#macro>
