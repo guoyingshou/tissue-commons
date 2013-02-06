@@ -83,13 +83,47 @@
             </ul>
         </form>
         <script type="text/javascript">
-            $('.sum').one('focusin', function(e) {
-                $(this).val('');
-            });
 
             $('input[type="submit"]').on('click', function(e) {
                 e.preventDefault();
                 $(this).validate();
+            });
+
+            $(document).on('focusin keyup', '#username', function(e) {
+                $(this).checkUsernameEmpty();
+            });
+
+            $(document).on('focusout', '#username', function(e) {
+                $(this).checkUsernameTaken();
+            });
+
+            $(document).on('focusin keyup', '#password', function(e) {
+                $(this).checkPassword();
+            });
+
+            $(document).on('focusin keyup', '#confirm', function(e) {
+                $(this).checkPassword();
+            });
+
+            $(document).on('focusin keyup', '#email', function(e) {
+                $(this).checkEmailFormat();
+            });
+
+            $(document).on('focusout', '#email', function(e) {
+                $(this).checkEmailTaken();
+            });
+
+            $(document).on('focusin keyup', '#displayName', function(e) {
+                $(this).checkDisplayNameEmpty();
+            });
+
+            $(document).one('focusin', '#headline', function(e) {
+                $(this).val('');
+                $(this).checkHeadlineEmpty();
+            });
+
+            $(document).on('keyup', '#headline', function(e) {
+                $(this).checkHeadlineEmpty();
             });
 
         </script>
