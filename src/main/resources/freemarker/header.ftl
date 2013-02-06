@@ -7,7 +7,7 @@
         <title>${title}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <script type="text/javascript" src="/jquery/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="/tissue/js/tissue.js"></script>
+        <script type="text/javascript" src="/tissue/js/common.js"></script>
         <#if myscripts??>
         <#list myscripts as myscript>
         <script type="text/javascript" src="${myscript}"></script>

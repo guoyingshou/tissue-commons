@@ -116,20 +116,13 @@
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
         <@formGadgets.postEditForm />
+        <@formGadgets.messageForm />
+
+        <#--
         <@formGadgets.oneItemForm />
         <@formGadgets.confirmForm />
 
         <script type="text/javascript">
-            $(document).on('click', 'a.post-edit', function(e) {
-                e.preventDefault();
-                var options = {
-                    type: "${post.type}",
-                    url: $(this).data("action")
-                };
-
-                $(this).closest('div').editPostDialog(options);
-            });
-
             $(document).on('click', 'a.msg-add', function(e) {
                 e.preventDefault();
                 $('ul.messages').oneItemDialog($(this).data("action"));
@@ -160,6 +153,7 @@
                 $(this).delDialog();
             });
         </script>
+        -->
     </#if>
 </#macro>
 
@@ -276,15 +270,7 @@
         <@formGadgets.confirmForm />
 
         <script type="text/javascript">
-            $(document).on('click', 'a.post-edit', function(e) {
-                e.preventDefault();
-                var options = {
-                    type: "${post.type}",
-                    url: $(this).data("action")
-                };
-                $(this).closest('div').editPostDialog(options);
-            });
- 
+
             $(document).on('click', 'a.question-comment-add', function(e) {
                 e.preventDefault();
             

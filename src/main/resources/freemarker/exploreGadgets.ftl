@@ -30,19 +30,6 @@
             </li>
         </ul>
 
-        <#if viewer??>
-        <ul class="action">
-            <li><a class="topicForm" href="#"><@spring.message "i18n.explore.action.createTopic" /></a></li>
-            <li><@formGadgets.topicForm /></li>
-            <li>
-                <script type="text/javascript">
-                    $(document).on('click', 'a.topicForm', function(e) {
-                        e.preventDefault();
-                        $('#contentInner').newTopicDialog();
-                    });
-                </script>
-            </li>
-        </ul>
-        </#if>
+        <@formGadgets.topicForm />
     </div>
 </#macro>

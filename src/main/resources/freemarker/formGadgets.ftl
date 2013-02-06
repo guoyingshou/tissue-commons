@@ -1,5 +1,33 @@
 <#import 'spring.ftl' as spring />
 
+<#macro oneItemForm>
+    <div id="oneItemForm" class="dialog pop-650" style="display: none">
+        <form>
+            <legend><a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+            <ul>
+                <li>
+                    <textarea id="editor" name="content"></textarea>
+                </li>
+                <li>
+                    <input type="submit" value="submit"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+
+<#macro confirmForm>
+    <form id="confirmForm" class="dialog pop-320" style="display:none">
+        <legend>confirm<a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+        <div class="message">
+             Are you sure that you really want to delete the selected item?
+        </div>
+        <div>
+            <input type="submit" name="ok" value="Yes" />
+        </div>
+    </form>
+</#macro>
+
 <#macro signupForm>
     <div class="input-form account">
         <form id="signupForm" action="<@spring.url '/signup' />" method="post">
@@ -86,7 +114,9 @@
 
             $('input[type="submit"]').on('click', function(e) {
                 e.preventDefault();
+                $('input[type="submit"]').attr("disabled", true);
                 $(this).validate();
+                $('input[type="submit"]').removeAttr("disabled");
             });
 
             $(document).on('focusin keyup', '#username', function(e) {
@@ -229,33 +259,61 @@
 </#macro>
 
 <#macro topicForm>
-    <div id="topicForm" class="dialog pop-650" style="display: none">
-        <form action="<@spring.url '/topics' />" method="post">
-                <legend>
-                    Your Topic
-                    <span class="op-error-info" style="display: none">error</span>
-                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-                </legend>
-                <ul>
-                    <li>
-                        <label for="title">title</label>
-                        <input type="input" class="sum" id="title" name="title" />
-                    </li>
-                    <li>
-                        <label for="editor">Objective</label>
-                        <textarea class="sum" id="editor" name="content"></textarea>
-                    </li>
-                    <li>
-                        <label for="tags">tags</label>
-                        <input type="input" class="sum" id="tags" name="tags" />
-                    </li>
-                    <li>
-                        <input type="submit" value="submit" />
-                        <span class="tips"> All fields are required </span>
-                    </li>
-                </ul>
-        </form>
-    </div>
+    <#if viewer??>
+    <ul class="action">
+        <li>
+            <a class="topicForm" href="#">
+                <@spring.message "i18n.explore.action.createTopic" />
+            </a>
+        </li>
+        <li>
+            <div id="topicForm" class="dialog pop-650" style="display: none">
+                <form action="<@spring.url '/topics' />" method="post">
+                    <legend>
+                        Your Topic
+                        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+                    </legend>
+                    <ul>
+                        <li>
+                            <label for="title">
+                                title
+                                <span class="error-empty" style="display: none">cann't by empty</span>
+                            </label>
+                            <input type="input" class="sum" id="title" name="title" />
+                        </li>
+                        <li>
+                            <label for="editor">
+                                Objective
+                                <span class="error-empty" style="display: none">cann't by empty</span>
+                            </label>
+                            <textarea class="sum" id="editor" name="content"></textarea>
+                        </li>
+                        <li>
+                            <label for="tags">
+                                tags
+                                <span class="error-empty" style="display: none">cann't by empty</span>
+                            </label>
+                            <input type="input" class="sum" id="tags" name="tags" />
+                        </li>
+                        <li>
+                            <input type="submit" value="submit" />
+                            <span class="tips"> All fields are required </span>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </li>
+        <li>
+                <script type="text/javascript">
+                    $(document).on('click', 'a.topicForm', function(e) {
+                        e.preventDefault();
+                        $('#contentInner').newTopicDialog();
+                    });
+                </script>
+ 
+        </li>
+    </ul>
+    </#if>
 </#macro>
 
 <#macro topicEditForm>
@@ -416,32 +474,59 @@
                 </ul>
         </form>
     </div>
+
+    <#--
+      An anchor with class of 'post-edit' anywhere in a page can trigger the 
+      display of the form therein the relavent action.
+      -->
+        <script type="text/javascript">
+            $(document).on('click', 'a.post-edit', function(e) {
+                e.preventDefault();
+                var options = {
+                    type: "${post.type}",
+                    url: $(this).data("action")
+                };
+
+                $(this).closest('div').editPostDialog(options);
+            });
+
+        </script>
+
 </#macro>
 
-<#macro oneItemForm>
-    <div id="oneItemForm" class="dialog pop-650" style="display: none">
-        <form>
-            <legend><a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
-            <ul>
-                <li>
-                    <textarea id="editor" name="content"></textarea>
-                </li>
-                <li>
-                    <input type="submit" value="submit"/>
-                </li>
-            </ul>
-        </form>
-    </div>
-</#macro>
+<#macro messageForm>
+    <@oneItemForm />
+    <@confirmForm />
 
-<#macro confirmForm>
-    <form id="confirmForm" class="dialog pop-320" style="display:none">
-        <legend>confirm<a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
-        <div class="message">
-             Are you sure that you really want to delete the selected item?
-        </div>
-        <div>
-            <input type="submit" name="ok" value="Yes" />
-        </div>
-    </form>
+        <script type="text/javascript">
+            $(document).on('click', 'a.msg-add', function(e) {
+                e.preventDefault();
+                $('ul.messages').oneItemDialog($(this).data("action"));
+            });
+
+
+            $(document).on('click', 'a.msg-comment-add', function(e) {
+                e.preventDefault();
+
+                var id = $(this).data("id");
+                var url = "<@spring.url '/messages/' />" + id + "/comments";
+
+                var selector = "ul.message-comments-" + id;
+                var target = $(selector);
+                if(target.length == 0) {
+                    target = $('<ul class="' + selector + '"/>'); 
+                }
+                target.oneItemDialog(url);
+            });
+
+            $(document).on('click', 'a.one-item-edit', function(e) {
+                e.preventDefault();
+                $(this).prev().oneItemDialog($(this).data("action"));
+            });
+
+            $(document).on('click', 'a.del', function(e) {
+                e.preventDefault();
+                $(this).delDialog();
+            });
+        </script>
 </#macro>
