@@ -40,17 +40,6 @@
                <@spring.message "i18n.common.menu.changePassword" />
            </a>
        </li>
-
-       <script type="text/javascript">
-          $(document).on('click', 'a#edit-profile', function(e) {
-              e.preventDefault();
-              $(this).editProfileDialog();
-          });
-          $(document).on('click', 'a#change-pass', function(e) {
-              e.preventDefault();
-              $(this).changePassDialog();
-          });
-       </script>
    </ul>
    </div>
    </#if>
@@ -97,12 +86,6 @@
                 </a>
             </li>
             <@formGadgets.inviteForm />
-            <script type="text/javascript">
-                $(document).on('click', 'a.invite', function(e) {
-                    e.preventDefault();
-                    $(this).inviteDialog();
-                });
-            </script>
             </#if>
         </ul>
     </div>
@@ -114,14 +97,7 @@
     </div>
     <#if viewer?? && viewer.isSelf(owner.id)>
         <a class="edit-resume" href="<@spring.url '/users/${owner.id}/resume' />">edit</a>
-        <@formGadgets.oneItemForm />
-        <script type="text/javascript">
-            $(document).on('click', 'a.edit-resume', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                $(this).prev().oneItemDialog(url);
-            });
-        </script>
+        <@formGadgets.resumeAddForm />
     </#if>
 </#macro>
 
@@ -136,14 +112,7 @@
 
     <#if viewer?? && viewer.isFriend(owner.id)>
         <a class="add-impression" href="<@spring.url '/users/${owner.id}/impressions' />">add impression</a>
-        <@formGadgets.oneItemForm />
-        <script type="text/javascript">
-            $(document).on('click', 'a.add-impression', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                $(this).prev().oneItemDialog(url);
-            });
-        </script>
+        <@formGadgets.impressionAddForm />
     </#if>
 </#macro>
 

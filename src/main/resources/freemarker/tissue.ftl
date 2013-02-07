@@ -29,19 +29,10 @@
 
     <#if viewer??>
         <a class="add-about" href="<@spring.url '/about' />">add</a>
-
-        <@formGadgets.oneItemForm/>
-
-        <script type="text/javascript">
-            $(document).on('click', 'a.add-about', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                $(this).prev().oneItemDialog(url);
-            });
-        </script>
+        <@formGadgets.aboutAddForm/>
     </#if>
-
 </#macro>
+
 <#macro slogan>
     <div class="slogan">
         <h3>在线社会化学习工具</h3>

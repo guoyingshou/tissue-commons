@@ -116,44 +116,7 @@
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
         <@formGadgets.postEditForm />
-        <@formGadgets.messageForm />
-
-        <#--
-        <@formGadgets.oneItemForm />
-        <@formGadgets.confirmForm />
-
-        <script type="text/javascript">
-            $(document).on('click', 'a.msg-add', function(e) {
-                e.preventDefault();
-                $('ul.messages').oneItemDialog($(this).data("action"));
-            });
-
-
-            $(document).on('click', 'a.msg-comment-add', function(e) {
-                e.preventDefault();
-
-                var id = $(this).data("id");
-                var url = "<@spring.url '/messages/' />" + id + "/comments";
-
-                var selector = "ul.message-comments-" + id;
-                var target = $(selector);
-                if(target.length == 0) {
-                    target = $('<ul class="' + selector + '"/>'); 
-                }
-                target.oneItemDialog(url);
-            });
-
-            $(document).on('click', 'a.one-item-edit', function(e) {
-                e.preventDefault();
-                $(this).prev().oneItemDialog($(this).data("action"));
-            });
-
-            $(document).on('click', 'a.del', function(e) {
-                e.preventDefault();
-                $(this).delDialog();
-            });
-        </script>
-        -->
+        <@formGadgets.messageAddEditForm />
     </#if>
 </#macro>
 
@@ -172,11 +135,11 @@
                 <a class="post-edit" data-action="<@spring.url '/posts/${post.id}' />" href="#">
                     edit
                 </a>
+            </#if>
+            <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
                 <a class="question-comment-add" data-action="<@spring.url '/posts/${post.id}/questionComments' />" href="#">
                     comment
                 </a>
-            </#if>
-            <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
                 <a class="answer-add" data-action="<@spring.url '/posts/${post.id}/answers' />" href="#">
                     add answer
                 </a>
@@ -266,47 +229,7 @@
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
         <@formGadgets.postEditForm />
-        <@formGadgets.oneItemForm />
-        <@formGadgets.confirmForm />
-
-        <script type="text/javascript">
-
-            $(document).on('click', 'a.question-comment-add', function(e) {
-                e.preventDefault();
-            
-                var url = $(this).data("action");
-                $('ul.question-comments').oneItemDialog(url);
-            });
- 
-            $(document).on('click', 'a.answer-add', function(e) {
-                e.preventDefault();
-                $('ul.answers').oneItemDialog($(this).data("action"));
-            });
-
-            $(document).on('click', 'a.answer-comment-add', function(e) {
-                e.preventDefault();
-
-                var id = $(this).data("id");
-                var url = "<@spring.url '/answers/' />" + id + "/comments";
-
-                var selector = "ul.answer-comments-" + id;
-                var target = $(selector);
-                if(target.length == 0) {
-                    target = $('<ul class="' + selector + '"/>'); 
-                }
-                target.oneItemDialog(url);
-            });
-
-            $(document).on('click', 'a.one-item-edit', function(e) {
-                e.preventDefault();
-                $(this).prev().oneItemDialog($(this).data("action"));
-            });
-
-            $(document).on('click', 'a.del', function(e) {
-                e.preventDefault();
-                $(this).delDialog();
-            });
-        </script>
+        <@formGadgets.commentAnswerAddEditForm />
     </#if>
 </#macro>
 

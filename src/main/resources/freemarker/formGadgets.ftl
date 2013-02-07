@@ -213,6 +213,12 @@
                     </li>
             </ul>
         </form>
+       <script type="text/javascript">
+          $(document).on('click', 'a#edit-profile', function(e) {
+              e.preventDefault();
+              $(this).editProfileDialog();
+          });
+       </script>
     </div>
 </#macro>
 
@@ -236,6 +242,12 @@
             </li>
         </ul>
     </form>
+       <script type="text/javascript">
+          $(document).on('click', 'a#change-pass', function(e) {
+              e.preventDefault();
+              $(this).changePassDialog();
+          });
+       </script>
 </div>
 </#macro>
 
@@ -256,6 +268,14 @@
             </ul>
         </form>
     </div>
+
+            <script type="text/javascript">
+                $(document).on('click', 'a.invite', function(e) {
+                    e.preventDefault();
+                    $(this).inviteDialog();
+                });
+            </script>
+
 </#macro>
 
 <#macro topicForm>
@@ -494,7 +514,7 @@
 
 </#macro>
 
-<#macro messageForm>
+<#macro messageAddEditForm>
     <@oneItemForm />
     <@confirmForm />
 
@@ -529,4 +549,80 @@
                 $(this).delDialog();
             });
         </script>
+</#macro>
+
+<#macro commentAnswerAddEditForm>
+    <@oneItemForm />
+    <@confirmForm />
+    <script type="text/javascript">
+
+            $(document).on('click', 'a.question-comment-add', function(e) {
+                e.preventDefault();
+            
+                var url = $(this).data("action");
+                $('ul.question-comments').oneItemDialog(url);
+            });
+ 
+            $(document).on('click', 'a.answer-add', function(e) {
+                e.preventDefault();
+                $('ul.answers').oneItemDialog($(this).data("action"));
+            });
+
+            $(document).on('click', 'a.answer-comment-add', function(e) {
+                e.preventDefault();
+
+                var id = $(this).data("id");
+                var url = "<@spring.url '/answers/' />" + id + "/comments";
+
+                var selector = "ul.answer-comments-" + id;
+                var target = $(selector);
+                if(target.length == 0) {
+                    target = $('<ul class="' + selector + '"/>'); 
+                }
+                target.oneItemDialog(url);
+            });
+
+            $(document).on('click', 'a.one-item-edit', function(e) {
+                e.preventDefault();
+                $(this).prev().oneItemDialog($(this).data("action"));
+            });
+
+            $(document).on('click', 'a.del', function(e) {
+                e.preventDefault();
+                $(this).delDialog();
+            });
+    </script>
+</#macro>
+
+<#macro impressionAddForm>
+    <@oneItemForm />
+    <script type="text/javascript">
+            $(document).on('click', 'a.add-impression', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $(this).prev().oneItemDialog(url);
+            });
+    </script>
+</#macro>
+
+<#macro resumeAddForm>
+    <@oneItemForm />
+    <script type="text/javascript">
+            $(document).on('click', 'a.edit-resume', function(e) {
+                e.preventDefault();
+                var url = $(this).attr('href');
+                $(this).prev().oneItemDialog(url);
+            });
+    </script>
+</#macro>
+
+<#macro aboutAddForm>
+    <@oneItemForm />
+    <script type="text/javascript">
+        $(document).on('click', 'a.add-about', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            $(this).prev().oneItemDialog(url);
+        });
+    </script>
 </#macro>
