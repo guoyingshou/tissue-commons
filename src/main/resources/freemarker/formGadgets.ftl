@@ -188,10 +188,10 @@
 </div>
 </#macro>
 
-<#macro editProfileForm>
-    <div id="editProfileForm" class="dialog pop-420" style="display: none">
+<#macro profileEditForm>
+    <div id="profileEditForm" class="dialog pop-420" style="display: none">
         <form action="<@spring.url '/users/${viewer.id}' />" method="post">
-            <legend>Edit profile <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+            <legend>Edit profile <a href="#" class="cancel cancel-profile-edit"><span data-icon="&#xe008"></span></a></legend>
             <ul>
                     <li>
                         <label for="displayName">DisplayName</label>
@@ -213,19 +213,20 @@
                     </li>
             </ul>
         </form>
-       <script type="text/javascript">
-          $(document).on('click', 'a#edit-profile', function(e) {
-              e.preventDefault();
-              $(this).editProfileDialog();
-          });
-       </script>
+
+        <script type="text/javascript">
+            $(document).one('click', 'a.edit-profile', function(e) {
+                e.preventDefault();
+                $(this).editProfileDialog();
+            });
+        </script>
     </div>
 </#macro>
 
-<#macro changePassForm>
-<div id="changePassForm" class="dialog pop-420" style="display: none">
+<#macro passChangeForm>
+<div id="passChangeForm" class="dialog pop-420" style="display: none">
     <form action="<@spring.url '/users/${viewer.id}/pass'/>" method="post">
-        <legend>Change password <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+        <legend>Change password <a href="#" class="cancel cancel-change-pass"><span data-icon="&#xe008"></span></a></legend>
         <ul>
             <li>
                 <label for="password">Password</label>
@@ -243,7 +244,7 @@
         </ul>
     </form>
        <script type="text/javascript">
-          $(document).on('click', 'a#change-pass', function(e) {
+          $(document).one('click', 'a.change-pass', function(e) {
               e.preventDefault();
               $(this).changePassDialog();
           });
@@ -327,7 +328,7 @@
                 <script type="text/javascript">
                     $(document).on('click', 'a.topicForm', function(e) {
                         e.preventDefault();
-                        $('#contentInner').newTopicDialog();
+                        $(document).newTopicDialog();
                     });
                 </script>
  
@@ -345,10 +346,18 @@
             </legend>
             <ul>
                 <li>
-                    <textarea id="editor" name="content"></textarea>
+                     <label for="editor">
+                         Objective
+                         <span class="error-empty" style="display: none">cann't by empty</span>
+                     </label>
+                     <textarea id="editor" name="content"></textarea>
                 </li>
                 <li>
-                    <input class="sum" id="tags" type="input" name="tags" />
+                     <label for="tags">
+                         tags
+                         <span class="error-empty" style="display: none">cann't by empty</span>
+                     </label>
+                     <input class="sum" id="tags" type="input" name="tags" />
                 </li>
                 <li>
                     <input type="submit" value="submit"/>
@@ -356,6 +365,13 @@
             </ul>
         </form>
     </div>
+    <script type="text/javascript">
+        $(document).on('click', 'a.topic-edit', function(e) {
+                   e.preventDefault();
+                   $('document').editTopicDialog($(this).data("action"));
+        });
+    </script>
+ 
 </#macro>
 
 <#macro planForm>
@@ -376,15 +392,21 @@
             <input type="submit" value="submit" />
         </form>
     </div>
+    <script type="text/javascript">
+            $(document).on('click', 'a.planForm', function(e) {
+                e.preventDefault();
+                $('#planDia').newPlanDialog();
+            });
+    </script>
 </#macro>
 
 <#macro postForm>
-    <div class="input-form">
-        <form id="post-form" method="post" action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>">
+    <div id="post-form">
+        <form method="post" action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>">
             <fieldset class="post-type">
                 <legend>
                     Type
-                    <span class="type-error-info" style="display: none">
+                    <span style="display: none">
                         Please select a type
                     </span>
                 </legend>
@@ -401,7 +423,7 @@
                     <li>
                         <label for="title">
                             title 
-                            <span class="title-error-info" style="display: none">
+                            <span style="display: none">
                                 Title cann't by empty
                             </span>
                         </label>
@@ -410,7 +432,7 @@
                     <li>
                         <label for="editor">
                             content
-                            <span class="content-error-info" style="display: none">
+                            <span style="display: none">
                                 Content cann't by empty
                             </span>
                          </label>
@@ -422,53 +444,12 @@
                 </ul>
             </fieldset>
         </form>
-    <script type="text/javascript">
-        CKEDITOR.replace("editor");
-
-        $(document).on('submit', 'form#post-form', function(e) {
-            e.preventDefault();
-
-            var ftype = true;
-            var ftitle = true;
-            var fcontent = true;
-
-            if($('input[name="type"]').is(':checked')) {
-                $('span.type-error-info').hide();
-                ftype = true;
-
-            }
-            else {
-                $('span.type-error-info').show();
-                ftype = false;
-            }
-
-            if($('#title').val() == "") {
-                $('span.title-error-info').show();
-                ftitle = false;
-            }
-            else {
-                $('span.title-error-info').hide();
-                ftitle = true;
-            }
-
-            var content = CKEDITOR.instances.editor.getData();
-
-            if(content == "") {
-                $('span.content-error-info').show();
-                fcontent = false;
-            }
-            else {
-                $('span.content-error-info').hide();
-                fcontent = true;
-            }
-
-            if(ftype && ftitle && fcontent) {
-                this.submit();
-            }
-
-        });
-    </script>
-
+        <script type="text/javascript">
+            CKEDITOR.replace("editor");
+            $('form', '#post-form').on('submit', function(e) {
+                return !$(this).post();
+            });
+        </script>
      </div>
 </#macro>
 
@@ -481,11 +462,17 @@
                 </legend>
                 <ul>
                     <li>
-                        <label for="title">title</label>
+                        <label for="title">
+                            title
+                            <span style="display:none">cann't be empty</span>
+                        </label>
                         <input type="input" class="sum" id="title" name="title" />
                     </li>
                     <li>
-                        <label for="editor">content</label>
+                        <label for="editor">
+                            content
+                            <span style="display:none">cann't be empty</span>
+                        </label>
                         <textarea id="editor" name="content"></textarea>
                     </li>
                     <li>
@@ -495,23 +482,12 @@
         </form>
     </div>
 
-    <#--
-      An anchor with class of 'post-edit' anywhere in a page can trigger the 
-      display of the form therein the relavent action.
-      -->
-        <script type="text/javascript">
-            $(document).on('click', 'a.post-edit', function(e) {
-                e.preventDefault();
-                var options = {
-                    type: "${post.type}",
-                    url: $(this).data("action")
-                };
-
-                $(this).closest('div').editPostDialog(options);
-            });
-
-        </script>
-
+    <script type="text/javascript">
+        $(document).on('click', 'a.post-edit', function(e) {
+            e.preventDefault();
+            $(this).editPostDialog();
+        });
+    </script>
 </#macro>
 
 <#macro messageAddEditForm>

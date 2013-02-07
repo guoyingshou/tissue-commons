@@ -29,14 +29,14 @@
    </ul>
    <ul class="action">
        <li>
-           <@formGadgets.editProfileForm />
-           <a href="#" id="edit-profile">
+           <@formGadgets.profileEditForm />
+           <a href="#" class="edit-profile">
                <@spring.message "i18n.common.menu.editProfile" />
            </a>
        </li>
        <li>
-           <@formGadgets.changePassForm />
-           <a href="#" id="change-pass">
+           <@formGadgets.passChangeForm />
+           <a href="#" class="change-pass">
                <@spring.message "i18n.common.menu.changePassword" />
            </a>
        </li>
@@ -45,7 +45,7 @@
    </#if>
 </#macro>
 
-<#macro personLogo>
+<#macro userLogo>
     <div>
         <h1>
             <a href="<@spring.url '/users/${owner.id}/posts' />">${owner.displayName}</a>

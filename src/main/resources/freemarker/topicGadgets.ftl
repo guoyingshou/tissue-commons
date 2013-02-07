@@ -43,25 +43,9 @@
     <#if topic.activePlan??>
         <#if viewer??>
             <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
-
-            <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id}/posts/_new'/>">
-                <@spring.message "i18n.topic.action.post" />
-            </a>
-<#--
-            <#assign plan = topic.activePlan in formGadgets />
-            <@formGadgets.postForm />
-
-            <a id="new-post" data-action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>" href="#">
-                <@spring.message "i18n.topic.action.post" />
-            </a>
-            <script type="text/javascript">
-                $(document).on('click', 'a#new-post', function(e) {
-                    e.preventDefault();
-                    $('#content').newPostDialog();
-                });
-            </script>
-            -->
-
+                <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id}/posts/_new'/>">
+                    <@spring.message "i18n.topic.action.post" />
+                </a>
             <#else>
                 <a href="<@spring.url '/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">
                     <@spring.message "i18n.topic.action.joinPlan" />
@@ -74,16 +58,34 @@
         <a class="planForm" href="#">
             <@spring.message "i18n.topic.action.createPlan" />
         </a>
-        <script type="text/javascript">
-            $(document).on('click', 'a.planForm', function(e) {
-                e.preventDefault();
-                $('#planDia').newPlanDialog();
-            });
-        </script>
         </#if>
     </#if>
     </u>
   </div>
+</#macro>
+
+<#macro showTopicDetail>
+           <div class="ts">
+               <span>
+                   ${topic.user.displayName}
+               </span>
+               <span>
+                   ${topic.createTime?datetime}
+               </span>
+           </div>
+
+           <div class="tags">
+               <#list topic.tags as tag>${tag}&nbsp;</#list>
+           </div>
+
+           <div class="content">
+               ${topic.content}
+           </div>
+
+           <#if viewer?? && topic.isOwner(viewer.id) >
+               <@formGadgets.topicEditForm />
+               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id}' />" href="#">edit</a>
+           </#if>
 </#macro>
 
 <#macro showTopics>
