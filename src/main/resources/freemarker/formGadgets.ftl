@@ -39,11 +39,8 @@
                 <li>
                     <label for="username">
                         <@spring.message "i18n.user.signup.label.username" />
-                        <span class="error-empty" style="display: none">
-                            <@spring.message "i18n.user.signup.error.empty" />
-                        </span>
-                        <span class="error-username-taken" style="display: none">
-                            <@spring.message "i18n.user.signup.error.userExist" />
+                        <span style="display: none">
+                            <@spring.message "i18n.user.signup.error.usernameInvalid" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="username" name="username" value="" />
@@ -52,8 +49,8 @@
                 <li>
                     <label for="password">
                         <@spring.message "i18n.user.signup.label.password" />
-                        <span class="error-password-invalid" style="display: none">
-                            <@spring.message "i18n.user.signup.error.passwordLength" />
+                        <span style="display: none">
+                            <@spring.message "i18n.user.signup.error.passwordInvalid" />
                         </span>
                     </label>
                     <input type="password" class="sum" id="password" name="password" value="" />
@@ -62,7 +59,7 @@
                 <li>
                     <label for="confirm">
                         <@spring.message "i18n.user.signup.label.confirm" />
-                        <span class="error-confirm-mismatch" style="display: none">
+                        <span style="display: none">
                             <@spring.message "i18n.user.signup.error.passwordMismatch" />
                         </span>
                     </label>
@@ -72,14 +69,8 @@
                 <li>
                     <label for="email">
                         <@spring.message "i18n.user.signup.label.email" />
-                        <span class="error-empty" style="display: none">
-                            <@spring.message "i18n.user.signup.error.empty" />
-                        </span>
-                        <span class="error-email-format" style="display: none">
-                            <@spring.message "i18n.user.signup.error.emailFormat" />
-                        </span>
-                        <span class="error-email-taken" style="display: none">
-                            <@spring.message "i18n.user.signup.error.emailExist" />
+                        <span style="display: none">
+                            <@spring.message "i18n.user.signup.error.emailInvalid" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="email" name="email" value="" />
@@ -88,7 +79,7 @@
                 <li>
                     <label for="displayName">
                         <@spring.message "i18n.user.signup.label.displayName" />
-                        <span class="error-empty" style="display: none">
+                        <span style="display: none">
                             <@spring.message "i18n.user.signup.error.empty" />
                         </span>
                     </label>
@@ -98,7 +89,7 @@
                 <li>
                     <label for="headline">
                         <@spring.message "i18n.user.signup.label.headline" />
-                        <span class="error-empty" style="display: none">
+                        <span style="display: none">
                             <@spring.message "i18n.user.signup.error.empty" />
                         </span>
                     </label>
@@ -111,51 +102,21 @@
             </ul>
         </form>
         <script type="text/javascript">
-
-            $('input[type="submit"]').on('click', function(e) {
-                e.preventDefault();
-                $('input[type="submit"]').attr("disabled", true);
-                $(this).validate();
-                $('input[type="submit"]').removeAttr("disabled");
-            });
-
-            $(document).on('focusin keyup', '#username', function(e) {
-                $(this).checkUsernameEmpty();
-            });
-
             $(document).on('focusout', '#username', function(e) {
-                $(this).checkUsernameTaken();
-            });
-
-            $(document).on('focusin keyup', '#password', function(e) {
-                $(this).checkPassword();
-            });
-
-            $(document).on('focusin keyup', '#confirm', function(e) {
-                $(this).checkPassword();
-            });
-
-            $(document).on('focusin keyup', '#email', function(e) {
-                $(this).checkEmailFormat();
+                $(this).isUsernameTaken(); 
             });
 
             $(document).on('focusout', '#email', function(e) {
-                $(this).checkEmailTaken();
-            });
-
-            $(document).on('focusin keyup', '#displayName', function(e) {
-                $(this).checkDisplayNameEmpty();
+                $(this).isEmailTaken(); 
             });
 
             $(document).one('focusin', '#headline', function(e) {
                 $(this).val('');
-                $(this).checkHeadlineEmpty();
             });
 
-            $(document).on('keyup', '#headline', function(e) {
-                $(this).checkHeadlineEmpty();
+            $(document).on('submit', '#signupForm', function(e) {
+                return $(this).validate();
             });
-
         </script>
     </div>
 </#macro>
@@ -188,24 +149,17 @@
 </div>
 </#macro>
 
-<#macro profileEditForm>
-    <div id="profileEditForm" class="dialog pop-420" style="display: none">
-        <form action="<@spring.url '/users/${viewer.id}' />" method="post">
-            <legend>Edit profile <a href="#" class="cancel cancel-profile-edit"><span data-icon="&#xe008"></span></a></legend>
+<#macro contactEditForm>
+    <div id="contactEditForm" class="dialog pop-420" style="display: none">
+        <form action="<@spring.url '/updateContact' />" method="post">
+            <legend>Update Contact <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
             <ul>
                     <li>
-                        <label for="displayName">DisplayName</label>
-                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.displayName}" />
-                    </li>
-
-                    <li>
-                        <label for="headline">Headline</label>
-                        <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
-                    </li>
-
-                    <li>
-                        <label for="email">Email</label>
-                        <input class="sum" type="input" id="email" name="email" value="${viewer.email}" />
+                        <label for="email">
+                            Email
+                            <span style="display:none">Invalid or already taken</span>
+                        </label>
+                        <input class="sum" type="input" id="email" name="email" value="${viewer.email!""}" />
                     </li>
 
                     <li>
@@ -215,9 +169,43 @@
         </form>
 
         <script type="text/javascript">
+            $(document).one('click', 'a.edit-contact', function(e) {
+                e.preventDefault();
+                $(this).changeContactDialog();
+            });
+        </script>
+    </div>
+</#macro>
+
+<#macro profileEditForm>
+    <div id="profileEditForm" class="dialog pop-420" style="display: none">
+        <form action="<@spring.url '/updateProfile' />" method="post">
+            <legend>Edit profile <a href="#" class="cancel cancel-profile-edit"><span data-icon="&#xe008"></span></a></legend>
+            <ul>
+                    <li>
+                        <label for="displayName">
+                            DisplayName
+                            <span style="display:none">Cann't be empty</span>
+                        </label>
+                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.displayName}" />
+                    </li>
+                    <li>
+                        <label for="headline">
+                            Headline
+                            <span style="display:none">Cann't be empty</span>
+                        </label>
+                        <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
+                    </li>
+                    <li>
+                        <input type="submit" value="save" />
+                    </li>
+            </ul>
+        </form>
+
+        <script type="text/javascript">
             $(document).one('click', 'a.edit-profile', function(e) {
                 e.preventDefault();
-                $(this).editProfileDialog();
+                $(this).changeProfileDialog();
             });
         </script>
     </div>
@@ -225,16 +213,22 @@
 
 <#macro passChangeForm>
 <div id="passChangeForm" class="dialog pop-420" style="display: none">
-    <form action="<@spring.url '/users/${viewer.id}/pass'/>" method="post">
+    <form action="<@spring.url '/changePass'/>" method="post">
         <legend>Change password <a href="#" class="cancel cancel-change-pass"><span data-icon="&#xe008"></span></a></legend>
         <ul>
             <li>
-                <label for="password">Password</label>
+                <label for="password">
+                    Password
+                    <span style="display:none">too short</span>
+                </label>
                 <input type="password" class="sum" id="password" name="password" value="" />
             </li>
 
             <li>
-                <label for="confirm">Confirm Password</label>
+                <label for="confirm">
+                    Confirm Password
+                    <span style="display:none">Confirm mismactch</span>
+                </label>
                 <input type="password" class="sum" id="confirm" name="confirm" value="" />
             </li>
 
@@ -325,13 +319,12 @@
             </div>
         </li>
         <li>
-                <script type="text/javascript">
-                    $(document).on('click', 'a.topicForm', function(e) {
-                        e.preventDefault();
-                        $(document).newTopicDialog();
-                    });
-                </script>
- 
+            <script type="text/javascript">
+                $(document).on('click', 'a.topicForm', function(e) {
+                    e.preventDefault();
+                    $(document).newTopicDialog();
+                });
+            </script>
         </li>
     </ul>
     </#if>
@@ -345,7 +338,14 @@
                 <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
             </legend>
             <ul>
-                <li>
+                 <li>
+                     <label for="title">
+                         title
+                         <span class="error-empty" style="display: none">cann't by empty</span>
+                     </label>
+                     <input type="input" class="sum" id="title" name="title" />
+                 </li>
+                 <li>
                      <label for="editor">
                          Objective
                          <span class="error-empty" style="display: none">cann't by empty</span>

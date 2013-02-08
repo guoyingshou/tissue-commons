@@ -29,6 +29,12 @@
    </ul>
    <ul class="action">
        <li>
+           <@formGadgets.contactEditForm />
+           <a href="#" class="edit-contact">
+               <@spring.message "i18n.common.menu.editContact" />
+           </a>
+       </li>
+        <li>
            <@formGadgets.profileEditForm />
            <a href="#" class="edit-profile">
                <@spring.message "i18n.common.menu.editProfile" />

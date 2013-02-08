@@ -39,8 +39,16 @@ public class UserService {
         return userDao.update(user);
     }
 
+    public void updateEmail(User user) {
+        userDao.updateEmail(user);
+    }
+
     public void changePassword(User user) {
         userDao.changePassword(user);
+    }
+
+    public boolean isUserIdExist(String userId) {
+        return userDao.isUserIdExist(userId);
     }
 
     public boolean isUsernameExist(String username) {
@@ -49,6 +57,10 @@ public class UserService {
 
     public boolean isEmailExist(String email) {
         return userDao.isEmailExist(email);
+    }
+
+    public boolean isEmailExist(String excludingUserId, String email) {
+        return userDao.isEmailExist(excludingUserId, email);
     }
 
     public void addResume(String userId, String resume) {

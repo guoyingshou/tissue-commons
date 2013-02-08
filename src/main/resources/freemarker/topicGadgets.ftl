@@ -84,7 +84,7 @@
 
            <#if viewer?? && topic.isOwner(viewer.id) >
                <@formGadgets.topicEditForm />
-               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id}' />" href="#">edit</a>
+               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id}/update' />" href="#">edit</a>
            </#if>
 </#macro>
 
