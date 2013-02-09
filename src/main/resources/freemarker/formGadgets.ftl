@@ -447,7 +447,7 @@
         <script type="text/javascript">
             CKEDITOR.replace("editor");
             $('form', '#post-form').on('submit', function(e) {
-                return !$(this).post();
+                return $(this).post();
             });
         </script>
      </div>

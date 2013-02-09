@@ -44,7 +44,7 @@
 
         <#if viewer?? && post.plan.isActive()>
             <#if post.isOwner(viewer.id)>
-                <a class="post-edit" data-type="${post.type}" data-action="<@spring.url '/posts/${post.id}' />" href="#">
+                <a class="post-edit" data-type="${post.type}" data-action="<@spring.url '/posts/${post.id}/update' />" href="#">
                     edit
                 </a>
             </#if>
