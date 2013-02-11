@@ -1,5 +1,4 @@
 <#import 'spring.ftl' as spring />
-<#import 'formGadgets.ftl' as formGadgets />
 
 <!doctype html>
 <html>
@@ -56,15 +55,6 @@
                     <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.signin" /></a></li>
                     <li><a class="signup" href="/social/signup"><@spring.message "i18n.common.menu.signup" /></a></li>
                 </ul>
-                <#--
-                <@formGadgets.signupForm />
-                <script type="text/javascript">
-                    $(document).on('click', 'a.signup', function(e) {
-                        e.preventDefault();
-                        $(this).registerDialog();
-                    });
-                </script>
-                -->
                 </#if>
             </div>
         </div>

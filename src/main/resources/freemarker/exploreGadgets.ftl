@@ -1,5 +1,5 @@
 <#import 'spring.ftl' as spring />
-<#import 'formGadgets.ftl' as formGadgets />
+<#import 'topicGadgets.ftl' as topicGadgets />
 
 <#macro exploreLogo title = 'explore'>
     <h1>
@@ -30,6 +30,13 @@
             </li>
         </ul>
 
-        <@formGadgets.topicForm />
+        <@topicGadgets.topicForm />
+        <ul class="action">
+            <li>
+                <a class="topic-create" data-action="<@spring.url '/topics' />" href="#">
+                    <@spring.message "i18n.explore.action.createTopic" />
+                </a>
+            </li>
+        </ul>
     </div>
 </#macro>

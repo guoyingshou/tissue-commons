@@ -1,6 +1,175 @@
 <#import 'spring.ftl' as spring />
 <#import 'utilGadgets.ftl' as utilGadgets />
-<#import 'formGadgets.ftl' as formGadgets />
+
+<#macro postForm>
+    <div id="post-form">
+        <form method="post" action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>">
+            <fieldset class="post-type">
+                <legend>
+                    Type
+                    <span style="display: none">
+                        Please select a type
+                    </span>
+                </legend>
+
+                <label>Concept <input type="radio" name="type" value="concept" /></label>
+                <label>Note <input type="radio" name="type" value="note" /></label>
+                <label>Question <input type="radio" name="type" value="question" /></label>
+                <label>Tutorial <input type="radio" name="type" value="tutorial" /></label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Your Post</legend>
+                <ul>
+                    <li>
+                        <label for="title">
+                            title 
+                            <span style="display: none">
+                                Title cann't by empty
+                            </span>
+                        </label>
+                        <input type="input" class="sum" id="title" name="title" />
+                    </li>
+                    <li>
+                        <label for="editor">
+                            content
+                            <span style="display: none">
+                                Content cann't by empty
+                            </span>
+                         </label>
+                        <textarea id="editor" name="content"></textarea>
+                    </li>
+                    <li>
+                        <input type="submit" value="submit" />
+                    </li>
+                </ul>
+            </fieldset>
+        </form>
+        <script type="text/javascript">
+            CKEDITOR.replace("editor");
+            $('form', '#post-form').on('submit', function(e) {
+                return $(this).post();
+            });
+        </script>
+     </div>
+</#macro>
+
+<#macro postEditForm>
+    <div id="postEditForm" class="dialog pop-650" style="display: none">
+        <form method="post">
+                <legend>Your post 
+                    <span class="op-error-info" style="display: none">Error</span>
+                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+                </legend>
+                <ul>
+                    <li>
+                        <label for="title">
+                            title
+                            <span style="display:none">cann't be empty</span>
+                        </label>
+                        <input type="input" class="sum" id="title" name="title" />
+                    </li>
+                    <li>
+                        <label for="editor">
+                            content
+                            <span style="display:none">cann't be empty</span>
+                        </label>
+                        <textarea id="editor" name="content"></textarea>
+                    </li>
+                    <li>
+                        <input type="submit" value="submit" />
+                    </li>
+                </ul>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(document).on('click', 'a.post-edit', function(e) {
+            e.preventDefault();
+            $(this).editPostDialog();
+        });
+    </script>
+</#macro>
+
+<#macro messageAddEditForm>
+    <@tissue.oneItemForm />
+    <@tissue.confirmForm />
+
+        <script type="text/javascript">
+            $(document).on('click', 'a.msg-add', function(e) {
+                e.preventDefault();
+                $('ul.messages').oneItemDialog($(this).data("action"));
+            });
+
+
+            $(document).on('click', 'a.msg-comment-add', function(e) {
+                e.preventDefault();
+
+                var id = $(this).data("id");
+                var url = "<@spring.url '/messages/' />" + id + "/comments";
+
+                var selector = "ul.message-comments-" + id;
+                var target = $(selector);
+                if(target.length == 0) {
+                    target = $('<ul class="' + selector + '"/>'); 
+                }
+                target.oneItemDialog(url);
+            });
+
+            $(document).on('click', 'a.one-item-edit', function(e) {
+                e.preventDefault();
+                $(this).prev().oneItemDialog($(this).data("action"));
+            });
+
+            $(document).on('click', 'a.del', function(e) {
+                e.preventDefault();
+                $(this).delDialog();
+            });
+        </script>
+</#macro>
+
+<#macro commentAnswerAddEditForm>
+    <@tissue.oneItemForm />
+    <@tissue.confirmForm />
+    <script type="text/javascript">
+
+            $(document).on('click', 'a.question-comment-add', function(e) {
+                e.preventDefault();
+            
+                var url = $(this).data("action");
+                $('ul.question-comments').oneItemDialog(url);
+            });
+ 
+            $(document).on('click', 'a.answer-add', function(e) {
+                e.preventDefault();
+                $('ul.answers').oneItemDialog($(this).data("action"));
+            });
+
+            $(document).on('click', 'a.answer-comment-add', function(e) {
+                e.preventDefault();
+
+                var id = $(this).data("id");
+                var url = "<@spring.url '/answers/' />" + id + "/comments";
+
+                var selector = "ul.answer-comments-" + id;
+                var target = $(selector);
+                if(target.length == 0) {
+                    target = $('<ul class="' + selector + '"/>'); 
+                }
+                target.oneItemDialog(url);
+            });
+
+            $(document).on('click', 'a.one-item-edit', function(e) {
+                e.preventDefault();
+                $(this).prev().oneItemDialog($(this).data("action"));
+            });
+
+            $(document).on('click', 'a.del', function(e) {
+                e.preventDefault();
+                $(this).delDialog();
+            });
+    </script>
+</#macro>
 
 <#macro showPosts posts>
 <ul id="posts">
@@ -115,8 +284,8 @@
     </ul>
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
-        <@formGadgets.postEditForm />
-        <@formGadgets.messageAddEditForm />
+        <@postEditForm />
+        <@messageAddEditForm />
     </#if>
 </#macro>
 
@@ -228,8 +397,8 @@
     </ul>
 
     <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
-        <@formGadgets.postEditForm />
-        <@formGadgets.commentAnswerAddEditForm />
+        <@postEditForm />
+        <@commentAnswerAddEditForm />
     </#if>
 </#macro>
 

@@ -60,7 +60,14 @@
 </#macro>
 
 <#macro showTimeBefore ts>
-   <#if ts.months != 0>
+   <#if ts.years != 0>
+       ${ts.years} 
+       <#if ts.years = 1> 
+           <@spring.message "i18n.common.ts.year.before" />
+       <#else>
+           <@spring.message "i18n.common.ts.years.before" />
+       </#if>
+   <#elseif ts.months != 0>
        ${ts.months} 
        <#if ts.months = 1> 
            <@spring.message "i18n.common.ts.month.before" />

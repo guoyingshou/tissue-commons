@@ -1,13 +1,94 @@
 <#import 'spring.ftl' as spring />
-<#import 'formGadgets.ftl' as formGadgets />
 <#import 'utilGadgets.ftl' as utilGadgets />
 
-<#macro topicLogo title='all'>
+<#macro topicForm>
+    <#if viewer??>
+        <div id="topicForm" class="dialog pop-650" style="display: none">
+            <form method="post">
+                <legend>
+                    <@spring.message "i18n.topic.form.legend" />
+                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+                </legend>
+                <ul>
+                    <li>
+                        <label for="title">
+                            <@spring.message "i18n.topic.form.title" />
+                            <span class="error-empty" style="display: none">
+                                <@spring.message "i18n.topic.form.title.error" />
+                            </span>
+                        </label>
+                        <input type="input" class="sum" id="title" name="title" />
+                    </li>
+                    <li>
+                        <label for="editor">
+                            <@spring.message "i18n.topic.form.objective" />
+                            <span class="error-empty" style="display: none">
+                                <@spring.message "i18n.topic.form.objective.error" />
+                            </span>
+                        </label>
+                        <textarea class="sum" id="editor" name="content"></textarea>
+                    </li>
+                    <li>
+                        <label for="tags">
+                            <@spring.message "i18n.topic.form.tags" />
+                            <span class="error-empty" style="display: none">
+                                <@spring.message "i18n.topic.form.tags.error" />
+                            </span>
+                        </label>
+                        <input type="input" class="sum" id="tags" name="tags" />
+                    </li>
+                    <li>
+                        <input type="submit" value="submit" />
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <script type="text/javascript">
+            $(document).on('click', 'a.topic-create', function(e) {
+                e.preventDefault();
+                $(this).newTopicDialog();
+            });
+
+            $(document).on('click', 'a.topic-edit', function(e) {
+                e.preventDefault();
+                $(this).editTopicDialog();
+            });
+        </script>
+    </#if>
+</#macro>
+
+<#macro planForm>
+    <div id="planForm" class="dialog pop-320" style="display: none">
+        <form action="<@spring.url '/topics/${topic.id}/plans' />" method="post">
+                <legend>Please select a duration <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+                <ul>
+                    <li>
+                        <label><input type="radio" name="duration" value="1" />1 Mon</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="duration" value="3" />3 Mon</label>
+                    </li>
+                    <li>
+                        <label><input type="radio" name="duration" value="6" />6 Mon</label>
+                    </li>
+                </ul>
+            <input type="submit" value="submit" />
+        </form>
+    </div>
+    <script type="text/javascript">
+            $(document).on('click', 'a.plan-create', function(e) {
+                e.preventDefault();
+                $('#planDia').newPlanDialog();
+            });
+    </script>
+</#macro>
+
+<#macro topicLogo title='posts'>
   <h1><a href="<@spring.url '/topics/${topic.id}/posts' />">${topic.title}</a></h1>
   <div>
       <ul class="menu">
           <li>
-              <a class="<#if title = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id}/posts' />">
+              <a class="<#if title = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id}/posts' />">
                   <@spring.message "i18n.topic.menu.all" />
               </a>
           </li>
@@ -33,7 +114,7 @@
               </a>
           </li>
           <li>
-              <a class="<#if title = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id}' />">
+              <a class="<#if title = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id}/objective' />">
                   <@spring.message "i18n.topic.menu.objective" />
               </a>
           </li>
@@ -54,8 +135,8 @@
         </#if>
     <#else>
         <#if viewer??>
-        <@formGadgets.planForm />
-        <a class="planForm" href="#">
+        <@planForm />
+        <a class="plan-create" href="#">
             <@spring.message "i18n.topic.action.createPlan" />
         </a>
         </#if>
@@ -64,18 +145,18 @@
   </div>
 </#macro>
 
-<#macro showTopicDetail>
+<#macro showTopicDetails>
            <div class="ts">
                <span>
                    ${topic.user.displayName}
-               </span>
-               <span>
-                   ${topic.createTime?datetime}
+                   [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
                </span>
            </div>
 
            <div class="tags">
-               <#list topic.tags as tag>${tag}&nbsp;</#list>
+               <#list topic.tags as tag>
+                   <span><a href="<@spring.url '/tags/${tag}' />">${tag}</a></span>
+               </#list>
            </div>
 
            <div class="content">
@@ -83,7 +164,7 @@
            </div>
 
            <#if viewer?? && topic.isOwner(viewer.id) >
-               <@formGadgets.topicEditForm />
+               <@topicForm />
                <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id}/update' />" href="#">edit</a>
            </#if>
 </#macro>
@@ -97,7 +178,7 @@
                 [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
             </div>
             <div class="title">
-                <a href="/group/topics/${topic.id}">${topic.title}</a>
+                <a href="/group/topics/${topic.id}/objective">${topic.title}</a>
             </div>
         </li>
     </#list>

@@ -1,5 +1,4 @@
 <#import 'spring.ftl' as spring />
-<#import 'formGadgets.ftl' as formGadgets />
 
 <#macro layout title="">
     <#include "header.ftl">
@@ -29,7 +28,7 @@
 
     <#if viewer??>
         <a class="add-about" href="<@spring.url '/about' />">add</a>
-        <@formGadgets.aboutAddForm/>
+        <@aboutAddForm/>
     </#if>
 </#macro>
 
@@ -43,4 +42,43 @@
             <div>获取更多机会</div>
         </div>
     </div>
+</#macro>
+
+<#macro oneItemForm>
+    <div id="oneItemForm" class="dialog pop-650" style="display: none">
+        <form>
+            <legend><a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+            <ul>
+                <li>
+                    <textarea id="editor" name="content"></textarea>
+                </li>
+                <li>
+                    <input type="submit" value="submit"/>
+                </li>
+            </ul>
+        </form>
+    </div>
+</#macro>
+
+<#macro confirmForm>
+    <form id="confirmForm" class="dialog pop-320" style="display:none">
+        <legend>confirm<a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+        <div class="message">
+             Are you sure that you really want to delete the selected item?
+        </div>
+        <div>
+            <input type="submit" name="ok" value="Yes" />
+        </div>
+    </form>
+</#macro>
+
+<#macro aboutAddForm>
+    <@oneItemForm />
+    <script type="text/javascript">
+        $(document).on('click', 'a.add-about', function(e) {
+            e.preventDefault();
+            var url = $(this).attr('href');
+            $(this).prev().oneItemDialog(url);
+        });
+    </script>
 </#macro>
