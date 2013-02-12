@@ -30,6 +30,7 @@
             </li>
         </ul>
 
+        <#if viewer??>
         <@topicGadgets.topicForm />
         <ul class="action">
             <li>
@@ -38,5 +39,6 @@
                 </a>
             </li>
         </ul>
+        </#if>
     </div>
 </#macro>
