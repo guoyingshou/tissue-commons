@@ -49,21 +49,23 @@
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
                     <li>
-                        <a href="#">setting</a>
+                        <a href="#">
+                            <@spring.message "i18n.common.menu.setting" />
+                        </a>
                         <ul class="dropdown-menu" style="display: none">
                             <li>
                                 <a class="edit-contact" data-action="<@spring.url '/changeContact' />" href="#">
-                                    <@spring.message "i18n.common.menu.editContact" />
+                                    <@spring.message "i18n.user.changeContact" />
                                 </a>
                             </li>
                             <li>
                                 <a class="edit-profile" data-action="<@spring.url '/changeProfile' />" href="#">
-                                    <@spring.message "i18n.common.menu.editProfile" />
+                                    <@spring.message "i18n.user.changeProfile" />
                                 </a>
                             </li>
                             <li>
                                 <a class="change-pass" data-action="<@spring.url '/changePass' />" href="#">
-                                    <@spring.message "i18n.common.menu.changePassword" />
+                                    <@spring.message "i18n.user.changePassword" />
                                 </a>
                              </li>
                         </ul>

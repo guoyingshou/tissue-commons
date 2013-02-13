@@ -6,15 +6,15 @@
     <div class="input-form account">
         <form id="signupForm" action="<@spring.url '/signup' />" method="post">
             <legend>
-                <@spring.message "i18n.user.signup.legend" />
+                <@spring.message "i18n.user.signup" />
             </legend>
 
             <ul>
                 <li>
                     <label for="username">
-                        <@spring.message "i18n.user.signup.label.username" />
+                        <@spring.message "i18n.user.username" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.signup.error.usernameInvalid" />
+                            <@spring.message "i18n.user.error.usernameInvalid" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="username" name="username" value="" />
@@ -22,9 +22,9 @@
 
                 <li>
                     <label for="password">
-                        <@spring.message "i18n.user.signup.label.password" />
+                        <@spring.message "i18n.user.password" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.signup.error.passwordInvalid" />
+                            <@spring.message "i18n.user.error.passwordInvalid" />
                         </span>
                     </label>
                     <input type="password" class="sum" id="password" name="password" value="" />
@@ -32,9 +32,9 @@
 
                 <li>
                     <label for="confirm">
-                        <@spring.message "i18n.user.signup.label.confirm" />
+                        <@spring.message "i18n.user.confirm" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.signup.error.passwordMismatch" />
+                            <@spring.message "i18n.user.error.passwordMismatch" />
                         </span>
                     </label>
                     <input type="password" class="sum" id="confirm" name="confirm" value="" />
@@ -42,9 +42,9 @@
 
                 <li>
                     <label for="email">
-                        <@spring.message "i18n.user.signup.label.email" />
+                        <@spring.message "i18n.user.email" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.signup.error.emailInvalid" />
+                            <@spring.message "i18n.user.error.emailInvalid" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="email" name="email" value="" />
@@ -52,9 +52,9 @@
 
                 <li>
                     <label for="displayName">
-                        <@spring.message "i18n.user.signup.label.displayName" />
+                        <@spring.message "i18n.user.displayName" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.signup.error.empty" />
+                            <@spring.message "i18n.user.error.empty" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="displayName" name="displayName" value="" />
@@ -62,16 +62,16 @@
 
                 <li>
                     <label for="headline">
-                        <@spring.message "i18n.user.signup.label.headline" />
+                        <@spring.message "i18n.user.headline" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.signup.error.empty" />
+                            <@spring.message "i18n.user.error.empty" />
                         </span>
                     </label>
                     <textarea class="sum" id="headline" name="headline">Engineer, XX company</textarea>
                 </li>
 
                 <li>
-                    <input type="submit" value='<@spring.message "i18n.user.signup.submit" />' />
+                    <input type="submit" value='<@spring.message "i18n.user.button.signup.submit" />' />
                 </li>
             </ul>
         </form>
@@ -99,24 +99,24 @@
 <div id="signinForm" class="input-form account">
     <form action="<@spring.url '/jsc'/>" method="post">
         <legend>
-            <@spring.message "i18n.user.signin.legend" />
+            <@spring.message "i18n.user.signin" />
             <#if error??>
                 <span>
-                    <@spring.message "i18n.user.signin.error" />
+                    <@spring.message "i18n.user.error.signin" />
                 </span>
             </#if>
         </legend>
         <ul>
             <li>
-                <label for="username"><@spring.message "i18n.user.signin.label.username" /></label>
+                <label for="username"><@spring.message "i18n.user.username" /></label>
                 <input type="text" class="sum" id="username" name="j_username" size="20" maxlength="50" />
             </li>
             <li>
-                <label for="password"><@spring.message "i18n.user.signin.label.password" /></label>
+                <label for="password"><@spring.message "i18n.user.password" /></label>
                 <input type="password" class="sum" id="password" name="j_password" size="20" maxlength="50" />
             </li>
             <li>
-                <input type="submit" value='<@spring.message "i18n.user.signin.submit" />'/>
+                <input type="submit" value='<@spring.message "i18n.user.button.signin.submit" />'/>
             </li>
         </ul>
     </form>
@@ -126,19 +126,23 @@
 <#macro contactEditForm>
     <div id="contactEditForm" class="dialog pop-420" style="display: none">
         <form method="post">
-            <legend>Update Contact <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+            <legend>
+                <@spring.message "i18n.user.changeContact" />
+            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
             <ul>
-                    <li>
-                        <label for="email">
-                            Email
-                            <span style="display:none">Invalid or already taken</span>
-                        </label>
-                        <input class="sum" type="input" id="email" name="email" value="${viewer.email!""}" />
-                    </li>
+                <li>
+                    <label for="email">
+                        <@spring.message "i18n.user.email" />
+                        <span style="display:none">
+                            <@spring.message "i18n.user.error.empty" />
+                        </span>
+                    </label>
+                    <input class="sum" type="input" id="email" name="email" value="${viewer.email!""}" />
+                </li>
 
-                    <li>
-                        <input type="submit" value="save" />
-                    </li>
+                <li>
+                    <input type="submit" value='<@spring.message "i18n.user.button.save"/>'/>
+                </li>
             </ul>
         </form>
 
@@ -154,24 +158,31 @@
 <#macro profileEditForm>
     <div id="profileEditForm" class="dialog pop-420" style="display: none">
         <form method="post">
-            <legend>Edit profile <a href="#" class="cancel cancel-profile-edit"><span data-icon="&#xe008"></span></a></legend>
+            <legend>
+                <@spring.message "i18n.user.changeProfile" />
+                <a href="#" class="cancel cancel-profile-edit"><span data-icon="&#xe008"></span></a>
+            </legend>
             <ul>
                     <li>
                         <label for="displayName">
-                            DisplayName
-                            <span style="display:none">Cann't be empty</span>
+                            <@spring.message "i18n.user.displayName" />
+                            <span style="display:none">
+                                <@spring.message "i18n.user.error.empty" />
+                            </span>
                         </label>
                         <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.displayName}" />
                     </li>
                     <li>
                         <label for="headline">
-                            Headline
-                            <span style="display:none">Cann't be empty</span>
+                            <@spring.message "i18n.user.headline" />
+                            <span style="display:none">
+                                <@spring.message "i18n.user.error.empty" />
+                            </span>
                         </label>
                         <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
                     </li>
                     <li>
-                        <input type="submit" value="save" />
+                        <input type="submit" value='<@spring.message "i18n.user.button.save" />' />
                     </li>
             </ul>
         </form>
@@ -188,26 +199,33 @@
 <#macro passChangeForm>
 <div id="passChangeForm" class="dialog pop-420" style="display: none">
     <form method="post">
-        <legend>Change password <a href="#" class="cancel cancel-change-pass"><span data-icon="&#xe008"></span></a></legend>
+        <legend>
+            <@spring.message "i18n.user.changePassword" />
+            <a href="#" class="cancel cancel-change-pass"><span data-icon="&#xe008"></span></a>
+        </legend>
         <ul>
             <li>
                 <label for="password">
-                    Password
-                    <span style="display:none">too short</span>
+                    <@spring.message "i18n.user.password" />
+                    <span style="display:none">
+                        <@spring.message "i18n.user.error.passwordInvalid" />
+                    </span>
                 </label>
                 <input type="password" class="sum" id="password" name="password" value="" />
             </li>
 
             <li>
                 <label for="confirm">
-                    Confirm Password
-                    <span style="display:none">Confirm mismactch</span>
+                    <@spring.message "i18n.user.confirm" />
+                    <span style="display:none">
+                        <@spring.message "i18n.user.error.passwordMismatch" />
+                    </span>
                 </label>
                 <input type="password" class="sum" id="confirm" name="confirm" value="" />
             </li>
 
             <li>
-                <input type="submit" value="Change"/>
+                <input type="submit" value='<@spring.message "i18n.user.button.save" />'/>
             </li>
         </ul>
     </form>
@@ -278,43 +296,21 @@
    <ul class="menu">
        <li>
            <a href="<@spring.url '/watchedfeeds' />">
-               <@spring.message "i18n.common.menu.watchedFeeds" />
+               <@spring.message "i18n.user.home.watchedFeeds" />
            </a>
        </li>
        <li>
            <a href="<@spring.url '/allfeeds' />">
-               <@spring.message "i18n.common.menu.allFeeds" />
+               <@spring.message "i18n.user.home.allFeeds" />
            </a>
        </li>
        <li>
            <a href="/social/invitations">
-               <@spring.message "i18n.common.menu.invitations" />
+               <@spring.message "i18n.user.home.invitations" />
                - ${viewer.invitationsReceived?size}
            </a>
        </li>
    </ul>
-   <#--
-   <ul class="action">
-       <li>
-           <@contactEditForm />
-           <a class="edit-contact" data-action="<@spring.url '/changeContact' />" href="#">
-               <@spring.message "i18n.common.menu.editContact" />
-           </a>
-       </li>
-        <li>
-           <@profileEditForm />
-           <a class="edit-profile" data-action="<@spring.url '/changeProfile' />" href="#">
-               <@spring.message "i18n.common.menu.editProfile" />
-           </a>
-       </li>
-       <li>
-           <@passChangeForm />
-           <a class="change-pass" data-action="<@spring.url '/changePass' />" href="#">
-               <@spring.message "i18n.common.menu.changePassword" />
-           </a>
-       </li>
-   </ul>
-   -->
    </div>
    </#if>
 </#macro>
