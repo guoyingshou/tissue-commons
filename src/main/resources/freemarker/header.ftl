@@ -1,4 +1,5 @@
 <#import 'spring.ftl' as spring />
+<#import 'userGadgets.ftl' as userGadgets />
 
 <!doctype html>
 <html>
@@ -7,6 +8,7 @@
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
         <script type="text/javascript" src="/jquery/jquery-1.8.3.min.js"></script>
         <script type="text/javascript" src="/tissue/js/common.js"></script>
+        <script type="text/javascript" src="/tissue/js/user.js"></script>
         <#if myscripts??>
         <#list myscripts as myscript>
         <script type="text/javascript" src="${myscript}"></script>
@@ -25,7 +27,7 @@
     <body>
         <div id="headerWrapper" class="wrapper">
             <div id="header" class="center">
-                <ul class="nav">
+                <ul class="nav-left nav-item">
                     <#if viewer??>
                         <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.home" /></a></li>
                     <#else>
@@ -36,17 +38,41 @@
                 </ul>
 
                 <#if viewer??>
-                <ul class="userbox">
+                <@userGadgets.contactEditForm />
+                <@userGadgets.profileEditForm />
+                <@userGadgets.passChangeForm />
+
+                <ul class="nav-right nav-item">
                     <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
                     <#else>
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
+                    <li>
+                        <a href="#">setting</a>
+                        <ul class="dropdown-menu" style="display: none">
+                            <li>
+                                <a class="edit-contact" data-action="<@spring.url '/changeContact' />" href="#">
+                                    <@spring.message "i18n.common.menu.editContact" />
+                                </a>
+                            </li>
+                            <li>
+                                <a class="edit-profile" data-action="<@spring.url '/changeProfile' />" href="#">
+                                    <@spring.message "i18n.common.menu.editProfile" />
+                                </a>
+                            </li>
+                            <li>
+                                <a class="change-pass" data-action="<@spring.url '/changePass' />" href="#">
+                                    <@spring.message "i18n.common.menu.changePassword" />
+                                </a>
+                             </li>
+                        </ul>
+                    </li>
                     <li><a href="/social/users/${viewer.id}/posts">${viewer.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "i18n.common.menu.signout" /></a></li>
                 </ul>
                 <#else>
-                <ul class="userbox">
+                <ul class="nav-right nav-item">
                     <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
                     <#else>

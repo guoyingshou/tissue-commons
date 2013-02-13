@@ -293,6 +293,7 @@
            </a>
        </li>
    </ul>
+   <#--
    <ul class="action">
        <li>
            <@contactEditForm />
@@ -313,6 +314,7 @@
            </a>
        </li>
    </ul>
+   -->
    </div>
    </#if>
 </#macro>
