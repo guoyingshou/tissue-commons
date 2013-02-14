@@ -75,23 +75,6 @@
                 </li>
             </ul>
         </form>
-        <script type="text/javascript">
-            $(document).on('focusout', '#username', function(e) {
-                $(this).isUsernameTaken(); 
-            });
-
-            $(document).on('focusout', '#email', function(e) {
-                $(this).isEmailTaken(); 
-            });
-
-            $(document).one('focusin', '#headline', function(e) {
-                $(this).val('');
-            });
-
-            $(document).on('submit', '#signupForm', function(e) {
-                return $(this).validate();
-            });
-        </script>
     </div>
 </#macro>
 
@@ -146,12 +129,14 @@
             </ul>
         </form>
 
+<#--
         <script type="text/javascript">
             $(document).one('click', 'a.edit-contact', function(e) {
                 e.preventDefault();
                 $(this).changeContactDialog();
             });
         </script>
+        -->
     </div>
 </#macro>
 
@@ -187,12 +172,14 @@
             </ul>
         </form>
 
+<#--
         <script type="text/javascript">
             $(document).one('click', 'a.edit-profile', function(e) {
                 e.preventDefault();
                 $(this).changeProfileDialog();
             });
         </script>
+        -->
     </div>
 </#macro>
 
@@ -229,39 +216,42 @@
             </li>
         </ul>
     </form>
+    <#--
        <script type="text/javascript">
           $(document).one('click', 'a.change-pass', function(e) {
               e.preventDefault();
               $(this).changePassDialog();
           });
        </script>
+       -->
 </div>
 </#macro>
 
 <#macro inviteForm>
     <div id="inviteForm" class="dialog pop-420" style="display: none">
-        <form>
-            <legend>Invite <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+        <form method="POST">
+            <legend>
+                <@spring.message "i18n.user.invite" />
+                <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+            </legend>
             <ul>
                 <li>
-                    <label for="letter">invitation letter</label>
+                    <label for="letter">
+                        <@spring.message "i18n.user.inviteLetter" />
+                        <span style="display:none">
+                            <@spring.message "i18n.user.error.empty" />
+                        </span>
+                    </label>
                 </li>
                 <li>
                     <textarea class="sum" id="letter" name="content"></textarea></p>
                 </li>
                 <li>
-                    <input type="submit" name="submit" value="submit" />
+                    <input type="submit" name="submit" value='<@spring.message "i18n.user.button.invite.submit"/>' />
                 </li>
             </ul>
         </form>
     </div>
-
-    <script type="text/javascript">
-        $(document).on('click', 'a.invite', function(e) {
-            e.preventDefault();
-            $(this).inviteDialog();
-        });
-    </script>
 </#macro>
 
 <#macro impressionAddForm>
@@ -351,8 +341,8 @@
         <ul class="action">
             <#if invitable>
             <li>
-                <a class="invite" href="<@spring.url '/users/${owner.id}/invites' />">
-                    <@spring.message "i18n.user.action.invite" />
+                <a class="invite" data-action="<@spring.url '/users/${owner.id}/invites' />" href="#">
+                    <@spring.message "i18n.user.invite" />
                 </a>
             </li>
             <@inviteForm />
