@@ -14,7 +14,7 @@
                     <label for="username">
                         <@spring.message "i18n.user.username" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.error.usernameInvalid" />
+                            <@spring.message "i18n.error.usernameInvalid" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="username" name="username" value="" />
@@ -24,7 +24,7 @@
                     <label for="password">
                         <@spring.message "i18n.user.password" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.error.passwordInvalid" />
+                            <@spring.message "i18n.error.passwordInvalid" />
                         </span>
                     </label>
                     <input type="password" class="sum" id="password" name="password" value="" />
@@ -34,7 +34,7 @@
                     <label for="confirm">
                         <@spring.message "i18n.user.confirm" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.error.passwordMismatch" />
+                            <@spring.message "i18n.error.passwordMismatch" />
                         </span>
                     </label>
                     <input type="password" class="sum" id="confirm" name="confirm" value="" />
@@ -44,7 +44,7 @@
                     <label for="email">
                         <@spring.message "i18n.user.email" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.error.emailInvalid" />
+                            <@spring.message "i18n.error.emailInvalid" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="email" name="email" value="" />
@@ -54,7 +54,7 @@
                     <label for="displayName">
                         <@spring.message "i18n.user.displayName" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.error.empty" />
+                            <@spring.message "i18n.error.empty" />
                         </span>
                     </label>
                     <input type="text" class="sum" id="displayName" name="displayName" value="" />
@@ -64,7 +64,7 @@
                     <label for="headline">
                         <@spring.message "i18n.user.headline" />
                         <span style="display: none">
-                            <@spring.message "i18n.user.error.empty" />
+                            <@spring.message "i18n.error.empty" />
                         </span>
                     </label>
                     <textarea class="sum" id="headline" name="headline">Engineer, XX company</textarea>
@@ -85,18 +85,18 @@
             <@spring.message "i18n.user.signin" />
             <#if error??>
                 <span>
-                    <@spring.message "i18n.user.error.signin" />
+                    <@spring.message "i18n.error.signin" />
                 </span>
             </#if>
         </legend>
         <ul>
             <li>
-                <label for="username"><@spring.message "i18n.user.username" /></label>
-                <input type="text" class="sum" id="username" name="j_username" size="20" maxlength="50" />
+                <label for="sign-username"><@spring.message "i18n.user.username" /></label>
+                <input type="text" class="sum" id="sign-username" name="j_username" size="20" maxlength="50" />
             </li>
             <li>
-                <label for="password"><@spring.message "i18n.user.password" /></label>
-                <input type="password" class="sum" id="password" name="j_password" size="20" maxlength="50" />
+                <label for="sign-password"><@spring.message "i18n.user.password" /></label>
+                <input type="password" class="sum" id="sign-password" name="j_password" size="20" maxlength="50" />
             </li>
             <li>
                 <input type="submit" value='<@spring.message "i18n.user.button.signin.submit" />'/>
@@ -117,7 +117,7 @@
                     <label for="email">
                         <@spring.message "i18n.user.email" />
                         <span style="display:none">
-                            <@spring.message "i18n.user.error.empty" />
+                            <@spring.message "i18n.error.empty" />
                         </span>
                     </label>
                     <input class="sum" type="input" id="email" name="email" value="${viewer.email!""}" />
@@ -128,15 +128,6 @@
                 </li>
             </ul>
         </form>
-
-<#--
-        <script type="text/javascript">
-            $(document).one('click', 'a.edit-contact', function(e) {
-                e.preventDefault();
-                $(this).changeContactDialog();
-            });
-        </script>
-        -->
     </div>
 </#macro>
 
@@ -152,7 +143,7 @@
                         <label for="displayName">
                             <@spring.message "i18n.user.displayName" />
                             <span style="display:none">
-                                <@spring.message "i18n.user.error.empty" />
+                                <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
                         <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.displayName}" />
@@ -161,7 +152,7 @@
                         <label for="headline">
                             <@spring.message "i18n.user.headline" />
                             <span style="display:none">
-                                <@spring.message "i18n.user.error.empty" />
+                                <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
                         <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
@@ -171,15 +162,6 @@
                     </li>
             </ul>
         </form>
-
-<#--
-        <script type="text/javascript">
-            $(document).one('click', 'a.edit-profile', function(e) {
-                e.preventDefault();
-                $(this).changeProfileDialog();
-            });
-        </script>
-        -->
     </div>
 </#macro>
 
@@ -195,7 +177,7 @@
                 <label for="password">
                     <@spring.message "i18n.user.password" />
                     <span style="display:none">
-                        <@spring.message "i18n.user.error.passwordInvalid" />
+                        <@spring.message "i18n.error.passwordInvalid" />
                     </span>
                 </label>
                 <input type="password" class="sum" id="password" name="password" value="" />
@@ -205,7 +187,7 @@
                 <label for="confirm">
                     <@spring.message "i18n.user.confirm" />
                     <span style="display:none">
-                        <@spring.message "i18n.user.error.passwordMismatch" />
+                        <@spring.message "i18n.error.passwordMismatch" />
                     </span>
                 </label>
                 <input type="password" class="sum" id="confirm" name="confirm" value="" />
@@ -216,14 +198,6 @@
             </li>
         </ul>
     </form>
-    <#--
-       <script type="text/javascript">
-          $(document).one('click', 'a.change-pass', function(e) {
-              e.preventDefault();
-              $(this).changePassDialog();
-          });
-       </script>
-       -->
 </div>
 </#macro>
 
@@ -239,7 +213,7 @@
                     <label for="letter">
                         <@spring.message "i18n.user.inviteLetter" />
                         <span style="display:none">
-                            <@spring.message "i18n.user.error.empty" />
+                            <@spring.message "i18n.error.empty" />
                         </span>
                     </label>
                 </li>
@@ -252,28 +226,6 @@
             </ul>
         </form>
     </div>
-</#macro>
-
-<#macro impressionAddForm>
-    <@tissue.oneItemForm />
-    <script type="text/javascript">
-            $(document).on('click', 'a.add-impression', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                $(this).prev().oneItemDialog(url);
-            });
-    </script>
-</#macro>
-
-<#macro resumeAddForm>
-    <@tissue.oneItemForm />
-    <script type="text/javascript">
-            $(document).on('click', 'a.edit-resume', function(e) {
-                e.preventDefault();
-                var url = $(this).attr('href');
-                $(this).prev().oneItemDialog(url);
-            });
-    </script>
 </#macro>
 
 <#macro homeLogo>
@@ -352,17 +304,17 @@
 </#macro>
 
 <#macro showResume>
-    <div>
+    <div class="resume">
         ${owner.resume!''}
     </div>
     <#if viewer?? && viewer.isSelf(owner.id)>
-        <a class="edit-resume" href="<@spring.url '/users/${owner.id}/resume' />">edit</a>
-        <@resumeAddForm />
+        <@tissue.oneItemForm />
+        <a class="edit-resume" data-action="<@spring.url '/users/${owner.id}/resume' />" data-target="div.resume" href="#">edit</a>
     </#if>
 </#macro>
 
 <#macro showImpressions>
-    <ul>
+    <ul class="impressions">
         <#if impressions??>
         <#list impressions as impression>
         <li>${impression.content}</li>
@@ -371,8 +323,8 @@
     </ul>
 
     <#if viewer?? && viewer.isFriend(owner.id)>
-        <a class="add-impression" href="<@spring.url '/users/${owner.id}/impressions' />">add impression</a>
-        <@impressionAddForm />
+        <@tissue.oneItemForm />
+        <a class="add-impression" data-action="<@spring.url '/users/${owner.id}/impressions' />" data-target="ul.impressions" href="#">add impression</a>
     </#if>
 </#macro>
 
@@ -407,7 +359,7 @@
     <#if owner?? && owner.ownedPlans??>
     <div>
         <h4>
-            <@spring.message "i18n.topic.info.inProgress" />
+            <@spring.message "i18n.topic.inProgress" />
         </h4>
         <ul>
         <#list owner.ownedPlans as plan>
@@ -433,7 +385,7 @@
     <#if owner?? && owner.archivedPlans??>
     <div>
         <h4>
-            <@spring.message "i18n.topic.info.archived" />
+            <@spring.message "i18n.topic.learned" />
         </h4>
         <ul>
         <#list owner.archivedPlans as plan>

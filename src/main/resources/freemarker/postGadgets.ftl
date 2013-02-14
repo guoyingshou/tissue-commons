@@ -6,35 +6,49 @@
         <form method="post" action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>">
             <fieldset class="post-type">
                 <legend>
-                    Type
+                    <@spring.message 'i18n.topic.post.type' />
                     <span style="display: none">
-                        Please select a type
+                        <@spring.message 'i18n.error.postTypeNotSelect' />
                     </span>
                 </legend>
 
-                <label>Concept <input type="radio" name="type" value="concept" /></label>
-                <label>Note <input type="radio" name="type" value="note" /></label>
-                <label>Question <input type="radio" name="type" value="question" /></label>
-                <label>Tutorial <input type="radio" name="type" value="tutorial" /></label>
+                <label>
+                    <@spring.message 'i18n.topic.post.concept' />
+                    <input type="radio" name="type" value="concept" />
+                </label>
+                <label>
+                    <@spring.message 'i18n.topic.post.note' />
+                    <input type="radio" name="type" value="note" />
+                </label>
+                <label>
+                    <@spring.message 'i18n.topic.post.question' />
+                    <input type="radio" name="type" value="question" />
+                </label>
+                <label>
+                    <@spring.message 'i18n.topic.post.tutorial' />
+                    <input type="radio" name="type" value="tutorial" />
+                </label>
             </fieldset>
 
             <fieldset>
-                <legend>Your Post</legend>
+                <legend>
+                    <@spring.message "i18n.topic.post" />
+                </legend>
                 <ul>
                     <li>
                         <label for="title">
-                            title 
+                            <@spring.message "i18n.topic.post.title" />
                             <span style="display: none">
-                                Title cann't by empty
+                                <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
                         <input type="input" class="sum" id="title" name="title" />
                     </li>
                     <li>
                         <label for="editor">
-                            content
+                            <@spring.message "i18n.topic.post.content" />
                             <span style="display: none">
-                                Content cann't by empty
+                                <@spring.message "i18n.error.empty" />
                             </span>
                          </label>
                         <textarea id="editor" name="content"></textarea>

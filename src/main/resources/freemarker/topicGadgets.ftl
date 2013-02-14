@@ -6,33 +6,33 @@
         <div id="topicForm" class="dialog pop-650" style="display: none">
             <form method="post">
                 <legend>
-                    <@spring.message "i18n.topic.form.legend" />
+                    <@spring.message "i18n.topic" />
                     <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
                 </legend>
                 <ul>
                     <li>
                         <label for="title">
-                            <@spring.message "i18n.topic.form.title" />
-                            <span class="error-empty" style="display: none">
-                                <@spring.message "i18n.topic.form.title.error" />
+                            <@spring.message "i18n.topic.title" />
+                            <span style="display: none">
+                                <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
                         <input type="input" class="sum" id="title" name="title" />
                     </li>
                     <li>
                         <label for="editor">
-                            <@spring.message "i18n.topic.form.objective" />
-                            <span class="error-empty" style="display: none">
-                                <@spring.message "i18n.topic.form.objective.error" />
+                            <@spring.message "i18n.topic.objective" />
+                            <span style="display: none">
+                                <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
                         <textarea class="sum" id="editor" name="content"></textarea>
                     </li>
                     <li>
                         <label for="tags">
-                            <@spring.message "i18n.topic.form.tags" />
-                            <span class="error-empty" style="display: none">
-                                <@spring.message "i18n.topic.form.tags.error" />
+                            <@spring.message "i18n.topic.tags" />
+                            <span style="display: none">
+                                <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
                         <input type="input" class="sum" id="tags" name="tags" />
@@ -43,44 +43,39 @@
                 </ul>
             </form>
         </div>
-        <script type="text/javascript">
-            $(document).on('click', 'a.topic-create', function(e) {
-                e.preventDefault();
-                $(this).newTopicDialog();
-            });
-
-            $(document).on('click', 'a.topic-edit', function(e) {
-                e.preventDefault();
-                $(this).editTopicDialog();
-            });
-        </script>
     </#if>
 </#macro>
 
 <#macro planForm>
     <div id="planForm" class="dialog pop-320" style="display: none">
         <form action="<@spring.url '/topics/${topic.id}/plans' />" method="post">
-                <legend>Please select a duration <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
+                <legend>
+                    <@spring.message 'i18n.topic.plan.duration' />
+                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+                </legend>
                 <ul>
                     <li>
-                        <label><input type="radio" name="duration" value="1" />1 Mon</label>
+                        <label>
+                            <input type="radio" name="duration" checked value="1" />
+                            <@spring.message 'i18n.topic.plan.duration.1month' />
+                        </label>
                     </li>
                     <li>
-                        <label><input type="radio" name="duration" value="3" />3 Mon</label>
+                        <label>
+                            <input type="radio" name="duration" value="3" />
+                            <@spring.message 'i18n.topic.plan.duration.3month' />
+                        </label>
                     </li>
                     <li>
-                        <label><input type="radio" name="duration" value="6" />6 Mon</label>
+                        <label>
+                            <input type="radio" name="duration" value="6" />
+                            <@spring.message 'i18n.topic.plan.duration.6month' />
+                        </label>
                     </li>
                 </ul>
-            <input type="submit" value="submit" />
+            <input type="submit" value="<@spring.message 'i18n.topic.plan.button.submit'/>" />
         </form>
     </div>
-    <script type="text/javascript">
-            $(document).on('click', 'a.plan-create', function(e) {
-                e.preventDefault();
-                $('#planDia').newPlanDialog();
-            });
-    </script>
 </#macro>
 
 <#macro topicLogo title='posts'>
@@ -89,33 +84,33 @@
       <ul class="menu">
           <li>
               <a class="<#if title = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id}/posts' />">
-                  <@spring.message "i18n.topic.menu.all" />
+                  <@spring.message "i18n.topic.post.all" />
               </a>
           </li>
 
           <li>
               <a class="<#if title = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id}/concept/posts' />">
-                  <@spring.message "i18n.topic.menu.concepts" />
+                  <@spring.message "i18n.topic.post.concept" />
               </a>
           </li>
           <li>
               <a class="<#if title = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id}/note/posts' />">
-                  <@spring.message "i18n.topic.menu.notes" />
+                  <@spring.message "i18n.topic.post.note" />
               </a>
           </li>
           <li>
               <a class="<#if title = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id}/question/posts' />">
-                  <@spring.message "i18n.topic.menu.questions" />
+                  <@spring.message "i18n.topic.post.question" />
               </a>
           </li>
           <li>
               <a class="<#if title = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id}/tutorial/posts' />">
-                  <@spring.message "i18n.topic.menu.tutorials" />
+                  <@spring.message "i18n.topic.post.tutorial" />
               </a>
           </li>
           <li>
               <a class="<#if title = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id}/objective' />">
-                  <@spring.message "i18n.topic.menu.objective" />
+                  <@spring.message "i18n.topic.objective" />
               </a>
           </li>
     </ul>
@@ -125,11 +120,11 @@
         <#if viewer??>
             <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
                 <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id}/posts/_new'/>">
-                    <@spring.message "i18n.topic.action.post" />
+                    <@spring.message "i18n.topic.post.createPost" />
                 </a>
             <#else>
                 <a href="<@spring.url '/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">
-                    <@spring.message "i18n.topic.action.joinPlan" />
+                    <@spring.message "i18n.topic.plan.joinPlan" />
                 </a>
             </#if> 
         </#if>
@@ -137,7 +132,7 @@
         <#if viewer??>
         <@planForm />
         <a class="plan-create" href="#">
-            <@spring.message "i18n.topic.action.createPlan" />
+            <@spring.message "i18n.topic.plan.hostPlan" />
         </a>
         </#if>
     </#if>
@@ -190,7 +185,7 @@
     <#assign plan = topic.activePlan />
     <div>
         <h4>
-            <@spring.message "i18n.topic.info.plan.live" />
+            <@spring.message "i18n.topic.plan.live" />
         </h4>
         <div class="ts">
             <a href="/group/plans/${topic.activePlan.id}">
@@ -214,7 +209,7 @@
     <#if topic.archivedPlans??>
     <div>
         <h4>
-            <@spring.message "i18n.topic.info.plan.archive" />
+            <@spring.message "i18n.topic.plan.archived" />
         </h4>
         <ul>
         <#list topic.archivedPlans as plan>
@@ -242,7 +237,7 @@
 <#macro showNewTopics>
     <div>
         <h4>
-            <@spring.message "i18n.topic.info.newTopics" />
+            <@spring.message "i18n.topic.newTopics" />
         </h4>
         <ul>
         <#list newTopics as topic>
