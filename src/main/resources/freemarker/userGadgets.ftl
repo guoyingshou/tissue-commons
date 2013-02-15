@@ -71,7 +71,7 @@
                 </li>
 
                 <li>
-                    <input type="submit" value='<@spring.message "i18n.user.button.signup.submit" />' />
+                    <input type="submit" value='<@spring.message "i18n.button.signup" />' />
                 </li>
             </ul>
         </form>
@@ -99,7 +99,7 @@
                 <input type="password" class="sum" id="sign-password" name="j_password" size="20" maxlength="50" />
             </li>
             <li>
-                <input type="submit" value='<@spring.message "i18n.user.button.signin.submit" />'/>
+                <input type="submit" value='<@spring.message "i18n.button.signin" />'/>
             </li>
         </ul>
     </form>
@@ -124,7 +124,7 @@
                 </li>
 
                 <li>
-                    <input type="submit" value='<@spring.message "i18n.user.button.save"/>'/>
+                    <input type="submit" value='<@spring.message "i18n.button.save"/>'/>
                 </li>
             </ul>
         </form>
@@ -158,7 +158,7 @@
                         <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
                     </li>
                     <li>
-                        <input type="submit" value='<@spring.message "i18n.user.button.save" />' />
+                        <input type="submit" value='<@spring.message "i18n.button.save" />' />
                     </li>
             </ul>
         </form>
@@ -194,7 +194,7 @@
             </li>
 
             <li>
-                <input type="submit" value='<@spring.message "i18n.user.button.save" />'/>
+                <input type="submit" value='<@spring.message "i18n.button.save" />'/>
             </li>
         </ul>
     </form>
@@ -221,7 +221,7 @@
                     <textarea class="sum" id="letter" name="content"></textarea></p>
                 </li>
                 <li>
-                    <input type="submit" name="submit" value='<@spring.message "i18n.user.button.invite.submit"/>' />
+                    <input type="submit" name="submit" value='<@spring.message "i18n.button.send"/>' />
                 </li>
             </ul>
         </form>

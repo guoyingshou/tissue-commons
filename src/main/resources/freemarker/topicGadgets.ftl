@@ -73,7 +73,7 @@
                         </label>
                     </li>
                 </ul>
-            <input type="submit" value="<@spring.message 'i18n.topic.plan.button.submit'/>" />
+            <input type="submit" value="<@spring.message 'i18n.button.submit'/>" />
         </form>
     </div>
 </#macro>
@@ -160,7 +160,9 @@
 
            <#if viewer?? && topic.isOwner(viewer.id) >
                <@topicForm />
-               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id}/update' />" href="#">edit</a>
+               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id}/update' />" href="#">
+                   <@spring.message 'i18n.action.edit' />
+               </a>
            </#if>
 </#macro>
 
@@ -247,7 +249,7 @@
                      <@utilGadgets.showTimeBefore topic.timeBefore />
                 </div>
                 <div>
-                    <a href="/group/topics/${topic.id}">
+                    <a href="/group/topics/${topic.id}/posts">
                         ${topic.title}
                     </a>
                 </div>
