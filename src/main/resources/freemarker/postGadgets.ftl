@@ -2,7 +2,7 @@
 <#import 'utilGadgets.ftl' as utilGadgets />
 
 <#macro postForm>
-        <form id="post-form" method="post" action="<@spring.url '/plans/${topic.activePlan.id}/posts'/>">
+        <form id="post-form" method="post" action="<@spring.url '/plans/${topic.activePlan.id}/posts/_new'/>">
             <fieldset class="post-type">
                 <legend>
                     <@spring.message 'i18n.topic.post.type' />

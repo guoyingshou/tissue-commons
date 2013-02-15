@@ -119,7 +119,7 @@
     <#if topic.activePlan??>
         <#if viewer??>
             <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
-                <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id}/posts/_new'/>">
+                <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id}/posts/_form'/>">
                     <@spring.message "i18n.topic.post.createPost" />
                 </a>
             <#else>

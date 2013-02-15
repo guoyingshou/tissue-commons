@@ -11,7 +11,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.List;
 
-public class ViewerTopicSetter {
+public class ViewerNewTopicsSetter {
 
     @Autowired
     protected UserService userService;
