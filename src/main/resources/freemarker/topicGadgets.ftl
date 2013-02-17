@@ -48,7 +48,7 @@
 
 <#macro planForm>
     <div id="planForm" class="dialog pop-320" style="display: none">
-        <form action="<@spring.url '/topics/${topic.id}/plans' />" method="post">
+        <form action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans' />" method="post">
                 <legend>
                     <@spring.message 'i18n.topic.plan.duration' />
                     <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
@@ -79,37 +79,37 @@
 </#macro>
 
 <#macro topicLogo title='posts'>
-  <h1><a href="<@spring.url '/topics/${topic.id}/posts' />">${topic.title}</a></h1>
+  <h1><a href="<@spring.url '/topics/${topic.id?replace("#","")}/posts' />">${topic.title}</a></h1>
   <div>
       <ul class="menu">
           <li>
-              <a class="<#if title = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id}/posts' />">
+              <a class="<#if title = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
                   <@spring.message "i18n.topic.post.all" />
               </a>
           </li>
 
           <li>
-              <a class="<#if title = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id}/concept/posts' />">
+              <a class="<#if title = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
                   <@spring.message "i18n.topic.post.concept" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id}/note/posts' />">
+              <a class="<#if title = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
                   <@spring.message "i18n.topic.post.note" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id}/question/posts' />">
+              <a class="<#if title = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
                   <@spring.message "i18n.topic.post.question" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id}/tutorial/posts' />">
+              <a class="<#if title = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
                   <@spring.message "i18n.topic.post.tutorial" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id}/objective' />">
+              <a class="<#if title = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
                   <@spring.message "i18n.topic.objective" />
               </a>
           </li>
@@ -119,11 +119,11 @@
     <#if topic.activePlan??>
         <#if viewer??>
             <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
-                <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id}/posts/_form'/>">
+                <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_form'/>">
                     <@spring.message "i18n.topic.post.createPost" />
                 </a>
             <#else>
-                <a href="<@spring.url '/topics/${topic.id}/plans/${topic.activePlan.id}/join'/>">
+                <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/join'/>">
                     <@spring.message "i18n.topic.plan.joinPlan" />
                 </a>
             </#if> 
@@ -160,7 +160,7 @@
 
            <#if viewer?? && topic.isOwner(viewer.id) >
                <@topicForm />
-               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id}/update' />" href="#">
+               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/update' />" href="#">
                    <@spring.message 'i18n.action.edit' />
                </a>
            </#if>
@@ -171,11 +171,11 @@
     <#list topics as topic>
         <li>
             <div class="ts">
-                <a href="/social/users/${topic.user.id}/posts">${topic.user.displayName}</a>
+                <a href="/social/users/${topic.user.id?replace("#", "")}/posts">${topic.user.displayName}</a>
                 [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
             </div>
             <div class="title">
-                <a href="/group/topics/${topic.id}/objective">${topic.title}</a>
+                <a href="/group/topics/${topic.id?replace("#", "")}/objective">${topic.title}</a>
             </div>
         </li>
     </#list>
@@ -190,13 +190,13 @@
             <@spring.message "i18n.topic.plan.live" />
         </h4>
         <div class="ts">
-            <a href="/group/plans/${topic.activePlan.id}">
+            <a href="/group/plans/${topic.activePlan.id?replace("#", "")}">
                 <@utilGadgets.showTimeRemaining topic.activePlan.timeRemaining />
             </a>
         </div>
 
         <div>
-            <a href="/social/users/${plan.user.id}/posts">
+            <a href="/social/users/${plan.user.id?replace("#", "")}/posts">
                 ${plan.user.displayName}
             </a>
         </div>
@@ -217,12 +217,12 @@
         <#list topic.archivedPlans as plan>
             <li>
                 <div class="ts">
-                    <a href="/group/plans/${plan.id}">
+                    <a href="/group/plans/${plan.id?replace("#", "")}">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>
                 <div>
-                    <a href="/social/users/${plan.user.id}/posts">
+                    <a href="/social/users/${plan.user.id?replace("#", "")}/posts">
                         ${plan.user.displayName}
                     </a>
                 </div>
@@ -245,11 +245,11 @@
         <#list newTopics as topic>
             <li>
                 <div class="ts">
-                     <a href="/social/users/${topic.user.id}/posts">${topic.user.displayName}</a>
+                     <a href="/social/users/${topic.user.id?replace("#", "")}/posts">${topic.user.displayName}</a>
                      <@utilGadgets.showTimeBefore topic.timeBefore />
                 </div>
                 <div>
-                    <a href="/group/topics/${topic.id}/posts">
+                    <a href="/group/topics/${topic.id?replace("#", "")}/posts">
                         ${topic.title}
                     </a>
                 </div>

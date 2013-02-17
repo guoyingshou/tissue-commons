@@ -260,32 +260,32 @@
 <#macro userLogo>
     <div>
         <h1>
-            <a href="<@spring.url '/users/${owner.id}/posts' />">${owner.displayName}</a>
+            <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.displayName}</a>
             <span>${owner.headline!""}</span>
         </h1>
         <ul class="menu">
             <li>
-                <a href="<@spring.url '/users/${owner.id}/posts' />">
+                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
                     <@spring.message "i18n.user.menu.articles" />
                 </a>
             </li>
             <li>
-                <a href="<@spring.url '/users/${owner.id}/status' />">
+                <a href="<@spring.url '/users/${owner.id?replace("#","")}/status' />">
                     <@spring.message "i18n.user.menu.status" />
                 </a>
             </li>
             <li>
-                <a href="<@spring.url '/users/${owner.id}/resume' />">
+                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/resume' />">
                     <@spring.message "i18n.user.menu.resume" />
                 </a>
             </li>
             <li>
-                <a href="<@spring.url '/users/${owner.id}/impressions' />">
+                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
                     <@spring.message "i18n.user.menu.impressions" />
                 </a>
             </li>
             <li>
-                <a href="<@spring.url '/users/${owner.id}/friends' />">
+                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/friends' />">
                     <@spring.message "i18n.user.menu.friends" />
                 </a>
             </li>
@@ -293,7 +293,7 @@
         <ul class="action">
             <#if invitable>
             <li>
-                <a class="invite" data-action="<@spring.url '/users/${owner.id}/invites' />" href="#">
+                <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invites' />" href="#">
                     <@spring.message "i18n.user.invite" />
                 </a>
             </li>
@@ -309,7 +309,7 @@
     </div>
     <#if viewer?? && viewer.isSelf(owner.id)>
         <@tissue.oneItemForm />
-        <a class="edit-resume" data-action="<@spring.url '/users/${owner.id}/resume' />" data-target="div.resume" href="#">edit</a>
+        <a class="edit-resume" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/resume' />" data-target="div.resume" href="#">edit</a>
     </#if>
 </#macro>
 
@@ -324,7 +324,7 @@
 
     <#if viewer?? && viewer.isFriend(owner.id)>
         <@tissue.oneItemForm />
-        <a class="add-impression" data-action="<@spring.url '/users/${owner.id}/impressions' />" data-target="ul.impressions" href="#">add impression</a>
+        <a class="add-impression" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />" data-target="ul.impressions" href="#">add impression</a>
     </#if>
 </#macro>
 
@@ -332,7 +332,7 @@
     <ul>
         <#list friends as friend>
         <li>
-            <a href="/social/users/${friend.id}/posts">${friend.displayName}</a>
+            <a href="/social/users/${friend.id?replace("#", "")}/posts">${friend.displayName}</a>
         </li>
         </#list>
     </ul>
@@ -344,7 +344,7 @@
         <li>
             <div>
                 <p>
-                    <a href="/social/users/${user.id}/posts">${user.displayName}</a>
+                    <a href="/social/users/${user.id?replace("#", "")}/posts">${user.displayName}</a>
                 </p>
                 <p>
                     ${user.headline!""}
@@ -369,7 +369,7 @@
                 </div>
 
                 <div class="ts">
-                    <a href="/group/plans/${plan.id}">
+                    <a href="/group/plans/${plan.id?replace("#", "")}">
                         <@utilGadgets.showTimeRemaining plan.timeRemaining />
                     </a>
                 </div>
@@ -395,7 +395,7 @@
                 </div>
 
                 <div class="ts">
-                    <a href="/group/plans/${plan.id}">
+                    <a href="/group/plans/${plan.id?replace("#", "")}">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>

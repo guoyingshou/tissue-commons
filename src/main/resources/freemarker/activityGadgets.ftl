@@ -10,7 +10,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe004;"></span>
                 <div class="ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -25,7 +25,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -40,7 +40,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -55,7 +55,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -70,7 +70,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -85,7 +85,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -99,7 +99,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -114,7 +114,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -129,7 +129,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -144,7 +144,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -159,7 +159,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
@@ -174,7 +174,7 @@
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id}/posts">
+                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
                         ${activity.who.displayName}
                     </a> 
                     <@utilGadgets.showTimeBefore activity.timeBefore />
