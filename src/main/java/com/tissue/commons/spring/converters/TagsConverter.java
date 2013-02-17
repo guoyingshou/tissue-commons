@@ -1,4 +1,4 @@
-package com.tissue.commons.converter;
+package com.tissue.commons.spring.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import com.google.common.base.Splitter;

@@ -10,12 +10,13 @@ public class CommonExceptionHandler {
 
     @ExceptionHandler(NoRecordFoundException.class)
     public String handleNoRecordFoundException() {
-        return "pageNotFound";
+        return "exceptions/pageNotFound";
     }
 
     @ExceptionHandler(IllegalAccessException.class)
-    public String handleIllegalAccessException() {
-        return "illegalAccess";
+    public String handleIllegalAccessException(IllegalAccessException exc) {
+        exc.printStackTrace();
+        return "exceptions/illegalAccess";
     }
 
 }

@@ -1,5 +1,7 @@
 package com.tissue.commons.social.service;
 
+//import com.tissue.core.util.OrientIdentityUtil;
+import com.tissue.core.social.command.UserCommand;
 import com.tissue.core.social.User;
 import com.tissue.core.plan.Topic;
 import com.tissue.core.plan.Plan;
@@ -31,20 +33,20 @@ public class UserService {
     @Autowired
     private PostDao postDao;
 
-    public User addUser(User user) {
-        return userDao.create(user);
+    public String addUser(UserCommand userCommand) {
+        return userDao.create(userCommand);
     }
 
-    public User updateUser(User user) {
-        return userDao.update(user);
+    public void updateUser(UserCommand userCommand) {
+        userDao.update(userCommand);
     }
 
-    public void updateEmail(User user) {
-        userDao.updateEmail(user);
+    public void updateEmail(UserCommand userCommand) {
+        userDao.updateEmail(userCommand);
     }
 
-    public void changePassword(User user) {
-        userDao.changePassword(user);
+    public void changePassword(UserCommand userCommand) {
+        userDao.changePassword(userCommand);
     }
 
     public boolean isUserIdExist(String userId) {

@@ -14,7 +14,7 @@ public class AboutService {
     @Autowired
     private AboutDao aboutDao;
 
-    public About addAbout(About about) {
+    public String addAbout(About about) {
         return aboutDao.create(about);
     }
 
