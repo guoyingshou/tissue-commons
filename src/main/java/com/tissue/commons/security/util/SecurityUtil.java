@@ -25,13 +25,7 @@ public class SecurityUtil {
 
     public static UserDetailsImpl getViewer() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
         return (auth instanceof AnonymousAuthenticationToken) ? null : (UserDetailsImpl)auth.getPrincipal();
-        /**
-        if(auth instanceof AnonymousAuthenticationToken)
-            return null;
-        return (UserDetailsImpl)auth.getPrincipal();
-            */
     }
 
 }

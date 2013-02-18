@@ -1,6 +1,5 @@
 package com.tissue.commons.social.service;
 
-//import com.tissue.core.util.OrientIdentityUtil;
 import com.tissue.core.social.command.UserCommand;
 import com.tissue.core.social.User;
 import com.tissue.core.plan.Topic;

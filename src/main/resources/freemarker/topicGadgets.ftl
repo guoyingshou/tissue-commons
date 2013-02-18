@@ -1,6 +1,8 @@
 <#import 'spring.ftl' as spring />
 <#import 'utilGadgets.ftl' as utilGadgets />
 
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <#macro topicForm>
     <#if viewer??>
         <div id="topicForm" class="dialog pop-650" style="display: none">
@@ -79,7 +81,10 @@
 </#macro>
 
 <#macro topicLogo title='posts'>
-  <h1><a href="<@spring.url '/topics/${topic.id?replace("#","")}/posts' />">${topic.title}</a></h1>
+
+  <h1>
+      <a href="<@spring.url '/topics/${topic.id?replace("#","")}/posts' />">${topic.title}</a>
+  </h1>
   <div>
       <ul class="menu">
           <li>
@@ -116,8 +121,15 @@
     </ul>
 
     <ul class="action">
-    <#if topic.activePlan??>
+        <@sec.authorize access="hasRole('ROLE_ADMIN')">
+        <li>
+            <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />">Delete Topic</a>
+        </li>
+        </@sec.authorize>
+
         <#if viewer??>
+        <#if topic.activePlan??>
+        <li>
             <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
                 <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_form'/>">
                     <@spring.message "i18n.topic.post.createPost" />
@@ -127,15 +139,16 @@
                     <@spring.message "i18n.topic.plan.joinPlan" />
                 </a>
             </#if> 
+        </li>
+        <#else>
+        <li>
+            <@planForm />
+            <a class="plan-create" href="#">
+                <@spring.message "i18n.topic.plan.hostPlan" />
+            </a>
+        </li>
         </#if>
-    <#else>
-        <#if viewer??>
-        <@planForm />
-        <a class="plan-create" href="#">
-            <@spring.message "i18n.topic.plan.hostPlan" />
-        </a>
         </#if>
-    </#if>
     </u>
   </div>
 </#macro>
@@ -160,7 +173,7 @@
 
            <#if viewer?? && topic.isOwner(viewer.id) >
                <@topicForm />
-               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/update' />" href="#">
+               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
                    <@spring.message 'i18n.action.edit' />
                </a>
            </#if>

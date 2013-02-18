@@ -4,7 +4,7 @@ import com.tissue.core.security.dao.UserDetailsDao;
 import com.tissue.core.security.UserDetailsImpl;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+//import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -29,15 +29,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        UserDetailsImpl u = userDetailsDao.getUserByUsername(username);
-        if(u == null) {
+        UserDetailsImpl userDetails = userDetailsDao.getUserByUsername(username);
+        if(userDetails == null) {
             throw new UsernameNotFoundException(username + " not exist");
         }
 
+        /**
         GrantedAuthority granted = new SimpleGrantedAuthority("ROLE_user");
         List<? extends GrantedAuthority> authorities = Arrays.asList(granted);
 
         u.setAuthorities(authorities);
-        return u;
+        */
+
+        return userDetails;
     }
 }

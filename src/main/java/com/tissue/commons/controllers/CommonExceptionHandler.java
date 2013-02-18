@@ -1,7 +1,7 @@
 package com.tissue.commons.controllers;
 
-import com.tissue.core.NoRecordFoundException;
-import com.tissue.commons.IllegalAccessException;
+import com.tissue.core.exceptions.NoRecordFoundException;
+import com.tissue.commons.exceptions.IllegalAccessException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
