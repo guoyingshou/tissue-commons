@@ -161,11 +161,11 @@
                 </a>
                 [ <@utilGadgets.showTimeBefore msg.timeBefore /> ]
             </div>
-            <div id="message-${msg.id?replace("#", "")}-content">${msg.content}</div>
+            <div id="message-${msg.id?replace("#", "")?replace(":", "-")}-content">${msg.content}</div>
 
             <#if viewer?? && post.plan.isActive()>
             <#if msg.isOwner(viewer.id)>
-            <a class="item-edit" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}' />" data-target="#message-${msg.id?replace("#", "")}-content" href="#">
+            <a class="item-edit" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-content" href="#">
                 <@spring.message 'i18n.action.edit' />
             </a>
             <a class="del" data-action="<@spring.url '/messages/${msg.id?replace("#","")}/delete' />" href="#">
@@ -173,13 +173,13 @@
             </a>
             </#if>
             <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
-            <a class="item-add" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/comments' />" data-target="#message-${msg.id?replace("#", "")}-comments" href="#">
+            <a class="item-add" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/comments' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-comments" href="#">
                 <@spring.message 'i18n.action.reply' />
             </a>
             </#if>
             </#if>
 
-            <ul id="message-${msg.id?replace("#", "")}-comments">
+            <ul id="message-${msg.id?replace("#", "")?replace(":", "-")}-comments">
             <#if msg.comments??>
             <#list msg.comments as comment>
                 <li class="message-comment">
@@ -190,10 +190,10 @@
                         [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
                     </div>
 
-                    <div id="message-comment-${comment.id?replace("#", "")}-content">${comment.content}</div>
+                    <div id="message-comment-${comment.id?replace("#", "")?replace(":", "-")}-content">${comment.content}</div>
 
                     <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
-                    <a class="item-edit" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}' />" data-target="#message-comment-${comment.id?replace("#","")}-content" href="#">
+                    <a class="item-edit" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}' />" data-target="#message-comment-${comment.id?replace("#","")?replace(":", "-")}-content" href="#">
                         <@spring.message 'i18n.action.edit' />
                     </a>
                     <a class="del" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/delete' />" href="#">
@@ -252,10 +252,10 @@
                 [ <@utilGadgets.showTimeBefore questionComment.timeBefore /> ]
             </div>
 
-            <div id="question-comment-${questionComment.id?replace("#","")}-content">${questionComment.content}</div>
+            <div id="question-comment-${questionComment.id?replace("#","")?replace(":", "-")}-content">${questionComment.content}</div>
 
             <#if viewer?? && post.plan.isActive() && questionComment.isOwner(viewer.id)>
-                <a class="item-edit" data-action="<@spring.url '/questionComments/${questionComment.id?replace("#", "")}' />" data-target="#question-comment-${questionComment.id?replace("#", "")}-content" href="#">
+                <a class="item-edit" data-action="<@spring.url '/questionComments/${questionComment.id?replace("#", "")}' />" data-target="#question-comment-${questionComment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                     <@spring.message 'i18n.action.edit' />
                 </a>
                 <a class="del" data-action="<@spring.url '/questionComments/${questionComment.id?replace("#", "")}/delete' />" href="#">
@@ -277,11 +277,11 @@
                 [ <@utilGadgets.showTimeBefore answer.timeBefore /> ]
             </div>
 
-            <div id="answer-${answer.id?replace("#", "")}-content">${answer.content}</div>
+            <div id="answer-${answer.id?replace("#", "")?replace(":", "-")}-content">${answer.content}</div>
 
             <#if viewer?? && post.plan.isActive()>
                 <#if answer.isOwner(viewer.id)>
-                <a class="item-edit" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}' />" data-target="#answer-${answer.id?replace("#", "")}-content" href="#">
+                <a class="item-edit" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}' />" data-target="#answer-${answer.id?replace("#", "")?replace(":", "-")}-content" href="#">
                     <@spring.message 'i18n.action.edit' />
                 </a>
                 <a class="del" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/delete' />" href="#">
@@ -289,13 +289,13 @@
                 </a>
                 </#if>
                 <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
-                <a class="item-add" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/comments' />" data-target="#answer-${answer.id?replace("#", "")}-comments" href="#">
+                <a class="item-add" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/comments' />" data-target="#answer-${answer.id?replace("#", "")?replace(":","-")}-comments" href="#">
                     <@spring.message 'i18n.action.comment' />
                 </a>
                 </#if>
             </#if>
 
-            <ul id="answer-${answer.id?replace("#", "")}-comments">
+            <ul id="answer-${answer.id?replace("#", "")?replace(":", "-")}-comments">
             <#if answer.comments??>
             <#list answer.comments as comment>
                 <li class="answer-comment-item">
@@ -304,10 +304,10 @@
                         [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
                     </div>
 
-                    <div id="answer-comment-${comment.id?replace("#", "")}-content">${comment.content}</div>
+                    <div id="answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content">${comment.content}</div>
 
                     <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
-                         <a class="item-edit" data-action="<@spring.url '/answerComments/${comment.id?replace("#", "")}'/>" data-target="#answer-comment-${comment.id?replace("#", "")}-content" href="#">
+                         <a class="item-edit" data-action="<@spring.url '/answerComments/${comment.id?replace("#", "")}'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                             <@spring.message 'i18n.action.edit' />
                         </a>
                         <a class="del" data-action="<@spring.url '/answerComments/${comment.id?replace("#","")}/delete' />" href="#">

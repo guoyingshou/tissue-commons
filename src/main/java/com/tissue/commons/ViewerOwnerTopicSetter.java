@@ -36,12 +36,12 @@ public class ViewerOwnerTopicSetter {
                 owner = viewer;
             }
             else {
-                owner = userService.getUserById(userId);
-                invitable = userService.isInvitable(viewerId, userId);
+                owner = userService.getUserById("#"+userId);
+                invitable = userService.isInvitable(viewerId, "#"+userId);
             }
         }
         else {
-            owner = userService.getUserById(userId);
+            owner = userService.getUserById("#"+userId);
         }
 
         model.put("viewer", viewer);
