@@ -363,6 +363,7 @@
         </h4>
         <ul>
         <#list owner.ownedPlans as plan>
+            <#if !plan.topic.deleted>
             <li>
                 <div class="topic-title-icon">
                     ${plan.topic.title}
@@ -373,8 +374,8 @@
                         <@utilGadgets.showTimeRemaining plan.timeRemaining />
                     </a>
                 </div>
-
             </li>
+            </#if>
         </#list>
         </ul>
     </div>

@@ -1,6 +1,8 @@
 <#import 'spring.ftl' as spring />
 <#import 'utilGadgets.ftl' as utilGadgets />
 
+<#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
+
 <#macro postForm>
         <form id="post-form" method="post" action="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_create'/>">
             <fieldset class="post-type">
@@ -131,13 +133,24 @@
         <a href="/social/users/${post.user.id?replace("#", "")}/posts">
             ${post.user.displayName} 
         </a>
-        [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
+        [ <@utilGadgets.showTimeBefore post.timeBefore /> ] 
     </div>
 
-    <h3 class="title">${post.title}</h3>
+    <h3 class="title">
+        ${post.title}
+        <#if post.deleted>
+           <span>[ closed ]</span>
+        </#if>
+    </h3>
     <div class="content">${post.content}</div>
 
-    <#if viewer?? && post.plan.isActive()>
+    <#if !(topic.deleted || post.deleted)>
+    <@sec.authorize access="hasRole('ROLE_ADMIN')">
+        <a href="<@spring.url '/posts/${post.id?replace("#", "")}/_delete' />">Delete Post</a>
+    </@sec.authorize>
+    </#if>
+
+    <#if !(topic.deleted ||post.deleted) && viewer?? && post.plan.isActive()>
     <#if post.isOwner(viewer.id)>
         <a class="post-edit" data-type="${post.type}" data-action="<@spring.url '/posts/${post.id?replace("#","")}/_update' />" href="#">
             <@spring.message 'i18n.action.edit' />
@@ -163,7 +176,7 @@
             </div>
             <div id="message-${msg.id?replace("#", "")?replace(":", "-")}-content">${msg.content}</div>
 
-            <#if viewer?? && post.plan.isActive()>
+            <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive()>
             <#if msg.isOwner(viewer.id)>
             <a class="item-edit" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/_update' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-content" href="#">
                 <@spring.message 'i18n.action.edit' />
@@ -192,8 +205,8 @@
 
                     <div id="message-comment-${comment.id?replace("#", "")?replace(":", "-")}-content">${comment.content}</div>
 
-                    <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
-                    <a class="item-edit" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_update}' />" data-target="#message-comment-${comment.id?replace("#","")?replace(":", "-")}-content" href="#">
+                    <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
+                    <a class="item-edit" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_update"}' />" data-target="#message-comment-${comment.id?replace("#","")?replace(":", "-")}-content" href="#">
                         <@spring.message 'i18n.action.edit' />
                     </a>
                     <a class="del" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_delete' />" href="#">
@@ -209,7 +222,7 @@
         </#if>
     </ul>
 
-    <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+    <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
     <@postEditForm />
     <@tissue.oneItemForm />
     <@tissue.confirmForm />
@@ -226,20 +239,29 @@
         <h3 class="title">${post.title}</h3>
         <div class="content">${post.content}</div>
 
+        <#if !(topic.deleted || post.deleted)>
+        <@sec.authorize access="hasRole('ROLE_ADMIN')">
+            <a href="<@spring.url '/posts/${post.id?replace("#", "")}/_delete' />">Delete Post</a>
+        </@sec.authorize>
+        </#if>
+
+
+        <#if !(topic.deleted || post.deleted)>
         <#if viewer?? && post.plan.isActive()>
-            <#if post.isOwner(viewer.id)>
+        <#if post.isOwner(viewer.id)>
                 <a class="post-edit" data-action="<@spring.url '/posts/${post.id?replace("#", "")}' />" href="#">
                     <@spring.message 'i18n.action.edit' />
                 </a>
-            </#if>
-            <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
+        </#if>
+        <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
                 <a class="item-add" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/questionComments/_create' />" data-target="#question-comments" href="#">
                     <@spring.message 'i18n.action.comment' />
                 </a>
                 <a class="item-add" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/answers/_create' />" data-target="#answers" href="#">
                     <@spring.message 'i18n.action.answer' />
                 </a>
-            </#if>
+        </#if>
+        </#if>
         </#if>
     </div>
 
@@ -254,7 +276,7 @@
 
             <div id="question-comment-${questionComment.id?replace("#","")?replace(":", "-")}-content">${questionComment.content}</div>
 
-            <#if viewer?? && post.plan.isActive() && questionComment.isOwner(viewer.id)>
+            <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && questionComment.isOwner(viewer.id)>
                 <a class="item-edit" data-action="<@spring.url '/questionComments/${questionComment.id?replace("#", "")}/_update' />" data-target="#question-comment-${questionComment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                     <@spring.message 'i18n.action.edit' />
                 </a>
@@ -279,7 +301,7 @@
 
             <div id="answer-${answer.id?replace("#", "")?replace(":", "-")}-content">${answer.content}</div>
 
-            <#if viewer?? && post.plan.isActive()>
+            <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive()>
                 <#if answer.isOwner(viewer.id)>
                 <a class="item-edit" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/_update' />" data-target="#answer-${answer.id?replace("#", "")?replace(":", "-")}-content" href="#">
                     <@spring.message 'i18n.action.edit' />
@@ -306,7 +328,7 @@
 
                     <div id="answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content">${comment.content}</div>
 
-                    <#if viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
+                    <#if !(topic.deleted ||post.deleted) && viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
                          <a class="item-edit" data-action="<@spring.url '/answerComments/${comment.id?replace("#", "")}/_update'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                             <@spring.message 'i18n.action.edit' />
                         </a>
@@ -323,7 +345,7 @@
         </#if>
     </ul>
 
-    <#if viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+    <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
     <@postEditForm />
     <@tissue.oneItemForm />
     <@tissue.confirmForm />

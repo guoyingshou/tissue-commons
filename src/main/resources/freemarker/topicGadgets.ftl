@@ -121,12 +121,15 @@
     </ul>
 
     <ul class="action">
+        <#if !topic.deleted>
         <@sec.authorize access="hasRole('ROLE_ADMIN')">
         <li>
             <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />">Delete Topic</a>
         </li>
         </@sec.authorize>
+        </#if>
 
+        <#if !topic.isDeleted()>
         <#if viewer??>
         <#if topic.activePlan??>
         <li>
@@ -147,6 +150,7 @@
                 <@spring.message "i18n.topic.plan.hostPlan" />
             </a>
         </li>
+        </#if>
         </#if>
         </#if>
     </u>
@@ -171,7 +175,7 @@
                ${topic.content}
            </div>
 
-           <#if viewer?? && topic.isOwner(viewer.id) >
+           <#if !topic.isDeleted() && viewer?? && topic.isOwner(viewer.id) >
                <@topicForm />
                <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
                    <@spring.message 'i18n.action.edit' />
@@ -195,9 +199,17 @@
     </ul>
 </#macro>
 
+<#macro showPlanSidebar>
+    <#if topic.deleted>
+       <div>closed</div>
+    <#else>
+        <@showLivePlan />
+        <@showArchivedPlans />
+    </#if>
+</#macro>
+
 <#macro showLivePlan>
     <#if topic.activePlan??>
-    <#assign plan = topic.activePlan />
     <div>
         <h4>
             <@spring.message "i18n.topic.plan.live" />
@@ -209,12 +221,12 @@
         </div>
 
         <div>
-            <a href="/social/users/${plan.user.id?replace("#", "")}/posts">
-                ${plan.user.displayName}
+            <a href="/social/users/${topic.activePlan.user.id?replace("#", "")}/posts">
+                ${topic.activePlan.user.displayName}
             </a>
         </div>
         <div>
-            ${plan.user.headline!""}
+            ${topic.activePlan.user.headline!""}
         </div>
     </div>
     </#if>
