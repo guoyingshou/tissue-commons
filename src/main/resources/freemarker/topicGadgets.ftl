@@ -122,11 +122,17 @@
 
     <ul class="action">
         <#if !topic.deleted>
+        <#if topic.isOwner(viewer.id)>
+        <li>
+            <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />">Delete Topic</a>
+        </li>
+        <#else>
         <@sec.authorize access="hasRole('ROLE_ADMIN')">
         <li>
             <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />">Delete Topic</a>
         </li>
         </@sec.authorize>
+        </#if>
         </#if>
 
         <#if !topic.isDeleted()>

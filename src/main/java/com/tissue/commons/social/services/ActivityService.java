@@ -1,4 +1,4 @@
-package com.tissue.commons.social.service;
+package com.tissue.commons.social.services;
 
 import com.tissue.core.social.Activity;
 import com.tissue.core.social.dao.ActivityDao;

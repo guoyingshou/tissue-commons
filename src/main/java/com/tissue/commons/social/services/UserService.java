@@ -1,4 +1,4 @@
-package com.tissue.commons.social.service;
+package com.tissue.commons.social.services;
 
 import com.tissue.core.social.command.UserCommand;
 import com.tissue.core.social.User;

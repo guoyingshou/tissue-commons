@@ -1,4 +1,4 @@
-package com.tissue.commons.security.service;
+package com.tissue.commons.security.services;
 
 import com.tissue.core.security.dao.UserDetailsDao;
 import com.tissue.core.security.UserDetailsImpl;
