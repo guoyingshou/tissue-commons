@@ -29,20 +29,9 @@ public class CommonExceptionHandler {
         return locale.toString();
     }
 
-    /**
-    @ModelAttribute("viewer")
-    public User prefetchViewer(Map model) {
-        String viewerId = SecurityUtil.getViewerId();
-        if(viewerId == null) {
-            return null;    
-        }
-        return userService.getViewer(viewerId);
-    }
-    */
- 
+
     @ExceptionHandler(NoRecordFoundException.class)
-    public HttpEntity<?> handleNoRecordFoundException() {
-        //return "exceptions/pageNotFound";
+    public HttpEntity<?> handleNoRecordFoundException(NoRecordFoundException exc) {
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 

@@ -46,7 +46,7 @@
 
 <#macro oneItemForm>
     <div id="oneItemForm" class="dialog pop-650" style="display: none">
-        <form>
+        <form method="post">
             <legend><a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
             <ul>
                 <li>

@@ -34,7 +34,7 @@
         <@topicGadgets.topicForm />
         <ul class="action">
             <li>
-                <a class="topic-create" data-action="<@spring.url '/topics/_create' />" href="#">
+                <a class="create-topic" data-action="<@spring.url '/topics/_create' />" href="#">
                     <@spring.message "i18n.explore.action.createTopic" />
                 </a>
             </li>

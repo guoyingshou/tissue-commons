@@ -3,81 +3,104 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
+<#--
+   topicForm is used for create as well as update
+ -->
 <#macro topicForm>
-    <#if viewer??>
-        <div id="topicForm" class="dialog pop-650" style="display: none">
-            <form method="post">
-                <legend>
-                    <@spring.message "i18n.topic" />
-                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-                </legend>
-                <ul>
-                    <li>
-                        <label for="title">
-                            <@spring.message "i18n.topic.title" />
-                            <span style="display: none">
-                                <@spring.message "i18n.error.empty" />
-                            </span>
-                        </label>
-                        <input type="input" class="sum" id="title" name="title" />
-                    </li>
-                    <li>
-                        <label for="editor">
-                            <@spring.message "i18n.topic.objective" />
-                            <span style="display: none">
-                                <@spring.message "i18n.error.empty" />
-                            </span>
-                        </label>
-                        <textarea class="sum" id="editor" name="content"></textarea>
-                    </li>
-                    <li>
-                        <label for="tags">
-                            <@spring.message "i18n.topic.tags" />
-                            <span style="display: none">
-                                <@spring.message "i18n.error.empty" />
-                            </span>
-                        </label>
-                        <input type="input" class="sum" id="tags" name="tags" />
-                    </li>
-                    <li>
-                        <input type="submit" value="submit" />
-                    </li>
-                </ul>
-            </form>
-        </div>
-    </#if>
+    <form id="topicForm" class="dialog pop-650" style="display:none" method="post">
+        <legend>
+            <@spring.message "i18n.topic" />
+            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+        </legend>
+        <ul>
+            <li>
+                <label for="title">
+                    <@spring.message "i18n.topic.title" />
+                    <span style="display: none">
+                        <@spring.message "i18n.error.empty" />
+                    </span>
+                </label>
+                <input type="input" class="sum" id="title" name="title" />
+            </li>
+            <li>
+                <label for="editor">
+                    <@spring.message "i18n.topic.objective" />
+                    <span style="display: none">
+                        <@spring.message "i18n.error.empty" />
+                    </span>
+                </label>
+                <textarea class="sum" id="editor" name="content"></textarea>
+            </li>
+            <li>
+                <label for="tags">
+                   <@spring.message "i18n.topic.tags" />
+                   <span style="display: none">
+                       <@spring.message "i18n.error.empty" />
+                   </span>
+                </label>
+                <input type="input" class="sum" id="tags" name="tags" />
+            </li>
+            <li>
+                <input type="submit" value="<@spring.message 'i18n.button.submit'/>" />
+            </li>
+        </ul>
+    </form>
 </#macro>
 
-<#macro planForm>
-    <div id="planForm" class="dialog pop-320" style="display: none">
-        <form action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans' />" method="post">
-                <legend>
-                    <@spring.message 'i18n.topic.plan.duration' />
-                    <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-                </legend>
-                <ul>
-                    <li>
-                        <label>
-                            <input type="radio" name="duration" checked value="1" />
-                            <@spring.message 'i18n.topic.plan.duration.1month' />
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="duration" value="3" />
-                            <@spring.message 'i18n.topic.plan.duration.3month' />
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            <input type="radio" name="duration" value="6" />
-                            <@spring.message 'i18n.topic.plan.duration.6month' />
-                        </label>
-                    </li>
-                </ul>
-            <input type="submit" value="<@spring.message 'i18n.button.submit'/>" />
-        </form>
-    </div>
+<#macro deleteTopicForm>
+    <form id="deleteTopicForm" class="dialog pop-650" style="display:none" method="post">
+        <legend>
+            <@spring.message "i18n.topic.delete" />
+            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+        </legend>
+        <ul>
+            <li>
+                <label for="reason">
+                    <@spring.message "i18n.topic.delete.reason" />
+                    <span style="display: none">
+                        <@spring.message "i18n.error.empty" />
+                    </span>
+                </label>
+                <textarea id="reason" name="content"></textarea>
+            </li>
+            <li>
+                <input type="submit" value="<@spring.message 'i18n.button.submit' />"/>
+            </li>
+        </ul>
+    </form>
+</#macro>
+
+<#macro createPlanForm>
+    <form id="createPlanForm" class="dialog pop-320" style="display:none" action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans' />" method="post">
+        <legend>
+            <@spring.message 'i18n.topic.plan.duration' />
+            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+        </legend>
+
+        <ul>
+            <li>
+                <label>
+                    <input type="radio" name="duration" checked value="1" />
+                    <@spring.message 'i18n.topic.plan.duration.1month' />
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="duration" value="3" />
+                    <@spring.message 'i18n.topic.plan.duration.3month' />
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="duration" value="6" />
+                    <@spring.message 'i18n.topic.plan.duration.6month' />
+                </label>
+            </li>
+            <li>
+                <input type="submit" value="<@spring.message 'i18n.button.submit'/>" />
+            </li>
+        </ul>
+    </form>
 </#macro>
 
 <#macro topicLogo title='posts'>
@@ -121,27 +144,13 @@
     </ul>
 
     <ul class="action">
-        <#if !topic.deleted>
-        <#if topic.isOwner(viewer.id)>
-        <li>
-            <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />">Delete Topic</a>
-        </li>
-        <#else>
-        <@sec.authorize access="hasRole('ROLE_ADMIN')">
-        <li>
-            <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />">Delete Topic</a>
-        </li>
-        </@sec.authorize>
-        </#if>
-        </#if>
-
         <#if !topic.isDeleted()>
         <#if viewer??>
         <#if topic.activePlan??>
         <li>
             <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
-                <a id="new-post" href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_form'/>">
-                    <@spring.message "i18n.topic.post.createPost" />
+                <a id="create-post" href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_form'/>">
+                    <@spring.message "i18n.topic.post.create" />
                 </a>
             <#else>
                 <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/join'/>">
@@ -151,8 +160,8 @@
         </li>
         <#else>
         <li>
-            <@planForm />
-            <a class="plan-create" href="#">
+            <@createPlanForm />
+            <a class="create-plan" href="#">
                 <@spring.message "i18n.topic.plan.hostPlan" />
             </a>
         </li>
@@ -164,29 +173,48 @@
 </#macro>
 
 <#macro showTopicDetails>
-           <div class="ts">
-               <span>
-                   ${topic.user.displayName}
-                   [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
-               </span>
-           </div>
-
-           <div class="tags">
-               <#list topic.tags as tag>
-                   <span><a href="<@spring.url '/tags/${tag}' />">${tag}</a></span>
-               </#list>
-           </div>
-
-           <div class="content">
-               ${topic.content}
-           </div>
-
+    <div class="ts">
+        <span>
+            ${topic.user.displayName}
+            [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
+        </span>
+    </div>
+    <div class="tags">
+        <#list topic.tags as tag>
+            <span><a href="<@spring.url '/tags/${tag}' />">${tag}</a></span>
+        </#list>
+    </div>
+    <div class="content">
+        ${topic.content}
+    </div>
+<#--
            <#if !topic.isDeleted() && viewer?? && topic.isOwner(viewer.id) >
                <@topicForm />
-               <a class="topic-edit" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
+               <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
                    <@spring.message 'i18n.action.edit' />
                </a>
            </#if>
+           -->
+
+    <#if !topic.deleted>
+    <@deleteTopicForm />
+    <#if viewer?? && topic.isOwner(viewer.id)>
+        <@topicForm />
+
+        <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
+           <@spring.message 'i18n.action.edit' />
+        </a>
+        <a class="delete-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
+                <@spring.message 'i18n.topic.delete' />
+        </a>
+    <#else>
+        <@sec.authorize access="hasRole('ROLE_ADMIN')">
+            <a class="delete-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
+                <@spring.message 'i18n.topic.delete' />
+            </a>
+        </@sec.authorize>
+    </#if>
+    </#if>
 </#macro>
 
 <#macro showTopics>
