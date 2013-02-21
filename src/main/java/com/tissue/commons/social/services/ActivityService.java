@@ -14,8 +14,8 @@ public class ActivityService {
     @Autowired
     private ActivityDao activityDao;
 
-    public List<Activity> getFriendsActivities(String userId, int num) {
-        return activityDao.getFriendsActivities(userId, num);
+    public List<Activity> getWatchedActivities(String userId, int num) {
+        return activityDao.getWatchedActivities(userId, num);
     }
 
     public List<Activity> getUserActivities(String userId, int num) {
