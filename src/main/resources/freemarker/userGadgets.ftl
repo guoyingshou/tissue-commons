@@ -237,7 +237,7 @@
    <div>
    <ul class="menu">
        <li>
-           <a href="<@spring.url '/watchedfeeds' />">
+           <a href="<@spring.url '/dashboard' />">
                <@spring.message "i18n.user.home.watchedFeeds" />
            </a>
        </li>
@@ -249,7 +249,7 @@
        <li>
            <a href="/social/invitations">
                <@spring.message "i18n.user.home.invitations" />
-               - ${viewer.invitationsReceived?size}
+               - ${invitationsReceived?size}
            </a>
        </li>
    </ul>
@@ -307,7 +307,7 @@
     <div class="resume">
         ${owner.resume!''}
     </div>
-    <#if viewer?? && viewer.isSelf(owner.id)>
+    <#if viewer?? && viewer.id == owner.id>
         <@tissue.oneItemForm />
         <a class="edit-resume" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/resume' />" data-target="div.resume" href="#">edit</a>
     </#if>
@@ -322,10 +322,33 @@
         </#if>
     </ul>
 
+<#--
     <#if viewer?? && viewer.isFriend(owner.id)>
+    -->
+    <#if viewer?? && isFriend>
         <@tissue.oneItemForm />
         <a class="add-impression" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />" data-target="ul.impressions" href="#">add impression</a>
     </#if>
+</#macro>
+
+<#macro showInvitations>
+    <ul>
+    <#list invitationsReceived as invitation>
+        <li>
+            <div>${invitation.invitor.displayName}</div>
+            <div>${invitation.createTime?date}</div>
+            <div>${invitation.content}</div>
+            <div class="intention">
+                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/accept' />" href="#">
+                        Accept
+                </a>
+                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/decline' />" href="#">
+                    Decline
+                </a>
+            </div>
+        </li>
+     </#list>
+     </ul>
 </#macro>
 
 <#macro showFriends>
@@ -355,15 +378,15 @@
     </ul>
 </#macro>
 
-<#macro showOwnedPlans>
-    <#if owner?? && owner.ownedPlans??>
+<#macro showLearningPlans>
+    <#if plans??>
     <div>
         <h4>
             <@spring.message "i18n.topic.inProgress" />
         </h4>
         <ul>
-        <#list owner.ownedPlans as plan>
-            <#if !plan.topic.deleted>
+        <#list plans as plan>
+        <#if !plan.topic.deleted && plan.isActive()>
             <li>
                 <div class="topic-title-icon">
                     ${plan.topic.title}
@@ -375,21 +398,22 @@
                     </a>
                 </div>
             </li>
-            </#if>
+        </#if>
         </#list>
         </ul>
     </div>
     </#if>
 </#macro>
 
-<#macro showArchivedPlans>
-    <#if owner?? && owner.archivedPlans??>
+<#macro showLearnedPlans>
+    <#if plans??>
     <div>
         <h4>
             <@spring.message "i18n.topic.learned" />
         </h4>
         <ul>
-        <#list owner.archivedPlans as plan>
+        <#list plans as plan>
+        <#if !plan.isActive()>
             <li>
                 <div class="topic-title-icon">
                     ${plan.topic.title}
@@ -401,6 +425,7 @@
                     </a>
                 </div>
             </li>
+        </#if>
         </#list>
         </ul>
     </div>

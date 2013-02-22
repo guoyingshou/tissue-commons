@@ -8,9 +8,6 @@ import com.tissue.core.plan.Post;
 import com.tissue.core.social.Impression;
 import com.tissue.core.social.Invitation;
 import com.tissue.core.social.dao.UserDao;
-import com.tissue.core.plan.dao.TopicDao;
-import com.tissue.core.plan.dao.PlanDao;
-import com.tissue.core.plan.dao.PostDao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,15 +19,6 @@ public class UserService {
 
     @Autowired
     private UserDao userDao;
-
-    @Autowired
-    private TopicDao topicDao;
-
-    @Autowired
-    private PlanDao planDao;
-
-    @Autowired
-    private PostDao postDao;
 
     public String addUser(UserCommand userCommand) {
         return userDao.create(userCommand);
@@ -48,9 +36,11 @@ public class UserService {
         userDao.changePassword(userCommand);
     }
 
+    /**
     public boolean isUserIdExist(String userId) {
         return userDao.isUserIdExist(userId);
     }
+    */
 
     public boolean isUsernameExist(String username) {
         return userDao.isUsernameExist(username);
@@ -72,10 +62,11 @@ public class UserService {
         userDao.addImpression(impression);
     }
 
-    public User getUserById(String id) {
-        return userDao.getUserById(id);
+    public User getUser(String id) {
+        return userDao.getUser(id);
     }
 
+        /**
     public User getViewer(String viewerId) {
         User user = userDao.getUserById(viewerId);
 
@@ -87,27 +78,20 @@ public class UserService {
 
         return user;
     }
+        */
  
     public List<User> getFriends(String userId) {
         return userDao.getFriends(userId);
     }
 
+    public List<Invitation> getInvitationsReceived(String userId) {
+        return userDao.getInvitationsReceived(userId);
+    }
+
     public List<Impression> getImpressions(String userId) {
         return userDao.getImpressions(userId);
     }
-
-    public List<Plan> getPlansByUserId(String userId) {
-        return planDao.getPlansByUserId(userId);
-    }
-
-    public long getPostsCountByUserId(String userId) {
-        return postDao.getPostsCountByUserId(userId);
-    }
-
-    public List<Post> getPagedPostsByUserId(String userId, int page, int size) {
-        return postDao.getPagedPostsByUserId(userId, page, size);
-    }
-    
+   
     public void inviteFriend(String fromId, String toId, String content) {
         userDao.inviteFriend(fromId, toId, content);
     }
@@ -128,7 +112,29 @@ public class UserService {
         return userDao.getNewUsers(excludingUserId, limit);
     }
 
+    /**
+     * topic
+     */
     public List<Topic> getNewTopics(String excludingUserId, int limit) {
-        return topicDao.getNewTopics(excludingUserId, limit);
+        return userDao.getNewTopics(excludingUserId, limit);
     }
+
+    /**
+     * plan
+     */
+    public List<Plan> getPlans(String userId) {
+        return userDao.getPlans(userId);
+    }
+
+    /**
+     * post
+     */
+    public long getPostsCount(String userId) {
+        return userDao.getPostsCount(userId);
+    }
+
+    public List<Post> getPagedPosts(String userId, int page, int size) {
+        return userDao.getPagedPosts(userId, page, size);
+    }
+ 
 }
