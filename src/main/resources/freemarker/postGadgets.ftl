@@ -139,7 +139,7 @@
        </div>
 
        <div class="ts has-icon-before">
-           <a href="/social/users/${post.user.id?replace("#", "")}/posts">${post.user.displayName}</a>
+           <a href="/social/users/${post.account.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
            [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
        </div>
        <div class="title has-icon-before">
@@ -153,8 +153,8 @@
 <#macro showPostDetail>
 <div class="post">
     <div class="item-ts">
-        <a href="/social/users/${post.user.id?replace("#", "")}/posts">
-            ${post.user.displayName} 
+        <a href="/social/users/${post.account.id?replace("#", "")}/posts">
+            ${post.account.user.displayName} 
         </a>
         [ <@utilGadgets.showTimeBefore post.timeBefore /> ] 
     </div>
@@ -208,8 +208,8 @@
 <#list post.messages as msg>
     <li class="message">
         <div class="item-ts">
-            <a href="/social/users/${msg.user.id?replace("#","")}/posts">
-                ${msg.user.displayName}  
+            <a href="/social/users/${msg.account.id?replace("#","")}/posts">
+                ${msg.account.user.displayName}  
             </a>
             [ <@utilGadgets.showTimeBefore msg.timeBefore /> ]
         </div>
@@ -241,8 +241,8 @@
         <#list msg.comments as comment>
             <li class="comment">
                 <div class="item-ts"> 
-                    <a href="/social/users/${comment.user.id?replace("#", "")}/posts">
-                        ${comment.user.displayName} 
+                    <a href="/social/users/${comment.account.id?replace("#", "")}/posts">
+                        ${comment.account.user.displayName} 
                     </a>
                     [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
                 </div>
@@ -288,8 +288,8 @@
 <#macro showQuestionDetail>
     <div class="post">
         <div class="item-ts">
-            <a href="/social/users/${post.user.id?replace("#","")}/posts">
-                ${post.user.displayName} 
+            <a href="/social/users/${post.account.id?replace("#","")}/posts">
+                ${post.account.user.displayName} 
             </a>
             [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
         </div>
@@ -333,8 +333,8 @@
     <#list post.comments as questionComment>
         <li class="comment">
             <div class="item-ts">
-                <a href="/social/users/${questionComment.user.id?replace("#","")}/posts">
-                    ${questionComment.user.displayName} 
+                <a href="/social/users/${questionComment.account.id?replace("#","")}/posts">
+                    ${questionComment.account.user.displayName} 
                 </a>
                 [ <@utilGadgets.showTimeBefore questionComment.timeBefore /> ]
             </div>
@@ -363,8 +363,8 @@
     <#list post.answers as answer>
         <li class="answer">
             <div class="item-ts">
-                <a href="/social/users/${answer.user.id?replace("#","")}/posts">
-                    ${answer.user.displayName} 
+                <a href="/social/users/${answer.account.id?replace("#","")}/posts">
+                    ${answer.account.user.displayName} 
                 </a>
                 [ <@utilGadgets.showTimeBefore answer.timeBefore /> ]
             </div>
@@ -395,8 +395,8 @@
             <#list answer.comments as comment>
                 <li class="comment">
                     <div class="item-ts">
-                        <a href="/social/users/${comment.user.id?replace("#","")}/posts">
-                            ${comment.user.displayName} 
+                        <a href="/social/users/${comment.account.id?replace("#","")}/posts">
+                            ${comment.account.user.displayName} 
                         </a>
                         [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
                     </div>

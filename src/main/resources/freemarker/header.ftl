@@ -54,23 +54,23 @@
                         </a>
                         <ul class="dropdown-menu" style="display: none">
                             <li>
-                                <a class="edit-contact" data-action="<@spring.url '/_changeContact' />" href="#">
-                                    <@spring.message "i18n.user.changeContact" />
+                                <a class="edit-contact" data-action="<@spring.url '/_updateContact' />" href="#">
+                                    <@spring.message "i18n.user.updateContact" />
                                 </a>
                             </li>
                             <li>
-                                <a class="edit-profile" data-action="<@spring.url '/_changeProfile' />" href="#">
-                                    <@spring.message "i18n.user.changeProfile" />
+                                <a class="edit-profile" data-action="<@spring.url '/_updateProfile' />" href="#">
+                                    <@spring.message "i18n.user.updateProfile" />
                                 </a>
                             </li>
                             <li>
-                                <a class="change-pass" data-action="<@spring.url '/_changePass' />" href="#">
-                                    <@spring.message "i18n.user.changePassword" />
+                                <a class="change-pass" data-action="<@spring.url '/_updatePassword' />" href="#">
+                                    <@spring.message "i18n.user.updatePassword" />
                                 </a>
                              </li>
                         </ul>
                     </li>
-                    <li><a href="/social/users/${viewer.id?replace("#", "")}/posts">${viewer.displayName}</a></li>
+                    <li><a href="/social/users/${viewer.id?replace("#", "")}/posts">${viewer.user.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "i18n.common.menu.signout" /></a></li>
                 </ul>
                 <#else>

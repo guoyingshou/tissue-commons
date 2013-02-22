@@ -110,7 +110,7 @@
     <div id="contactEditForm" class="dialog pop-420" style="display: none">
         <form method="post">
             <legend>
-                <@spring.message "i18n.user.changeContact" />
+                <@spring.message "i18n.user.updateContact" />
             <a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
             <ul>
                 <li>
@@ -135,7 +135,7 @@
     <div id="profileEditForm" class="dialog pop-420" style="display: none">
         <form method="post">
             <legend>
-                <@spring.message "i18n.user.changeProfile" />
+                <@spring.message "i18n.user.updateProfile" />
                 <a href="#" class="cancel cancel-profile-edit"><span data-icon="&#xe008"></span></a>
             </legend>
             <ul>
@@ -146,7 +146,7 @@
                                 <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
-                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.displayName}" />
+                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.user.displayName}" />
                     </li>
                     <li>
                         <label for="headline">
@@ -155,7 +155,7 @@
                                 <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
-                        <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
+                        <textarea class="sum" id="headline" name="headline">${viewer.user.headline!""}</textarea>
                     </li>
                     <li>
                         <input type="submit" value='<@spring.message "i18n.button.save" />' />
@@ -169,7 +169,7 @@
 <div id="passChangeForm" class="dialog pop-420" style="display: none">
     <form method="post">
         <legend>
-            <@spring.message "i18n.user.changePassword" />
+            <@spring.message "i18n.user.updatePassword" />
             <a href="#" class="cancel cancel-change-pass"><span data-icon="&#xe008"></span></a>
         </legend>
         <ul>
@@ -260,8 +260,8 @@
 <#macro userLogo>
     <div>
         <h1>
-            <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.displayName}</a>
-            <span>${owner.headline!""}</span>
+            <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.user.displayName}</a>
+            <span>${owner.user.headline!""}</span>
         </h1>
         <ul class="menu">
             <li>
@@ -293,7 +293,7 @@
         <ul class="action">
             <#if invitable>
             <li>
-                <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invites' />" href="#">
+                <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invites/_create' />" href="#">
                     <@spring.message "i18n.user.invite" />
                 </a>
             </li>
@@ -309,7 +309,7 @@
     </div>
     <#if viewer?? && viewer.id == owner.id>
         <@tissue.oneItemForm />
-        <a class="edit-resume" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/resume' />" data-target="div.resume" href="#">edit</a>
+        <a class="edit-resume" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/resume/_create' />" data-target="div.resume" href="#">edit</a>
     </#if>
 </#macro>
 
@@ -322,12 +322,9 @@
         </#if>
     </ul>
 
-<#--
-    <#if viewer?? && viewer.isFriend(owner.id)>
-    -->
     <#if viewer?? && isFriend>
         <@tissue.oneItemForm />
-        <a class="add-impression" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />" data-target="ul.impressions" href="#">add impression</a>
+        <a class="add-impression" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/impressions/_create' />" data-target="ul.impressions" href="#">add impression</a>
     </#if>
 </#macro>
 
@@ -339,10 +336,10 @@
             <div>${invitation.createTime?date}</div>
             <div>${invitation.content}</div>
             <div class="intention">
-                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/accept' />" href="#">
+                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/_accept' />" href="#">
                         Accept
                 </a>
-                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/decline' />" href="#">
+                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/_decline' />" href="#">
                     Decline
                 </a>
             </div>

@@ -9,4 +9,9 @@ public class HttpErrorController {
     public String pageNotFound() {
         return "exceptions/pageNotFound";
     }
+
+    @RequestMapping("/accessDenied")
+    public String denyAcess() {
+        return "exceptions/accessDenied";
+    }
 }

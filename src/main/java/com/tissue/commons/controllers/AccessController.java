@@ -1,15 +1,26 @@
 package com.tissue.commons.controllers;
 
+import com.tissue.core.social.Account;
 import com.tissue.core.exceptions.NoRecordFoundException;
 import com.tissue.commons.services.CommonService;
+import com.tissue.commons.social.services.UserService;
 import com.tissue.commons.exceptions.IllegalAccessException;
 import com.tissue.commons.security.util.SecurityUtil;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.Map;
 
 public class AccessController {
+
     @Autowired
     private CommonService commonService;
+
+    @Autowired
+    private UserService userService;
+
 
     protected void checkAuthorizations(String rid) {
         String viewerId = SecurityUtil.getViewerId();
@@ -31,4 +42,10 @@ public class AccessController {
             throw new IllegalAccessException("Not Owner");
         }
     }
+
+    @ModelAttribute("viewer")
+    public Account prefetchViewer(Map model) {
+        return userService.getUserAccount(SecurityUtil.getViewerId());
+    }
+
 }

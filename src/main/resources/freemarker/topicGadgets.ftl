@@ -175,7 +175,7 @@
 <#macro showTopicDetails>
     <div class="ts">
         <span>
-            ${topic.user.displayName}
+            ${topic.account.user.displayName}
             [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
         </span>
     </div>
@@ -222,7 +222,7 @@
     <#list topics as topic>
         <li>
             <div class="ts">
-                <a href="/social/users/${topic.user.id?replace("#", "")}/posts">${topic.user.displayName}</a>
+                <a href="/social/users/${topic.account.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
                 [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
             </div>
             <div class="title">
@@ -255,12 +255,12 @@
         </div>
 
         <div>
-            <a href="/social/users/${topic.activePlan.user.id?replace("#", "")}/posts">
-                ${topic.activePlan.user.displayName}
+            <a href="/social/users/${topic.activePlan.account.id?replace("#", "")}/posts">
+                ${topic.activePlan.account.user.displayName}
             </a>
         </div>
         <div>
-            ${topic.activePlan.user.headline!""}
+            ${topic.activePlan.account.user.headline!""}
         </div>
     </div>
     </#if>
@@ -281,12 +281,12 @@
                     </a>
                 </div>
                 <div>
-                    <a href="/social/users/${plan.user.id?replace("#", "")}/posts">
-                        ${plan.user.displayName}
+                    <a href="/social/users/${plan.account.id?replace("#", "")}/posts">
+                        ${plan.account.user.displayName}
                     </a>
                 </div>
                 <div>
-                    ${plan.user.headline!""}
+                    ${plan.account.user.headline!""}
                 </div>
             </li>
         </#list>
@@ -304,7 +304,7 @@
         <#list newTopics as topic>
             <li>
                 <div class="ts">
-                     <a href="/social/users/${topic.user.id?replace("#", "")}/posts">${topic.user.displayName}</a>
+                     <a href="/social/users/${topic.account.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
                      <@utilGadgets.showTimeBefore topic.timeBefore />
                 </div>
                 <div>

@@ -32,18 +32,22 @@ public class CommonExceptionHandler {
 
     @ExceptionHandler(NoRecordFoundException.class)
     public HttpEntity<?> handleNoRecordFoundException(NoRecordFoundException exc) {
+        System.out.println("1");
+        exc.printStackTrace();
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(IllegalAccessException.class)
     public HttpEntity<?> handleIllegalAccessException(IllegalAccessException exc) {
-        //return "exceptions/illegalAccess";
+        System.out.println("2");
+        exc.printStackTrace();
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(OException.class)
     public HttpEntity<?> handleOException(OException exc) {
-        //return "exceptions/orientException";
+        System.out.println("3");
+        exc.printStackTrace();
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 

@@ -1,6 +1,10 @@
 package com.tissue.commons.social.services;
 
-import com.tissue.core.social.command.UserCommand;
+import com.tissue.core.command.UserCommand;
+import com.tissue.core.command.ProfileCommand;
+import com.tissue.core.command.EmailCommand;
+import com.tissue.core.command.PasswordCommand;
+import com.tissue.core.social.Account;
 import com.tissue.core.social.User;
 import com.tissue.core.plan.Topic;
 import com.tissue.core.plan.Plan;
@@ -24,23 +28,17 @@ public class UserService {
         return userDao.create(userCommand);
     }
 
-    public void updateUser(UserCommand userCommand) {
-        userDao.update(userCommand);
+    public void updateProfile(ProfileCommand command) {
+        userDao.updateProfile(command);
     }
 
-    public void updateEmail(UserCommand userCommand) {
-        userDao.updateEmail(userCommand);
+    public void updateEmail(EmailCommand command) {
+        userDao.updateEmail(command);
     }
 
-    public void changePassword(UserCommand userCommand) {
-        userDao.changePassword(userCommand);
+    public void updatePassword(PasswordCommand command) {
+        userDao.updatePassword(command);
     }
-
-    /**
-    public boolean isUserIdExist(String userId) {
-        return userDao.isUserIdExist(userId);
-    }
-    */
 
     public boolean isUsernameExist(String username) {
         return userDao.isUsernameExist(username);
@@ -62,23 +60,9 @@ public class UserService {
         userDao.addImpression(impression);
     }
 
-    public User getUser(String id) {
-        return userDao.getUser(id);
+    public Account getUserAccount(String accountId) {
+        return userDao.getUserAccount(accountId);
     }
-
-        /**
-    public User getViewer(String viewerId) {
-        User user = userDao.getUserById(viewerId);
-
-        List<User> friends = userDao.getFriends(viewerId);
-        user.setFriends(friends);
-
-        List<Invitation> invitations = userDao.getInvitationsReceived(viewerId);
-        user.setInvitationsReceived(invitations);
-
-        return user;
-    }
-        */
  
     public List<User> getFriends(String userId) {
         return userDao.getFriends(userId);
