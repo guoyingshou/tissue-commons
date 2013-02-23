@@ -60,10 +60,23 @@ public class UserService {
         userDao.addImpression(impression);
     }
 
-    public Account getUserAccount(String accountId) {
-        return userDao.getUserAccount(accountId);
+    public Account getAccount(String accountId) {
+        return userDao.getAccount(accountId);
     }
  
+    public User getUser(String userId) {
+        return userDao.getUser(userId);
+    }
+
+    public User getUserByAccount(String accountId) {
+        return userDao.getUserByAccount(accountId);
+    }
+
+    public String getUserIdByAccount(String accountId) {
+        return userDao.getUserIdByAccount(accountId);
+    }
+
+
     public List<User> getFriends(String userId) {
         return userDao.getFriends(userId);
     }
@@ -108,6 +121,10 @@ public class UserService {
      */
     public List<Plan> getPlans(String userId) {
         return userDao.getPlans(userId);
+    }
+
+    public List<Plan> getPlansByAccount(String accountId) {
+        return userDao.getPlansByAccount(accountId);
     }
 
     /**

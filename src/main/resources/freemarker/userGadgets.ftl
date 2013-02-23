@@ -146,7 +146,7 @@
                                 <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
-                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.user.displayName}" />
+                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.displayName}" />
                     </li>
                     <li>
                         <label for="headline">
@@ -155,7 +155,7 @@
                                 <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
-                        <textarea class="sum" id="headline" name="headline">${viewer.user.headline!""}</textarea>
+                        <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
                     </li>
                     <li>
                         <input type="submit" value='<@spring.message "i18n.button.save" />' />
@@ -260,8 +260,8 @@
 <#macro userLogo>
     <div>
         <h1>
-            <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.user.displayName}</a>
-            <span>${owner.user.headline!""}</span>
+            <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.displayName}</a>
+            <span>${owner.headline!""}</span>
         </h1>
         <ul class="menu">
             <li>
@@ -336,10 +336,10 @@
             <div>${invitation.createTime?date}</div>
             <div>${invitation.content}</div>
             <div class="intention">
-                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/_accept' />" href="#">
+                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id?replace("#", "")}/_accept' />" href="#">
                         Accept
                 </a>
-                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id}/_decline' />" href="#">
+                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id?replace("#","")}/_decline' />" href="#">
                     Decline
                 </a>
             </div>

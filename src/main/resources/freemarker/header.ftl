@@ -70,7 +70,7 @@
                              </li>
                         </ul>
                     </li>
-                    <li><a href="/social/users/${viewer.id?replace("#", "")}/posts">${viewer.user.displayName}</a></li>
+                    <li><a href="/social/users/${viewer.id?replace("#", "")}/posts">${viewer.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "i18n.common.menu.signout" /></a></li>
                 </ul>
                 <#else>

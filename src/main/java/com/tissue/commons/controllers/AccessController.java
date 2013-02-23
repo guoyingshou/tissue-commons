@@ -1,5 +1,6 @@
 package com.tissue.commons.controllers;
 
+import com.tissue.core.social.User;
 import com.tissue.core.social.Account;
 import com.tissue.core.exceptions.NoRecordFoundException;
 import com.tissue.commons.services.CommonService;
@@ -23,9 +24,10 @@ public class AccessController {
 
 
     protected void checkAuthorizations(String rid) {
-        String viewerId = SecurityUtil.getViewerId();
+        String viewerAccountId = SecurityUtil.getViewerAccountId();
 
-        if(!(SecurityUtil.getViewer().hasRole("ROLE_ADMIN") || commonService.isOwner(viewerId, rid))) {
+        //if(!(SecurityUtil.getViewer().hasRole("ROLE_ADMIN") || commonService.isOwner(viewerId, rid))) {
+        if(!(SecurityUtil.viewerHasRole("ROLE_ADMIN") || commonService.isOwner(viewerAccountId, rid))) {
             throw new IllegalAccessException("Not Authorized");
         }
     }
@@ -37,15 +39,15 @@ public class AccessController {
     }
 
     protected void checkOwnership(String rid) {
-        String viewerId = SecurityUtil.getViewerId();
-        if(!commonService.isOwner(viewerId, rid)) {
+        String viewerAccountId = SecurityUtil.getViewerAccountId();
+        if(!commonService.isOwner(viewerAccountId, rid)) {
             throw new IllegalAccessException("Not Owner");
         }
     }
 
     @ModelAttribute("viewer")
-    public Account prefetchViewer(Map model) {
-        return userService.getUserAccount(SecurityUtil.getViewerId());
+    public User setupViewer(Map model) {
+        return userService.getUserByAccount(SecurityUtil.getViewerAccountId());
     }
 
 }

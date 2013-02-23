@@ -139,7 +139,7 @@
        </div>
 
        <div class="ts has-icon-before">
-           <a href="/social/users/${post.account.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
+           <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
            [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
        </div>
        <div class="title has-icon-before">
@@ -153,7 +153,7 @@
 <#macro showPostDetail>
 <div class="post">
     <div class="item-ts">
-        <a href="/social/users/${post.account.id?replace("#", "")}/posts">
+        <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">
             ${post.account.user.displayName} 
         </a>
         [ <@utilGadgets.showTimeBefore post.timeBefore /> ] 
@@ -172,7 +172,7 @@
 
     <div class="response">
     <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive()>
-    <#if post.isOwner(viewer.id)>
+    <#if post.isOwner(viewerAccountId)>
         <a class="delete-post action" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/_delete' />" href="#">
             <@spring.message 'i18n.action.delete' />
         </a>
@@ -183,7 +183,7 @@
         <a class="create-item action" data-action="<@spring.url '/posts/${post.id?replace("#","")}/messages/_create' />" data-target="ul.messages" href="#">
             <@spring.message 'i18n.action.addMessage' />
         </a>
-    <#elseif post.plan.isMember(viewer.id)>
+    <#elseif post.plan.isMember(viewerAccountId)>
        <@sec.authorize access="hasRole('ROLE_ADMIN')">
             <a class="delete-post action" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/_delete' />" href="#">
                 <@spring.message 'i18n.action.delete' />
@@ -208,7 +208,7 @@
 <#list post.messages as msg>
     <li class="message">
         <div class="item-ts">
-            <a href="/social/users/${msg.account.id?replace("#","")}/posts">
+            <a href="/social/users/${msg.account.user.id?replace("#","")}/posts">
                 ${msg.account.user.displayName}  
             </a>
             [ <@utilGadgets.showTimeBefore msg.timeBefore /> ]
@@ -220,7 +220,7 @@
 
         <div class="response">
         <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive()>
-        <#if msg.isOwner(viewer.id)>
+        <#if msg.isOwner(viewerAccountId)>
             <a class="delete-item action" data-action="<@spring.url '/messages/${msg.id?replace("#","")}/_delete' />" href="#">
                 <@spring.message 'i18n.action.delete' />
             </a>
@@ -228,7 +228,7 @@
                 <@spring.message 'i18n.action.edit' />
             </a>
         </#if>
-        <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
+        <#if post.plan.isOwner(viewerAccountId) || post.plan.isMember(viewerAccountId)>
             <a class="create-item action" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/comments/_create' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-comments" href="#">
                 <@spring.message 'i18n.action.reply' />
             </a>
@@ -241,7 +241,7 @@
         <#list msg.comments as comment>
             <li class="comment">
                 <div class="item-ts"> 
-                    <a href="/social/users/${comment.account.id?replace("#", "")}/posts">
+                    <a href="/social/users/${comment.account.user.id?replace("#", "")}/posts">
                         ${comment.account.user.displayName} 
                     </a>
                     [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
@@ -252,7 +252,7 @@
                 </div>
 
                 <div class="response">
-                <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
+                <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && comment.isOwner(viewerAccountId)>
                     <a class="delete-item action" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_delete' />" href="#">
                         <@spring.message 'i18n.action.delete' />
                     </a>
@@ -270,7 +270,7 @@
     </#if>
 </ul>
 
-<#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+<#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && (post.plan.isOwner(viewerAccountId) || post.plan.isMember(viewerAccountId))>
     <@updatePostForm />
     <@deletePostForm />
     <@tissue.oneItemForm />
@@ -288,7 +288,7 @@
 <#macro showQuestionDetail>
     <div class="post">
         <div class="item-ts">
-            <a href="/social/users/${post.account.id?replace("#","")}/posts">
+            <a href="/social/users/${post.account.user.id?replace("#","")}/posts">
                 ${post.account.user.displayName} 
             </a>
             [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
@@ -310,12 +310,12 @@
 
         <#if !(topic.deleted || post.deleted)>
         <#if viewer?? && post.plan.isActive()>
-        <#if post.isOwner(viewer.id)>
+        <#if post.isOwner(viewerAccountId)>
             <a class="update-post action" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/_update' />" href="#">
                 <@spring.message 'i18n.action.edit' />
             </a>
         </#if>
-        <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
+        <#if post.plan.isOwner(viewerAccountId) || post.plan.isMember(viewerAccountId)>
             <a class="create-item action" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/questionComments/_create' />" data-target="ul.question-comments" href="#">
                 <@spring.message 'i18n.action.comment' />
             </a>
@@ -333,7 +333,7 @@
     <#list post.comments as questionComment>
         <li class="comment">
             <div class="item-ts">
-                <a href="/social/users/${questionComment.account.id?replace("#","")}/posts">
+                <a href="/social/users/${questionComment.account.user.id?replace("#","")}/posts">
                     ${questionComment.account.user.displayName} 
                 </a>
                 [ <@utilGadgets.showTimeBefore questionComment.timeBefore /> ]
@@ -344,7 +344,7 @@
             </div>
 
             <div class="response">
-            <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && questionComment.isOwner(viewer.id)>
+            <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && questionComment.isOwner(viewerAccountId)>
                 <a class="delete-item action" data-action="<@spring.url '/questionComments/${questionComment.id?replace("#", "")}/_delete' />" href="#">
                     <@spring.message 'i18n.action.delete' />
                 </a>
@@ -363,7 +363,7 @@
     <#list post.answers as answer>
         <li class="answer">
             <div class="item-ts">
-                <a href="/social/users/${answer.account.id?replace("#","")}/posts">
+                <a href="/social/users/${answer.account.user.id?replace("#","")}/posts">
                     ${answer.account.user.displayName} 
                 </a>
                 [ <@utilGadgets.showTimeBefore answer.timeBefore /> ]
@@ -374,7 +374,7 @@
 
             <div class="response">
             <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive()>
-            <#if answer.isOwner(viewer.id)>
+            <#if answer.isOwner(viewerAccountId)>
                 <a class="delete-item action" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/_delete' />" href="#">
                     <@spring.message 'i18n.action.delete' />
                 </a>
@@ -382,7 +382,7 @@
                     <@spring.message 'i18n.action.edit' />
                 </a>
             </#if>
-            <#if post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id)>
+            <#if post.plan.isOwner(viewerAccountId) || post.plan.isMember(viewerAccountId)>
                 <a class="create-item action" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/comments/_create' />" data-target="#answer-${answer.id?replace("#", "")?replace(":","-")}-comments" href="#">
                     <@spring.message 'i18n.action.comment' />
                 </a>
@@ -395,7 +395,7 @@
             <#list answer.comments as comment>
                 <li class="comment">
                     <div class="item-ts">
-                        <a href="/social/users/${comment.account.id?replace("#","")}/posts">
+                        <a href="/social/users/${comment.account.user.id?replace("#","")}/posts">
                             ${comment.account.user.displayName} 
                         </a>
                         [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
@@ -406,7 +406,7 @@
                     </div>
 
                     <div class="response">
-                    <#if !(topic.deleted ||post.deleted) && viewer?? && post.plan.isActive() && comment.isOwner(viewer.id)>
+                    <#if !(topic.deleted ||post.deleted) && viewer?? && post.plan.isActive() && comment.isOwner(viewerAccountId)>
                         <a class="delete-item action" data-action="<@spring.url '/answerComments/${comment.id?replace("#","")}/_delete' />" href="#">
                             <@spring.message 'i18n.action.delete' />
                         </a>
@@ -424,7 +424,7 @@
         </#if>
     </ul>
 
-<#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && (post.plan.isOwner(viewer.id) || post.plan.isMember(viewer.id))>
+<#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive() && (post.plan.isOwner(viewerAccountId) || post.plan.isMember(viewerAccountId))>
     <@updatePostForm />
     <@deletePostForm />
     <@tissue.oneItemForm />

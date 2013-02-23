@@ -8,11 +8,16 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 
 public class SecurityUtil {
 
-    public static String getViewerId() {
-        UserDetailsImpl viewer = getViewer();
-        return (viewer != null) ? viewer.getId() : null;
+    public static String getViewerAccountId() {
+        UserDetailsImpl userDetails = getUserDetails();
+        return (userDetails != null) ? userDetails.getId() : null;
     }
 
+    public static Boolean viewerHasRole(String role) {
+        return getUserDetails().hasRole(role);
+    }
+
+    /**
     public static String getUsername() {
         UserDetailsImpl viewer = getViewer();
         return (viewer != null) ? viewer.getUsername() : null;
@@ -22,8 +27,9 @@ public class SecurityUtil {
         UserDetailsImpl viewer = getViewer();
         return (viewer != null) ? viewer.getDisplayName() : null;
     }
+    */
 
-    public static UserDetailsImpl getViewer() {
+    private static UserDetailsImpl getUserDetails() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return (auth instanceof AnonymousAuthenticationToken) ? null : (UserDetailsImpl)auth.getPrincipal();
     }

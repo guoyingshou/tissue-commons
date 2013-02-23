@@ -148,7 +148,7 @@
         <#if viewer??>
         <#if topic.activePlan??>
         <li>
-            <#if topic.activePlan.isOwner(viewer.id) || topic.activePlan.isMember(viewer.id)>
+            <#if topic.activePlan.isOwner(viewerAccountId) || topic.activePlan.isMember(viewerAccountId)>
                 <a id="create-post" href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_form'/>">
                     <@spring.message "i18n.topic.post.create" />
                 </a>
@@ -188,7 +188,7 @@
         ${topic.content}
     </div>
 <#--
-           <#if !topic.isDeleted() && viewer?? && topic.isOwner(viewer.id) >
+           <#if !topic.isDeleted() && viewer?? && topic.isOwner(viewerAccountId) >
                <@topicForm />
                <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
                    <@spring.message 'i18n.action.edit' />
@@ -198,7 +198,7 @@
 
     <#if !topic.deleted>
     <@deleteTopicForm />
-    <#if viewer?? && topic.isOwner(viewer.id)>
+    <#if viewer?? && topic.isOwner(viewerAccountId)>
         <@topicForm />
 
         <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
@@ -222,7 +222,7 @@
     <#list topics as topic>
         <li>
             <div class="ts">
-                <a href="/social/users/${topic.account.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
+                <a href="/social/users/${topic.account.user.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
                 [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
             </div>
             <div class="title">
@@ -255,7 +255,7 @@
         </div>
 
         <div>
-            <a href="/social/users/${topic.activePlan.account.id?replace("#", "")}/posts">
+            <a href="/social/users/${topic.activePlan.account.user.id?replace("#", "")}/posts">
                 ${topic.activePlan.account.user.displayName}
             </a>
         </div>
@@ -281,7 +281,7 @@
                     </a>
                 </div>
                 <div>
-                    <a href="/social/users/${plan.account.id?replace("#", "")}/posts">
+                    <a href="/social/users/${plan.account.user.id?replace("#", "")}/posts">
                         ${plan.account.user.displayName}
                     </a>
                 </div>
@@ -304,7 +304,7 @@
         <#list newTopics as topic>
             <li>
                 <div class="ts">
-                     <a href="/social/users/${topic.account.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
+                     <a href="/social/users/${topic.account.user.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
                      <@utilGadgets.showTimeBefore topic.timeBefore />
                 </div>
                 <div>
