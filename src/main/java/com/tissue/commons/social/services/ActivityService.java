@@ -14,6 +14,7 @@ public class ActivityService {
     @Autowired
     private ActivityDao activityDao;
 
+    /**
     public List<Activity> getWatchedActivities(String userId, int num) {
         return activityDao.getWatchedActivities(userId, num);
     }
@@ -29,5 +30,6 @@ public class ActivityService {
     public List<Activity> getActivities(int num) {
         return activityDao.getActivities(num);
     }
+    */
 
 }

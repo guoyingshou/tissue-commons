@@ -11,6 +11,7 @@ import com.tissue.core.plan.Plan;
 import com.tissue.core.plan.Post;
 import com.tissue.core.social.Impression;
 import com.tissue.core.social.Invitation;
+import com.tissue.core.social.Activity;
 import com.tissue.core.social.dao.UserDao;
 
 import org.springframework.stereotype.Component;
@@ -76,9 +77,28 @@ public class UserService {
         return userDao.getUserIdByAccount(accountId);
     }
 
+    public Boolean isFriend(String userId1, String userId2) {
+        return userDao.isFriend(userId1, userId2);
+    }
 
     public List<User> getFriends(String userId) {
         return userDao.getFriends(userId);
+    }
+
+    public List<Activity> getWatchedActivities(String userId, int count) {
+        return userDao.getWatchedActivities(userId, count);
+    }
+
+    public List<Activity> getUserActivities(String userId, int count) {
+        return userDao.getUserActivities(userId, count);
+    }
+
+    public List<Activity> getActivitiesForNewUser(int num) {
+        return userDao.getActivitiesForNewUser(num);
+    }
+
+    public List<Activity> getActivities(int num) {
+        return userDao.getActivities(num);
     }
 
     public List<Invitation> getInvitationsReceived(String userId) {
@@ -93,7 +113,7 @@ public class UserService {
         userDao.inviteFriend(fromId, toId, content);
     }
 
-    public boolean isInvitable(String userId1, String userId2) {
+    public Boolean isInvitable(String userId1, String userId2) {
         return userDao.isInvitable(userId1, userId2);
     }
 

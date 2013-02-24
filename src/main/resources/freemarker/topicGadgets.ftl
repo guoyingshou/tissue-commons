@@ -104,7 +104,6 @@
 </#macro>
 
 <#macro topicLogo title='posts'>
-
   <h1>
       <a href="<@spring.url '/topics/${topic.id?replace("#","")}/posts' />">${topic.title}</a>
   </h1>
@@ -144,9 +143,7 @@
     </ul>
 
     <ul class="action">
-        <#if !topic.isDeleted()>
-        <#if viewer??>
-        <#if topic.activePlan??>
+        <#if !topic.isDeleted() && viewer?? && topic.activePlan??>
         <li>
             <#if topic.activePlan.isOwner(viewerAccountId) || topic.activePlan.isMember(viewerAccountId)>
                 <a id="create-post" href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_form'/>">
@@ -165,8 +162,6 @@
                 <@spring.message "i18n.topic.plan.hostPlan" />
             </a>
         </li>
-        </#if>
-        </#if>
         </#if>
     </u>
   </div>
@@ -187,14 +182,6 @@
     <div class="content">
         ${topic.content}
     </div>
-<#--
-           <#if !topic.isDeleted() && viewer?? && topic.isOwner(viewerAccountId) >
-               <@topicForm />
-               <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
-                   <@spring.message 'i18n.action.edit' />
-               </a>
-           </#if>
-           -->
 
     <#if !topic.deleted>
     <@deleteTopicForm />

@@ -183,7 +183,7 @@
         <a class="create-item action" data-action="<@spring.url '/posts/${post.id?replace("#","")}/messages/_create' />" data-target="ul.messages" href="#">
             <@spring.message 'i18n.action.addMessage' />
         </a>
-    <#elseif post.plan.isMember(viewerAccountId)>
+    <#elseif post.plan.isOwner(viewerAccountId) || post.plan.isMember(viewerAccountId)>
        <@sec.authorize access="hasRole('ROLE_ADMIN')">
             <a class="delete-post action" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/_delete' />" href="#">
                 <@spring.message 'i18n.action.delete' />
@@ -308,8 +308,7 @@
         </@sec.authorize>
         </#if>
 
-        <#if !(topic.deleted || post.deleted)>
-        <#if viewer?? && post.plan.isActive()>
+        <#if !(topic.deleted || post.deleted) && viewer?? && post.plan.isActive()>
         <#if post.isOwner(viewerAccountId)>
             <a class="update-post action" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/_update' />" href="#">
                 <@spring.message 'i18n.action.edit' />
@@ -322,7 +321,6 @@
             <a class="create-item action" data-action="<@spring.url '/posts/${post.id?replace("#", "")}/answers/_create' />" data-target="ul.answers" href="#">
                 <@spring.message 'i18n.action.answer' />
             </a>
-        </#if>
         </#if>
         </#if>
         </div>
