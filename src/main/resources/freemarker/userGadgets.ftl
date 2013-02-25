@@ -120,7 +120,7 @@
                             <@spring.message "i18n.error.empty" />
                         </span>
                     </label>
-                    <input class="sum" type="input" id="email" name="email" value="${viewer.email!""}" />
+                    <input class="sum" type="input" id="email" name="email" value="${viewerAccount.email!""}" />
                 </li>
 
                 <li>
@@ -146,7 +146,7 @@
                                 <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
-                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewer.displayName}" />
+                        <input type="input" class="sum" id="displayName" name="displayName" value="${viewerAccount.user.displayName}" />
                     </li>
                     <li>
                         <label for="headline">
@@ -155,7 +155,7 @@
                                 <@spring.message "i18n.error.empty" />
                             </span>
                         </label>
-                        <textarea class="sum" id="headline" name="headline">${viewer.headline!""}</textarea>
+                        <textarea class="sum" id="headline" name="headline">${viewerAccount.user.headline!""}</textarea>
                     </li>
                     <li>
                         <input type="submit" value='<@spring.message "i18n.button.save" />' />
@@ -233,7 +233,7 @@
        <@spring.message "i18n.common.sitename" />
        <span><@spring.message "i18n.common.siteslogan" /></span>
    </h1>
-   <#if viewer??>
+   <#if viewerAccount??>
    <div>
    <ul class="menu">
        <li>
@@ -307,7 +307,7 @@
     <div class="resume">
         ${owner.resume!''}
     </div>
-    <#if viewer?? && viewer.id == owner.id>
+    <#if viewerAccount?? && viewerAccount.user.id == owner.id>
         <@tissue.oneItemForm />
         <a class="edit-resume" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/resume/_create' />" data-target="div.resume" href="#">edit</a>
     </#if>
@@ -322,7 +322,7 @@
         </#if>
     </ul>
 
-    <#if viewer?? && isFriend>
+    <#if viewerAccount?? && isFriend>
         <@tissue.oneItemForm />
         <a class="add-impression" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/impressions/_create' />" data-target="ul.impressions" href="#">add impression</a>
     </#if>

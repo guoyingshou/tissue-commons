@@ -30,7 +30,7 @@
             </li>
         </ul>
 
-        <#if viewer??>
+        <#if viewerAccount??>
         <@topicGadgets.topicForm />
         <ul class="action">
             <li>

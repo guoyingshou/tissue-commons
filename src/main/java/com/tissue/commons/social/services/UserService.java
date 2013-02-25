@@ -12,6 +12,7 @@ import com.tissue.core.plan.Post;
 import com.tissue.core.social.Impression;
 import com.tissue.core.social.Invitation;
 import com.tissue.core.social.Activity;
+import com.tissue.core.social.About;
 import com.tissue.core.social.dao.UserDao;
 
 import org.springframework.stereotype.Component;
@@ -158,4 +159,15 @@ public class UserService {
         return userDao.getPagedPosts(userId, page, size);
     }
  
+    /**
+     * about
+     */
+    public String addAbout(About about) {
+        return userDao.addAbout(about);
+    }
+
+    public List<About> getAbouts() {
+        return userDao.getAbouts();
+    }
+
 }

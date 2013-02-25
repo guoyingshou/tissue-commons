@@ -71,7 +71,7 @@
 </#macro>
 
 <#macro createPlanForm>
-    <form id="createPlanForm" class="dialog pop-320" style="display:none" action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans' />" method="post">
+    <form id="createPlanForm" class="dialog pop-320" style="display:none" action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/_create' />" method="post">
         <legend>
             <@spring.message 'i18n.topic.plan.duration' />
             <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
@@ -143,14 +143,14 @@
     </ul>
 
     <ul class="action">
-        <#if !topic.isDeleted() && viewer?? && topic.activePlan??>
+        <#if !topic.isDeleted() && viewerAccount?? && topic.activePlan??>
         <li>
-            <#if topic.activePlan.isOwner(viewerAccountId) || topic.activePlan.isMember(viewerAccountId)>
-                <a id="create-post" href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/posts/_form'/>">
+            <#if topic.activePlan.isOwner(viewerAccount.id) || topic.activePlan.isMember(viewerAccount.id)>
+                <a id="create-post" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_form'/>">
                     <@spring.message "i18n.topic.post.create" />
                 </a>
             <#else>
-                <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/join'/>">
+                <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
                     <@spring.message "i18n.topic.plan.joinPlan" />
                 </a>
             </#if> 
@@ -185,7 +185,7 @@
 
     <#if !topic.deleted>
     <@deleteTopicForm />
-    <#if viewer?? && topic.isOwner(viewerAccountId)>
+    <#if viewerAccount?? && topic.isOwner(viewerAccount.id)>
         <@topicForm />
 
         <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
@@ -236,7 +236,7 @@
             <@spring.message "i18n.topic.plan.live" />
         </h4>
         <div class="ts">
-            <a href="/group/plans/${topic.activePlan.id?replace("#", "")}">
+            <a href="/group/topics/${topic.id?replace("#","")}/plans/${topic.activePlan.id?replace("#", "")}">
                 <@utilGadgets.showTimeRemaining topic.activePlan.timeRemaining />
             </a>
         </div>
@@ -263,7 +263,7 @@
         <#list topic.archivedPlans as plan>
             <li>
                 <div class="ts">
-                    <a href="/group/plans/${plan.id?replace("#", "")}">
+                    <a href="/group/topics/${topic.id?replace("#","")}/plans/${plan.id?replace("#", "")}">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>

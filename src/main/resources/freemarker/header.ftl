@@ -28,7 +28,7 @@
         <div id="headerWrapper" class="wrapper">
             <div id="header" class="center">
                 <ul class="nav-left nav-item">
-                    <#if viewer??>
+                    <#if viewerAccount??>
                         <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.home" /></a></li>
                     <#else>
                         <li><a href="/social/home"><@spring.message "i18n.common.menu.home" /></a></li>
@@ -37,7 +37,7 @@
                     <li><a href="/social/about"><@spring.message "i18n.common.menu.about" /></a></li>
                 </ul>
 
-                <#if viewer??>
+                <#if viewerAccount??>
                 <@userGadgets.contactEditForm />
                 <@userGadgets.profileEditForm />
                 <@userGadgets.passChangeForm />
@@ -70,7 +70,7 @@
                              </li>
                         </ul>
                     </li>
-                    <li><a href="/social/users/${viewer.id?replace("#", "")}/posts">${viewer.displayName}</a></li>
+                    <li><a href="/social/users/${viewerAccount.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "i18n.common.menu.signout" /></a></li>
                 </ul>
                 <#else>

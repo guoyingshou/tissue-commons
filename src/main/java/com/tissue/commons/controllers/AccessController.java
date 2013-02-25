@@ -11,43 +11,24 @@ import com.tissue.commons.security.util.SecurityUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.Map;
 
+@ControllerAdvice
 public class AccessController {
-
-    @Autowired
-    private CommonService commonService;
 
     @Autowired
     private UserService userService;
 
 
-    protected void checkAuthorizations(String rid) {
+    @ModelAttribute("viewerAccount")
+    public Account setupViewer(Map model) {
         String viewerAccountId = SecurityUtil.getViewerAccountId();
-
-        //if(!(SecurityUtil.getViewer().hasRole("ROLE_ADMIN") || commonService.isOwner(viewerId, rid))) {
-        if(!(SecurityUtil.viewerHasRole("ROLE_ADMIN") || commonService.isOwner(viewerAccountId, rid))) {
-            throw new IllegalAccessException("Not Authorized");
+        if(viewerAccountId == null) {
+            return null;
         }
+        return userService.getAccount(viewerAccountId);
     }
-
-    protected void checkExistence(String rid) {
-        if(!commonService.isResourceExist(rid)) {
-            throw new NoRecordFoundException(rid);
-        }
-    }
-
-    protected void checkOwnership(String rid) {
-        String viewerAccountId = SecurityUtil.getViewerAccountId();
-        if(!commonService.isOwner(viewerAccountId, rid)) {
-            throw new IllegalAccessException("Not Owner");
-        }
-    }
-
-    @ModelAttribute("viewer")
-    public User setupViewer(Map model) {
-        return userService.getUserByAccount(SecurityUtil.getViewerAccountId());
-    }
-
+ 
 }

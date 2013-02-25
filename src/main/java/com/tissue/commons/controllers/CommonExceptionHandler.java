@@ -21,14 +21,15 @@ import java.util.Map;
 @ControllerAdvice
 public class CommonExceptionHandler {
 
+    /**
     @Autowired
     protected UserService userService;
+    */
 
     @ModelAttribute("locale")
     public String setupLocale(Locale locale) {
         return locale.toString();
     }
-
 
     @ExceptionHandler(NoRecordFoundException.class)
     public HttpEntity<?> handleNoRecordFoundException(NoRecordFoundException exc) {

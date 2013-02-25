@@ -17,18 +17,6 @@ public class SecurityUtil {
         return getUserDetails().hasRole(role);
     }
 
-    /**
-    public static String getUsername() {
-        UserDetailsImpl viewer = getViewer();
-        return (viewer != null) ? viewer.getUsername() : null;
-    }
-
-    public static String getDisplayName() {
-        UserDetailsImpl viewer = getViewer();
-        return (viewer != null) ? viewer.getDisplayName() : null;
-    }
-    */
-
     private static UserDetailsImpl getUserDetails() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         return (auth instanceof AnonymousAuthenticationToken) ? null : (UserDetailsImpl)auth.getPrincipal();
