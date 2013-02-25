@@ -21,7 +21,6 @@ public class AccessController {
     @Autowired
     private UserService userService;
 
-
     @ModelAttribute("viewerAccount")
     public Account setupViewer(Map model) {
         String viewerAccountId = SecurityUtil.getViewerAccountId();
