@@ -21,7 +21,7 @@
             </li>
         </#if>
 
-        <#if activity.label = 'plan'>
+        <#if activity.label = 'hostGroup'>
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="ts">
@@ -31,12 +31,12 @@
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span><@spring.messageArgs "i18n.activity.plan" activity.messageArgs /></span>
+                    <span><@spring.messageArgs "i18n.activity.hostGroup" activity.messageArgs /></span>
                 </div>
             </li>
         </#if>
 
-        <#if activity.label = 'members'>
+        <#if activity.label = 'joinGroup'>
             <li class="activity-item">
                 <span class="activity-icon" data-icon="&#xe001;"></span>
                 <div class="ts">
@@ -46,7 +46,7 @@
                     <@utilGadgets.showTimeBefore activity.timeBefore />
                 </div>
                 <div>
-                    <span><@spring.messageArgs "i18n.activity.members" activity.messageArgs /></span>
+                    <span><@spring.messageArgs "i18n.activity.joinGroup" activity.messageArgs /></span>
                 </div>
             </li>
         </#if>
