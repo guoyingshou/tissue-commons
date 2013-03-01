@@ -16,27 +16,18 @@
             <li>
                 <label for="title">
                     <@spring.message "i18n.topic.title" />
-                    <span style="display: none">
-                        <@spring.message "i18n.error.empty" />
-                    </span>
                 </label>
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
                 <label for="editor">
                     <@spring.message "i18n.topic.objective" />
-                    <span style="display: none">
-                        <@spring.message "i18n.error.empty" />
-                    </span>
                 </label>
                 <textarea class="sum" id="editor" name="content"></textarea>
             </li>
             <li>
                 <label for="tags">
                    <@spring.message "i18n.topic.tags" />
-                   <span style="display: none">
-                       <@spring.message "i18n.error.empty" />
-                   </span>
                 </label>
                 <input type="input" class="sum" id="tags" name="tags" />
             </li>
@@ -57,9 +48,6 @@
             <li>
                 <label for="reason">
                     <@spring.message "i18n.topic.delete.reason" />
-                    <span style="display: none">
-                        <@spring.message "i18n.error.empty" />
-                    </span>
                 </label>
                 <textarea id="reason" name="content"></textarea>
             </li>

@@ -9,7 +9,7 @@
             <legend>
                 <@spring.message 'i18n.topic.post.type' />
                 <span style="display: none">
-                    <@spring.message 'i18n.error.postTypeNotSelect' />
+                    <@spring.message 'NotEmpty.type' />
                 </span>
             </legend>
 
@@ -40,18 +40,12 @@
                 <li>
                     <label for="title">
                         <@spring.message "i18n.topic.post.title" />
-                        <span style="display: none">
-                            <@spring.message "i18n.error.empty" />
-                        </span>
                     </label>
                     <input type="input" class="sum" id="title" name="title" />
                 </li>
                 <li>
                     <label for="editor">
                         <@spring.message "i18n.topic.post.content" />
-                        <span style="display: none">
-                            <@spring.message "i18n.error.empty" />
-                        </span>
                     </label>
                     <textarea id="editor" name="content"></textarea>
                 </li>
@@ -76,18 +70,12 @@
             <li>
                 <label for="title">
                     <@spring.message "i18n.topic.post.title" />
-                    <span style="display:none">
-                        <@spring.message "i18n.error.empty" />
-                    </span>
                 </label>
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
                 <label for="editor">
                     <@spring.message "i18n.topic.post.content" />
-                    <span style="display:none">
-                        <@spring.message "i18n.error.empty" />
-                    </span>
                 </label>
                 <textarea id="editor" name="content"></textarea>
             </li>
@@ -108,9 +96,6 @@
             <li>
                 <label for="reason">
                     <@spring.message "i18n.topic.post.delete.reason" />
-                    <span style="display: none">
-                        <@spring.message "i18n.error.empty" />
-                    </span>
                 </label>
                 <textarea id="reason" name="content"></textarea>
             </li>

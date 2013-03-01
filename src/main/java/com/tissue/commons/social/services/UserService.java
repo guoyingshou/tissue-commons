@@ -4,6 +4,7 @@ import com.tissue.core.command.UserCommand;
 import com.tissue.core.command.ProfileCommand;
 import com.tissue.core.command.EmailCommand;
 import com.tissue.core.command.PasswordCommand;
+import com.tissue.core.command.InvitationCommand;
 import com.tissue.core.social.Account;
 import com.tissue.core.social.User;
 import com.tissue.core.plan.Topic;
@@ -110,8 +111,8 @@ public class UserService {
         return userDao.getImpressions(userId);
     }
    
-    public void inviteFriend(String fromId, String toId, String content) {
-        userDao.inviteFriend(fromId, toId, content);
+    public void inviteFriend(InvitationCommand command) {
+        userDao.inviteFriend(command);
     }
 
     public Boolean isInvitable(String userId1, String userId2) {

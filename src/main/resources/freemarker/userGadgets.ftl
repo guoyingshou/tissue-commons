@@ -105,6 +105,9 @@
         <li>
             <label for="email">
                 <@spring.message "i18n.user.email" />
+                <span id="updateEmailFail" style="display: none" class="error">
+                    <@spring.message "Fail.email" />
+                </span>
             </label>
             <input class="sum" type="input" id="email" name="email" value="${viewerAccount.email!""}" />
         </li>
@@ -123,6 +126,9 @@
             <span data-icon="&#xe008"></span>
         </a>
     </legend>
+    <div id="failUpdateProfile" class="error" style="display: none">
+        <@spring.message "Fail.profile" />
+    </div>
     <ul>
         <li>
             <label for="displayName">
@@ -155,6 +161,9 @@
         <li>
             <label for="password">
                 <@spring.message "i18n.user.password" />
+                <span id="failUpdatePassword" style="display:none" class="error">
+                    <@spring.message "Fail.password" />
+                </span>
             </label>
             <input type="password" class="sum" id="password" name="password" value="" />
         </li>
@@ -181,13 +190,13 @@
         <li>
             <label for="letter">
                 <@spring.message "i18n.user.inviteLetter" />
-                <span style="display:none" class="error">
-                    <@spring.message "i18n.error.inviteLetterEmpty" />
+                <span id="failInvite" style="display: none" class="error">
+                    <@spring.message "Fail.invite" />
                 </span>
             </label>
         </li>
         <li>
-            <textarea class="sum" id="letter" name="content"></textarea></p>
+            <textarea class="sum" id="letter" name="letter"></textarea></p>
         </li>
         <li>
             <input type="submit" name="submit" value='<@spring.message "i18n.button.send"/>' />
@@ -215,11 +224,21 @@
            </a>
        </li>
        <li>
+       <#--
+           <a href="<@spring.url '/users/${owner.id?replace("#", "")}/friends' />">
+           -->
+           <a href="<@spring.url '/friends' />">
+                <@spring.message "i18n.user.menu.friends" />
+           </a>
+       </li>
+       <#if (invitationsReceived?size > 0)>
+       <li>
            <a href="/social/invitations">
                <@spring.message "i18n.user.home.invitations" />
                - ${invitationsReceived?size}
            </a>
        </li>
+       </#if>
    </ul>
    </div>
    </#if>
@@ -242,26 +261,23 @@
                     <@spring.message "i18n.user.menu.status" />
                 </a>
             </li>
+            <#--
             <li>
                 <a href="<@spring.url '/users/${owner.id?replace("#", "")}/resume' />">
                     <@spring.message "i18n.user.menu.resume" />
                 </a>
             </li>
+            -->
             <li>
                 <a href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
                     <@spring.message "i18n.user.menu.impressions" />
-                </a>
-            </li>
-            <li>
-                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/friends' />">
-                    <@spring.message "i18n.user.menu.friends" />
                 </a>
             </li>
          </ul>
         <ul class="action">
             <#if invitable>
             <li>
-                <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invites/_create' />" href="#">
+                <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invitations/_create' />" href="#">
                     <@spring.message "i18n.user.invite" />
                 </a>
             </li>

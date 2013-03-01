@@ -17,9 +17,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.orientechnologies.common.exception.OException;
 import java.util.Locale;
 import java.util.Map;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @ControllerAdvice
 public class CommonExceptionHandler {
+
+    private static Logger logger = LoggerFactory.getLogger(CommonExceptionHandler.class);
 
     /**
     @Autowired
@@ -33,23 +37,27 @@ public class CommonExceptionHandler {
 
     @ExceptionHandler(NoRecordFoundException.class)
     public HttpEntity<?> handleNoRecordFoundException(NoRecordFoundException exc) {
-        System.out.println("1");
-        exc.printStackTrace();
+        logger.warn(exc.getMessage());
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(IllegalAccessException.class)
     public HttpEntity<?> handleIllegalAccessException(IllegalAccessException exc) {
-        System.out.println("2");
-        exc.printStackTrace();
+        logger.warn(exc.getMessage());
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(OException.class)
     public HttpEntity<?> handleOException(OException exc) {
-        System.out.println("3");
-        exc.printStackTrace();
+        logger.warn(exc.getMessage());
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public HttpEntity<?> handleIllegalArgumentException(IllegalArgumentException exc) {
+        logger.warn(exc.getMessage());
+        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+    }
+
 
 }

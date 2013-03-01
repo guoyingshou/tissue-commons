@@ -14,4 +14,5 @@ public class HttpErrorController {
     public String denyAcess() {
         return "exceptions/accessDenied";
     }
+
 }
