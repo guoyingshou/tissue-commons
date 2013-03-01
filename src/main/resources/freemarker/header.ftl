@@ -38,9 +38,9 @@
                 </ul>
 
                 <#if viewerAccount??>
-                <@userGadgets.contactEditForm />
-                <@userGadgets.profileEditForm />
-                <@userGadgets.passChangeForm />
+                <@userGadgets.updateEmailForm />
+                <@userGadgets.updateProfileForm />
+                <@userGadgets.updatePasswordForm />
 
                 <ul class="nav-right nav-item">
                     <#if locale == 'zh_CN'>
@@ -54,23 +54,23 @@
                         </a>
                         <ul class="dropdown-menu" style="display: none">
                             <li>
-                                <a class="edit-contact" data-action="<@spring.url '/_updateContact' />" href="#">
-                                    <@spring.message "i18n.user.updateContact" />
+                                <a class="update-email" data-action="<@spring.url '/_updateEmail' />" href="#">
+                                    <@spring.message "i18n.user.updateEmail" />
                                 </a>
                             </li>
                             <li>
-                                <a class="edit-profile" data-action="<@spring.url '/_updateProfile' />" href="#">
+                                <a class="update-profile" data-action="<@spring.url '/_updateProfile' />" href="#">
                                     <@spring.message "i18n.user.updateProfile" />
                                 </a>
                             </li>
                             <li>
-                                <a class="change-pass" data-action="<@spring.url '/_updatePassword' />" href="#">
+                                <a class="update-password" data-action="<@spring.url '/_updatePassword' />" href="#">
                                     <@spring.message "i18n.user.updatePassword" />
                                 </a>
                              </li>
                         </ul>
                     </li>
-                    <li><a href="/social/users/${viewerAccount.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
+                    <li><a href="/social/users/${viewerAccount.user.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "i18n.common.menu.signout" /></a></li>
                 </ul>
                 <#else>
