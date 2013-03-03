@@ -3,9 +3,6 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#--
-   topicForm is used for create as well as update
- -->
 <#macro topicForm>
     <form id="topicForm" class="dialog pop-650" style="display:none" method="post">
         <legend>
@@ -16,19 +13,28 @@
             <li>
                 <label for="title">
                     <@spring.message "i18n.topic.title" />
+                    <span class="error" style="display: none">
+                        <@spring.message "NotEmpty.topic.title" />
+                    </span>
                 </label>
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
                 <label for="editor">
                     <@spring.message "i18n.topic.objective" />
-                </label>
+                    <span class="error" style="display: none">
+                        <@spring.message "NotEmpty.topic.objective" />
+                    </span>
+                 </label>
                 <textarea class="sum" id="editor" name="content"></textarea>
             </li>
             <li>
                 <label for="tags">
-                   <@spring.message "i18n.topic.tags" />
-                </label>
+                    <@spring.message "i18n.topic.tags" />
+                    <span class="error" style="display: none">
+                        <@spring.message "NotEmpty.topic.tags" />
+                    </span>
+                 </label>
                 <input type="input" class="sum" id="tags" name="tags" />
             </li>
             <li>

@@ -18,9 +18,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @ControllerAdvice
-public class AccessController {
+public class ViewerAdvice {
 
-    private static Logger logger = LoggerFactory.getLogger(AccessController.class);
+    private static Logger logger = LoggerFactory.getLogger(ViewerAdvice.class);
 
     @Autowired
     private UserService userService;

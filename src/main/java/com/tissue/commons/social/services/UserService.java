@@ -5,6 +5,7 @@ import com.tissue.core.command.ProfileCommand;
 import com.tissue.core.command.EmailCommand;
 import com.tissue.core.command.PasswordCommand;
 import com.tissue.core.command.InvitationCommand;
+import com.tissue.core.command.ImpressionCommand;
 import com.tissue.core.social.Account;
 import com.tissue.core.social.User;
 import com.tissue.core.plan.Topic;
@@ -21,7 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-@Component("userService")
+@Component
 public class UserService {
 
     @Autowired
@@ -55,13 +56,11 @@ public class UserService {
         return userDao.isEmailExist(excludingUserId, email);
     }
 
+    /**
     public void addResume(String userId, String resume) {
         userDao.addResume(userId, resume);
     }
-
-    public void addImpression(Impression impression) {
-        userDao.addImpression(impression);
-    }
+    */
 
     public Account getAccount(String accountId) {
         return userDao.getAccount(accountId);
@@ -79,6 +78,10 @@ public class UserService {
         return userDao.getUserIdByAccount(accountId);
     }
 
+    public List<User> getNewUsers(String excludingUserId, int limit) {
+        return userDao.getNewUsers(excludingUserId, limit);
+    }
+
     public Boolean isFriend(String userId1, String userId2) {
         return userDao.isFriend(userId1, userId2);
     }
@@ -87,48 +90,8 @@ public class UserService {
         return userDao.getFriends(userId);
     }
 
-    public List<Activity> getWatchedActivities(String userId, int count) {
-        return userDao.getWatchedActivities(userId, count);
-    }
-
-    public List<Activity> getUserActivities(String userId, int count) {
-        return userDao.getUserActivities(userId, count);
-    }
-
-    public List<Activity> getActivitiesForNewUser(int num) {
-        return userDao.getActivitiesForNewUser(num);
-    }
-
-    public List<Activity> getActivities(int num) {
-        return userDao.getActivities(num);
-    }
-
-    public List<Invitation> getInvitationsReceived(String userId) {
-        return userDao.getInvitationsReceived(userId);
-    }
-
-    public List<Impression> getImpressions(String userId) {
-        return userDao.getImpressions(userId);
-    }
-   
-    public void inviteFriend(InvitationCommand command) {
-        userDao.inviteFriend(command);
-    }
-
-    public Boolean isInvitable(String userId1, String userId2) {
-        return userDao.isInvitable(userId1, userId2);
-    }
-
-    public void acceptInvitation(String invitationId) {
-        userDao.acceptInvitation(invitationId);
-    }
-
-    public void declineInvitation(String invitationId) {
-        userDao.declineInvitation(invitationId);
-    }
-
-    public List<User> getNewUsers(String excludingUserId, int limit) {
-        return userDao.getNewUsers(excludingUserId, limit);
+    public List<Activity> getActivities(String userId, int count) {
+        return userDao.getActivities(userId, count);
     }
 
     /**
@@ -160,15 +123,4 @@ public class UserService {
         return userDao.getPagedPosts(userId, page, size);
     }
  
-    /**
-     * about
-     */
-    public String addAbout(About about) {
-        return userDao.addAbout(about);
-    }
-
-    public List<About> getAbouts() {
-        return userDao.getAbouts();
-    }
-
 }

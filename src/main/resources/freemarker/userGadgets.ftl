@@ -3,7 +3,7 @@
 <#import 'utilGadgets.ftl' as utilGadgets />
 
 <#macro signupForm>
-<@spring.bind 'account.*' />
+<@spring.bind 'user.*' />
 <form id="signupForm" class="input-form account" action="<@spring.url '/signup' />" method="post">
     <div class="error">
         <@spring.showErrors "<br/>" />
@@ -21,20 +21,20 @@
                     <@spring.message "Taken.username" />
                 </span>
             </label>
-            <@spring.formInput "account.username" 'class="sum"' />
+            <@spring.formInput "user.username" 'class="sum"' />
         </li>
         <li>
             <label for="password">
                 <@spring.message "i18n.user.password" />
                 <span class="requirement"><@spring.message "i18n.user.password.requirement" /></span>
             </label>
-            <@spring.formPasswordInput "account.password" 'class="sum"' />
+            <@spring.formPasswordInput "user.password" 'class="sum"' />
         </li>
         <li>
             <label for="confirm">
                 <@spring.message "i18n.user.confirm" />
             </label>
-            <@spring.formPasswordInput "account.confirm" 'class="sum"' />
+            <@spring.formPasswordInput "user.confirm" 'class="sum"' />
         </li>
         <li>
             <label for="email">
@@ -43,19 +43,19 @@
                     <@spring.message "Taken.email" />
                 </span>
             </label>
-            <@spring.formInput "account.email" 'class="sum"'/>
+            <@spring.formInput "user.email" 'class="sum"'/>
         </li>
         <li>
             <label for="displayName">
                 <@spring.message "i18n.user.displayName" />
             </label>
-            <@spring.formInput "account.displayName" 'class="sum"'/>
+            <@spring.formInput "user.displayName" 'class="sum"'/>
         </li>
         <li>
             <label for="headline">
                 <@spring.message "i18n.user.headline" />
             </label>
-            <@spring.formTextarea "account.headline" "class='sum'" />
+            <@spring.formTextarea "user.headline" "class='sum'" />
         </li>
         <li>
             <input type="submit" value='<@spring.message "i18n.button.signup" />' />
@@ -133,12 +133,18 @@
         <li>
             <label for="displayName">
                 <@spring.message "i18n.user.displayName" />
+                <span id="empty-displayName" class="error" style="display: none">
+                    <@spring.message "NotEmpty.displayName" />
+                </span>
             </label>
             <input type="input" class="sum" id="displayName" name="displayName" value="${viewerAccount.user.displayName}" />
         </li>
         <li>
             <label for="headline">
                 <@spring.message "i18n.user.headline" />
+                <span id="empty-headline" class="error" style="display: none">
+                    <@spring.message "NotEmpty.headline" />
+                </span>
             </label>
             <textarea class="sum" id="headline" name="headline">${viewerAccount.user.headline!""}</textarea>
         </li>
@@ -205,6 +211,23 @@
 </form>
 </#macro>
 
+<#macro impressionForm>
+<form id="impressionForm" class="dialog pop-650" style="display:none" method="post">
+    <legend>
+        Impression
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <ul>
+        <li>
+            <textarea id="editor" name="content"></textarea>
+        </li>
+        <li>
+           <input type="submit" value="submit"/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
 <#macro homeLogo>
     <h1>
        <@spring.message "i18n.common.sitename" />
@@ -224,9 +247,6 @@
            </a>
        </li>
        <li>
-       <#--
-           <a href="<@spring.url '/users/${owner.id?replace("#", "")}/friends' />">
-           -->
            <a href="<@spring.url '/friends' />">
                 <@spring.message "i18n.user.menu.friends" />
            </a>
@@ -307,8 +327,8 @@
     </ul>
 
     <#if viewerAccount?? && isFriend>
-        <@tissue.oneItemForm />
-        <a class="add-impression" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/impressions/_create' />" data-target="ul.impressions" href="#">add impression</a>
+        <@impressionForm />
+        <a class="add-impression" data-action="<@spring.url '/impressions/users/${owner.id?replace("#", "")}/_create' />" data-target="ul.impressions" href="#">add impression</a>
     </#if>
 </#macro>
 

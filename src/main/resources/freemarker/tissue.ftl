@@ -8,30 +8,6 @@
     <#include "footer.ftl">
 </#macro>
 
-<#macro aboutLogo>
-  <div>
-    <h1>
-       <@spring.message "i18n.common.sitename" />
-       <span><@spring.message "i18n.common.siteslogan" /></span>
-   </h1>
- </div>
-</#macro>
-
-<#macro showAbout>
-    <ul>
-        <#if abouts??>
-        <#list abouts as about>
-        <li>${about.content}</li>
-        </#list>
-        </#if>
-    </ul>
-
-    <#if viewer??>
-        <a class="add-about" href="<@spring.url '/about' />">add</a>
-        <@aboutAddForm/>
-    </#if>
-</#macro>
-
 <#macro slogan>
     <div class="slogan">
         <h3>在线社会化学习工具</h3>
@@ -72,13 +48,45 @@
     </form>
 </#macro>
 
-<#macro aboutAddForm>
-    <@oneItemForm />
-    <script type="text/javascript">
-        $(document).on('click', 'a.add-about', function(e) {
-            e.preventDefault();
-            var url = $(this).attr('href');
-            $(this).prev().oneItemDialog(url);
-        });
-    </script>
+<#macro aboutForm>
+<form id="aboutForm" class="dialog pop-650" style="display: none" method="post">
+    <legend>
+        About
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <ul>
+        <li>
+            <textarea id="editor" name="content"></textarea>
+        </li>
+        <li>
+            <input type="submit" value="submit"/>
+        </li>
+    </ul>
+</form>
 </#macro>
+
+<#macro aboutLogo>
+  <div>
+    <h1>
+       <@spring.message "i18n.common.sitename" />
+       <span><@spring.message "i18n.common.siteslogan" /></span>
+   </h1>
+ </div>
+</#macro>
+
+<#macro showAbout>
+    <ul>
+        <#if abouts??>
+        <#list abouts as about>
+        <li>${about.content}</li>
+        </#list>
+        </#if>
+    </ul>
+
+    <#if viewerAccount??>
+        <@aboutForm/>
+        <a class="add-about" data-action="<@spring.url '/about/_create' />" href="#">add</a>
+    </#if>
+</#macro>
+
+
