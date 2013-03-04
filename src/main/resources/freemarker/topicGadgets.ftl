@@ -137,7 +137,8 @@
     </ul>
 
     <ul class="action">
-        <#if !topic.isDeleted() && viewerAccount?? && topic.activePlan??>
+        <#if viewerAccount??>
+        <#if !topic.isDeleted() && topic.activePlan??>
         <li>
             <#if topic.activePlan.isOwner(viewerAccount.id) || topic.activePlan.isMember(viewerAccount.id)>
                 <a id="create-post" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_form'/>">
@@ -156,6 +157,7 @@
                 <@spring.message "i18n.topic.plan.hostPlan" />
             </a>
         </li>
+        </#if>
         </#if>
     </u>
   </div>

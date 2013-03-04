@@ -2,7 +2,7 @@
 
 <#macro layout title="">
     <#include "header.ftl">
-    <div id="mainWrapper" class="center">
+    <div id="page-main-wrapper" class="center">
         <#nested>
     </div>
     <#include "footer.ftl">

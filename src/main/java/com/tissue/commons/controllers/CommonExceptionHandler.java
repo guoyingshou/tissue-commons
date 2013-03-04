@@ -25,11 +25,6 @@ public class CommonExceptionHandler {
 
     private static Logger logger = LoggerFactory.getLogger(CommonExceptionHandler.class);
 
-    /**
-    @Autowired
-    protected UserService userService;
-    */
-
     @ModelAttribute("locale")
     public String setupLocale(Locale locale) {
         return locale.toString();

@@ -11,6 +11,7 @@ import com.tissue.commons.security.util.SecurityUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 import java.util.Map;
@@ -27,6 +28,8 @@ public class ViewerAdvice {
 
     @ModelAttribute("viewerAccount")
     public Account setupViewer(Map model) {
+        logger.debug("setup viewer");
+
         String viewerAccountId = SecurityUtil.getViewerAccountId();
         logger.debug("current viewer account id: " + viewerAccountId);
 
@@ -35,5 +38,4 @@ public class ViewerAdvice {
         }
         return userService.getAccount(viewerAccountId);
     }
- 
 }

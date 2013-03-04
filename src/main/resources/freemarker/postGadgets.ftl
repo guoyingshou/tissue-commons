@@ -4,60 +4,71 @@
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
 <#macro postForm>
-    <form id="createPostForm" method="post" action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_create'/>">
-        <fieldset class="post-type">
-            <legend>
-                <@spring.message 'i18n.topic.post.type' />
-                <span style="display: none">
-                    <@spring.message 'NotEmpty.type' />
-                </span>
-            </legend>
+<@spring.bind "post.*" />
+<form id="createPostForm" method="post" action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_create'/>">
+    <div class="error">
+        <@spring.showErrors "<br>" />
+        <span style="display: none">
+            <@spring.message 'NotNull.post.type' />
+        </span>
+    </div>
+    <fieldset class="post-type">
+        <legend>
+            <@spring.message 'i18n.topic.post.type' />
+        </legend>
 
-            <label>
-                <@spring.message 'i18n.topic.post.concept' />
-                <input type="radio" name="type" value="concept" />
-            </label>
-            <label>
-                <@spring.message 'i18n.topic.post.note' />
-                <input type="radio" name="type" value="note" />
-            </label>
-            <label>
-                <@spring.message 'i18n.topic.post.question' />
-                <input type="radio" name="type" value="question" />
-            </label>
-            <label>
-                <@spring.message 'i18n.topic.post.tutorial' />
-                <input type="radio" name="type" value="tutorial" />
-            </label>
-        </fieldset>
+        <label>
+            <@spring.message 'i18n.topic.post.concept' />
+            <input type="radio" name="type" value="concept" />
+        </label>
+        <label>
+            <@spring.message 'i18n.topic.post.note' />
+            <input type="radio" name="type" value="note" />
+        </label>
+        <label>
+            <@spring.message 'i18n.topic.post.question' />
+            <input type="radio" name="type" value="question" />
+        </label>
+        <label>
+            <@spring.message 'i18n.topic.post.tutorial' />
+            <input type="radio" name="type" value="tutorial" />
+        </label>
+    </fieldset>
 
-        <fieldset>
-            <legend>
-                <@spring.message "i18n.topic.post" />
-            </legend>
+    <fieldset>
+        <legend>
+            <@spring.message "i18n.topic.post" />
+        </legend>
 
-            <ul>
-                <li>
-                    <label for="title">
-                        <@spring.message "i18n.topic.post.title" />
-                    </label>
-                    <input type="input" class="sum" id="title" name="title" />
-                </li>
-                <li>
-                    <label for="editor">
-                        <@spring.message "i18n.topic.post.content" />
-                    </label>
-                    <textarea id="editor" name="content"></textarea>
-                </li>
-                <li>
-                    <input type="submit" value="<@spring.message 'i18n.button.publish'/>" />
-                </li>
-            </ul>
-        </fieldset>
-    </form>
-    <script type="text/javascript">
-        CKEDITOR.replace("editor");
-    </script>
+        <ul>
+            <li>
+                <label for="title">
+                    <@spring.message "i18n.topic.post.title" />
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.post.title' />
+                    </span>
+                </label>
+
+                <@spring.formInput "post.title" 'class="sum"' />
+            </li>
+            <li>
+                <label for="content">
+                    <@spring.message "i18n.topic.post.content" />
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.post.content' />
+                    </span>
+                </label>
+                <@spring.formTextarea "post.content" 'class="sum"' />
+            </li>
+            <li>
+                <input type="submit" value="<@spring.message 'i18n.button.publish'/>" />
+            </li>
+        </ul>
+    </fieldset>
+</form>
+<script type="text/javascript">
+    CKEDITOR.replace("content");
+</script>
 </#macro>
 
 <#macro updatePostForm>
@@ -70,14 +81,20 @@
             <li>
                 <label for="title">
                     <@spring.message "i18n.topic.post.title" />
-                </label>
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.post.title' />
+                    </span>
+                 </label>
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
-                <label for="editor">
+                <label for="content">
                     <@spring.message "i18n.topic.post.content" />
-                </label>
-                <textarea id="editor" name="content"></textarea>
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.post.content' />
+                    </span>
+                 </label>
+                <textarea id="content" name="content"></textarea>
             </li>
             <li>
                 <input type="submit" value="<@spring.message 'i18n.button.submit' />" />
@@ -96,8 +113,11 @@
             <li>
                 <label for="reason">
                     <@spring.message "i18n.topic.post.delete.reason" />
-                </label>
-                <textarea id="reason" name="content"></textarea>
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.reason' />
+                    </span>
+                 </label>
+                 <textarea id="reason" name="content"></textarea>
             </li>
             <li>
                 <input type="submit" value="<@spring.message 'i18n.button.submit' />"/>
