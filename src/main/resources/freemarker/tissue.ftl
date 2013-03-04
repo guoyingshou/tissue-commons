@@ -20,32 +20,19 @@
     </div>
 </#macro>
 
-<#macro oneItemForm>
-    <div id="oneItemForm" class="dialog pop-650" style="display: none">
-        <form method="post">
-            <legend><a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
-            <ul>
-                <li>
-                    <textarea id="editor" name="content"></textarea>
-                </li>
-                <li>
-                    <input type="submit" value="submit"/>
-                </li>
-            </ul>
-        </form>
+<#macro deleteConfirmForm>
+<form id="deleteConfirmForm" class="dialog pop-320" style="display:none" method="post">
+    <legend>
+        Warning
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <div class="message">
+          Are you sure that you really want to delete the selected item?
     </div>
-</#macro>
-
-<#macro confirmForm>
-    <form id="confirmForm" class="dialog pop-320" style="display:none">
-        <legend>confirm<a href="#" class="cancel"><span data-icon="&#xe008"></span></a></legend>
-        <div class="message">
-             Are you sure that you really want to delete the selected item?
-        </div>
-        <div>
-            <input type="submit" name="ok" value="Yes" />
-        </div>
-    </form>
+    <div>
+        <input type="submit" name="ok" value="Yes" />
+    </div>
+</form>
 </#macro>
 
 <#macro aboutForm>

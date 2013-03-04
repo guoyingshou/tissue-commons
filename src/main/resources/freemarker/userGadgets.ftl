@@ -394,7 +394,7 @@
                 </div>
 
                 <div class="ts">
-                    <a href="/group/topics/${plan.topic.id?replace("#", "")}/plans/${plan.id?replace("#", "")}">
+                    <a href="/group/topics/${plan.topic.id?replace("#", "")}/plans/${plan.id?replace("#", "")}/posts">
                         <@utilGadgets.showTimeRemaining plan.timeRemaining />
                     </a>
                 </div>
@@ -421,7 +421,7 @@
                 </div>
 
                 <div class="ts">
-                    <a href="/group/topics/${plan.topic.id?replace("#","")}/plans/${plan.id?replace("#", "")}">
+                    <a href="/group/topics/${plan.topic.id?replace("#","")}/plans/${plan.id?replace("#", "")}/posts">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>

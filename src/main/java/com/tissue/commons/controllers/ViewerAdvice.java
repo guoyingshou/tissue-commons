@@ -28,8 +28,6 @@ public class ViewerAdvice {
 
     @ModelAttribute("viewerAccount")
     public Account setupViewer(Map model) {
-        logger.debug("setup viewer");
-
         String viewerAccountId = SecurityUtil.getViewerAccountId();
         logger.debug("current viewer account id: " + viewerAccountId);
 

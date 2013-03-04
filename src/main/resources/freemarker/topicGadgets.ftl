@@ -44,26 +44,6 @@
     </form>
 </#macro>
 
-<#macro deleteTopicForm>
-    <form id="deleteTopicForm" class="dialog pop-650" style="display:none" method="post">
-        <legend>
-            <@spring.message "i18n.topic.delete" />
-            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-        </legend>
-        <ul>
-            <li>
-                <label for="reason">
-                    <@spring.message "i18n.topic.delete.reason" />
-                </label>
-                <textarea id="reason" name="content"></textarea>
-            </li>
-            <li>
-                <input type="submit" value="<@spring.message 'i18n.button.submit' />"/>
-            </li>
-        </ul>
-    </form>
-</#macro>
-
 <#macro createPlanForm>
     <form id="createPlanForm" class="dialog pop-320" style="display:none" action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/_create' />" method="post">
         <legend>
@@ -180,19 +160,19 @@
     </div>
 
     <#if !topic.deleted>
-    <@deleteTopicForm />
+    <@tissue.deleteConfirmForm />
     <#if viewerAccount?? && topic.isOwner(viewerAccount.id)>
         <@topicForm />
 
         <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
            <@spring.message 'i18n.action.edit' />
         </a>
-        <a class="delete-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
+        <a class="delete" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
                 <@spring.message 'i18n.topic.delete' />
         </a>
     <#else>
         <@sec.authorize access="hasRole('ROLE_ADMIN')">
-            <a class="delete-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
+            <a class="delete" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
                 <@spring.message 'i18n.topic.delete' />
             </a>
         </@sec.authorize>
@@ -232,7 +212,7 @@
             <@spring.message "i18n.topic.plan.live" />
         </h4>
         <div class="ts">
-            <a href="/group/topics/${topic.id?replace("#","")}/plans/${topic.activePlan.id?replace("#", "")}">
+            <a href="/group/topics/${topic.id?replace("#","")}/plans/${topic.activePlan.id?replace("#", "")}/posts">
                 <@utilGadgets.showTimeRemaining topic.activePlan.timeRemaining />
             </a>
         </div>
@@ -259,7 +239,7 @@
         <#list topic.archivedPlans as plan>
             <li>
                 <div class="ts">
-                    <a href="/group/topics/${topic.id?replace("#","")}/plans/${plan.id?replace("#", "")}">
+                    <a href="/group/topics/${topic.id?replace("#","")}/plans/${plan.id?replace("#", "")}/posts">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>
