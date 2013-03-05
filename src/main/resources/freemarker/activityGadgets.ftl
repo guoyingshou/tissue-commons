@@ -7,182 +7,51 @@
     <#list activities as activity>
 
         <#if activity.label = 'topic'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe004;"></span>
-                <div class="ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.topic" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@topicActivity activity />
         </#if>
 
         <#if activity.label = 'hostGroup'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.hostGroup" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@hostGroupActivity activity />
         </#if>
 
         <#if activity.label = 'joinGroup'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.joinGroup" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@joinGroupActivity activity />
         </#if>
 
         <#if activity.label = 'concept'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.concept" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@conceptActivity activity />
         </#if>
 
         <#if activity.label = 'note'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.note" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@noteActivity activity />
         </#if>
 
         <#if activity.label = 'tutorial'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.tutorial" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@tutorialActivity activity />
         </#if>
 
         <#if activity.label = 'question'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.question" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@questionActivity activity />
         </#if>
 
         <#if activity.label = 'postMessage'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.postMessage" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@postMessageActivity activity />
         </#if>
 
         <#if activity.label = 'postMessageComment'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.postMessageComment" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@postMessageCommentActivity activity />
         </#if>
 
         <#if activity.label = 'questionComment'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.questionComment" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@questionCommentActivity activity />
         </#if>
 
         <#if activity.label = 'answer'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.answer" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@answerActivity activity />
         </#if>
 
         <#if activity.label = 'answerComment'>
-            <li class="activity-item">
-                <span class="activity-icon" data-icon="&#xe001;"></span>
-                <div class="activity-ts">
-                    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                        ${activity.who.displayName}
-                    </a> 
-                    <@utilGadgets.showTimeBefore activity.timeBefore />
-                </div>
-                <div>
-                    <span><@spring.messageArgs "i18n.activity.answerComment" activity.messageArgs /></span>
-                </div>
-            </li>
+        <@answerCommentActivity activity />
         </#if>
 
      </#list>
@@ -190,3 +59,120 @@
     </#if>
 </#macro>
 
+<#macro actorInfo activity code>
+<span class="activity-icon" data-icon="${code}"></span>
+<div class="activity-ts">
+    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
+        ${activity.who.displayName}
+    </a> 
+    <@utilGadgets.showTimeBefore activity.timeBefore />
+</div>
+</#macro>
+
+<#macro topicActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe004;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.topic" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro hostGroupActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe001;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.hostGroup" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro joinGroupActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe001;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.joinGroup" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro conceptActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe002;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.concept" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro noteActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe003;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.note" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro tutorialActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe004;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.tutorial" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro questionActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe004;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.question" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro postMessageActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe004;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.postMessage" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro postMessageCommentActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe004;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.postMessageComment" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro questionCommentActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe004;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.questionComment" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro answerActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe004;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.answer" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>
+
+<#macro answerCommentActivity activity>
+<li class="activity-item">
+    <@actorInfo activity "&#xe001;" />
+    <div>
+        <span><@spring.messageArgs "i18n.activity.answerComment" activity.messageArgs /></span>
+    </div>
+</li>
+</#macro>

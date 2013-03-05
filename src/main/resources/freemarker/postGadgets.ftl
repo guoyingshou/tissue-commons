@@ -471,10 +471,10 @@
 
                     <div class="response">
                     <#if !(topic.deleted ||post.deleted) && viewerAccount?? && post.plan.isActive() && comment.isOwner(viewerAccount.id)>
-                        <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/answers/${answer.id?replace("#","")}/answerComments/${comment.id?replace("#","")}/_delete' />" href="#">
+                        <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#","")}/_delete' />" href="#">
                             <@spring.message 'i18n.action.delete' />
                         </a>
-                         <a class="update-answerComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/answers/${answer.id?replace("#","")}/answerComments/${comment.id?replace("#", "")}/_update'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
+                         <a class="update-answerComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#", "")}/_update'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                             <@spring.message 'i18n.action.edit' />
                         </a>
                     </#if>
