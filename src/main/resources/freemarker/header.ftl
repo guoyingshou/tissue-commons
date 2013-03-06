@@ -25,8 +25,8 @@
 
     </head>
     <body>
-        <div id="page-header-wrapper" class="wrapper">
-            <div id="page-header" class="center">
+        <div id="page-header-wrapper">
+            <div id="page-header" class="page-center">
                 <ul class="nav-left nav-item">
                     <#if viewerAccount??>
                         <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.home" /></a></li>

@@ -1,4 +1,5 @@
 <#import 'spring.ftl' as spring />
+<#import 'commonGadgets.ftl' as commonGadgets />
 <#import 'utilGadgets.ftl' as utilGadgets />
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
@@ -67,7 +68,9 @@
     </fieldset>
 </form>
 <script type="text/javascript">
-    CKEDITOR.replace("content");
+    CKEDITOR.replace("content", {
+        filebrowserUploadUrl: '/media/images/_create' 
+    });
 </script>
 </#macro>
 
@@ -340,13 +343,13 @@
     <@updatePostForm />
     <@postMessageForm />
     <@postMessageCommentForm />
-    <@tissue.deleteConfirmForm />
+    <@commonGadgets.deleteConfirmForm />
 <#else>
     <@sec.authorize access="hasRole('ROLE_ADMIN')">
         <@updatePostForm />
         <@postMessageForm />
         <@postMessageCommentForm />
-        <@tissue.deleteConfirmForm />
+        <@commonGadgets.deleteConfirmForm />
     </@sec.authorize>
 </#if>
 </#macro>
@@ -493,14 +496,14 @@
     <@questionCommentForm />
     <@answerForm />
     <@answerCommentForm />
-    <@tissue.deleteConfirmForm />
+    <@commonGadgets.deleteConfirmForm />
 <#else>
     <@sec.authorize access="hasRole('ROLE_ADMIN')">
         <@updatePostForm />
         <@questionCommentForm />
         <@answerForm />
         <@answerCommentForm />
-        <@tissue.deleteConfirmForm />
+        <@commonGadgets.deleteConfirmForm />
     </@sec.authorize>
 </#if>
 </#macro>

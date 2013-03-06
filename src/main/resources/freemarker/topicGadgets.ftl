@@ -1,4 +1,5 @@
 <#import 'spring.ftl' as spring />
+<#import 'commonGadgets.ftl' as commonGadgets />
 <#import 'utilGadgets.ftl' as utilGadgets />
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
@@ -20,13 +21,13 @@
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
-                <label for="editor">
+                <label for="content">
                     <@spring.message "i18n.topic.objective" />
                     <span class="error" style="display: none">
                         <@spring.message "NotEmpty.topic.objective" />
                     </span>
                  </label>
-                <textarea class="sum" id="editor" name="content"></textarea>
+                <textarea class="sum" id="content" name="content"></textarea>
             </li>
             <li>
                 <label for="tags">
@@ -77,40 +78,43 @@
     </form>
 </#macro>
 
-<#macro topicLogo title='posts'>
+
+<#macro topicLogo>
   <h1>
       <a href="<@spring.url '/topics/${topic.id?replace("#","")}/posts' />">${topic.title}</a>
   </h1>
-  <div>
+</#macro>
+
+<#macro topicMenu page='posts'>
       <ul class="menu">
           <li>
-              <a class="<#if title = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
+              <a class="<#if page = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
                   <@spring.message "i18n.topic.post.all" />
               </a>
           </li>
 
           <li>
-              <a class="<#if title = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
+              <a class="<#if page = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
                   <@spring.message "i18n.topic.post.concept" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
+              <a class="<#if page = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
                   <@spring.message "i18n.topic.post.note" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
+              <a class="<#if page = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
                   <@spring.message "i18n.topic.post.question" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
+              <a class="<#if page = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
                   <@spring.message "i18n.topic.post.tutorial" />
               </a>
           </li>
           <li>
-              <a class="<#if title = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
+              <a class="<#if page = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
                   <@spring.message "i18n.topic.objective" />
               </a>
           </li>
@@ -140,7 +144,6 @@
         </#if>
         </#if>
     </u>
-  </div>
 </#macro>
 
 <#macro showTopicDetails>
@@ -160,7 +163,7 @@
     </div>
 
     <#if !topic.deleted>
-    <@tissue.deleteConfirmForm />
+    <@commonGadgets.deleteConfirmForm />
     <#if viewerAccount?? && topic.isOwner(viewerAccount.id)>
         <@topicForm />
 

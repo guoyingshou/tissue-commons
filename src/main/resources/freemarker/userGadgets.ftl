@@ -1,5 +1,4 @@
 <#import 'spring.ftl' as spring />
-<#import 'tissue.ftl' as tissue />
 <#import 'utilGadgets.ftl' as utilGadgets />
 
 <#macro signupForm>
@@ -219,7 +218,7 @@
     </legend>
     <ul>
         <li>
-            <textarea id="editor" name="content"></textarea>
+            <textarea id="content" name="content"></textarea>
         </li>
         <li>
            <input type="submit" value="submit"/>
@@ -233,8 +232,10 @@
        <@spring.message "i18n.common.sitename" />
        <span><@spring.message "i18n.common.siteslogan" /></span>
    </h1>
+</#macro>
+
+<#macro homeMenu>
    <#if viewerAccount??>
-   <div>
    <ul class="menu">
        <li>
            <a href="<@spring.url '/dashboard' />">
@@ -260,16 +261,17 @@
        </li>
        </#if>
    </ul>
-   </div>
    </#if>
 </#macro>
 
 <#macro userLogo>
-    <div>
-        <h1>
-            <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.displayName}</a>
-            <span>${owner.headline!""}</span>
-        </h1>
+    <h1>
+        <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.displayName}</a>
+        <span>${owner.headline!""}</span>
+    </h1>
+</#macro>
+
+<#macro userMenu>
         <ul class="menu">
             <li>
                 <a href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
@@ -281,13 +283,6 @@
                     <@spring.message "i18n.user.menu.status" />
                 </a>
             </li>
-            <#--
-            <li>
-                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/resume' />">
-                    <@spring.message "i18n.user.menu.resume" />
-                </a>
-            </li>
-            -->
             <li>
                 <a href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
                     <@spring.message "i18n.user.menu.impressions" />
@@ -304,9 +299,9 @@
             <@inviteForm />
             </#if>
         </ul>
-    </div>
 </#macro>
 
+<#--
 <#macro showResume>
     <div class="resume">
         ${owner.resume!''}
@@ -316,6 +311,7 @@
         <a class="edit-resume" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/resume/_create' />" data-target="div.resume" href="#">edit</a>
     </#if>
 </#macro>
+-->
 
 <#macro showImpressions>
     <ul class="impressions">
