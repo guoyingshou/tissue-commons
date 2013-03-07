@@ -1,45 +1,44 @@
 <#import 'spring.ftl' as spring />
 <#import 'commonGadgets.ftl' as commonGadgets />
-<#import 'utilGadgets.ftl' as utilGadgets />
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
 <#macro topicForm>
     <form id="topicForm" class="dialog pop-650" style="display:none" method="post">
         <legend>
-            <@spring.message "i18n.topic" />
+            <@spring.message "Legend.topicForm" />
             <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
         </legend>
         <ul>
             <li>
                 <label for="title">
-                    <@spring.message "i18n.topic.title" />
+                    <@spring.message "Label.topicForm.title" />
                     <span class="error" style="display: none">
-                        <@spring.message "NotEmpty.topic.title" />
+                        <@spring.message "NotEmpty.topicForm.title" />
                     </span>
                 </label>
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
                 <label for="content">
-                    <@spring.message "i18n.topic.objective" />
+                    <@spring.message "Label.topicForm.objective" />
                     <span class="error" style="display: none">
-                        <@spring.message "NotEmpty.topic.objective" />
+                        <@spring.message "NotEmpty.topicForm.objective" />
                     </span>
                  </label>
                 <textarea class="sum" id="content" name="content"></textarea>
             </li>
             <li>
                 <label for="tags">
-                    <@spring.message "i18n.topic.tags" />
+                    <@spring.message "Label.topicForm.tags" />
                     <span class="error" style="display: none">
-                        <@spring.message "NotEmpty.topic.tags" />
+                        <@spring.message "NotEmpty.topicForm.tags" />
                     </span>
                  </label>
                 <input type="input" class="sum" id="tags" name="tags" />
             </li>
             <li>
-                <input type="submit" value="<@spring.message 'i18n.button.submit'/>" />
+                <input type="submit" value="<@spring.message 'Submit.button'/>" />
             </li>
         </ul>
     </form>
@@ -48,7 +47,7 @@
 <#macro createPlanForm>
     <form id="createPlanForm" class="dialog pop-320" style="display:none" action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/_create' />" method="post">
         <legend>
-            <@spring.message 'i18n.topic.plan.duration' />
+            <@spring.message 'Legend.planForm' />
             <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
         </legend>
 
@@ -56,23 +55,23 @@
             <li>
                 <label>
                     <input type="radio" name="duration" checked value="1" />
-                    <@spring.message 'i18n.topic.plan.duration.1month' />
+                    <@spring.message 'Label.planForm.duration1' />
                 </label>
             </li>
             <li>
                 <label>
                     <input type="radio" name="duration" value="3" />
-                    <@spring.message 'i18n.topic.plan.duration.3month' />
+                    <@spring.message 'Label.planForm.duration2' />
                 </label>
             </li>
             <li>
                 <label>
                     <input type="radio" name="duration" value="6" />
-                    <@spring.message 'i18n.topic.plan.duration.6month' />
+                    <@spring.message 'Label.planForm.duration3' />
                 </label>
             </li>
             <li>
-                <input type="submit" value="<@spring.message 'i18n.button.submit'/>" />
+                <input type="submit" value="<@spring.message 'Submit.button'/>" />
             </li>
         </ul>
     </form>
@@ -86,71 +85,70 @@
 </#macro>
 
 <#macro topicMenu page='posts'>
-      <ul class="menu">
-          <li>
-              <a class="<#if page = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
-                  <@spring.message "i18n.topic.post.all" />
-              </a>
-          </li>
+  <ul class="menu">
+      <li>
+          <a class="<#if page = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
+              <@spring.message "Menu.topic.posts.all" />
+          </a>
+      </li>
+      <li>
+          <a class="<#if page = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
+              <@spring.message "Menu.topic.posts.concept" />
+          </a>
+      </li>
+      <li>
+          <a class="<#if page = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
+              <@spring.message "Menu.topic.posts.note" />
+          </a>
+      </li>
+      <li>
+          <a class="<#if page = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
+              <@spring.message "Menu.topic.posts.tutorial" />
+          </a>
+      </li>
+      <li>
+          <a class="<#if page = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
+              <@spring.message "Menu.topic.posts.question" />
+          </a>
+      </li>
+      <li>
+          <a class="<#if page = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
+              <@spring.message "Menu.topic.objective" />
+          </a>
+      </li>
+</ul>
 
-          <li>
-              <a class="<#if page = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
-                  <@spring.message "i18n.topic.post.concept" />
-              </a>
-          </li>
-          <li>
-              <a class="<#if page = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
-                  <@spring.message "i18n.topic.post.note" />
-              </a>
-          </li>
-          <li>
-              <a class="<#if page = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
-                  <@spring.message "i18n.topic.post.question" />
-              </a>
-          </li>
-          <li>
-              <a class="<#if page = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
-                  <@spring.message "i18n.topic.post.tutorial" />
-              </a>
-          </li>
-          <li>
-              <a class="<#if page = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
-                  <@spring.message "i18n.topic.objective" />
-              </a>
-          </li>
-    </ul>
-
-    <ul class="action">
-        <#if viewerAccount??>
-        <#if !topic.isDeleted() && topic.activePlan??>
-        <li>
-            <#if topic.activePlan.isOwner(viewerAccount.id) || topic.activePlan.isMember(viewerAccount.id)>
-                <a id="create-post" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_form'/>">
-                    <@spring.message "i18n.topic.post.create" />
-                </a>
-            <#else>
-                <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
-                    <@spring.message "i18n.topic.plan.joinPlan" />
-                </a>
-            </#if> 
-        </li>
+<ul class="action">
+    <#if viewerAccount??>
+    <#if !topic.isDeleted() && topic.activePlan??>
+    <li>
+        <#if topic.activePlan.isOwner(viewerAccount.id) || topic.activePlan.isMember(viewerAccount.id)>
+        <a id="create-post" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_form'/>">
+            <@spring.message "Create.topic.post" />
+        </a>
         <#else>
-        <li>
-            <@createPlanForm />
-            <a class="create-plan" href="#">
-                <@spring.message "i18n.topic.plan.hostPlan" />
-            </a>
-        </li>
-        </#if>
-        </#if>
-    </u>
+        <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
+            <@spring.message "Join.topic.plan" />
+        </a>
+        </#if> 
+    </li>
+    <#else>
+    <li>
+        <@createPlanForm />
+        <a class="create-plan" href="#">
+            <@spring.message "Host.topic.plan" />
+        </a>
+    </li>
+    </#if>
+    </#if>
+</u>
 </#macro>
 
 <#macro showTopicDetails>
     <div class="ts">
         <span>
             ${topic.account.user.displayName}
-            [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
+            [ <@commonGadgets.showTimeBefore topic.timeBefore /> ]
         </span>
     </div>
     <div class="tags">
@@ -168,15 +166,15 @@
         <@topicForm />
 
         <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
-           <@spring.message 'i18n.action.edit' />
+           <@spring.message 'Update.topic' />
         </a>
         <a class="delete" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'i18n.topic.delete' />
+                <@spring.message 'Delete.topic' />
         </a>
     <#else>
         <@sec.authorize access="hasRole('ROLE_ADMIN')">
             <a class="delete" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'i18n.topic.delete' />
+                <@spring.message 'Delete.topic' />
             </a>
         </@sec.authorize>
     </#if>
@@ -189,7 +187,7 @@
         <li>
             <div class="ts">
                 <a href="/social/users/${topic.account.user.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
-                [ <@utilGadgets.showTimeBefore topic.timeBefore /> ]
+                [ <@commonGadgets.showTimeBefore topic.timeBefore /> ]
             </div>
             <div class="title">
                 <a href="/group/topics/${topic.id?replace("#", "")}/objective">${topic.title}</a>
@@ -212,11 +210,11 @@
     <#if topic.activePlan??>
     <div>
         <h4>
-            <@spring.message "i18n.topic.plan.live" />
+            <@spring.message "Live.topic.plan" />
         </h4>
         <div class="ts">
             <a href="/group/topics/${topic.id?replace("#","")}/plans/${topic.activePlan.id?replace("#", "")}/posts">
-                <@utilGadgets.showTimeRemaining topic.activePlan.timeRemaining />
+                <@commonGadgets.showTimeRemaining topic.activePlan.timeRemaining />
             </a>
         </div>
 
@@ -236,7 +234,7 @@
     <#if topic.archivedPlans??>
     <div>
         <h4>
-            <@spring.message "i18n.topic.plan.archived" />
+            <@spring.message "Archived.topic.plans" />
         </h4>
         <ul>
         <#list topic.archivedPlans as plan>
@@ -264,14 +262,14 @@
 <#macro showNewTopics>
     <div>
         <h4>
-            <@spring.message "i18n.topic.newTopics" />
+            <@spring.message "Latest.topics" />
         </h4>
         <ul>
         <#list newTopics as topic>
             <li>
                 <div class="ts">
                      <a href="/social/users/${topic.account.user.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
-                     <@utilGadgets.showTimeBefore topic.timeBefore />
+                     <@commonGadgets.showTimeBefore topic.timeBefore />
                 </div>
                 <div>
                     <a href="/group/topics/${topic.id?replace("#", "")}/posts">

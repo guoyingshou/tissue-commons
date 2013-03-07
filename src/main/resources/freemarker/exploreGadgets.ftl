@@ -3,8 +3,8 @@
 
 <#macro exploreLogo>
     <h1>
-        <@spring.message "i18n.common.sitename" />
-        <span><@spring.message "i18n.common.siteslogan" />
+        <@spring.message "Sitename" />
+        <span><@spring.message "Siteslogan" />
     </h1>
 </#macro>
 
@@ -12,22 +12,22 @@
     <ul class="menu">
         <li>
             <a class="<#if page = 'trending'>current</#if>" href="<@spring.url '/explore' />">
-                <@spring.message "i18n.explore.menu.trending" />
+                <@spring.message "Menu.explore.trending" />
             </a>
         </li>
         <li>
             <a class="<#if page = 'featured'>current</#if>" href="<@spring.url '/featured' />">
-                <@spring.message "i18n.explore.menu.featured" />
+                <@spring.message "Menu.explore.featured" />
             </a>
         </li>
         <li>
             <a class="<#if page = 'topics'>current</#if>" href="<@spring.url '/topics' />">
-                <@spring.message "i18n.explore.menu.topics" />
+                <@spring.message "Menu.explore.topics" />
             </a>
         </li>
         <li>
             <a class="<#if page = 'tags'>current</#if>" href="<@spring.url '/tags' />">
-                <@spring.message "i18n.explore.menu.tags" />
+                <@spring.message "Menu.explore.tags" />
             </a>
         </li>
     </ul>
@@ -37,7 +37,7 @@
     <ul class="action">
         <li>
             <a class="create-topic" data-action="<@spring.url '/topics/_create' />" href="#">
-                <@spring.message "i18n.explore.action.createTopic" />
+                <@spring.message "Menu.explore.createTopic" />
             </a>
         </li>
     </ul>

@@ -1,6 +1,5 @@
 <#import 'spring.ftl' as spring />
 <#import 'commonGadgets.ftl' as commonGadgets />
-<#import 'utilGadgets.ftl' as utilGadgets />
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
@@ -10,43 +9,43 @@
     <div class="error">
         <@spring.showErrors "<br>" />
         <span style="display: none">
-            <@spring.message 'NotNull.post.type' />
+            <@spring.message 'NotNull.postForm.type' />
         </span>
     </div>
     <fieldset class="post-type">
         <legend>
-            <@spring.message 'i18n.topic.post.type' />
+            <@spring.message 'Legend.postForm.type' />
         </legend>
 
         <label>
-            <@spring.message 'i18n.topic.post.concept' />
+            <@spring.message 'Label.postForm.concept' />
             <input type="radio" name="type" value="concept" />
         </label>
         <label>
-            <@spring.message 'i18n.topic.post.note' />
+            <@spring.message 'Label.postForm.note' />
             <input type="radio" name="type" value="note" />
         </label>
         <label>
-            <@spring.message 'i18n.topic.post.question' />
-            <input type="radio" name="type" value="question" />
+            <@spring.message 'Label.postForm.tutorial' />
+            <input type="radio" name="type" value="tutorial" />
         </label>
         <label>
-            <@spring.message 'i18n.topic.post.tutorial' />
-            <input type="radio" name="type" value="tutorial" />
+            <@spring.message 'Label.postForm.question' />
+            <input type="radio" name="type" value="question" />
         </label>
     </fieldset>
 
     <fieldset>
         <legend>
-            <@spring.message "i18n.topic.post" />
+            <@spring.message "Legend.postForm" />
         </legend>
 
         <ul>
             <li>
                 <label for="title">
-                    <@spring.message "i18n.topic.post.title" />
+                    <@spring.message "Label.postForm.title" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.post.title' />
+                        <@spring.message 'NotEmpty.postForm.title' />
                     </span>
                 </label>
 
@@ -54,15 +53,15 @@
             </li>
             <li>
                 <label for="content">
-                    <@spring.message "i18n.topic.post.content" />
+                    <@spring.message "Label.postForm.content" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.post.content' />
+                        <@spring.message 'NotEmpty.postForm.content' />
                     </span>
                 </label>
                 <@spring.formTextarea "post.content" 'class="sum"' />
             </li>
             <li>
-                <input type="submit" value="<@spring.message 'i18n.button.publish'/>" />
+                <input type="submit" value="<@spring.message 'Publish.button'/>" />
             </li>
         </ul>
     </fieldset>
@@ -77,30 +76,30 @@
 <#macro updatePostForm>
     <form id="updatePostForm" class="dialog pop-650" style="display:none" method="post">
         <legend>
-            <@spring.message "i18n.topic.post" />
+            <@spring.message "Legend.postForm" />
             <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
         </legend>
         <ul>
             <li>
                 <label for="title">
-                    <@spring.message "i18n.topic.post.title" />
+                    <@spring.message "Label.postForm.title" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.post.title' />
+                        <@spring.message 'NotEmpty.postForm.title' />
                     </span>
                  </label>
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
                 <label for="content">
-                    <@spring.message "i18n.topic.post.content" />
+                    <@spring.message "Label.postForm.content" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.post.content' />
+                        <@spring.message 'NotEmpty.postForm.content' />
                     </span>
                  </label>
                 <textarea id="content" name="content"></textarea>
             </li>
             <li>
-                <input type="submit" value="<@spring.message 'i18n.button.submit' />" />
+                <input type="submit" value="<@spring.message 'Submit.button' />" />
             </li>
         </ul>
     </form>
@@ -209,7 +208,7 @@
 
        <div class="ts has-icon-before">
            <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
-           [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
+           [ <@commonGadgets.showTimeBefore post.timeBefore /> ]
        </div>
        <div class="title has-icon-before">
            <a href="/group/topics/${post.plan.topic.id?replace("#", "")}/posts/${post.id?replace("#","")}" class="post">${post.title}</a>
@@ -225,7 +224,7 @@
         <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">
             ${post.account.user.displayName} 
         </a>
-        [ <@utilGadgets.showTimeBefore post.timeBefore /> ] 
+        [ <@commonGadgets.showTimeBefore post.timeBefore /> ] 
     </div>
 
     <h3 class="item-title">
@@ -243,28 +242,28 @@
     <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive()>
     <#if post.isOwner(viewerAccount.id)>
         <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/_delete' />" href="#">
-            <@spring.message 'i18n.action.delete' />
+            <@spring.message 'Delete.post' />
         </a>
         <a class="update-post action" data-type="${post.type}" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/_update' />" href="#">
-            <@spring.message 'i18n.action.edit' />
+            <@spring.message 'Update.post' />
         </a>
 
         <a class="create-postMessage action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
-            <@spring.message 'i18n.action.addMessage' />
+            <@spring.message 'AddMessage.post' />
         </a>
     <#elseif post.plan.isOwner(viewerAccount.id) || post.plan.isMember(viewerAccount.id)>
        <@sec.authorize access="hasRole('ROLE_ADMIN')">
             <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'i18n.action.delete' />
+                <@spring.message 'Delete.post' />
             </a>
         </@sec.authorize>
         <a class="create-postMessage action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
-            <@spring.message 'i18n.action.addMessage' />
+            <@spring.message 'AddMessage.post' />
         </a>
      <#else>
         <@sec.authorize access="hasRole('ROLE_ADMIN')">
             <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'i18n.action.delete' />
+                <@spring.message 'Delete.post' />
             </a>
         </@sec.authorize>
      </#if>
@@ -280,7 +279,7 @@
             <a href="/social/users/${msg.account.user.id?replace("#","")}/posts">
                 ${msg.account.user.displayName}  
             </a>
-            [ <@utilGadgets.showTimeBefore msg.timeBefore /> ]
+            [ <@commonGadgets.showTimeBefore msg.timeBefore /> ]
         </div>
 
         <div id="message-${msg.id?replace("#", "")?replace(":", "-")}-content" class="item-content">
@@ -291,15 +290,15 @@
         <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive()>
         <#if msg.isOwner(viewerAccount.id)>
             <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#","")}/posts/${post.id?replace("#","")}/messages/${msg.id?replace("#","")}/_delete' />" href="#">
-                <@spring.message 'i18n.action.delete' />
+                <@spring.message 'Delete.message' />
             </a>
             <a class="update-postMessage action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/messages/${msg.id?replace("#", "")}/_update' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-content" href="#">
-                <@spring.message 'i18n.action.edit' />
+                <@spring.message 'Update.message' />
             </a>
         </#if>
         <#if post.plan.isOwner(viewerAccount.id) || post.plan.isMember(viewerAccount.id)>
             <a class="create-postMessageComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/messages/${msg.id?replace("#", "")}/comments/_create' />" href="#">
-                <@spring.message 'i18n.action.reply' />
+                <@spring.message 'Reply.message' />
             </a>
         </#if>
         </#if>
@@ -313,7 +312,7 @@
                     <a href="/social/users/${comment.account.user.id?replace("#", "")}/posts">
                         ${comment.account.user.displayName} 
                     </a>
-                    [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
+                    [ <@commonGadgets.showTimeBefore comment.timeBefore /> ]
                 </div>
 
                 <div id="message-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" class="item-content">
@@ -323,10 +322,10 @@
                 <div class="response">
                 <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive() && comment.isOwner(viewerAccount.id)>
                     <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/messages/${msg.id?replace("#","")}/messageComments/${comment.id?replace("#", "")}/_delete' />" href="#">
-                        <@spring.message 'i18n.action.delete' />
+                        <@spring.message 'Delete.comment' />
                     </a>
                     <a class="update-postMessageComment action" data-action="<@spring.url '/topics/${topic.id?replace("#","")}/posts/${post.id?replace("#","")}/messages/${msg.id?replace("#","")}/messageComments/${comment.id?replace("#", "")}/_update"}' />" data-target="#message-comment-${comment.id?replace("#","")?replace(":", "-")}-content" href="#">
-                        <@spring.message 'i18n.action.edit' />
+                        <@spring.message 'Update.comment' />
                     </a>
                 </#if>
                 </div>
@@ -360,7 +359,7 @@
             <a href="/social/users/${post.account.user.id?replace("#","")}/posts">
                 ${post.account.user.displayName} 
             </a>
-            [ <@utilGadgets.showTimeBefore post.timeBefore /> ]
+            [ <@commonGadgets.showTimeBefore post.timeBefore /> ]
         </div>
 
         <h3 class="item-title">${post.title}</h3>
@@ -403,7 +402,7 @@
                 <a href="/social/users/${questionComment.account.user.id?replace("#","")}/posts">
                     ${questionComment.account.user.displayName} 
                 </a>
-                [ <@utilGadgets.showTimeBefore questionComment.timeBefore /> ]
+                [ <@commonGadgets.showTimeBefore questionComment.timeBefore /> ]
             </div>
 
             <div id="question-comment-${questionComment.id?replace("#","")?replace(":", "-")}-content" class="item-content">
@@ -433,7 +432,7 @@
                 <a href="/social/users/${answer.account.user.id?replace("#","")}/posts">
                     ${answer.account.user.displayName} 
                 </a>
-                [ <@utilGadgets.showTimeBefore answer.timeBefore /> ]
+                [ <@commonGadgets.showTimeBefore answer.timeBefore /> ]
             </div>
             <div id="answer-${answer.id?replace("#", "")?replace(":", "-")}-content" class="item-content">
                 ${answer.content}
@@ -465,7 +464,7 @@
                         <a href="/social/users/${comment.account.user.id?replace("#","")}/posts">
                             ${comment.account.user.displayName} 
                         </a>
-                        [ <@utilGadgets.showTimeBefore comment.timeBefore /> ]
+                        [ <@commonGadgets.showTimeBefore comment.timeBefore /> ]
                     </div>
 
                     <div id="answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" class="item-content">

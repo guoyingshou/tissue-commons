@@ -1,5 +1,5 @@
 <#import 'spring.ftl' as spring />
-<#import 'utilGadgets.ftl' as utilGadgets />
+<#import 'commonGadgets.ftl' as commonGadgets />
 
 <#macro signupForm>
 <@spring.bind 'user.*' />
@@ -9,55 +9,59 @@
     </div>
 
     <legend>
-        <@spring.message "i18n.user.signup" />
-        <span class="requirement"><@spring.message "i18n.user.signup.requirement" /></span>
+        <@spring.message "Legend.signupForm" />
+        <span class="requirement">
+            <@spring.message "Require.signupForm" />
+        </span>
     </legend>
     <ul>
         <li>
             <label for="username">
-                <@spring.message "i18n.user.username" />
+                <@spring.message "Label.signupForm.username" />
                 <span style="display: none" class="error">
-                    <@spring.message "Taken.username" />
+                    <@spring.message "Taken.signupForm.username" />
                 </span>
             </label>
             <@spring.formInput "user.username" 'class="sum"' />
         </li>
         <li>
             <label for="password">
-                <@spring.message "i18n.user.password" />
-                <span class="requirement"><@spring.message "i18n.user.password.requirement" /></span>
+                <@spring.message "Label.signupForm.password" />
+                <span class="requirement">
+                    <@spring.message "Size.signupForm.password" />
+                </span>
             </label>
             <@spring.formPasswordInput "user.password" 'class="sum"' />
         </li>
         <li>
             <label for="confirm">
-                <@spring.message "i18n.user.confirm" />
+                <@spring.message "Label.signupForm.confirm" />
             </label>
             <@spring.formPasswordInput "user.confirm" 'class="sum"' />
         </li>
         <li>
             <label for="email">
-                <@spring.message "i18n.user.email" />
+                <@spring.message "Label.signupForm.email" />
                 <span style="display: none" class="error">
-                    <@spring.message "Taken.email" />
+                    <@spring.message "Taken.signupForm.email" />
                 </span>
             </label>
             <@spring.formInput "user.email" 'class="sum"'/>
         </li>
         <li>
             <label for="displayName">
-                <@spring.message "i18n.user.displayName" />
+                <@spring.message "Label.signupForm.displayName" />
             </label>
             <@spring.formInput "user.displayName" 'class="sum"'/>
         </li>
         <li>
             <label for="headline">
-                <@spring.message "i18n.user.headline" />
+                <@spring.message "Label.signupForm.headline" />
             </label>
             <@spring.formTextarea "user.headline" "class='sum'" />
         </li>
         <li>
-            <input type="submit" value='<@spring.message "i18n.button.signup" />' />
+            <input type="submit" value='<@spring.message "Signup.button" />' />
         </li>
     </ul>
 </form>
@@ -68,25 +72,25 @@
     <#if error??>
     <div>
         <span class="error">
-            <@spring.message "Invalid.usernameOrPassword" />
+            <@spring.message "Invalid.signinForm" />
         </span>
     </div>
     </#if>
 
     <legend>
-        <@spring.message "i18n.user.signin" />
+        <@spring.message "Legend.signupForm" />
     </legend>
     <ul>
         <li>
-            <label for="sign-username"><@spring.message "i18n.user.username" /></label>
+            <label for="sign-username"><@spring.message "Label.signinForm.username" /></label>
             <input type="text" class="sum" id="sign-username" name="j_username" size="20" maxlength="50" />
         </li>
         <li>
-            <label for="sign-password"><@spring.message "i18n.user.password" /></label>
+            <label for="sign-password"><@spring.message "Label.signinForm.password" /></label>
             <input type="password" class="sum" id="sign-password" name="j_password" size="20" maxlength="50" />
         </li>
         <li>
-            <input type="submit" value='<@spring.message "i18n.button.signin" />'/>
+            <input type="submit" value='<@spring.message "Signin.button" />'/>
         </li>
     </ul>
 </form>
@@ -95,7 +99,7 @@
 <#macro updateEmailForm>
 <form id="updateEmailForm" class="dialog pop-420" style="display: none" method="post">
     <legend>
-        <@spring.message "i18n.user.updateEmail" />
+        <@spring.message "Legend.emailForm" />
         <a href="#" class="cancel">
             <span data-icon="&#xe008"></span>
         </a>
@@ -103,15 +107,15 @@
     <ul>
         <li>
             <label for="email">
-                <@spring.message "i18n.user.email" />
-                <span id="updateEmailFail" style="display: none" class="error">
-                    <@spring.message "Fail.email" />
+                <@spring.message "Label.emailForm.email" />
+                <span style="display: none" class="error">
+                    <@spring.message "NotValid.emailForm.email" />
                 </span>
             </label>
             <input class="sum" type="input" id="email" name="email" value="${viewerAccount.email!""}" />
         </li>
         <li>
-            <input type="submit" value='<@spring.message "i18n.button.save"/>'/>
+            <input type="submit" value='<@spring.message "Save.button"/>'/>
         </li>
     </ul>
 </form>
@@ -120,35 +124,35 @@
 <#macro updateProfileForm>
 <form id="updateProfileForm" class="dialog pop-420" style="display: none" method="post">
     <legend>
-        <@spring.message "i18n.user.updateProfile" />
+        <@spring.message "Legend.profileForm" />
         <a href="#" class="cancel cancel-profile-edit">
             <span data-icon="&#xe008"></span>
         </a>
     </legend>
     <div id="failUpdateProfile" class="error" style="display: none">
-        <@spring.message "Fail.profile" />
+        <@spring.message "Fail.profileForm" />
     </div>
     <ul>
         <li>
             <label for="displayName">
-                <@spring.message "i18n.user.displayName" />
+                <@spring.message "Label.profileForm.displayName" />
                 <span id="empty-displayName" class="error" style="display: none">
-                    <@spring.message "NotEmpty.displayName" />
+                    <@spring.message "NotEmpty.profileForm.displayName" />
                 </span>
             </label>
             <input type="input" class="sum" id="displayName" name="displayName" value="${viewerAccount.user.displayName}" />
         </li>
         <li>
             <label for="headline">
-                <@spring.message "i18n.user.headline" />
+                <@spring.message "Label.profileForm.headline" />
                 <span id="empty-headline" class="error" style="display: none">
-                    <@spring.message "NotEmpty.headline" />
+                    <@spring.message "NotEmpty.profileForm.headline" />
                 </span>
             </label>
             <textarea class="sum" id="headline" name="headline">${viewerAccount.user.headline!""}</textarea>
         </li>
         <li>
-            <input type="submit" value='<@spring.message "i18n.button.save" />' />
+            <input type="submit" value='<@spring.message "Save.button" />' />
         </li>
     </ul>
 </form>
@@ -157,7 +161,7 @@
 <#macro updatePasswordForm>
 <form id="updatePasswordForm" class="dialog pop-420" style="display:none" method="post">
     <legend>
-        <@spring.message "i18n.user.updatePassword" />
+        <@spring.message "Legend.passwordForm" />
         <a href="#" class="cancel cancel-change-pass">
             <span data-icon="&#xe008"></span>
         </a>
@@ -165,21 +169,21 @@
     <ul>
         <li>
             <label for="password">
-                <@spring.message "i18n.user.password" />
+                <@spring.message "Label.passwordForm.password" />
                 <span id="failUpdatePassword" style="display:none" class="error">
-                    <@spring.message "Fail.password" />
+                    <@spring.message "Fail.passwordForm" />
                 </span>
             </label>
             <input type="password" class="sum" id="password" name="password" value="" />
         </li>
         <li>
             <label for="confirm">
-                <@spring.message "i18n.user.confirm" />
+                <@spring.message "Label.passwordForm.confirm" />
             </label>
             <input type="password" class="sum" id="confirm" name="confirm" value="" />
         </li>
         <li>
-            <input type="submit" value='<@spring.message "i18n.button.save" />'/>
+            <input type="submit" value='<@spring.message "Save.button" />'/>
         </li>
     </ul>
 </form>
@@ -188,23 +192,23 @@
 <#macro inviteForm>
 <form id="inviteForm" class="dialog pop-420" style="display: none" method="POST">
     <legend>
-        <@spring.message "i18n.user.invite" />
+        <@spring.message "Legend.inviteForm" />
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <ul>
         <li>
             <label for="letter">
-                <@spring.message "i18n.user.inviteLetter" />
+                <@spring.message "Label.inviteForm.content" />
                 <span id="failInvite" style="display: none" class="error">
-                    <@spring.message "Fail.invite" />
+                    <@spring.message "Fail.inviteForm" />
                 </span>
             </label>
         </li>
         <li>
-            <textarea class="sum" id="letter" name="letter"></textarea></p>
+            <textarea class="sum" id="content" name="content"></textarea></p>
         </li>
         <li>
-            <input type="submit" name="submit" value='<@spring.message "i18n.button.send"/>' />
+            <input type="submit" name="submit" value='<@spring.message "Send.button"/>' />
         </li>
     </ul>
 </form>
@@ -229,8 +233,8 @@
 
 <#macro homeLogo>
     <h1>
-       <@spring.message "i18n.common.sitename" />
-       <span><@spring.message "i18n.common.siteslogan" /></span>
+       <@spring.message "Sitename" />
+       <span><@spring.message "Siteslogan" /></span>
    </h1>
 </#macro>
 
@@ -239,23 +243,23 @@
    <ul class="menu">
        <li>
            <a href="<@spring.url '/dashboard' />">
-               <@spring.message "i18n.user.home.watchedFeeds" />
+               <@spring.message "Menu.home.watchedFeeds" />
            </a>
        </li>
        <li>
            <a href="<@spring.url '/allfeeds' />">
-               <@spring.message "i18n.user.home.allFeeds" />
+               <@spring.message "Menu.home.allFeeds" />
            </a>
        </li>
        <li>
            <a href="<@spring.url '/friends' />">
-                <@spring.message "i18n.user.menu.friends" />
+                <@spring.message "Menu.home.friends" />
            </a>
        </li>
        <#if (invitationsReceived?size > 0)>
        <li>
            <a href="/social/invitations">
-               <@spring.message "i18n.user.home.invitations" />
+               <@spring.message "Menu.home.invitations" />
                - ${invitationsReceived?size}
            </a>
        </li>
@@ -275,17 +279,17 @@
         <ul class="menu">
             <li>
                 <a href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
-                    <@spring.message "i18n.user.menu.articles" />
+                    <@spring.message "Menu.user.posts" />
                 </a>
             </li>
             <li>
                 <a href="<@spring.url '/users/${owner.id?replace("#","")}/status' />">
-                    <@spring.message "i18n.user.menu.status" />
+                    <@spring.message "Menu.user.status" />
                 </a>
             </li>
             <li>
                 <a href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
-                    <@spring.message "i18n.user.menu.impressions" />
+                    <@spring.message "Menu.user.impressions" />
                 </a>
             </li>
          </ul>
@@ -293,7 +297,7 @@
             <#if invitable>
             <li>
                 <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invitations/_create' />" href="#">
-                    <@spring.message "i18n.user.invite" />
+                    <@spring.message "Menu.user.invite" />
                 </a>
             </li>
             <@inviteForm />
@@ -337,10 +341,10 @@
             <div>${invitation.content}</div>
             <div class="intention">
                 <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id?replace("#", "")}/_accept' />" href="#">
-                        Accept
+                   <@spring.message "Accept.invitation" />
                 </a>
                 <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id?replace("#","")}/_decline' />" href="#">
-                    Decline
+                   <@spring.message "Decline.invitation" />
                 </a>
             </div>
         </li>
@@ -379,7 +383,7 @@
     <#if plans??>
     <div>
         <h4>
-            <@spring.message "i18n.topic.inProgress" />
+            <@spring.message "InProgress.topics" />
         </h4>
         <ul>
         <#list plans as plan>
@@ -391,7 +395,7 @@
 
                 <div class="ts">
                     <a href="/group/topics/${plan.topic.id?replace("#", "")}/plans/${plan.id?replace("#", "")}/posts">
-                        <@utilGadgets.showTimeRemaining plan.timeRemaining />
+                        <@commonGadgets.showTimeRemaining plan.timeRemaining />
                     </a>
                 </div>
             </li>
@@ -406,7 +410,7 @@
     <#if plans??>
     <div>
         <h4>
-            <@spring.message "i18n.topic.learned" />
+            <@spring.message "Learned.topics" />
         </h4>
         <ul>
         <#list plans as plan>

@@ -1,5 +1,5 @@
 <#import 'spring.ftl' as spring />
-<#import 'utilGadgets.ftl' as utilGadgets />
+<#import 'commonGadgets.ftl' as commonGadgets />
 
 <#macro showActivities>
     <#if activities??>
@@ -65,7 +65,7 @@
     <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
         ${activity.who.displayName}
     </a> 
-    <@utilGadgets.showTimeBefore activity.timeBefore />
+    <@commonGadgets.showTimeBefore activity.timeBefore />
 </div>
 </#macro>
 
@@ -73,7 +73,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.topic" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.topic" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -82,7 +82,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe001;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.hostGroup" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.hostGroup" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -91,7 +91,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe001;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.joinGroup" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.joinGroup" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -100,7 +100,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe002;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.concept" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.concept" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -109,7 +109,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe003;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.note" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.note" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -118,7 +118,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.tutorial" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.tutorial" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -127,7 +127,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.question" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.question" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -136,7 +136,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.postMessage" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.postMessage" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -145,7 +145,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.postMessageComment" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.postMessageComment" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -154,7 +154,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.questionComment" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.questionComment" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -163,7 +163,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.answer" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.answer" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -172,7 +172,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe001;" />
     <div>
-        <span><@spring.messageArgs "i18n.activity.answerComment" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.answerComment" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>

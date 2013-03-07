@@ -22,19 +22,19 @@
         <link rel='stylesheet' type='text/css' media='screen' href='${style}' />
         </#list>
         </#if>
-
     </head>
+
     <body>
         <div id="page-header-wrapper">
             <div id="page-header" class="page-center">
                 <ul class="nav-left nav-item">
                     <#if viewerAccount??>
-                        <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.home" /></a></li>
+                        <li><a href="/social/dashboard"><@spring.message "Nav.header.home" /></a></li>
                     <#else>
-                        <li><a href="/social/home"><@spring.message "i18n.common.menu.home" /></a></li>
+                        <li><a href="/social/home"><@spring.message "Nav.header.home" /></a></li>
                     </#if>
-                    <li><a href="/group/explore"><@spring.message "i18n.common.menu.explore" /></a></li>
-                    <li><a href="/social/about"><@spring.message "i18n.common.menu.about" /></a></li>
+                    <li><a href="/group/explore"><@spring.message "Nav.header.explore" /></a></li>
+                    <li><a href="/social/about"><@spring.message "Nav.header.about" /></a></li>
                 </ul>
 
                 <#if viewerAccount??>
@@ -50,28 +50,28 @@
                     </#if>
                     <li>
                         <a href="#">
-                            <@spring.message "i18n.common.menu.setting" />
+                            <@spring.message "Nav.header.setting" />
                         </a>
                         <ul class="dropdown-menu" style="display: none">
                             <li>
                                 <a class="update-email" data-action="<@spring.url '/_updateEmail' />" href="#">
-                                    <@spring.message "i18n.user.updateEmail" />
+                                    <@spring.message "Nav.header.updateEmail" />
                                 </a>
                             </li>
                             <li>
                                 <a class="update-profile" data-action="<@spring.url '/_updateProfile' />" href="#">
-                                    <@spring.message "i18n.user.updateProfile" />
+                                    <@spring.message "Nav.header.updateProfile" />
                                 </a>
                             </li>
                             <li>
                                 <a class="update-password" data-action="<@spring.url '/_updatePassword' />" href="#">
-                                    <@spring.message "i18n.user.updatePassword" />
+                                    <@spring.message "Nav.header.updatePassword" />
                                 </a>
                              </li>
                         </ul>
                     </li>
                     <li><a href="/social/users/${viewerAccount.user.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
-                    <li><a href="/social/signout"><@spring.message "i18n.common.menu.signout" /></a></li>
+                    <li><a href="/social/signout"><@spring.message "Nav.header.signout" /></a></li>
                 </ul>
                 <#else>
                 <ul class="nav-right nav-item">
@@ -80,8 +80,8 @@
                     <#else>
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
-                    <li><a href="/social/dashboard"><@spring.message "i18n.common.menu.signin" /></a></li>
-                    <li><a class="signup" href="/social/signup"><@spring.message "i18n.common.menu.signup" /></a></li>
+                    <li><a href="/social/dashboard"><@spring.message "Nav.header.signin" /></a></li>
+                    <li><a class="signup" href="/social/signup"><@spring.message "Nav.header.signup" /></a></li>
                 </ul>
                 </#if>
             </div>
