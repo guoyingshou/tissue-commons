@@ -77,6 +77,48 @@
     </form>
 </#macro>
 
+<#macro exploreLogo>
+    <h1>
+        <@spring.message "Sitename" />
+        <span><@spring.message "Siteslogan" />
+    </h1>
+</#macro>
+
+<#macro exploreMenu selected="trending">
+    <ul class="menu">
+        <li>
+            <a class="<#if selected = 'trending'>current</#if>" href="<@spring.url '/explore' />">
+                <@spring.message "Menu.explore.trending" />
+            </a>
+        </li>
+        <li>
+            <a class="<#if selected = 'featured'>current</#if>" href="<@spring.url '/featured' />">
+                <@spring.message "Menu.explore.featured" />
+            </a>
+        </li>
+        <li>
+            <a class="<#if selected = 'topics'>current</#if>" href="<@spring.url '/topics' />">
+                <@spring.message "Menu.explore.topics" />
+            </a>
+        </li>
+        <li>
+            <a class="<#if selected = 'tags'>current</#if>" href="<@spring.url '/tags' />">
+                <@spring.message "Menu.explore.tags" />
+            </a>
+        </li>
+    </ul>
+
+    <#if viewerAccount??>
+    <@topicGadgets.topicForm />
+    <ul class="action">
+        <li>
+            <a class="create-topic" data-action="<@spring.url '/topics/_create' />" href="#">
+                <@spring.message "Menu.explore.createTopic" />
+            </a>
+        </li>
+    </ul>
+    </#if>
+</#macro>
 
 <#macro topicLogo>
   <h1>
@@ -84,35 +126,35 @@
   </h1>
 </#macro>
 
-<#macro topicMenu page='posts'>
+<#macro topicMenu selected='all'>
   <ul class="menu">
       <li>
-          <a class="<#if page = 'posts'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
-              <@spring.message "Menu.topic.posts.all" />
+          <a class="<#if selected = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
+              <@spring.message "Menu.posts.all" />
           </a>
       </li>
       <li>
-          <a class="<#if page = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
-              <@spring.message "Menu.topic.posts.concept" />
+          <a class="<#if selected = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
+              <@spring.message "Menu.posts.concept" />
           </a>
       </li>
       <li>
-          <a class="<#if page = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
-              <@spring.message "Menu.topic.posts.note" />
+          <a class="<#if selected = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
+              <@spring.message "Menu.posts.note" />
           </a>
       </li>
       <li>
-          <a class="<#if page = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
-              <@spring.message "Menu.topic.posts.tutorial" />
+          <a class="<#if selected = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
+              <@spring.message "Menu.posts.tutorial" />
           </a>
       </li>
       <li>
-          <a class="<#if page = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
-              <@spring.message "Menu.topic.posts.question" />
+          <a class="<#if selected = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
+              <@spring.message "Menu.posts.question" />
           </a>
       </li>
       <li>
-          <a class="<#if page = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
+          <a class="<#if selected = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
               <@spring.message "Menu.topic.objective" />
           </a>
       </li>
@@ -124,11 +166,11 @@
     <li>
         <#if topic.activePlan.isOwner(viewerAccount.id) || topic.activePlan.isMember(viewerAccount.id)>
         <a id="create-post" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_form'/>">
-            <@spring.message "Create.topic.post" />
+            <@spring.message "Create.post" />
         </a>
         <#else>
         <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
-            <@spring.message "Join.topic.plan" />
+            <@spring.message "Join.plan" />
         </a>
         </#if> 
     </li>
@@ -136,7 +178,7 @@
     <li>
         <@createPlanForm />
         <a class="create-plan" href="#">
-            <@spring.message "Host.topic.plan" />
+            <@spring.message "Host.plan" />
         </a>
     </li>
     </#if>

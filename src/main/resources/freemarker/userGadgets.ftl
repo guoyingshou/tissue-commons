@@ -2,7 +2,7 @@
 <#import 'commonGadgets.ftl' as commonGadgets />
 
 <#macro signupForm>
-<@spring.bind 'user.*' />
+<@spring.bind 'signupForm.*' />
 <form id="signupForm" class="input-form account" action="<@spring.url '/signup' />" method="post">
     <div class="error">
         <@spring.showErrors "<br/>" />
@@ -22,7 +22,7 @@
                     <@spring.message "Taken.signupForm.username" />
                 </span>
             </label>
-            <@spring.formInput "user.username" 'class="sum"' />
+            <@spring.formInput "signupForm.username" 'class="sum"' />
         </li>
         <li>
             <label for="password">
@@ -31,13 +31,13 @@
                     <@spring.message "Size.signupForm.password" />
                 </span>
             </label>
-            <@spring.formPasswordInput "user.password" 'class="sum"' />
+            <@spring.formPasswordInput "signupForm.password" 'class="sum"' />
         </li>
         <li>
             <label for="confirm">
                 <@spring.message "Label.signupForm.confirm" />
             </label>
-            <@spring.formPasswordInput "user.confirm" 'class="sum"' />
+            <@spring.formPasswordInput "signupForm.confirm" 'class="sum"' />
         </li>
         <li>
             <label for="email">
@@ -46,19 +46,19 @@
                     <@spring.message "Taken.signupForm.email" />
                 </span>
             </label>
-            <@spring.formInput "user.email" 'class="sum"'/>
+            <@spring.formInput "signupForm.email" 'class="sum"'/>
         </li>
         <li>
             <label for="displayName">
                 <@spring.message "Label.signupForm.displayName" />
             </label>
-            <@spring.formInput "user.displayName" 'class="sum"'/>
+            <@spring.formInput "signupForm.displayName" 'class="sum"'/>
         </li>
         <li>
             <label for="headline">
                 <@spring.message "Label.signupForm.headline" />
             </label>
-            <@spring.formTextarea "user.headline" "class='sum'" />
+            <@spring.formTextarea "signupForm.headline" "class='sum'" />
         </li>
         <li>
             <input type="submit" value='<@spring.message "Signup.button" />' />
@@ -238,27 +238,27 @@
    </h1>
 </#macro>
 
-<#macro homeMenu>
+<#macro homeMenu selected = 'watchedFeeds'>
    <#if viewerAccount??>
    <ul class="menu">
        <li>
-           <a href="<@spring.url '/dashboard' />">
+           <a class="<#if selected = 'watchedFeeds'>current</#if>" href="<@spring.url '/dashboard' />">
                <@spring.message "Menu.home.watchedFeeds" />
            </a>
        </li>
        <li>
-           <a href="<@spring.url '/allfeeds' />">
+           <a class="<#if selected = 'allFeeds'>current</#if>" href="<@spring.url '/allfeeds' />">
                <@spring.message "Menu.home.allFeeds" />
            </a>
        </li>
        <li>
-           <a href="<@spring.url '/friends' />">
+           <a class="<#if selected = 'friends'>current</#if>" href="<@spring.url '/friends' />">
                 <@spring.message "Menu.home.friends" />
            </a>
        </li>
        <#if (invitationsReceived?size > 0)>
        <li>
-           <a href="/social/invitations">
+           <a class="<#if selected = 'invitations'>current</#if>" href="/social/invitations">
                <@spring.message "Menu.home.invitations" />
                - ${invitationsReceived?size}
            </a>
@@ -275,47 +275,35 @@
     </h1>
 </#macro>
 
-<#macro userMenu>
-        <ul class="menu">
-            <li>
-                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
-                    <@spring.message "Menu.user.posts" />
-                </a>
-            </li>
-            <li>
-                <a href="<@spring.url '/users/${owner.id?replace("#","")}/status' />">
-                    <@spring.message "Menu.user.status" />
-                </a>
-            </li>
-            <li>
-                <a href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
-                    <@spring.message "Menu.user.impressions" />
-                </a>
-            </li>
-         </ul>
-        <ul class="action">
-            <#if invitable>
-            <li>
-                <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invitations/_create' />" href="#">
-                    <@spring.message "Menu.user.invite" />
-                </a>
-            </li>
-            <@inviteForm />
-            </#if>
-        </ul>
+<#macro userMenu selected = 'posts'>
+    <ul class="menu">
+        <li>
+            <a class="<#if selected='posts'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
+                <@spring.message "Menu.user.posts" />
+            </a>
+        </li>
+        <li>
+           <a class="<#if selected='status'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#","")}/status' />">
+                <@spring.message "Menu.user.status" />
+            </a>
+        </li>
+        <li>
+            <a class="<#if selected='impressions'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
+                <@spring.message "Menu.user.impressions" />
+            </a>
+        </li>
+    </ul>
+    <ul class="action">
+        <#if invitable>
+        <li>
+            <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invitations/_create' />" href="#">
+                <@spring.message "Menu.user.invite" />
+            </a>
+        </li>
+        <@inviteForm />
+        </#if>
+    </ul>
 </#macro>
-
-<#--
-<#macro showResume>
-    <div class="resume">
-        ${owner.resume!''}
-    </div>
-    <#if viewerAccount?? && viewerAccount.user.id == owner.id>
-        <@tissue.oneItemForm />
-        <a class="edit-resume" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/resume/_create' />" data-target="div.resume" href="#">edit</a>
-    </#if>
-</#macro>
--->
 
 <#macro showImpressions>
     <ul class="impressions">

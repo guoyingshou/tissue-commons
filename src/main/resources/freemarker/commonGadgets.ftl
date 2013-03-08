@@ -209,8 +209,8 @@
 <#macro aboutLogo>
   <div>
     <h1>
-       <@spring.message "i18n.common.sitename" />
-       <span><@spring.message "i18n.common.siteslogan" /></span>
+       <@spring.message "Sitename" />
+       <span><@spring.message "Siteslogan" /></span>
    </h1>
  </div>
 </#macro>
