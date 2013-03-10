@@ -19,7 +19,7 @@ public class SecurityUtil {
 
     private static UserDetailsImpl getUserDetails() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return (auth instanceof AnonymousAuthenticationToken) ? null : (UserDetailsImpl)auth.getPrincipal();
+        return ((auth == null) ||auth instanceof AnonymousAuthenticationToken) ? null : (UserDetailsImpl)auth.getPrincipal();
     }
 
 }

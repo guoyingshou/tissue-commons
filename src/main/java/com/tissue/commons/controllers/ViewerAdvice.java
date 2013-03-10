@@ -4,7 +4,6 @@ import com.tissue.core.social.User;
 import com.tissue.core.social.Account;
 import com.tissue.core.exceptions.NoRecordFoundException;
 import com.tissue.commons.services.CommonService;
-import com.tissue.commons.social.services.UserService;
 import com.tissue.commons.exceptions.IllegalAccessException;
 import com.tissue.commons.security.util.SecurityUtil;
 
@@ -24,7 +23,7 @@ public class ViewerAdvice {
     private static Logger logger = LoggerFactory.getLogger(ViewerAdvice.class);
 
     @Autowired
-    private UserService userService;
+    private CommonService commonService;
 
     @ModelAttribute("viewerAccount")
     public Account setupViewer(Map model) {
@@ -34,6 +33,6 @@ public class ViewerAdvice {
         if(viewerAccountId == null) {
             return null;
         }
-        return userService.getAccount(viewerAccountId);
+        return commonService.getAccount(viewerAccountId);
     }
 }
