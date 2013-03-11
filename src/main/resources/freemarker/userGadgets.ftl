@@ -387,7 +387,7 @@
     <ul>
     <#list invitationsReceived as invitation>
         <li>
-            <div>${invitation.invitor.displayName}</div>
+            <div>${invitation.from.user.displayName}</div>
             <div>${invitation.createTime?date}</div>
             <div>${invitation.content}</div>
             <div class="intention">
