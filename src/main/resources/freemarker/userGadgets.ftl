@@ -2,7 +2,9 @@
 <#import 'commonGadgets.ftl' as commonGadgets />
 
 <#macro signupForm>
+
 <@spring.bind 'signupForm.*' />
+
 <form id="signupForm" class="input-form account" action="<@spring.url '/signup' />" method="post">
     <div class="error">
         <@spring.showErrors "<br/>" />
@@ -78,7 +80,7 @@
     </#if>
 
     <legend>
-        <@spring.message "Legend.signupForm" />
+        <@spring.message "Legend.signinForm" />
     </legend>
     <ul>
         <li>
@@ -182,6 +184,67 @@
             </label>
             <input type="password" class="sum" id="confirm" name="confirm" value="" />
         </li>
+        <li>
+            <input type="submit" value='<@spring.message "Save.button" />'/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
+<#macro resetRequestForm>
+<@spring.bind "resetRequestForm.*" />
+<form id="resetRequestForm" method="post" action="<@spring.url '/resetRequest' />">
+
+    <div class="error">
+        <@spring.showErrors "<br>" />
+    </div>
+
+    <legend>
+        <@spring.message "Legend.resetRequestForm" />
+    </legend>
+    <ul>
+        <li>
+            <label for="email">
+                <@spring.message "Label.resetRequestForm.email" />
+            </label>
+            <@spring.formInput 'resetRequestForm.email' 'class="sum"' />
+        </li>
+        <li>
+            <input type="submit" value='<@spring.message "Submit.button"/>'/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
+<#macro resetPasswordForm>
+
+<@spring.bind 'resetPasswordForm.*' />
+
+<form id="resetPasswordForm" method="post" action="<@spring.url '/reset'/>">
+    <div class="error">
+        <@spring.showErrors "<br>" />
+    </div>
+
+    <legend>
+        <@spring.message "Legend.resetPasswordForm" />
+    </legend>
+    <ul>
+        <li>
+            <label for="password">
+                <@spring.message "Label.resetPasswordForm.password" />
+            </label>
+            <@spring.formPasswordInput "resetPasswordForm.password" 'class="sum"' />
+        </li>
+        <li>
+            <label for="confirm">
+                <@spring.message "Label.resetPasswordForm.confirm" />
+            </label>
+            <@spring.formPasswordInput 'resetPasswordForm.confirm' 'class="sum"' />
+        </li>
+        <li>
+            <@spring.formHiddenInput 'resetPasswordForm.code' 'class="sum"' />
+        </li>
+ 
         <li>
             <input type="submit" value='<@spring.message "Save.button" />'/>
         </li>
