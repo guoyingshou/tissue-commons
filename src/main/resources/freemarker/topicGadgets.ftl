@@ -134,22 +134,22 @@
           </a>
       </li>
       <li>
-          <a class="<#if selected = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concept/posts' />">
+          <a class="<#if selected = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concepts' />">
               <@spring.message "Menu.posts.concept" />
           </a>
       </li>
       <li>
-          <a class="<#if selected = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/note/posts' />">
+          <a class="<#if selected = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/notes' />">
               <@spring.message "Menu.posts.note" />
           </a>
       </li>
       <li>
-          <a class="<#if selected = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorial/posts' />">
+          <a class="<#if selected = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorials' />">
               <@spring.message "Menu.posts.tutorial" />
           </a>
       </li>
       <li>
-          <a class="<#if selected = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/question/posts' />">
+          <a class="<#if selected = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions' />">
               <@spring.message "Menu.posts.question" />
           </a>
       </li>
@@ -167,6 +167,9 @@
         <#if topic.activePlan.isOwner(viewerAccount.id) || topic.activePlan.isMember(viewerAccount.id)>
         <a id="create-post" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_form'/>">
             <@spring.message "Create.post" />
+        </a>
+        <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_form'/>">
+            <@spring.message "Create.question" />
         </a>
         <#else>
         <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
@@ -186,7 +189,7 @@
 </u>
 </#macro>
 
-<#macro showTopicDetails>
+<#macro showTopicObjective>
     <div class="ts">
         <span>
             ${topic.account.user.displayName}

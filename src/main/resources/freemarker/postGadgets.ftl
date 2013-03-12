@@ -29,10 +29,6 @@
             <@spring.message 'Label.postForm.tutorial' />
             <input type="radio" name="type" value="tutorial" />
         </label>
-        <label>
-            <@spring.message 'Label.postForm.question' />
-            <input type="radio" name="type" value="question" />
-        </label>
     </fieldset>
 
     <fieldset>
@@ -139,6 +135,8 @@
 </form>
 </#macro>
 
+
+<#--
 <#macro questionCommentForm>
 <form id="questionCommentForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
@@ -189,6 +187,7 @@
     </ul>
 </form>
 </#macro>
+-->
 
 <#macro showPosts posts>
 <ul id="posts">
@@ -353,6 +352,7 @@
 </#if>
 </#macro>
 
+<#--
 <#macro showQuestionDetail>
     <div class="post">
         <div class="item-ts">
@@ -506,5 +506,4 @@
     </@sec.authorize>
 </#if>
 </#macro>
-
-
+-->
