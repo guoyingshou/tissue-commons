@@ -38,6 +38,10 @@
                 <input type="input" class="sum" id="tags" name="tags" />
             </li>
             <li>
+                <input type="hidden" name="type" value="topic" />
+            </li>
+ 
+            <li>
                 <input type="submit" value="<@spring.message 'Submit.button'/>" />
             </li>
         </ul>

@@ -3,104 +3,7 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro postForm>
-<@spring.bind "post.*" />
-<form id="createPostForm" method="post" action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_create'/>">
-    <div class="error">
-        <@spring.showErrors "<br>" />
-        <span style="display: none">
-            <@spring.message 'NotNull.postForm.type' />
-        </span>
-    </div>
-    <fieldset class="post-type">
-        <legend>
-            <@spring.message 'Legend.postForm.type' />
-        </legend>
-
-        <label>
-            <@spring.message 'Label.postForm.concept' />
-            <input type="radio" name="type" value="concept" />
-        </label>
-        <label>
-            <@spring.message 'Label.postForm.note' />
-            <input type="radio" name="type" value="note" />
-        </label>
-        <label>
-            <@spring.message 'Label.postForm.tutorial' />
-            <input type="radio" name="type" value="tutorial" />
-        </label>
-    </fieldset>
-
-    <fieldset>
-        <legend>
-            <@spring.message "Legend.postForm" />
-        </legend>
-
-        <ul>
-            <li>
-                <label for="title">
-                    <@spring.message "Label.postForm.title" />
-                    <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.postForm.title' />
-                    </span>
-                </label>
-
-                <@spring.formInput "post.title" 'class="sum"' />
-            </li>
-            <li>
-                <label for="content">
-                    <@spring.message "Label.postForm.content" />
-                    <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.postForm.content' />
-                    </span>
-                </label>
-                <@spring.formTextarea "post.content" 'class="sum"' />
-            </li>
-            <li>
-                <input type="submit" value="<@spring.message 'Publish.button'/>" />
-            </li>
-        </ul>
-    </fieldset>
-</form>
-<script type="text/javascript">
-    CKEDITOR.replace("content", {
-        filebrowserUploadUrl: '/media/images/_create' 
-    });
-</script>
-</#macro>
-
-<#macro updatePostForm>
-    <form id="updatePostForm" class="dialog pop-650" style="display:none" method="post">
-        <legend>
-            <@spring.message "Legend.postForm" />
-            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-        </legend>
-        <ul>
-            <li>
-                <label for="title">
-                    <@spring.message "Label.postForm.title" />
-                    <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.postForm.title' />
-                    </span>
-                 </label>
-                <input type="input" class="sum" id="title" name="title" />
-            </li>
-            <li>
-                <label for="content">
-                    <@spring.message "Label.postForm.content" />
-                    <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.postForm.content' />
-                    </span>
-                 </label>
-                <textarea id="content" name="content"></textarea>
-            </li>
-            <li>
-                <input type="submit" value="<@spring.message 'Submit.button' />" />
-            </li>
-        </ul>
-    </form>
-</#macro>
-
+<#--
 <#macro postMessageForm>
 <form id="postMessageForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
@@ -134,59 +37,29 @@
     </ul>
 </form>
 </#macro>
+-->
 
-<#macro showPosts>
-<ul id="posts">
-   <#list posts as post>
-   <li class="container-has-icon">
-       <div class="icon">
-       <#if post.type == 'concept'>
-           <span data-icon="&#xe007;"></span>
-       <#elseif post.type = 'note'>
-           <span data-icon="&#xe008;"></span>
-       <#elseif post.type = 'question'>
-           <span data-icon="&#xe009;"></span>
-       <#else>
-           <span data-icon="&#xe01c;"></span>
-       </#if>
-       </div>
-
-       <div class="ts has-icon-before">
-           <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
-           [ <@commonGadgets.showTimeBefore post.timeBefore /> ]
-       </div>
-       <div class="title has-icon-before">
-       <#if post.type == 'question'>
-           <a href="/group/questions/${post.id?replace("#","")}" class="post">${post.title}</a>
-       <#else>
-           <a href="/group/articles/${post.id?replace("#","")}" class="post">${post.title}</a>
-       </#if>
-       </div>
-   </li>
-   </#list>
-</ul>
-</#macro>
-
-<#macro showPostDetail>
-<div class="post">
+<#macro showArticleDetail>
+<div class="article">
     <div class="item-ts">
-        <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">
-            ${post.account.user.displayName} 
+        <a href="/social/users/${article.account.user.id?replace("#", "")}/posts">
+            ${article.account.user.displayName} 
         </a>
-        [ <@commonGadgets.showTimeBefore post.timeBefore /> ] 
+        [ <@commonGadgets.showTimeBefore article.timeBefore /> ] 
     </div>
 
     <h3 class="item-title">
-        ${post.title}
-        <#if post.deleted>
+        ${article.title}
+        <#if article.deleted>
            <span>[ closed ]</span>
         </#if>
     </h3>
 
     <div class="item-content">
-        ${post.content}
+        ${article.content}
     </div>
 
+<#--
     <div class="response">
     <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive()>
     <#if post.isOwner(viewerAccount.id)>
@@ -218,8 +91,10 @@
      </#if>
     </#if>
     </div>
+    -->
 </div>
 
+<#--
 <ul class="messages">
 <#if post.messages??>
 <#list post.messages as msg>
@@ -300,5 +175,7 @@
         <@commonGadgets.deleteConfirmForm />
     </@sec.authorize>
 </#if>
+-->
+
 </#macro>
 

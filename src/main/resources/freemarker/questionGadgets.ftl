@@ -4,35 +4,38 @@
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
 <#macro questionForm>
-<@spring.bind "question.*" />
+<@spring.bind "postForm.*" />
 <form id="createQuestionForm" method="post" action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
     <div class="error">
         <@spring.showErrors "<br>" />
     </div>
     <fieldset>
         <legend>
-            <@spring.message "Legend.questionForm" />
+            <@spring.message "Legend.postForm" />
         </legend>
 
         <ul>
             <li>
                 <label for="title">
-                    <@spring.message "Label.questionForm.title" />
+                    <@spring.message "Label.postForm.title" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.questionForm.title' />
+                        <@spring.message 'NotEmpty.postForm.title' />
                     </span>
                 </label>
 
-                <@spring.formInput "question.title" 'class="sum"' />
+                <@spring.formInput "postForm.title" 'class="sum"' />
             </li>
             <li>
                 <label for="content">
                     <@spring.message "Label.questionForm.content" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.questionForm.content' />
+                        <@spring.message 'NotEmpty.postForm.content' />
                     </span>
                 </label>
-                <@spring.formTextarea "question.content" 'class="sum"' />
+                <@spring.formTextarea "postForm.content" 'class="sum"' />
+            </li>
+            <li>
+                <input type="hidden" name="type" value="question" />
             </li>
             <li>
                 <input type="submit" value="<@spring.message 'Publish.button'/>" />
