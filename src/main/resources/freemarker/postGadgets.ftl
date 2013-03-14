@@ -3,6 +3,7 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
+<#--
 <#macro postForm>
 <@spring.bind "post.*" />
 <form id="createPostForm" method="post" action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_create'/>">
@@ -134,6 +135,7 @@
     </ul>
 </form>
 </#macro>
+-->
 
 <#macro showPosts>
 <ul id="posts">
@@ -167,6 +169,7 @@
 </ul>
 </#macro>
 
+<#--
 <#macro showPostDetail>
 <div class="post">
     <div class="item-ts">
@@ -206,7 +209,7 @@
                 <@spring.message 'Delete.post' />
             </a>
         </@sec.authorize>
-        <a class="create-postMessage action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
+        <a class="create-message action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
             <@spring.message 'AddMessage.post' />
         </a>
      <#else>
@@ -301,4 +304,4 @@
     </@sec.authorize>
 </#if>
 </#macro>
-
+-->

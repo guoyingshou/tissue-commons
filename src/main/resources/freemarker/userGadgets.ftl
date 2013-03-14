@@ -301,7 +301,7 @@
    </h1>
 </#macro>
 
-<#macro homeMenu selected = 'watchedFeeds'>
+<#macro homeMenu>
    <#if viewerAccount??>
    <ul class="menu">
        <li>
@@ -338,7 +338,7 @@
     </h1>
 </#macro>
 
-<#macro userMenu selected = 'posts'>
+<#macro userMenu>
     <ul class="menu">
         <li>
             <a class="<#if selected='posts'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">

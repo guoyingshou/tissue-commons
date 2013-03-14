@@ -3,7 +3,105 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
+<#macro articleForm>
+<@spring.bind "articleForm.*" />
+<form id="createArticleForm" method="post" action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
+    <div class="error">
+        <@spring.showErrors "<br>" />
+        <span style="display: none">
+            <@spring.message 'NotNull.articleForm.type' />
+        </span>
+    </div>
+    <fieldset class="post-type">
+        <legend>
+            <@spring.message 'Legend.articleForm.type' />
+        </legend>
+
+        <label>
+            <@spring.message 'Label.articleForm.concept' />
+            <input type="radio" name="type" value="concept" />
+        </label>
+        <label>
+            <@spring.message 'Label.articleForm.note' />
+            <input type="radio" name="type" value="note" />
+        </label>
+        <label>
+            <@spring.message 'Label.articleForm.tutorial' />
+            <input type="radio" name="type" value="tutorial" />
+        </label>
+    </fieldset>
+
+    <fieldset>
+        <legend>
+            <@spring.message "Legend.articleForm" />
+        </legend>
+
+        <ul>
+            <li>
+                <label for="title">
+                    <@spring.message "Label.articleForm.title" />
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.articleForm.title' />
+                    </span>
+                </label>
+
+                <@spring.formInput "articleForm.title" 'class="sum"' />
+            </li>
+            <li>
+                <label for="content">
+                    <@spring.message "Label.articleForm.content" />
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.articleForm.content' />
+                    </span>
+                </label>
+                <@spring.formTextarea "articleForm.content" 'class="sum"' />
+            </li>
+            <li>
+                <input type="submit" value="<@spring.message 'Publish.button'/>" />
+            </li>
+        </ul>
+    </fieldset>
+</form>
+<script type="text/javascript">
+    CKEDITOR.replace("content", {
+        filebrowserUploadUrl: '/media/images/_create' 
+    });
+</script>
+</#macro>
+
 <#--
+<#macro updatePostForm>
+    <form id="updatePostForm" class="dialog pop-650" style="display:none" method="post">
+        <legend>
+            <@spring.message "Legend.postForm" />
+            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+        </legend>
+        <ul>
+            <li>
+                <label for="title">
+                    <@spring.message "Label.postForm.title" />
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.postForm.title' />
+                    </span>
+                 </label>
+                <input type="input" class="sum" id="title" name="title" />
+            </li>
+            <li>
+                <label for="content">
+                    <@spring.message "Label.postForm.content" />
+                    <span style="display: none" class="error">
+                        <@spring.message 'NotEmpty.postForm.content' />
+                    </span>
+                 </label>
+                <textarea id="content" name="content"></textarea>
+            </li>
+            <li>
+                <input type="submit" value="<@spring.message 'Submit.button' />" />
+            </li>
+        </ul>
+    </form>
+</#macro>
+
 <#macro postMessageForm>
 <form id="postMessageForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
@@ -79,7 +177,7 @@
                 <@spring.message 'Delete.post' />
             </a>
         </@sec.authorize>
-        <a class="create-postMessage action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
+        <a class="create-message action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
             <@spring.message 'AddMessage.post' />
         </a>
      <#else>
@@ -175,7 +273,7 @@
         <@commonGadgets.deleteConfirmForm />
     </@sec.authorize>
 </#if>
--->
 
+-->
 </#macro>
 

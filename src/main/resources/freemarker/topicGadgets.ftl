@@ -168,8 +168,8 @@
     <#if viewerAccount??>
     <#if !topic.isDeleted() && topic.activePlan??>
     <li>
-        <#if topic.activePlan.isOwner(viewerAccount.id) || topic.activePlan.isMember(viewerAccount.id)>
-        <a id="create-post" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/_form'/>">
+        <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
+        <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_form'/>">
             <@spring.message "Create.post" />
         </a>
         <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_form'/>">
