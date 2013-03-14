@@ -250,12 +250,12 @@
     <#if topic.deleted>
        <div>closed</div>
     <#else>
-        <@showLivePlan />
-        <@showArchivedPlans />
+        <@showPlanLive />
+        <@showPlansArchived />
     </#if>
 </#macro>
 
-<#macro showLivePlan>
+<#macro showPlanLive>
     <#if topic.activePlan??>
     <div>
         <h4>
@@ -279,7 +279,7 @@
     </#if>
 </#macro>
 
-<#macro showArchivedPlans>
+<#macro showPlansArchived>
     <#if topic.archivedPlans??>
     <div>
         <h4>

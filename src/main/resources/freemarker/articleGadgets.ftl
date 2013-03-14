@@ -69,28 +69,27 @@
 </script>
 </#macro>
 
-<#--
-<#macro updatePostForm>
-    <form id="updatePostForm" class="dialog pop-650" style="display:none" method="post">
+<#macro updateArticleForm>
+    <form id="updateArticleForm" class="dialog pop-650" style="display:none" method="post">
         <legend>
-            <@spring.message "Legend.postForm" />
+            <@spring.message "Legend.articleForm" />
             <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
         </legend>
         <ul>
             <li>
                 <label for="title">
-                    <@spring.message "Label.postForm.title" />
+                    <@spring.message "Label.articleForm.title" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.postForm.title' />
+                        <@spring.message 'NotEmpty.articleForm.title' />
                     </span>
                  </label>
                 <input type="input" class="sum" id="title" name="title" />
             </li>
             <li>
                 <label for="content">
-                    <@spring.message "Label.postForm.content" />
+                    <@spring.message "Label.articleForm.content" />
                     <span style="display: none" class="error">
-                        <@spring.message 'NotEmpty.postForm.content' />
+                        <@spring.message 'NotEmpty.articleForm.content' />
                     </span>
                  </label>
                 <textarea id="content" name="content"></textarea>
@@ -102,7 +101,7 @@
     </form>
 </#macro>
 
-<#macro postMessageForm>
+<#macro messageForm>
 <form id="postMessageForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
         Message
@@ -119,7 +118,7 @@
 </form>
 </#macro>
 
-<#macro postMessageCommentForm>
+<#macro messageCommentForm>
 <form id="postMessageCommentForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
         Message comment
@@ -135,7 +134,6 @@
     </ul>
 </form>
 </#macro>
--->
 
 <#macro showArticleDetail>
 <div class="article">
@@ -144,6 +142,13 @@
             ${article.account.user.displayName} 
         </a>
         [ <@commonGadgets.showTimeBefore article.timeBefore /> ] 
+
+        <@sec.authorize access="hasRole('ROLE_ADMIN')">
+            <a class="delete-article action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#", "")}/_delete' />" href="#">
+                <@spring.message 'Delete.post' />
+            </a>
+        </@sec.authorize>
+ 
     </div>
 
     <h3 class="item-title">
@@ -157,39 +162,21 @@
         ${article.content}
     </div>
 
-<#--
     <div class="response">
-    <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive()>
-    <#if post.isOwner(viewerAccount.id)>
-        <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/_delete' />" href="#">
+    <#if !(topic.deleted || article.deleted) && isMember>
+    <a class="create-message action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#","")}/messages/_create' />" href="#">
+        <@spring.message 'AddMessage.post' />
+    </a>
+    <#if article.isOwner(viewerAccount.id)>
+        <a class="delete-article action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#", "")}/_delete' />" href="#">
             <@spring.message 'Delete.post' />
         </a>
-        <a class="update-post action" data-type="${post.type}" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/_update' />" href="#">
+        <a class="update-article action" data-type="${article.type}" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#","")}/_update' />" href="#">
             <@spring.message 'Update.post' />
         </a>
-
-        <a class="create-postMessage action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
-            <@spring.message 'AddMessage.post' />
-        </a>
-    <#elseif post.plan.isOwner(viewerAccount.id) || post.plan.isMember(viewerAccount.id)>
-       <@sec.authorize access="hasRole('ROLE_ADMIN')">
-            <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'Delete.post' />
-            </a>
-        </@sec.authorize>
-        <a class="create-message action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#","")}/messages/_create' />" href="#">
-            <@spring.message 'AddMessage.post' />
-        </a>
-     <#else>
-        <@sec.authorize access="hasRole('ROLE_ADMIN')">
-            <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'Delete.post' />
-            </a>
-        </@sec.authorize>
-     </#if>
+    </#if>
     </#if>
     </div>
-    -->
 </div>
 
 <#--
@@ -261,15 +248,15 @@
 </ul>
 
 <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive() && (post.plan.isOwner(viewerAccount.id) || post.plan.isMember(viewerAccount.id))>
-    <@updatePostForm />
-    <@postMessageForm />
-    <@postMessageCommentForm />
+    <@updateArticleForm />
+    <@messageForm />
+    <@messageCommentForm />
     <@commonGadgets.deleteConfirmForm />
 <#else>
     <@sec.authorize access="hasRole('ROLE_ADMIN')">
-        <@updatePostForm />
-        <@postMessageForm />
-        <@postMessageCommentForm />
+        <@updateArticleForm />
+        <@messageForm />
+        <@messageCommentForm />
         <@commonGadgets.deleteConfirmForm />
     </@sec.authorize>
 </#if>

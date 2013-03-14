@@ -430,7 +430,7 @@
     </ul>
 </#macro>
 
-<#macro showLearningPlans>
+<#macro showPlansLearning>
     <#if plans??>
     <div>
         <h4>
@@ -457,7 +457,7 @@
     </#if>
 </#macro>
 
-<#macro showLearnedPlans>
+<#macro showPlansLearned>
     <#if plans??>
     <div>
         <h4>
