@@ -252,23 +252,26 @@
 </form>
 </#macro>
 
-<#macro inviteForm>
-<form id="inviteForm" class="dialog pop-420" style="display: none" method="POST">
+<#macro invitationForm>
+<form id="invitationForm" class="dialog pop-420" style="display: none" method="POST">
     <legend>
-        <@spring.message "Legend.inviteForm" />
+        <@spring.message "Legend.invitationForm" />
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <ul>
         <li>
             <label for="letter">
-                <@spring.message "Label.inviteForm.content" />
+                <@spring.message "Label.invitationForm.content" />
                 <span id="failInvite" style="display: none" class="error">
-                    <@spring.message "Fail.inviteForm" />
+                    <@spring.message "Fail.invitationForm" />
                 </span>
             </label>
         </li>
         <li>
-            <textarea class="sum" id="content" name="content"></textarea></p>
+            <textarea class="sum" id="content" name="content"></textarea>
+        </li>
+         <li>
+            <input type="hidden" id="to" name="to" value="${owner.id}">
         </li>
         <li>
             <input type="submit" name="submit" value='<@spring.message "Send.button"/>' />
@@ -287,6 +290,10 @@
         <li>
             <textarea id="content" name="content"></textarea>
         </li>
+        <li>
+            <input type="hidden" id="to" name="to" value="${owner.id}>
+        </li>
+ 
         <li>
            <input type="submit" value="submit"/>
         </li>
