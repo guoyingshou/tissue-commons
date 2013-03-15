@@ -146,7 +146,7 @@
            [ <@commonGadgets.showTimeBefore question.timeBefore /> ]
        </div>
        <div class="title has-icon-before">
-           <a href="/group/topics/${question.plan.topic.id?replace("#", "")}/questions/${question.id?replace("#","")}" class="post">${question.title}</a>
+           <a href="/group/questions/${question.id?replace("#","")}" class="post">${question.title}</a>
        </div>
    </li>
    </#list>
@@ -160,6 +160,13 @@
                 ${question.account.user.displayName} 
             </a>
             [ <@commonGadgets.showTimeBefore question.timeBefore /> ]
+            <#if !(topic.deleted || question.deleted)>
+            <@sec.authorize access="hasRole('ROLE_ADMIN')">
+                <a class="delete  action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#", "")}/_delete' />">
+                    <@spring.message 'Delete.question' />
+                </a>
+            </@sec.authorize>
+            </#if>
         </div>
 
         <h3 class="item-title">${question.title}</h3>
@@ -168,28 +175,19 @@
         </div>
 
         <div class="response">
-        <#if !(topic.deleted || question.deleted)>
-        <@sec.authorize access="hasRole('ROLE_ADMIN')">
-            <a class="delete  action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#", "")}/_delete' />">
-                <@spring.message 'Delete.question' />
-            </a>
-        </@sec.authorize>
-        </#if>
-
-        <#if !(topic.deleted || question.deleted) && viewerAccount?? && question.plan.isActive()>
-        <#if question.isOwner(viewerAccount.id)>
-            <a class="update-question action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#", "")}/_update' />" href="#">
-                <@spring.message 'Update.question' />
-            </a>
-        </#if>
-        <#if question.plan.isOwner(viewerAccount.id) || question.plan.isMember(viewerAccount.id)>
-            <a class="create-questionComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#", "")}/questionComments/_create' />" href="#">
+        <#if !(topic.deleted || question.deleted) && isMember>
+            <a class="create-questionComment action" data-action="<@spring.url '/questions/${question.id?replace("#", "")}/questionComments/_create' />" href="#">
                 <@spring.message 'Comment.question' />
             </a>
-            <a class="create-answer action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#", "")}/answers/_create' />" href="#">
+            <a class="create-answer action" data-action="<@spring.url '/questions/${question.id?replace("#", "")}/answers/_create' />" href="#">
                 <@spring.message 'Answer.question' />
             </a>
-        </#if>
+
+            <#if question.isOwner(viewerAccount.id)>
+            <a class="update-question action" data-action="<@spring.url '/questions/${question.id?replace("#", "")}/_update' />" href="#">
+                <@spring.message 'Update.question' />
+            </a>
+            </#if>
         </#if>
         </div>
     </div>
@@ -210,11 +208,11 @@
             </div>
 
             <div class="response">
-            <#if !(topic.deleted || question.deleted) && viewerAccount?? && question.plan.isActive() && questionComment.isOwner(viewerAccount.id)>
-                <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#", "")}/questionComments/${questionComment.id?replace("#", "")}/_delete' />" href="#">
+            <#if !(topic.deleted || question.deleted) && isMember && questionComment.isOwner(viewerAccount.id)>
+                <a class="delete action" data-action="<@spring.url '/questionComments/${questionComment.id?replace("#", "")}/_delete' />" href="#">
                     <@spring.message 'Delete.comment' />
                 </a>
-                <a class="update-questionComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#","")}/questionComments/${questionComment.id?replace("#", "")}/_update' />" data-target="#question-comment-${questionComment.id?replace("#", "")?replace(":", "-")}-content" href="#">
+                <a class="update-questionComment action" data-action="<@spring.url '/questionComments/${questionComment.id?replace("#", "")}/_update' />" data-target="#question-comment-${questionComment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                     <@spring.message 'Update.comment' />
                 </a>
             </#if>
@@ -239,20 +237,19 @@
             </div>
 
             <div class="response">
-            <#if !(topic.deleted || question.deleted) && viewerAccount?? && question.plan.isActive()>
-            <#if answer.isOwner(viewerAccount.id)>
-                <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#","")}/answers/${answer.id?replace("#", "")}/_delete' />" href="#">
-                    <@spring.message 'Delete.answer' />
-                </a>
-                <a class="update-answer action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#","")}/answers/${answer.id?replace("#", "")}/_update' />" data-target="#answer-${answer.id?replace("#", "")?replace(":", "-")}-content" href="#">
-                    <@spring.message 'Update.answer' />
-                </a>
-            </#if>
-            <#if question.plan.isOwner(viewerAccount.id) || question.plan.isMember(viewerAccount.id)>
+            <#if !(topic.deleted || question.deleted) && isMember>
                 <a class="create-answerComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#","")}/answers/${answer.id?replace("#", "")}/comments/_create' />" href="#">
                     <@spring.message 'Comment.answer' />
                 </a>
-            </#if>
+
+                <#if answer.isOwner(viewerAccount.id)>
+                <a class="delete action" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/_delete' />" href="#">
+                    <@spring.message 'Delete.answer' />
+                </a>
+                <a class="update-answer action" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/_update' />" data-target="#answer-${answer.id?replace("#", "")?replace(":", "-")}-content" href="#">
+                    <@spring.message 'Update.answer' />
+                </a>
+                </#if>
             </#if>
             </div>
 
@@ -272,11 +269,11 @@
                     </div>
 
                     <div class="response">
-                    <#if !(topic.deleted ||question.deleted) && viewerAccount?? && question.plan.isActive() && comment.isOwner(viewerAccount.id)>
-                        <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#","")}/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#","")}/_delete' />" href="#">
+                    <#if !(topic.deleted ||question.deleted) && isMember && comment.isOwner(viewerAccount.id)>
+                        <a class="delete action" data-action="<@spring.url '/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#","")}/_delete' />" href="#">
                             <@spring.message 'Delete.comment' />
                         </a>
-                         <a class="update-answerComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#","")}/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#", "")}/_update'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
+                         <a class="update-answerComment action" data-action="<@spring.url '/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#", "")}/_update'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                             <@spring.message 'Update.comment' />
                         </a>
                     </#if>
@@ -290,7 +287,7 @@
         </#if>
     </ul>
 
-<#if !(topic.deleted || question.deleted) && viewerAccount?? && question.plan.isActive() && (question.plan.isOwner(viewerAccount.id) || question.plan.isMember(viewerAccount.id))>
+<#if !(topic.deleted || question.deleted) && isMember>
     <@updateQuestionForm />
     <@questionCommentForm />
     <@answerForm />

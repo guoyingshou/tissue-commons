@@ -179,10 +179,9 @@
     </div>
 </div>
 
-<#--
 <ul class="messages">
-<#if post.messages??>
-<#list post.messages as msg>
+<#if article.messages??>
+<#list article.messages as msg>
     <li class="message">
         <div class="item-ts">
             <a href="/social/users/${msg.account.user.id?replace("#","")}/posts">
@@ -196,20 +195,20 @@
         </div>
 
         <div class="response">
-        <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive()>
-        <#if msg.isOwner(viewerAccount.id)>
-            <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#","")}/posts/${post.id?replace("#","")}/messages/${msg.id?replace("#","")}/_delete' />" href="#">
-                <@spring.message 'Delete.message' />
-            </a>
-            <a class="update-postMessage action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/messages/${msg.id?replace("#", "")}/_update' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-content" href="#">
-                <@spring.message 'Update.message' />
-            </a>
-        </#if>
-        <#if post.plan.isOwner(viewerAccount.id) || post.plan.isMember(viewerAccount.id)>
-            <a class="create-postMessageComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/messages/${msg.id?replace("#", "")}/comments/_create' />" href="#">
+        <#if !(topic.deleted || article.deleted) && isMember>
+           <a class="create-messageComment action" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/comments/_create' />" href="#">
                 <@spring.message 'Reply.message' />
             </a>
-        </#if>
+
+            <#if msg.isOwner(viewerAccount.id)>
+            <a class="delete-messageComment action" data-action="<@spring.url '/messages/${msg.id?replace("#","")}/_delete' />" href="#">
+                <@spring.message 'Delete.message' />
+            </a>
+            <a class="update-message action" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/_update' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-content" href="#">
+                <@spring.message 'Update.message' />
+            </a>
+            </#if>
+
         </#if>
         </div>
 
@@ -229,11 +228,11 @@
                 </div>
 
                 <div class="response">
-                <#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive() && comment.isOwner(viewerAccount.id)>
-                    <a class="delete action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/posts/${post.id?replace("#", "")}/messages/${msg.id?replace("#","")}/messageComments/${comment.id?replace("#", "")}/_delete' />" href="#">
+                <#if !(topic.deleted || article.deleted) && isMember && comment.isOwner(viewerAccount.id)>
+                    <a class="delete action" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_delete' />" href="#">
                         <@spring.message 'Delete.reply' />
                     </a>
-                    <a class="update-postMessageComment action" data-action="<@spring.url '/topics/${topic.id?replace("#","")}/posts/${post.id?replace("#","")}/messages/${msg.id?replace("#","")}/messageComments/${comment.id?replace("#", "")}/_update"}' />" data-target="#message-comment-${comment.id?replace("#","")?replace(":", "-")}-content" href="#">
+                    <a class="update-messageComment action" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_update"}' />" data-target="#message-comment-${comment.id?replace("#","")?replace(":", "-")}-content" href="#">
                         <@spring.message 'Update.reply' />
                     </a>
                 </#if>
@@ -244,10 +243,10 @@
         </ul>
     </li>
     </#list>
-    </#if>
+</#if>
 </ul>
 
-<#if !(topic.deleted || post.deleted) && viewerAccount?? && post.plan.isActive() && (post.plan.isOwner(viewerAccount.id) || post.plan.isMember(viewerAccount.id))>
+<#if !(topic.deleted || article.deleted) && isMember>
     <@updateArticleForm />
     <@messageForm />
     <@messageCommentForm />
@@ -261,6 +260,5 @@
     </@sec.authorize>
 </#if>
 
--->
 </#macro>
 
