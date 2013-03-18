@@ -162,7 +162,7 @@
             [ <@commonGadgets.showTimeBefore question.timeBefore /> ]
             <#if !(topic.deleted || question.deleted)>
             <@sec.authorize access="hasRole('ROLE_ADMIN')">
-                <a class="delete  action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#", "")}/_delete' />">
+                <a class="delete  action" data-action="<@spring.url '/questions/${question.id?replace("#", "")}/_delete' />">
                     <@spring.message 'Delete.question' />
                 </a>
             </@sec.authorize>
@@ -238,7 +238,7 @@
 
             <div class="response">
             <#if !(topic.deleted || question.deleted) && isMember>
-                <a class="create-answerComment action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/${question.id?replace("#","")}/answers/${answer.id?replace("#", "")}/comments/_create' />" href="#">
+                <a class="create-answerComment action" data-action="<@spring.url '/answers/${answer.id?replace("#", "")}/comments/_create' />" href="#">
                     <@spring.message 'Comment.answer' />
                 </a>
 

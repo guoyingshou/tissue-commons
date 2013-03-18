@@ -1,7 +1,7 @@
 package com.tissue.commons.controllers;
 
-import com.tissue.core.social.User;
-import com.tissue.core.social.Account;
+import com.tissue.core.User;
+import com.tissue.core.Account;
 import com.tissue.core.exceptions.NoRecordFoundException;
 import com.tissue.commons.services.CommonService;
 import com.tissue.commons.exceptions.IllegalAccessException;

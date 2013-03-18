@@ -262,7 +262,7 @@
             <@spring.message "Live.topic.plan" />
         </h4>
         <div class="ts">
-            <a href="/group/topics/${topic.id?replace("#","")}/plans/${topic.activePlan.id?replace("#", "")}/posts">
+            <a href="/group/plans/${topic.activePlan.id?replace("#", "")}/posts">
                 <@commonGadgets.showTimeRemaining topic.activePlan.timeRemaining />
             </a>
         </div>
@@ -289,7 +289,7 @@
         <#list topic.archivedPlans as plan>
             <li>
                 <div class="ts">
-                    <a href="/group/topics/${topic.id?replace("#","")}/plans/${plan.id?replace("#", "")}/posts">
+                    <a href="/group/plans/${plan.id?replace("#", "")}/posts">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>

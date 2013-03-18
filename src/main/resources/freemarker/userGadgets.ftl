@@ -271,7 +271,7 @@
             <textarea class="sum" id="content" name="content"></textarea>
         </li>
          <li>
-            <input type="hidden" id="to" name="to" value="${owner.id}">
+            <input type="hidden" id="to" name="to" value="${owner.id?replace("#","")}">
         </li>
         <li>
             <input type="submit" name="submit" value='<@spring.message "Send.button"/>' />
@@ -366,11 +366,11 @@
     <ul class="action">
         <#if invitable>
         <li>
-            <a class="invite" data-action="<@spring.url '/users/${owner.id?replace("#", "")}/invitations/_create' />" href="#">
+            <a class="create-invitation" data-action="<@spring.url '/invitations/_create' />" href="#">
                 <@spring.message "Menu.user.invite" />
             </a>
         </li>
-        <@inviteForm />
+        <@invitationForm />
         </#if>
     </ul>
 </#macro>

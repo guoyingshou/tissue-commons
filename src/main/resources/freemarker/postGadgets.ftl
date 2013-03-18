@@ -3,6 +3,39 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
+<#macro showPosts>
+<ul id="posts">
+   <#list posts as post>
+   <li class="container-has-icon">
+       <div class="icon">
+       <#if post.type == 'concept'>
+           <span data-icon="&#xe007;"></span>
+       <#elseif post.type = 'note'>
+           <span data-icon="&#xe008;"></span>
+       <#elseif post.type = 'question'>
+           <span data-icon="&#xe009;"></span>
+       <#else>
+           <span data-icon="&#xe01c;"></span>
+       </#if>
+       </div>
+
+       <div class="ts has-icon-before">
+           <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
+           [ <@commonGadgets.showTimeBefore post.timeBefore /> ]
+       </div>
+       <div class="title has-icon-before">
+       <#if post.type == 'question'>
+           <a href="/group/questions/${post.id?replace("#","")}" class="post">${post.title}</a>
+       <#else>
+           <a href="/group/articles/${post.id?replace("#","")}" class="post">${post.title}</a>
+       </#if>
+       </div>
+   </li>
+   </#list>
+</ul>
+</#macro>
+
+
 <#--
 <#macro postForm>
 <@spring.bind "post.*" />
@@ -135,41 +168,7 @@
     </ul>
 </form>
 </#macro>
--->
 
-<#macro showPosts>
-<ul id="posts">
-   <#list posts as post>
-   <li class="container-has-icon">
-       <div class="icon">
-       <#if post.type == 'concept'>
-           <span data-icon="&#xe007;"></span>
-       <#elseif post.type = 'note'>
-           <span data-icon="&#xe008;"></span>
-       <#elseif post.type = 'question'>
-           <span data-icon="&#xe009;"></span>
-       <#else>
-           <span data-icon="&#xe01c;"></span>
-       </#if>
-       </div>
-
-       <div class="ts has-icon-before">
-           <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
-           [ <@commonGadgets.showTimeBefore post.timeBefore /> ]
-       </div>
-       <div class="title has-icon-before">
-       <#if post.type == 'question'>
-           <a href="/group/questions/${post.id?replace("#","")}" class="post">${post.title}</a>
-       <#else>
-           <a href="/group/articles/${post.id?replace("#","")}" class="post">${post.title}</a>
-       </#if>
-       </div>
-   </li>
-   </#list>
-</ul>
-</#macro>
-
-<#--
 <#macro showPostDetail>
 <div class="post">
     <div class="item-ts">

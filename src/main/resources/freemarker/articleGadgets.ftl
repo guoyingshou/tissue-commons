@@ -118,10 +118,10 @@
 </form>
 </#macro>
 
-<#macro messageCommentForm>
-<form id="postMessageCommentForm" class="dialog pop-650" style="display:none" method="post">
+<#macro messageReplyForm>
+<form id="messageReplyForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
-        Message comment
+        Reply
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <ul>
@@ -144,7 +144,7 @@
         [ <@commonGadgets.showTimeBefore article.timeBefore /> ] 
 
         <@sec.authorize access="hasRole('ROLE_ADMIN')">
-            <a class="delete-article action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#", "")}/_delete' />" href="#">
+            <a class="delete-article action" data-action="<@spring.url '/articles/${article.id?replace("#", "")}/_delete' />" href="#">
                 <@spring.message 'Delete.post' />
             </a>
         </@sec.authorize>
@@ -164,14 +164,14 @@
 
     <div class="response">
     <#if !(topic.deleted || article.deleted) && isMember>
-    <a class="create-message action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#","")}/messages/_create' />" href="#">
+    <a class="create-message action" data-action="<@spring.url '/articles/${article.id?replace("#","")}/messages/_create' />" href="#">
         <@spring.message 'AddMessage.post' />
     </a>
     <#if article.isOwner(viewerAccount.id)>
-        <a class="delete-article action" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#", "")}/_delete' />" href="#">
+        <a class="delete-article action" data-action="<@spring.url '/articles/${article.id?replace("#", "")}/_delete' />" href="#">
             <@spring.message 'Delete.post' />
         </a>
-        <a class="update-article action" data-type="${article.type}" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/${article.id?replace("#","")}/_update' />" href="#">
+        <a class="update-article action" data-type="${article.type}" data-action="<@spring.url '/articles/${article.id?replace("#","")}/_update' />" href="#">
             <@spring.message 'Update.post' />
         </a>
     </#if>
@@ -249,13 +249,13 @@
 <#if !(topic.deleted || article.deleted) && isMember>
     <@updateArticleForm />
     <@messageForm />
-    <@messageCommentForm />
+    <@messageReplyForm />
     <@commonGadgets.deleteConfirmForm />
 <#else>
     <@sec.authorize access="hasRole('ROLE_ADMIN')">
         <@updateArticleForm />
         <@messageForm />
-        <@messageCommentForm />
+        <@messageReplyForm />
         <@commonGadgets.deleteConfirmForm />
     </@sec.authorize>
 </#if>

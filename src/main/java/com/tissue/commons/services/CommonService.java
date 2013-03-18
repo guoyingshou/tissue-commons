@@ -1,11 +1,12 @@
 package com.tissue.commons.services;
 
-import com.tissue.core.exceptions.NoRecordFoundException;
-import com.tissue.core.orient.dao.CommonDao;
-import com.tissue.core.social.Account;
-import com.tissue.core.social.User;
+import com.tissue.core.Account;
+import com.tissue.core.User;
+import com.tissue.core.dao.UserDao;
+import com.tissue.core.dao.AccountDao;
+import com.tissue.core.dao.CommonDao;
 import com.tissue.core.plan.Plan;
-import com.tissue.core.social.dao.UserDao;
+import com.tissue.core.exceptions.NoRecordFoundException;
 import com.tissue.commons.security.util.SecurityUtil;
 import com.tissue.commons.exceptions.IllegalAccessException;
 
@@ -23,6 +24,9 @@ public class CommonService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private AccountDao accountDao;
 
     public void checkAuthorizations(String rid) {
         String viewerAccountId = SecurityUtil.getViewerAccountId();
@@ -46,7 +50,7 @@ public class CommonService {
     }
 
     public Account getAccount(String accountId) {
-        return userDao.getAccount(accountId);
+        return accountDao.getAccount(accountId);
     }
 
     public List<User> getNewUsers(String excludingUserId, int limit) {
