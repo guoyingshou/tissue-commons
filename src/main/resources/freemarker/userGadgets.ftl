@@ -291,7 +291,7 @@
             <textarea id="content" name="content"></textarea>
         </li>
         <li>
-            <input type="hidden" id="to" name="to" value="${owner.id}>
+            <input type="hidden" id="to" name="to" value="${owner.id?replace('#','')}">
         </li>
  
         <li>
@@ -386,22 +386,23 @@
 
     <#if viewerAccount?? && isFriend>
         <@impressionForm />
-        <a class="add-impression" data-action="<@spring.url '/impressions/users/${owner.id?replace("#", "")}/_create' />" data-target="ul.impressions" href="#">add impression</a>
+        <a class="add-impression" data-action="<@spring.url '/impressions/_create' />" data-target="ul.impressions" href="#">add impression</a>
     </#if>
 </#macro>
 
 <#macro showInvitations>
     <ul>
     <#list invitationsReceived as invitation>
-        <li>
+        <#assign target = "li.invitation-${invitation.id?replace('#','')?replace(':', '-')}">
+        <li class="${target}">
             <div>${invitation.from.user.displayName}</div>
             <div>${invitation.createTime?date}</div>
             <div>${invitation.content}</div>
-            <div class="intention">
-                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id?replace("#", "")}/_accept' />" href="#">
+            <div class="action">
+                <a class="process-invitation" data-action="<@spring.url '/invitations/${invitation.id?replace("#", "")}/_accept' />" data-target="${target}" href="#">
                    <@spring.message "Accept.invitation" />
                 </a>
-                <a class="process-invite" data-action="<@spring.url '/invitations/${invitation.id?replace("#","")}/_decline' />" href="#">
+                <a class="process-invitation" data-action="<@spring.url '/invitations/${invitation.id?replace("#","")}/_decline' />" data-target="${target}" href="#">
                    <@spring.message "Decline.invitation" />
                 </a>
             </div>

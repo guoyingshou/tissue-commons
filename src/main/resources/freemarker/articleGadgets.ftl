@@ -95,6 +95,9 @@
                 <textarea id="content" name="content"></textarea>
             </li>
             <li>
+                <input type="hidden" name="type" value="${article.type}" />
+            </li>
+            <li>
                 <input type="submit" value="<@spring.message 'Submit.button' />" />
             </li>
         </ul>
@@ -102,7 +105,7 @@
 </#macro>
 
 <#macro messageForm>
-<form id="postMessageForm" class="dialog pop-650" style="display:none" method="post">
+<form id="messageForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
         Message
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>

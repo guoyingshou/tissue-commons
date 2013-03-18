@@ -2,8 +2,9 @@ package com.tissue.commons.controllers;
 
 import com.tissue.core.User;
 import com.tissue.core.Account;
+import com.tissue.core.dao.AccountDao;
 import com.tissue.core.exceptions.NoRecordFoundException;
-import com.tissue.commons.services.CommonService;
+//import com.tissue.commons.services.CommonService;
 import com.tissue.commons.exceptions.IllegalAccessException;
 import com.tissue.commons.security.util.SecurityUtil;
 
@@ -23,7 +24,7 @@ public class ViewerAdvice {
     private static Logger logger = LoggerFactory.getLogger(ViewerAdvice.class);
 
     @Autowired
-    private CommonService commonService;
+    private AccountDao accountDao;
 
     @ModelAttribute("viewerAccount")
     public Account setupViewer(Map model) {
@@ -33,6 +34,6 @@ public class ViewerAdvice {
         if(viewerAccountId == null) {
             return null;
         }
-        return commonService.getAccount(viewerAccountId);
+        return accountDao.getAccount(viewerAccountId);
     }
 }
