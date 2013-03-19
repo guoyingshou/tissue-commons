@@ -76,6 +76,9 @@
                 <textarea id="content" name="content"></textarea>
             </li>
             <li>
+                <input type="hidden" name="type" value="question" />
+            </li>
+            <li>
                 <input type="submit" value="<@spring.message 'Submit.button' />" />
             </li>
         </ul>
@@ -184,7 +187,10 @@
             </a>
 
             <#if question.isOwner(viewerAccount.id)>
-            <a class="update-question action" data-action="<@spring.url '/questions/${question.id?replace("#", "")}/_update' />" href="#">
+            <a class="delete action" data-action="<@spring.url '/questions/${question.id?replace("#", "")}/_delete' />" href="#">
+                <@spring.message 'Delete.question' />
+            </a>
+             <a class="update-question action" data-action="<@spring.url '/questions/${question.id?replace("#", "")}/_update' />" href="#">
                 <@spring.message 'Update.question' />
             </a>
             </#if>
@@ -270,10 +276,10 @@
 
                     <div class="response">
                     <#if !(topic.deleted ||question.deleted) && isMember && comment.isOwner(viewerAccount.id)>
-                        <a class="delete action" data-action="<@spring.url '/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#","")}/_delete' />" href="#">
+                        <a class="delete action" data-action="<@spring.url '/answerComments/${comment.id?replace("#","")}/_delete' />" href="#">
                             <@spring.message 'Delete.comment' />
                         </a>
-                         <a class="update-answerComment action" data-action="<@spring.url '/answers/${answer.id?replace("#","")}/comments/${comment.id?replace("#", "")}/_update'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
+                         <a class="update-answerComment action" data-action="<@spring.url '/answerComments/${comment.id?replace("#", "")}/_update'/>" data-target="#answer-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" href="#">
                             <@spring.message 'Update.comment' />
                         </a>
                     </#if>

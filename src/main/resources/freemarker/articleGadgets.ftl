@@ -121,8 +121,8 @@
 </form>
 </#macro>
 
-<#macro messageReplyForm>
-<form id="messageReplyForm" class="dialog pop-650" style="display:none" method="post">
+<#macro replyForm>
+<form id="replyForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
         Reply
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
@@ -147,7 +147,7 @@
         [ <@commonGadgets.showTimeBefore article.timeBefore /> ] 
 
         <@sec.authorize access="hasRole('ROLE_ADMIN')">
-            <a class="delete-article action" data-action="<@spring.url '/articles/${article.id?replace("#", "")}/_delete' />" href="#">
+            <a class="delete action" data-action="<@spring.url '/articles/${article.id?replace("#", "")}/_delete' />" href="#">
                 <@spring.message 'Delete.post' />
             </a>
         </@sec.authorize>
@@ -171,7 +171,7 @@
         <@spring.message 'AddMessage.post' />
     </a>
     <#if article.isOwner(viewerAccount.id)>
-        <a class="delete-article action" data-action="<@spring.url '/articles/${article.id?replace("#", "")}/_delete' />" href="#">
+        <a class="delete action" data-action="<@spring.url '/articles/${article.id?replace("#", "")}/_delete' />" href="#">
             <@spring.message 'Delete.post' />
         </a>
         <a class="update-article action" data-type="${article.type}" data-action="<@spring.url '/articles/${article.id?replace("#","")}/_update' />" href="#">
@@ -199,12 +199,12 @@
 
         <div class="response">
         <#if !(topic.deleted || article.deleted) && isMember>
-           <a class="create-messageComment action" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/comments/_create' />" href="#">
+           <a class="create-reply action" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/messageReplies/_create' />" href="#">
                 <@spring.message 'Reply.message' />
             </a>
 
             <#if msg.isOwner(viewerAccount.id)>
-            <a class="delete-messageComment action" data-action="<@spring.url '/messages/${msg.id?replace("#","")}/_delete' />" href="#">
+            <a class="delete action" data-action="<@spring.url '/messages/${msg.id?replace("#","")}/_delete' />" href="#">
                 <@spring.message 'Delete.message' />
             </a>
             <a class="update-message action" data-action="<@spring.url '/messages/${msg.id?replace("#", "")}/_update' />" data-target="#message-${msg.id?replace("#", "")?replace(":", "-")}-content" href="#">
@@ -215,27 +215,27 @@
         </#if>
         </div>
 
-        <ul id="message-${msg.id?replace("#", "")?replace(":", "-")}-comments" class="comments">
-        <#if msg.comments??>
-        <#list msg.comments as comment>
-            <li class="comment">
+        <ul id="message-${msg.id?replace("#", "")?replace(":", "-")}-replies" class="replies">
+        <#if msg.replies??>
+        <#list msg.replies as reply>
+            <li class="reply">
                 <div class="item-ts"> 
-                    <a href="/social/users/${comment.account.user.id?replace("#", "")}/posts">
-                        ${comment.account.user.displayName} 
+                    <a href="/social/users/${reply.account.user.id?replace("#", "")}/posts">
+                        ${reply.account.user.displayName} 
                     </a>
-                    [ <@commonGadgets.showTimeBefore comment.timeBefore /> ]
+                    [ <@commonGadgets.showTimeBefore reply.timeBefore /> ]
                 </div>
 
-                <div id="message-comment-${comment.id?replace("#", "")?replace(":", "-")}-content" class="item-content">
-                    ${comment.content}
+                <div id="message-reply-${reply.id?replace("#", "")?replace(":", "-")}-content" class="item-content">
+                    ${reply.content}
                 </div>
 
                 <div class="response">
-                <#if !(topic.deleted || article.deleted) && isMember && comment.isOwner(viewerAccount.id)>
-                    <a class="delete action" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_delete' />" href="#">
+                <#if !(topic.deleted || article.deleted) && isMember && reply.isOwner(viewerAccount.id)>
+                    <a class="delete action" data-action="<@spring.url '/messageReplies/${reply.id?replace("#", "")}/_delete' />" href="#">
                         <@spring.message 'Delete.reply' />
                     </a>
-                    <a class="update-messageComment action" data-action="<@spring.url '/messageComments/${comment.id?replace("#", "")}/_update"}' />" data-target="#message-comment-${comment.id?replace("#","")?replace(":", "-")}-content" href="#">
+                    <a class="update-reply action" data-action="<@spring.url '/messageReplies/${reply.id?replace("#", "")}/_update"}' />" data-target="#message-reply-${reply.id?replace("#","")?replace(":", "-")}-content" href="#">
                         <@spring.message 'Update.reply' />
                     </a>
                 </#if>
@@ -252,13 +252,13 @@
 <#if !(topic.deleted || article.deleted) && isMember>
     <@updateArticleForm />
     <@messageForm />
-    <@messageReplyForm />
+    <@replyForm />
     <@commonGadgets.deleteConfirmForm />
 <#else>
     <@sec.authorize access="hasRole('ROLE_ADMIN')">
         <@updateArticleForm />
         <@messageForm />
-        <@messageReplyForm />
+        <@replyForm />
         <@commonGadgets.deleteConfirmForm />
     </@sec.authorize>
 </#if>
