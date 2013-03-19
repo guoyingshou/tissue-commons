@@ -130,7 +130,7 @@
   </h1>
 </#macro>
 
-<#macro topicMenu selected='all'>
+<#macro topicMenu>
   <ul class="menu">
       <li>
           <a class="<#if selected = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
