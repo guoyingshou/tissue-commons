@@ -34,11 +34,11 @@
         <@questionActivity activity />
         </#if>
 
-        <#if activity.label = 'postMessage'>
+        <#if activity.label = 'message'>
         <@postMessageActivity activity />
         </#if>
 
-        <#if activity.label = 'postMessageComment'>
+        <#if activity.label = 'messageComment'>
         <@postMessageCommentActivity activity />
         </#if>
 
