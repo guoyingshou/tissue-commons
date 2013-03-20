@@ -4,9 +4,8 @@ import com.tissue.core.User;
 import com.tissue.core.Account;
 import com.tissue.core.dao.AccountDao;
 import com.tissue.core.exceptions.NoRecordFoundException;
-//import com.tissue.commons.services.CommonService;
 import com.tissue.commons.exceptions.IllegalAccessException;
-import com.tissue.commons.security.util.SecurityUtil;
+import com.tissue.commons.util.SecurityUtil;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.beans.factory.annotation.Autowired;

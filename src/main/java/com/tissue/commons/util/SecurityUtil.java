@@ -1,4 +1,4 @@
-package com.tissue.commons.security.util;
+package com.tissue.commons.util;
 
 import com.tissue.core.security.UserDetailsImpl;
 

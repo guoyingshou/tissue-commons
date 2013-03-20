@@ -1,4 +1,4 @@
-package com.tissue.commons.security.services;
+package com.tissue.commons.services;
 
 import com.tissue.core.security.UserDetailsImpl;
 import com.tissue.core.security.dao.UserDetailsDao;
@@ -14,11 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Arrays;
 
-//import org.apache.commons.logging.Log;
-//import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class UserDetailsServiceImpl implements UserDetailsService {
-    //private static Log log = LogFactory.getLog(UserDetailsServiceImpl.class);
+
+    private static Logger logger = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     private UserDetailsDao userDetailsDao;
 
