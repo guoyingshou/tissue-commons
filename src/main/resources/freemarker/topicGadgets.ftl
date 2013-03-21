@@ -176,7 +176,7 @@
             <@spring.message "Create.question" />
         </a>
         <#else>
-        <a href="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
+        <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
             <@spring.message "Join.plan" />
         </a>
         </#if> 

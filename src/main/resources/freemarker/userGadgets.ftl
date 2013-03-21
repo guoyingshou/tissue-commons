@@ -192,7 +192,7 @@
 </#macro>
 
 <#macro resetRequestForm>
-<@spring.bind "resetRequestForm.*" />
+<@spring.bind "resetForm.*" />
 <form id="resetRequestForm" method="post" action="<@spring.url '/resetRequest' />">
 
     <div class="error">
@@ -207,7 +207,7 @@
             <label for="email">
                 <@spring.message "Label.resetRequestForm.email" />
             </label>
-            <@spring.formInput 'resetRequestForm.email' 'class="sum"' />
+            <@spring.formInput 'resetForm.email' 'class="sum"' />
         </li>
         <li>
             <input type="submit" value='<@spring.message "Submit.button"/>'/>
@@ -217,10 +217,8 @@
 </#macro>
 
 <#macro resetPasswordForm>
-
-<@spring.bind 'resetPasswordForm.*' />
-
-<form id="resetPasswordForm" method="post" action="<@spring.url '/reset'/>">
+<@spring.bind 'passwordForm.*' />
+<form id="resetPasswordForm" method="post" action="<@spring.url '/reset/${code}'/>">
     <div class="error">
         <@spring.showErrors "<br>" />
     </div>
@@ -233,18 +231,15 @@
             <label for="password">
                 <@spring.message "Label.resetPasswordForm.password" />
             </label>
-            <@spring.formPasswordInput "resetPasswordForm.password" 'class="sum"' />
+            <@spring.formPasswordInput "passwordForm.password" 'class="sum"' />
         </li>
         <li>
             <label for="confirm">
                 <@spring.message "Label.resetPasswordForm.confirm" />
             </label>
-            <@spring.formPasswordInput 'resetPasswordForm.confirm' 'class="sum"' />
+            <@spring.formPasswordInput 'passwordForm.confirm' 'class="sum"' />
         </li>
-        <li>
-            <@spring.formHiddenInput 'resetPasswordForm.code' 'class="sum"' />
-        </li>
- 
+
         <li>
             <input type="submit" value='<@spring.message "Save.button" />'/>
         </li>
@@ -399,12 +394,20 @@
             <div>${invitation.createTime?date}</div>
             <div>${invitation.content}</div>
             <div class="action">
+                <a href="<@spring.url '/invitations/${invitation.id?replace("#", "")}/_accept' />">
+                   <@spring.message "Accept.invitation" />
+                </a>
+                <a href="<@spring.url '/invitations/${invitation.id?replace("#","")}/_decline' />">
+                   <@spring.message "Decline.invitation" />
+                </a>
+             <#--
                 <a class="process-invitation" data-action="<@spring.url '/invitations/${invitation.id?replace("#", "")}/_accept' />" data-target="${target}" href="#">
                    <@spring.message "Accept.invitation" />
                 </a>
                 <a class="process-invitation" data-action="<@spring.url '/invitations/${invitation.id?replace("#","")}/_decline' />" data-target="${target}" href="#">
                    <@spring.message "Decline.invitation" />
                 </a>
+                -->
             </div>
         </li>
      </#list>

@@ -136,7 +136,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "Activity.postMessage" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.message" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -145,7 +145,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe004;" />
     <div>
-        <span><@spring.messageArgs "Activity.postMessageComment" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.messageComment" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
