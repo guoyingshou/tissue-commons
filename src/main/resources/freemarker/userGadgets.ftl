@@ -390,7 +390,7 @@
     <#list invitationsReceived as invitation>
         <#assign target = "li.invitation-${invitation.id?replace('#','')?replace(':', '-')}">
         <li class="${target}">
-            <div>${invitation.from.user.displayName}</div>
+            <div>${invitation.account.user.displayName}</div>
             <div>${invitation.createTime?date}</div>
             <div>${invitation.content}</div>
             <div class="action">

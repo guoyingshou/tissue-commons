@@ -10,11 +10,11 @@
         <@topicActivity activity />
         </#if>
 
-        <#if activity.label = 'hostGroup'>
+        <#if activity.label = 'plan'>
         <@hostGroupActivity activity />
         </#if>
 
-        <#if activity.label = 'joinGroup'>
+        <#if activity.label = 'member'>
         <@joinGroupActivity activity />
         </#if>
 
@@ -82,7 +82,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe001;" />
     <div>
-        <span><@spring.messageArgs "Activity.hostGroup" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.plan" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
@@ -91,7 +91,7 @@
 <li class="activity-item">
     <@actorInfo activity "&#xe001;" />
     <div>
-        <span><@spring.messageArgs "Activity.joinGroup" activity.messageArgs /></span>
+        <span><@spring.messageArgs "Activity.member" activity.messageArgs /></span>
     </div>
 </li>
 </#macro>
