@@ -1,8 +1,6 @@
 package com.tissue.commons.controllers;
 
 import com.tissue.commons.util.SecurityUtil;
-import com.tissue.core.exceptions.NoRecordFoundException;
-import com.tissue.commons.exceptions.IllegalAccessException;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -28,18 +26,6 @@ public class CommonExceptionHandler {
         return locale.toString();
     }
 
-    @ExceptionHandler(NoRecordFoundException.class)
-    public HttpEntity<?> handleNoRecordFoundException(NoRecordFoundException exc) {
-        logger.warn(exc.getMessage());
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
-
-    @ExceptionHandler(IllegalAccessException.class)
-    public HttpEntity<?> handleIllegalAccessException(IllegalAccessException exc) {
-        logger.warn(exc.getMessage());
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
-
     @ExceptionHandler(OException.class)
     public HttpEntity<?> handleOException(OException exc) {
         logger.warn(exc.getMessage());
@@ -51,6 +37,5 @@ public class CommonExceptionHandler {
         logger.warn(exc.getMessage());
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
-
 
 }
