@@ -38,9 +38,11 @@
                 </ul>
 
                 <#if viewerAccount??>
+                <#--
                 <@userGadgets.updateEmailForm />
                 <@userGadgets.updateProfileForm />
                 <@userGadgets.updatePasswordForm />
+                -->
 
                 <ul class="nav-right nav-item">
                     <#if locale == 'zh_CN'>
@@ -49,9 +51,10 @@
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
                     <li>
-                        <a href="#">
+                        <a href="/social/_setting">
                             <@spring.message "Nav.header.setting" />
                         </a>
+                        <#--
                         <ul class="dropdown-menu" style="display: none">
                             <li>
                                 <a class="update-email" data-action="<@spring.url '/_updateEmail' />" href="#">
@@ -69,6 +72,7 @@
                                 </a>
                              </li>
                         </ul>
+                        -->
                     </li>
                     <li><a href="/social/users/${viewerAccount.user.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "Nav.header.signout" /></a></li>
