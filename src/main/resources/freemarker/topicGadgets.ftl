@@ -3,51 +3,6 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro topicForm>
-    <form id="topicForm" class="dialog pop-650" style="display:none" method="post">
-        <legend>
-            <@spring.message "Legend.topicForm" />
-            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-        </legend>
-        <ul>
-            <li>
-                <label for="title">
-                    <@spring.message "Label.topicForm.title" />
-                    <span class="error" style="display: none">
-                        <@spring.message "NotEmpty.topicForm.title" />
-                    </span>
-                </label>
-                <input type="input" class="sum" id="title" name="title" />
-            </li>
-            <li>
-                <label for="content">
-                    <@spring.message "Label.topicForm.objective" />
-                    <span class="error" style="display: none">
-                        <@spring.message "NotEmpty.topicForm.objective" />
-                    </span>
-                 </label>
-                <textarea class="sum" id="content" name="content"></textarea>
-            </li>
-            <li>
-                <label for="tags">
-                    <@spring.message "Label.topicForm.tags" />
-                    <span class="error" style="display: none">
-                        <@spring.message "NotEmpty.topicForm.tags" />
-                    </span>
-                 </label>
-                <input type="input" class="sum" id="tags" name="tags" />
-            </li>
-            <li>
-                <input type="hidden" name="type" value="topic" />
-            </li>
- 
-            <li>
-                <input type="submit" value="<@spring.message 'Submit.button'/>" />
-            </li>
-        </ul>
-    </form>
-</#macro>
-
 <#macro createPlanForm>
     <form id="createPlanForm" class="dialog pop-320" style="display:none" action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/_create' />" method="post">
         <legend>
@@ -113,10 +68,9 @@
     </ul>
 
     <#if viewerAccount??>
-    <@topicGadgets.topicForm />
     <ul class="action">
         <li>
-            <a class="create-topic" data-action="<@spring.url '/topics/_create' />" href="#">
+            <a class="create-topic" href="<@spring.url '/topics/_create' />">
                 <@spring.message "Menu.explore.createTopic" />
             </a>
         </li>
@@ -169,10 +123,10 @@
     <#if !topic.isDeleted() && topic.activePlan??>
     <li>
         <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
-        <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_form'/>">
+        <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
             <@spring.message "Create.post" />
         </a>
-        <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_form'/>">
+        <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
             <@spring.message "Create.question" />
         </a>
         <#else>
@@ -191,59 +145,6 @@
     </#if>
     </#if>
 </u>
-</#macro>
-
-<#macro showTopicObjective>
-    <div class="ts">
-        <span>
-            ${topic.account.user.displayName}
-            [ <@commonGadgets.showTimeBefore topic.timeBefore /> ]
-        </span>
-    </div>
-    <div class="tags">
-        <#list topic.tags as tag>
-            <span><a href="<@spring.url '/tags/${tag}' />">${tag}</a></span>
-        </#list>
-    </div>
-    <div class="content">
-        ${topic.content}
-    </div>
-
-    <#if !topic.deleted>
-    <@commonGadgets.deleteConfirmForm />
-    <#if viewerAccount?? && topic.isOwner(viewerAccount.id)>
-        <@topicForm />
-
-        <a class="update-topic" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_update' />" href="#">
-           <@spring.message 'Update.topic' />
-        </a>
-        <a class="delete" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'Delete.topic' />
-        </a>
-    <#else>
-        <@sec.authorize access="hasRole('ROLE_ADMIN')">
-            <a class="delete" data-action="<@spring.url '/topics/${topic.id?replace("#", "")}/_delete' />" href="#">
-                <@spring.message 'Delete.topic' />
-            </a>
-        </@sec.authorize>
-    </#if>
-    </#if>
-</#macro>
-
-<#macro showTopics>
-    <ul>
-    <#list topics as topic>
-        <li>
-            <div class="ts">
-                <a href="/social/users/${topic.account.user.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
-                [ <@commonGadgets.showTimeBefore topic.timeBefore /> ]
-            </div>
-            <div class="title">
-                <a href="/group/topics/${topic.id?replace("#", "")}/objective">${topic.title}</a>
-            </div>
-        </li>
-    </#list>
-    </ul>
 </#macro>
 
 <#macro showPlanSidebar>
@@ -306,28 +207,5 @@
         </ul>
     </div>
     </#if>
-</#macro>
-
-<#macro showNewTopics>
-    <div>
-        <h4>
-            <@spring.message "Latest.topics" />
-        </h4>
-        <ul>
-        <#list newTopics as topic>
-            <li>
-                <div class="ts">
-                     <a href="/social/users/${topic.account.user.id?replace("#", "")}/posts">${topic.account.user.displayName}</a>
-                     <@commonGadgets.showTimeBefore topic.timeBefore />
-                </div>
-                <div>
-                    <a href="/group/topics/${topic.id?replace("#", "")}/posts">
-                        ${topic.title}
-                    </a>
-                </div>
-            </li>
-        </#list>
-        </ul>
-    </div>
 </#macro>
 
