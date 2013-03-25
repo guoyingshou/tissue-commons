@@ -3,39 +3,6 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro createPlanForm>
-    <form id="createPlanForm" class="dialog pop-320" style="display:none" action="<@spring.url '/topics/${topic.id?replace("#", "")}/plans/_create' />" method="post">
-        <legend>
-            <@spring.message 'Legend.planForm' />
-            <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-        </legend>
-
-        <ul>
-            <li>
-                <label>
-                    <input type="radio" name="duration" checked value="1" />
-                    <@spring.message 'Label.planForm.duration1' />
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="duration" value="3" />
-                    <@spring.message 'Label.planForm.duration2' />
-                </label>
-            </li>
-            <li>
-                <label>
-                    <input type="radio" name="duration" value="6" />
-                    <@spring.message 'Label.planForm.duration3' />
-                </label>
-            </li>
-            <li>
-                <input type="submit" value="<@spring.message 'Submit.button'/>" />
-            </li>
-        </ul>
-    </form>
-</#macro>
-
 <#macro exploreLogo>
     <h1>
         <@spring.message "Sitename" />
@@ -43,7 +10,7 @@
     </h1>
 </#macro>
 
-<#macro exploreMenu selected="trending">
+<#macro exploreMenu>
     <ul class="menu">
         <li>
             <a class="<#if selected = 'trending'>current</#if>" href="<@spring.url '/explore' />">
@@ -137,8 +104,7 @@
     </li>
     <#else>
     <li>
-        <@createPlanForm />
-        <a class="create-plan" href="#">
+        <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
             <@spring.message "Host.plan" />
         </a>
     </li>
@@ -207,5 +173,122 @@
         </ul>
     </div>
     </#if>
+</#macro>
+
+<#macro messageForm>
+<form id="messageForm" class="dialog pop-650" style="display:none" method="post">
+    <legend>
+        Message
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <ul>
+        <li>
+            <textarea id="content" name="content"></textarea>
+        </li>
+        <li>
+            <input type="submit" value="submit"/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
+<#macro replyForm>
+<form id="replyForm" class="dialog pop-650" style="display:none" method="post">
+    <legend>
+        Reply
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <ul>
+        <li>
+            <textarea id="content" name="content"></textarea>
+        </li>
+        <li>
+            <input type="submit" value="submit"/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
+<#macro questionCommentForm>
+<form id="questionCommentForm" class="dialog pop-650" style="display:none" method="post">
+    <legend>
+        Question Comment
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <ul>
+        <li>
+            <textarea id="content" name="content"></textarea>
+        </li>
+        <li>
+            <input type="submit" value="submit"/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
+<#macro answerForm>
+<form id="answerForm" class="dialog pop-650" style="display:none" method="post">
+    <legend>
+        Answer
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <ul>
+        <li>
+            <textarea id="content" name="content"></textarea>
+        </li>
+        <li>
+            <input type="submit" value="submit"/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
+<#macro answerCommentForm>
+<form id="answerCommentForm" class="dialog pop-650" style="display:none" method="post">
+    <legend>
+        Answer comment
+        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
+    </legend>
+    <ul>
+        <li>
+            <textarea id="content" name="content"></textarea>
+        </li>
+        <li>
+            <input type="submit" value="submit"/>
+        </li>
+    </ul>
+</form>
+</#macro>
+
+<#macro showPosts>
+<ul id="posts">
+   <#list posts as post>
+   <li class="container-has-icon">
+       <div class="icon">
+       <#if post.type == 'concept'>
+           <span data-icon="&#xe007;"></span>
+       <#elseif post.type = 'note'>
+           <span data-icon="&#xe008;"></span>
+       <#elseif post.type = 'question'>
+           <span data-icon="&#xe009;"></span>
+       <#else>
+           <span data-icon="&#xe01c;"></span>
+       </#if>
+       </div>
+
+       <div class="ts has-icon-before">
+           <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
+           [ <@commonGadgets.showTimeBefore post.timeBefore /> ]
+       </div>
+       <div class="title has-icon-before">
+       <#if post.type == 'question'>
+           <a href="/group/questions/${post.id?replace("#","")}" class="post">${post.title}</a>
+       <#else>
+           <a href="/group/articles/${post.id?replace("#","")}" class="post">${post.title}</a>
+       </#if>
+       </div>
+   </li>
+   </#list>
+</ul>
 </#macro>
 

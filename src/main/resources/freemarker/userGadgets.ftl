@@ -63,41 +63,16 @@
             </a>
         </li>
     </ul>
+
+    <#if invitable>
     <ul class="action">
-        <#if invitable>
         <li>
-            <a class="create-invitation" data-action="<@spring.url '/invitations/_create' />" href="#">
+            <a href="<@spring.url '/users/${owner.id?replace("#","")}/invitations/_create' />">
                 <@spring.message "Menu.user.invite" />
             </a>
         </li>
-
-        <form id="invitationForm" class="dialog pop-420" style="display: none" method="POST">
-            <legend>
-                <@spring.message "Legend.invitationForm" />
-                <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-            </legend>
-            <ul>
-                <li>
-                    <label for="letter">
-                        <@spring.message "Label.invitationForm.content" />
-                        <span id="failInvite" style="display: none" class="error">
-                            <@spring.message "Fail.invitationForm" />
-                        </span>
-                    </label>
-               </li>
-               <li>
-                   <textarea class="sum" id="content" name="content"></textarea>
-               </li>
-               <li>
-                   <input type="hidden" id="to" name="to" value="${owner.id?replace("#","")}">
-               </li>
-               <li>
-                   <input type="submit" name="submit" value='<@spring.message "Send.button"/>' />
-               </li>
-            </ul>
-        </form>
-        </#if>
     </ul>
+    </#if>
 </#macro>
 
 <#macro settingMenu>
@@ -124,6 +99,22 @@
        </li>
    </ul>
 </#macro>
+
+<#macro aboutMenu>
+   <ul class="menu">
+       <li>
+           <a class="<#if selected = 'praise'>current</#if>" href="<@spring.url '/praise' />">
+               <@spring.message "Menu.about.praise" />
+           </a>
+       </li>
+       <li>
+           <a class="<#if selected = 'vision'>current</#if>" href="<@spring.url '/about' />">
+               <@spring.message "Menu.about.vision" />
+           </a>
+       </li>
+   </ul>
+</#macro>
+
 
 <#macro showPlansLearning>
     <#if plans??>
