@@ -6,17 +6,16 @@
     <head>
         <title>${title}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
         <script type="text/javascript" src="/jquery/jquery-1.8.3.min.js"></script>
-        <script type="text/javascript" src="/tissue/js/common.js"></script>
-        <script type="text/javascript" src="/tissue/js/user.js"></script>
+        <script type="text/javascript" src="/tissue/js/tissue.min.js"></script>
         <#if myscripts??>
         <#list myscripts as myscript>
         <script type="text/javascript" src="${myscript}"></script>
         </#list>
         </#if>
          
-        <link type="text/css" rel="stylesheet" href="/tissue/css/common.css"></link>
-
+        <link type="text/css" rel="stylesheet" href="/tissue/css/style.min.css"></link>
         <#if mystyles??>
         <#list mystyles as style>
         <link rel='stylesheet' type='text/css' media='screen' href='${style}' />
@@ -38,12 +37,6 @@
                 </ul>
 
                 <#if viewerAccount??>
-                <#--
-                <@userGadgets.updateEmailForm />
-                <@userGadgets.updateProfileForm />
-                <@userGadgets.updatePasswordForm />
-                -->
-
                 <ul class="nav-right nav-item">
                     <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
@@ -54,25 +47,6 @@
                         <a href="/social/_setting">
                             <@spring.message "Nav.header.setting" />
                         </a>
-                        <#--
-                        <ul class="dropdown-menu" style="display: none">
-                            <li>
-                                <a class="update-email" data-action="<@spring.url '/_updateEmail' />" href="#">
-                                    <@spring.message "Nav.header.updateEmail" />
-                                </a>
-                            </li>
-                            <li>
-                                <a class="update-profile" data-action="<@spring.url '/_updateProfile' />" href="#">
-                                    <@spring.message "Nav.header.updateProfile" />
-                                </a>
-                            </li>
-                            <li>
-                                <a class="update-password" data-action="<@spring.url '/_updatePassword' />" href="#">
-                                    <@spring.message "Nav.header.updatePassword" />
-                                </a>
-                             </li>
-                        </ul>
-                        -->
                     </li>
                     <li><a href="/social/users/${viewerAccount.user.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
                     <li><a href="/social/signout"><@spring.message "Nav.header.signout" /></a></li>
