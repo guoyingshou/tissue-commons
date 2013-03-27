@@ -13,23 +13,23 @@
    <ul class="menu">
        <li>
            <a class="<#if selected = 'watchedFeeds'>current</#if>" href="<@spring.url '/dashboard' />">
-               <@spring.message "Menu.home.watchedFeeds" />
+               <@spring.message "home.watchedFeeds" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'allFeeds'>current</#if>" href="<@spring.url '/allfeeds' />">
-               <@spring.message "Menu.home.allFeeds" />
+               <@spring.message "home.allFeeds" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'friends'>current</#if>" href="<@spring.url '/friends' />">
-                <@spring.message "Menu.home.friends" />
+                <@spring.message "home.friends" />
            </a>
        </li>
        <#if (invitationsReceived?size > 0)>
        <li>
            <a class="<#if selected = 'invitations'>current</#if>" href="/social/invitations">
-               <@spring.message "Menu.home.invitations" />
+               <@spring.message "home.invitations" />
                - ${invitationsReceived?size}
            </a>
        </li>
@@ -49,17 +49,17 @@
     <ul class="menu">
         <li>
             <a class="<#if selected='posts'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
-                <@spring.message "Menu.user.posts" />
+                <@spring.message "user.posts" />
             </a>
         </li>
         <li>
            <a class="<#if selected='status'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#","")}/status' />">
-                <@spring.message "Menu.user.status" />
+                <@spring.message "user.status" />
             </a>
         </li>
         <li>
             <a class="<#if selected='impressions'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
-                <@spring.message "Menu.user.impressions" />
+                <@spring.message "user.impressions" />
             </a>
         </li>
     </ul>
@@ -68,7 +68,7 @@
     <ul class="action">
         <li>
             <a href="<@spring.url '/users/${owner.id?replace("#","")}/invitations/_create' />">
-                <@spring.message "Menu.user.invite" />
+                <@spring.message "user.invite" />
             </a>
         </li>
     </ul>
@@ -79,22 +79,22 @@
    <ul class="menu">
        <li>
            <a class="<#if selected = 'profile'>current</#if>" href="<@spring.url '/_setting' />">
-               <@spring.message "Menu.setting.profile" />
+               <@spring.message "setting.profile" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'headline'>current</#if>" href="<@spring.url '/_updateHeadline' />">
-               <@spring.message "Menu.setting.headline" />
+               <@spring.message "setting.headline" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'email'>current</#if>" href="<@spring.url '/_updateEmail' />">
-                <@spring.message "Menu.setting.email" />
+                <@spring.message "setting.email" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'password'>current</#if>" href="<@spring.url '/_updatePassword' />">
-               <@spring.message "Menu.setting.password" />
+               <@spring.message "setting.password" />
            </a>
        </li>
    </ul>
@@ -104,12 +104,12 @@
    <ul class="menu">
        <li>
            <a class="<#if selected = 'praise'>current</#if>" href="<@spring.url '/praise' />">
-               <@spring.message "Menu.about.praise" />
+               <@spring.message "about.praise" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'vision'>current</#if>" href="<@spring.url '/about' />">
-               <@spring.message "Menu.about.vision" />
+               <@spring.message "about.vision" />
            </a>
        </li>
    </ul>

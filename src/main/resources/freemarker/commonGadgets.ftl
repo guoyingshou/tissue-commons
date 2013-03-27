@@ -24,16 +24,16 @@
     </head>
 
     <body>
-        <div id="page-header-wrapper">
-            <div id="page-header" class="page-center">
+        <div id="page-nav-wrapper">
+            <div id="page-nav">
                 <ul class="nav-left nav-item">
                     <#if viewerAccount??>
-                        <li><a href="/social/dashboard"><@spring.message "Nav.header.home" /></a></li>
+                        <li><a href="/social/dashboard"><@spring.message "home" /></a></li>
                     <#else>
-                        <li><a href="/social/home"><@spring.message "Nav.header.home" /></a></li>
+                        <li><a href="/social/home"><@spring.message "home" /></a></li>
                     </#if>
-                    <li><a href="/group/explore"><@spring.message "Nav.header.explore" /></a></li>
-                    <li><a href="/social/about"><@spring.message "Nav.header.about" /></a></li>
+                    <li><a href="/group/explore"><@spring.message "explore" /></a></li>
+                    <li><a href="/social/about"><@spring.message "about" /></a></li>
                 </ul>
 
                 <#if viewerAccount??>
@@ -45,11 +45,11 @@
                     </#if>
                     <li>
                         <a href="/social/_setting">
-                            <@spring.message "Nav.header.setting" />
+                            <@spring.message "setting" />
                         </a>
                     </li>
                     <li><a href="/social/users/${viewerAccount.user.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
-                    <li><a href="/social/signout"><@spring.message "Nav.header.signout" /></a></li>
+                    <li><a href="/social/signout"><@spring.message "signout" /></a></li>
                 </ul>
                 <#else>
                 <ul class="nav-right nav-item">
@@ -58,8 +58,8 @@
                     <#else>
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
-                    <li><a href="/social/dashboard"><@spring.message "Nav.header.signin" /></a></li>
-                    <li><a class="signup" href="/social/signup"><@spring.message "Nav.header.signup" /></a></li>
+                    <li><a href="/social/dashboard"><@spring.message "signin" /></a></li>
+                    <li><a class="signup" href="/social/signup"><@spring.message "signup" /></a></li>
                 </ul>
                 </#if>
             </div>
@@ -68,7 +68,7 @@
         <#nested>
 
         <div id="page-footer-wrapper">
-            <div id="page-footer" class="page-center">
+            <div id="page-footer">
                 <p>Copyritht @2012 Tissue | Powered by JinZhouLin</p>
             </div>
         </div>

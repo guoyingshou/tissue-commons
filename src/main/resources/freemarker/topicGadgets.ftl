@@ -14,22 +14,22 @@
     <ul class="menu">
         <li>
             <a class="<#if selected = 'trending'>current</#if>" href="<@spring.url '/explore' />">
-                <@spring.message "Menu.explore.trending" />
+                <@spring.message "explore.trending" />
             </a>
         </li>
         <li>
             <a class="<#if selected = 'featured'>current</#if>" href="<@spring.url '/featured' />">
-                <@spring.message "Menu.explore.featured" />
+                <@spring.message "explore.featured" />
             </a>
         </li>
         <li>
             <a class="<#if selected = 'topics'>current</#if>" href="<@spring.url '/topics' />">
-                <@spring.message "Menu.explore.topics" />
+                <@spring.message "explore.topics" />
             </a>
         </li>
         <li>
             <a class="<#if selected = 'tags'>current</#if>" href="<@spring.url '/tags' />">
-                <@spring.message "Menu.explore.tags" />
+                <@spring.message "explore.tags" />
             </a>
         </li>
     </ul>
@@ -38,7 +38,7 @@
     <ul class="action">
         <li>
             <a class="create-topic" href="<@spring.url '/topics/_create' />">
-                <@spring.message "Menu.explore.createTopic" />
+                <@spring.message "explore.createTopic" />
             </a>
         </li>
     </ul>
@@ -55,32 +55,32 @@
   <ul class="menu">
       <li>
           <a class="<#if selected = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
-              <@spring.message "Menu.posts.all" />
+              <@spring.message "topic.all" />
           </a>
       </li>
       <li>
           <a class="<#if selected = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concepts' />">
-              <@spring.message "Menu.posts.concept" />
+              <@spring.message "topic.concept" />
           </a>
       </li>
       <li>
           <a class="<#if selected = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/notes' />">
-              <@spring.message "Menu.posts.note" />
+              <@spring.message "topic.note" />
           </a>
       </li>
       <li>
           <a class="<#if selected = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorials' />">
-              <@spring.message "Menu.posts.tutorial" />
+              <@spring.message "topic.tutorial" />
           </a>
       </li>
       <li>
           <a class="<#if selected = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions' />">
-              <@spring.message "Menu.posts.question" />
+              <@spring.message "topic.question" />
           </a>
       </li>
       <li>
           <a class="<#if selected = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
-              <@spring.message "Menu.topic.objective" />
+              <@spring.message "topic.objective" />
           </a>
       </li>
 </ul>
@@ -91,21 +91,21 @@
     <li>
         <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
         <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
-            <@spring.message "Create.post" />
+            <@spring.message "topic.createArticle" />
         </a>
         <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
-            <@spring.message "Create.question" />
+            <@spring.message "topic.createQuestion" />
         </a>
         <#else>
         <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
-            <@spring.message "Join.plan" />
+            <@spring.message "topic.joinPlan" />
         </a>
         </#if> 
     </li>
     <#else>
     <li>
         <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
-            <@spring.message "Host.plan" />
+            <@spring.message "topic.hostPlan" />
         </a>
     </li>
     </#if>
@@ -261,7 +261,7 @@
 </#macro>
 
 <#macro showPosts>
-<ul id="posts">
+<ul id="content-posts">
    <#list posts as post>
    <li class="container-has-icon">
        <div class="icon">
