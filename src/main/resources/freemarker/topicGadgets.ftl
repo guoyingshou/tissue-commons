@@ -124,10 +124,11 @@
 
 <#macro showPlanLive>
     <#if topic.activePlan??>
-    <div>
+    <div class="active">
         <h4>
             <@spring.message "Live.topic.plan" />
         </h4>
+
         <div class="ts">
             <a href="/group/plans/${topic.activePlan.id?replace("#", "")}/posts">
                 <@site.showTimeRemaining topic.activePlan.timeRemaining />
@@ -139,6 +140,7 @@
                 ${topic.activePlan.account.user.displayName}
             </a>
         </div>
+
         <div>
             ${topic.activePlan.account.user.headline!""}
         </div>
@@ -148,29 +150,27 @@
 
 <#macro showPlansArchived>
     <#if topic.archivedPlans??>
-    <div>
+    <div class="archived">
         <h4>
             <@spring.message "Archived.topic.plans" />
         </h4>
-        <ul>
         <#list topic.archivedPlans as plan>
-            <li>
-                <div class="ts">
-                    <a href="/group/plans/${plan.id?replace("#", "")}/posts">
-                        ${plan.createTime?date} - ${plan.endTime?date}
-                    </a>
-                </div>
-                <div>
-                    <a href="/social/users/${plan.account.user.id?replace("#", "")}/posts">
-                        ${plan.account.user.displayName}
-                    </a>
-                </div>
-                <div>
-                    ${plan.account.user.headline!""}
-                </div>
-            </li>
+        <div class="plan">
+            <div class="ts">
+                <a href="/group/plans/${plan.id?replace("#", "")}/posts">
+                    ${plan.createTime?date} - ${plan.endTime?date}
+                </a>
+            </div>
+            <div>
+                <a href="/social/users/${plan.account.user.id?replace("#", "")}/posts">
+                    ${plan.account.user.displayName}
+                </a>
+            </div>
+            <div>
+                ${plan.account.user.headline!""}
+            </div>
+        </div>
         </#list>
-        </ul>
     </div>
     </#if>
 </#macro>
@@ -261,26 +261,25 @@
 </#macro>
 
 <#macro showPosts>
-<ul id="content-posts">
+<ul class="posts">
    <#list posts as post>
-   <li class="container-has-icon">
-       <div class="icon">
+   <li class="icon-container">
        <#if post.type == 'concept'>
-           <span data-icon="&#xe007;"></span>
+       <span class="icon" data-icon="&#xe007;"></span>
        <#elseif post.type = 'note'>
-           <span data-icon="&#xe008;"></span>
+       <span class="icon" data-icon="&#xe008;"></span>
        <#elseif post.type = 'question'>
-           <span data-icon="&#xe009;"></span>
+       <span class="icon" data-icon="&#xe009;"></span>
        <#else>
-           <span data-icon="&#xe01c;"></span>
+       <span class="icon" data-icon="&#xe01c;"></span>
        </#if>
-       </div>
 
-       <div class="ts has-icon-before">
+       <div class="ts">
            <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
            [ <@site.showTimeBefore post.timeBefore /> ]
        </div>
-       <div class="title has-icon-before">
+
+       <div>
        <#if post.type == 'question'>
            <a href="/group/questions/${post.id?replace("#","")}" class="post">${post.title}</a>
        <#else>

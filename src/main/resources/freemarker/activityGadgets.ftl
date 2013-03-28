@@ -3,9 +3,8 @@
 
 <#macro showActivities>
     <#if activities??>
-    <ul>
+    <ul class="activities">
     <#list activities as activity>
-
         <#if activity.label = 'topic'>
         <@topicActivity activity />
         </#if>
@@ -60,8 +59,8 @@
 </#macro>
 
 <#macro actorInfo activity code>
-<span class="activity-icon" data-icon="${code}"></span>
-<div class="activity-ts">
+<span class="icon" data-icon="${code}"></span>
+<div class="ts">
     <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
         ${activity.who.displayName}
     </a> 
@@ -70,7 +69,7 @@
 </#macro>
 
 <#macro topicActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe004;" />
     <div>
         <span><@spring.messageArgs "Activity.topic" activity.messageArgs /></span>
@@ -79,7 +78,7 @@
 </#macro>
 
 <#macro hostGroupActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe001;" />
     <div>
         <span><@spring.messageArgs "Activity.plan" activity.messageArgs /></span>
@@ -88,7 +87,7 @@
 </#macro>
 
 <#macro joinGroupActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe001;" />
     <div>
         <span><@spring.messageArgs "Activity.member" activity.messageArgs /></span>
@@ -97,7 +96,7 @@
 </#macro>
 
 <#macro conceptActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe002;" />
     <div>
         <span><@spring.messageArgs "Activity.concept" activity.messageArgs /></span>
@@ -106,7 +105,7 @@
 </#macro>
 
 <#macro noteActivity activity>
-<li class="activity-item">
+<li class="iconf-container">
     <@actorInfo activity "&#xe003;" />
     <div>
         <span><@spring.messageArgs "Activity.note" activity.messageArgs /></span>
@@ -115,7 +114,7 @@
 </#macro>
 
 <#macro tutorialActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe004;" />
     <div>
         <span><@spring.messageArgs "Activity.tutorial" activity.messageArgs /></span>
@@ -124,7 +123,7 @@
 </#macro>
 
 <#macro questionActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe004;" />
     <div>
         <span><@spring.messageArgs "Activity.question" activity.messageArgs /></span>
@@ -133,7 +132,7 @@
 </#macro>
 
 <#macro postMessageActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe004;" />
     <div>
         <span><@spring.messageArgs "Activity.message" activity.messageArgs /></span>
@@ -142,7 +141,7 @@
 </#macro>
 
 <#macro postMessageCommentActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe004;" />
     <div>
         <span><@spring.messageArgs "Activity.messageComment" activity.messageArgs /></span>
@@ -151,7 +150,7 @@
 </#macro>
 
 <#macro questionCommentActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe004;" />
     <div>
         <span><@spring.messageArgs "Activity.questionComment" activity.messageArgs /></span>
@@ -160,7 +159,7 @@
 </#macro>
 
 <#macro answerActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe004;" />
     <div>
         <span><@spring.messageArgs "Activity.answer" activity.messageArgs /></span>
@@ -169,7 +168,7 @@
 </#macro>
 
 <#macro answerCommentActivity activity>
-<li class="activity-item">
+<li class="icon-container">
     <@actorInfo activity "&#xe001;" />
     <div>
         <span><@spring.messageArgs "Activity.answerComment" activity.messageArgs /></span>

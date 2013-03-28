@@ -115,30 +115,37 @@
    </ul>
 </#macro>
 
-
 <#macro showPlansLearning>
     <#if plans??>
-    <div>
+    <div class="active">
         <h4>
             <@spring.message "InProgress.topics" />
         </h4>
-        <ul>
         <#list plans as plan>
         <#if !plan.topic.deleted && plan.isActive()>
-            <li>
-                <div class="topic-title-icon">
-                    ${plan.topic.title}
-                </div>
+        <div class="plan">
+            <div>
+                ${plan.topic.title}
+            </div>
 
-                <div class="ts">
-                    <a href="/group/plans/${plan.id?replace("#", "")}/posts">
-                        <@site.showTimeRemaining plan.timeRemaining />
-                    </a>
-                </div>
-            </li>
+            <div>
+                <a href="/social/users/${plan.account.user.id?replace("#","")}/posts">
+                    ${plan.account.user.displayName}
+                </a>
+            </div>
+
+            <div>
+                ${plan.account.user.headline!""}
+            </div>
+
+            <div class="ts">
+                <a href="/group/plans/${plan.id?replace("#", "")}/posts">
+                    <@site.showTimeRemaining plan.timeRemaining />
+                </a>
+            </div>
+        </div>
         </#if>
         </#list>
-        </ul>
     </div>
     </#if>
 </#macro>
@@ -149,23 +156,32 @@
         <h4>
             <@spring.message "Learned.topics" />
         </h4>
-        <ul>
+
         <#list plans as plan>
         <#if !plan.isActive()>
-            <li>
-                <div class="topic-title-icon">
-                    ${plan.topic.title}
-                </div>
+        <div class="plan">
+            <div>
+                ${plan.topic.title}
+            </div>
 
-                <div class="ts">
-                    <a href="/group/plans/${plan.id?replace("#", "")}/posts">
-                        ${plan.createTime?date} - ${plan.endTime?date}
-                    </a>
-                </div>
-            </li>
+            <div>
+                <a href="/social/users/${plan.account.user.id?replace("#","")}/posts">
+                    ${plan.account.user.displayName}
+                </a>
+            </div>
+
+            <div>
+                ${plan.account.user.headline!""}
+            </div>
+
+            <div class="ts">
+                <a href="/group/plans/${plan.id?replace("#", "")}/posts">
+                    ${plan.createTime?date} - ${plan.endTime?date}
+                </a>
+            </div>
+        </div>
         </#if>
         </#list>
-        </ul>
     </div>
     </#if>
 </#macro>
@@ -175,12 +191,10 @@
         <#list users as user>
         <li>
             <div>
-                <p>
-                    <a href="/social/users/${user.id?replace("#", "")}/posts">${user.displayName}</a>
-                </p>
-                <p>
-                    ${user.headline!""}
-                </p>
+                <a href="/social/users/${user.id?replace("#", "")}/posts">${user.displayName}</a>
+            </div>
+            <div>
+                ${user.headline!""}
             </div>
         </li>
         </#list>
