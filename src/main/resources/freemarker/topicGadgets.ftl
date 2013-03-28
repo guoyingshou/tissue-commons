@@ -1,5 +1,5 @@
 <#import 'spring.ftl' as spring />
-<#import 'commonGadgets.ftl' as commonGadgets />
+<#import 'siteGadgets.ftl' as site />
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
@@ -130,7 +130,7 @@
         </h4>
         <div class="ts">
             <a href="/group/plans/${topic.activePlan.id?replace("#", "")}/posts">
-                <@commonGadgets.showTimeRemaining topic.activePlan.timeRemaining />
+                <@site.showTimeRemaining topic.activePlan.timeRemaining />
             </a>
         </div>
 
@@ -278,7 +278,7 @@
 
        <div class="ts has-icon-before">
            <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
-           [ <@commonGadgets.showTimeBefore post.timeBefore /> ]
+           [ <@site.showTimeBefore post.timeBefore /> ]
        </div>
        <div class="title has-icon-before">
        <#if post.type == 'question'>

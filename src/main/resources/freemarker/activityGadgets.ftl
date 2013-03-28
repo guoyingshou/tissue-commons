@@ -1,5 +1,5 @@
 <#import 'spring.ftl' as spring />
-<#import 'commonGadgets.ftl' as commonGadgets />
+<#import 'siteGadgets.ftl' as site />
 
 <#macro showActivities>
     <#if activities??>
@@ -65,7 +65,7 @@
     <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
         ${activity.who.displayName}
     </a> 
-    <@commonGadgets.showTimeBefore activity.timeBefore />
+    <@site.showTimeBefore activity.timeBefore />
 </div>
 </#macro>
 

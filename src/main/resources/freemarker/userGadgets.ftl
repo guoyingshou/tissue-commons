@@ -1,5 +1,5 @@
 <#import 'spring.ftl' as spring />
-<#import 'commonGadgets.ftl' as commonGadgets />
+<#import 'siteGadgets.ftl' as site />
 
 <#macro homeLogo>
     <h1>
@@ -132,7 +132,7 @@
 
                 <div class="ts">
                     <a href="/group/plans/${plan.id?replace("#", "")}/posts">
-                        <@commonGadgets.showTimeRemaining plan.timeRemaining />
+                        <@site.showTimeRemaining plan.timeRemaining />
                     </a>
                 </div>
             </li>
@@ -171,19 +171,19 @@
 </#macro>
 
 <#macro showUsers>
-                <ul class="users">
-                    <#list users as user>
-                    <li>
-                        <div>
-                            <p>
-                                <a href="/social/users/${user.id?replace("#", "")}/posts">${user.displayName}</a>
-                            </p>
-                            <p>
-                                ${user.headline!""}
-                            </p>
-                       </div>
-                    </li>
-                    </#list>
-                </ul>
+    <ul class="users">
+        <#list users as user>
+        <li>
+            <div>
+                <p>
+                    <a href="/social/users/${user.id?replace("#", "")}/posts">${user.displayName}</a>
+                </p>
+                <p>
+                    ${user.headline!""}
+                </p>
+            </div>
+        </li>
+        </#list>
+    </ul>
 </#macro>
 
