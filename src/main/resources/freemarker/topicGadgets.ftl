@@ -34,7 +34,7 @@
         </li>
     </ul>
 
-    <#if viewerAccount??>
+    <#if viewerAccount?? && (viewerActivePlansCount < 5)>
     <ul class="action">
         <li>
             <a class="create-topic" href="<@spring.url '/topics/_create' />">
@@ -86,21 +86,25 @@
 </ul>
 
 <ul class="action">
-    <#if viewerAccount??>
+    <#if viewerAccount?? && (viewerActivePlansCount < 5)>
     <#if !topic.isDeleted() && topic.activePlan??>
+    <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
     <li>
-        <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
         <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
             <@spring.message "topic.createArticle" />
         </a>
+    </li>
+    <li>
         <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
             <@spring.message "topic.createQuestion" />
         </a>
-        <#else>
+    </li>
+    <#else>
+    <li>
         <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
             <@spring.message "topic.joinPlan" />
         </a>
-        </#if> 
+    </#if> 
     </li>
     <#else>
     <li>

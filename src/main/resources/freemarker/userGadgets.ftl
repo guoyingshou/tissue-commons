@@ -125,9 +125,12 @@
         <#if !plan.topic.deleted && plan.isActive()>
         <div class="plan">
             <div>
-                ${plan.topic.title}
+                <a href="/group/topics/${plan.topic.id?replace("#","")}/posts">
+                    ${plan.topic.title}
+                </a>
             </div>
 
+<#--
             <div>
                 <a href="/social/users/${plan.account.user.id?replace("#","")}/posts">
                     ${plan.account.user.displayName}
@@ -137,6 +140,7 @@
             <div>
                 ${plan.account.user.headline!""}
             </div>
+            -->
 
             <div class="ts">
                 <a href="/group/plans/${plan.id?replace("#", "")}/posts">
@@ -161,9 +165,12 @@
         <#if !plan.isActive()>
         <div class="plan">
             <div>
-                ${plan.topic.title}
+                <a href="/group/topics/${plan.topic.id?replace("#","")}/posts">
+                    ${plan.topic.title}
+                </a>
             </div>
 
+<#--
             <div>
                 <a href="/social/users/${plan.account.user.id?replace("#","")}/posts">
                     ${plan.account.user.displayName}
@@ -173,6 +180,7 @@
             <div>
                 ${plan.account.user.headline!""}
             </div>
+-->
 
             <div class="ts">
                 <a href="/group/plans/${plan.id?replace("#", "")}/posts">

@@ -105,7 +105,7 @@
 </#macro>
 
 <#macro noteActivity activity>
-<li class="iconf-container">
+<li class="icon-container">
     <@actorInfo activity "&#xe003;" />
     <div>
         <span><@spring.messageArgs "Activity.note" activity.messageArgs /></span>
