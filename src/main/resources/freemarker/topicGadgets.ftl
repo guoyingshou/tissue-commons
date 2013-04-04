@@ -34,7 +34,7 @@
         </li>
     </ul>
 
-    <#if viewerAccount?? && (viewerActivePlansCount < 5)>
+    <#if viewerAccount?? && (viewerActivePlansCount < 9)>
     <ul class="action">
         <li>
             <a class="create-topic" href="<@spring.url '/topics/_create' />">
@@ -86,7 +86,7 @@
 </ul>
 
 <ul class="action">
-    <#if viewerAccount?? && (viewerActivePlansCount < 5)>
+    <#if viewerAccount?? && (viewerActivePlansCount < 9)>
     <#if !topic.isDeleted() && topic.activePlan??>
     <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
     <li>
@@ -187,7 +187,7 @@
     </legend>
     <ul>
         <li>
-            <textarea id="content" name="content"></textarea>
+            <textarea id="message-editor" name="content"></textarea>
         </li>
         <li>
             <input type="submit" value="submit"/>
@@ -204,13 +204,14 @@
     </legend>
     <ul>
         <li>
-            <textarea id="content" name="content"></textarea>
+            <textarea id="reply-editor" name="content"></textarea>
         </li>
         <li>
             <input type="submit" value="submit"/>
         </li>
     </ul>
 </form>
+
 </#macro>
 
 <#macro questionCommentForm>
@@ -221,7 +222,7 @@
     </legend>
     <ul>
         <li>
-            <textarea id="content" name="content"></textarea>
+            <textarea id="questionComment-editor" name="content"></textarea>
         </li>
         <li>
             <input type="submit" value="submit"/>
@@ -238,7 +239,7 @@
     </legend>
     <ul>
         <li>
-            <textarea id="content" name="content"></textarea>
+            <textarea id="answer-editor" name="content"></textarea>
         </li>
         <li>
             <input type="submit" value="submit"/>
@@ -255,7 +256,7 @@
     </legend>
     <ul>
         <li>
-            <textarea id="content" name="content"></textarea>
+            <textarea id="answerComment-editor" name="content"></textarea>
         </li>
         <li>
             <input type="submit" value="submit"/>

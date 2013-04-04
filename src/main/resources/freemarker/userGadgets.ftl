@@ -156,7 +156,7 @@
 
 <#macro showPlansLearned>
     <#if plans??>
-    <div>
+    <div class="archived">
         <h4>
             <@spring.message "Learned.topics" />
         </h4>
@@ -169,19 +169,6 @@
                     ${plan.topic.title}
                 </a>
             </div>
-
-<#--
-            <div>
-                <a href="/social/users/${plan.account.user.id?replace("#","")}/posts">
-                    ${plan.account.user.displayName}
-                </a>
-            </div>
-
-            <div>
-                ${plan.account.user.headline!""}
-            </div>
--->
-
             <div class="ts">
                 <a href="/group/plans/${plan.id?replace("#", "")}/posts">
                     ${plan.createTime?date} - ${plan.endTime?date}

@@ -234,21 +234,20 @@
    </#if>
 </#macro>
 
-<#macro deleteConfirmForm>
-<form id="deleteConfirmForm" class="dialog pop-320" style="display:none" method="post">
+<#macro confirmForm>
+<form id="confirmForm" class="dialog pop-320" style="display:none" method="post">
     <legend>
         Warning
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <div class="message">
-          Are you sure that you really want to delete the selected item?
+          Are you sure about what you're doing and would like to continue?
     </div>
     <div>
         <input type="submit" name="ok" value="Yes" />
     </div>
 </form>
 </#macro>
-
 
 <#macro siteLogo>
     <h1>

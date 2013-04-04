@@ -6,172 +6,72 @@
     <ul class="activities">
     <#list activities as activity>
         <#if activity.label = 'topic'>
-        <@topicActivity activity />
+            <@activityItem activity "&#xe004;" "Activity.topic" />
         </#if>
 
         <#if activity.label = 'plan'>
-        <@hostGroupActivity activity />
+            <@activityItem activity "&#xe001;" "Activity.plan" />
         </#if>
 
         <#if activity.label = 'member'>
-        <@joinGroupActivity activity />
+            <@activityItem activity "&#xe001;" "Activity.member" />
         </#if>
 
         <#if activity.label = 'concept'>
-        <@conceptActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.concept" />
         </#if>
 
         <#if activity.label = 'note'>
-        <@noteActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.note" />
         </#if>
 
         <#if activity.label = 'tutorial'>
-        <@tutorialActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.tutorial" />
         </#if>
 
         <#if activity.label = 'question'>
-        <@questionActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.question" />
         </#if>
 
         <#if activity.label = 'message'>
-        <@postMessageActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.message" />
         </#if>
 
         <#if activity.label = 'messageComment'>
-        <@postMessageCommentActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.messageComment" />
         </#if>
 
         <#if activity.label = 'questionComment'>
-        <@questionCommentActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.questionComment" />
         </#if>
 
         <#if activity.label = 'answer'>
-        <@answerActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.answer" />
         </#if>
 
         <#if activity.label = 'answerComment'>
-        <@answerCommentActivity activity />
+            <@activityItem activity "&#xe005;" "Activity.answerComment" />
         </#if>
-
      </#list>
     </ul>
     </#if>
 </#macro>
 
-<#macro actorInfo activity code>
-<span class="icon" data-icon="${code}"></span>
-<div class="ts">
-    <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-        ${activity.who.displayName}
-    </a> 
-    <@site.showTimeBefore activity.timeBefore />
-</div>
+<#macro activityItem activity iconCode messageKey>
+    <li class="icon-container">
+        <span class="icon" data-icon="${iconCode}"></span>
+        <div class="ts">
+            <em>
+                <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
+                    ${activity.who.displayName}
+                </a> 
+            </em>
+            [ <@site.showTimeBefore activity.timeBefore /> ]
+        </div>
+
+        <div>
+            <@spring.messageArgs messageKey activity.messageArgs />
+        </div>
+    </li>
 </#macro>
 
-<#macro topicActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe004;" />
-    <div>
-        <span><@spring.messageArgs "Activity.topic" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro hostGroupActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe001;" />
-    <div>
-        <span><@spring.messageArgs "Activity.plan" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro joinGroupActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe001;" />
-    <div>
-        <span><@spring.messageArgs "Activity.member" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro conceptActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe002;" />
-    <div>
-        <span><@spring.messageArgs "Activity.concept" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro noteActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe003;" />
-    <div>
-        <span><@spring.messageArgs "Activity.note" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro tutorialActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe004;" />
-    <div>
-        <span><@spring.messageArgs "Activity.tutorial" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro questionActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe004;" />
-    <div>
-        <span><@spring.messageArgs "Activity.question" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro postMessageActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe004;" />
-    <div>
-        <span><@spring.messageArgs "Activity.message" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro postMessageCommentActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe004;" />
-    <div>
-        <span><@spring.messageArgs "Activity.messageComment" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro questionCommentActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe004;" />
-    <div>
-        <span><@spring.messageArgs "Activity.questionComment" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro answerActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe004;" />
-    <div>
-        <span><@spring.messageArgs "Activity.answer" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
-
-<#macro answerCommentActivity activity>
-<li class="icon-container">
-    <@actorInfo activity "&#xe001;" />
-    <div>
-        <span><@spring.messageArgs "Activity.answerComment" activity.messageArgs /></span>
-    </div>
-</li>
-</#macro>
