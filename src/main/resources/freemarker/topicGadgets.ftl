@@ -179,6 +179,7 @@
     </#if>
 </#macro>
 
+<#--
 <#macro messageForm>
 <form id="messageForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
@@ -195,6 +196,7 @@
     </ul>
 </form>
 </#macro>
+-->
 
 <#macro replyForm>
 <form id="replyForm" class="dialog pop-650" style="display:none" method="post">
@@ -231,6 +233,7 @@
 </form>
 </#macro>
 
+<#--
 <#macro answerForm>
 <form id="answerForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
@@ -247,6 +250,7 @@
     </ul>
 </form>
 </#macro>
+-->
 
 <#macro answerCommentForm>
 <form id="answerCommentForm" class="dialog pop-650" style="display:none" method="post">
