@@ -86,33 +86,33 @@
 </ul>
 
 <ul class="action">
-    <#if viewerAccount?? && (viewerActivePlansCount < 9)>
-    <#if !topic.isDeleted() && topic.activePlan??>
-    <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
-    <li>
-        <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
-            <@spring.message "topic.createArticle" />
-        </a>
-    </li>
-    <li>
-        <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
-            <@spring.message "topic.createQuestion" />
-        </a>
-    </li>
-    <#else>
-    <li>
-        <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
-            <@spring.message "topic.joinPlan" />
-        </a>
-    </#if> 
-    </li>
-    <#else>
-    <li>
-        <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
-            <@spring.message "topic.hostPlan" />
-        </a>
-    </li>
-    </#if>
+    <#if viewerAccount?? && (viewerActivePlansCount < 9) && !topic.isDeleted()>
+        <#if topic.activePlan??>
+            <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
+            <li>
+                <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
+                    <@spring.message "topic.createArticle" />
+                </a>
+            </li>
+            <li>
+                <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
+                    <@spring.message "topic.createQuestion" />
+                </a>
+            </li>
+            <#else>
+            <li>
+                <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
+                    <@spring.message "topic.joinPlan" />
+                </a>
+            </li>
+            </#if> 
+        <#else>
+            <li>
+                <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
+                    <@spring.message "topic.hostPlan" />
+                </a>
+            </li>
+        </#if>
     </#if>
 </u>
 </#macro>
@@ -179,25 +179,6 @@
     </#if>
 </#macro>
 
-<#--
-<#macro messageForm>
-<form id="messageForm" class="dialog pop-650" style="display:none" method="post">
-    <legend>
-        Message
-        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-    </legend>
-    <ul>
-        <li>
-            <textarea id="message-editor" name="content"></textarea>
-        </li>
-        <li>
-            <input type="submit" value="submit"/>
-        </li>
-    </ul>
-</form>
-</#macro>
--->
-
 <#macro replyForm>
 <form id="replyForm" class="dialog pop-650" style="display:none" method="post">
     <legend>
@@ -232,25 +213,6 @@
     </ul>
 </form>
 </#macro>
-
-<#--
-<#macro answerForm>
-<form id="answerForm" class="dialog pop-650" style="display:none" method="post">
-    <legend>
-        Answer
-        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
-    </legend>
-    <ul>
-        <li>
-            <textarea id="answer-editor" name="content"></textarea>
-        </li>
-        <li>
-            <input type="submit" value="submit"/>
-        </li>
-    </ul>
-</form>
-</#macro>
--->
 
 <#macro answerCommentForm>
 <form id="answerCommentForm" class="dialog pop-650" style="display:none" method="post">
