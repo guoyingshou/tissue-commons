@@ -8,6 +8,7 @@
    </h1>
 </#macro>
 
+<#--
 <#macro homeMenu>
    <#if viewerAccount??>
    <ul class="menu">
@@ -37,15 +38,16 @@
    </ul>
    </#if>
 </#macro>
+-->
 
-<#macro userLogo>
+<#macro ownerLogo>
     <h1>
         <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.displayName}</a>
         <span>${owner.headline!""}</span>
     </h1>
 </#macro>
 
-<#macro userMenu>
+<#macro ownerMenu>
     <ul class="menu">
         <li>
             <a class="<#if selected='posts'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
@@ -74,6 +76,44 @@
     </ul>
     </#if>
 </#macro>
+
+<#macro viewerMenu>
+<div id="page-menu-wrapper">
+    <div id="page-menu">
+ 
+   <#if viewerAccount??>
+   <ul class="menu">
+       <li>
+           <a class="<#if selected = 'watchedFeeds'>current</#if>" href="<@spring.url '/dashboard' />">
+               <@spring.message "home.watchedFeeds" />
+           </a>
+       </li>
+       <li>
+           <a class="<#if selected = 'allFeeds'>current</#if>" href="<@spring.url '/allfeeds' />">
+               <@spring.message "home.allFeeds" />
+           </a>
+       </li>
+       <li>
+           <a class="<#if selected = 'friends'>current</#if>" href="<@spring.url '/friends' />">
+                <@spring.message "home.friends" />
+           </a>
+       </li>
+       <#if (invitationsReceived?size > 0)>
+       <li>
+           <a class="<#if selected = 'invitations'>current</#if>" href="/social/invitations">
+               <@spring.message "home.invitations" />
+               - ${invitationsReceived?size}
+           </a>
+       </li>
+       </#if>
+   </ul>
+   </#if>
+
+    </div>
+</div>
+
+</#macro>
+
 
 <#macro settingMenu>
    <ul class="menu">

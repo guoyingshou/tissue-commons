@@ -117,6 +117,20 @@
 </u>
 </#macro>
 
+<#macro topicHeader>
+    <div id="page-logo-wrapper">
+        <div id="page-logo">
+            <@topicLogo />
+        </div>
+    </div>
+
+    <div id="page-menu-wrapper">
+        <div id="page-menu">
+            <@topicMenu />
+        </div>
+    </div>
+</#macro>
+
 <#macro showPlanSidebar>
     <#if topic.deleted>
        <div>closed</div>
