@@ -53,6 +53,14 @@ public class ViewerAdvice {
         return locale.toString();
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public String handleRuntimeException(RuntimeException exc) {
+        logger.warn(exc.getMessage());
+        return "redirect:/badOperation";
+    }
+
+
+    /**
     @ExceptionHandler(OException.class)
     public HttpEntity<?> handleOException(OException exc) {
         logger.warn(exc.getMessage());
@@ -64,5 +72,6 @@ public class ViewerAdvice {
         logger.warn(exc.getMessage());
         return new ResponseEntity(HttpStatus.BAD_REQUEST);
     }
+    */
 
 }

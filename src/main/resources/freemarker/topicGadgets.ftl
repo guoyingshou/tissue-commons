@@ -35,7 +35,7 @@
     </ul>
 
     <#if viewerAccount?? && (viewerActivePlansCount < 9)>
-    <ul class="action">
+    <ul class="menu-action">
         <li>
             <a class="create-topic" href="<@spring.url '/topics/_create' />">
                 <@spring.message "explore.createTopic" />
@@ -47,11 +47,12 @@
 
 <#macro topicLogo>
   <h1>
-      <a href="<@spring.url '/topics/${topic.id?replace("#","")}/posts' />">${topic.title}</a>
+      <a href="<@spring.url '/topics/${topic.id?replace("#","")}/objective' />">${topic.title}</a>
   </h1>
 </#macro>
 
 <#macro topicMenu>
+  
   <ul class="menu">
       <li>
           <a class="<#if selected = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
@@ -78,43 +79,55 @@
               <@spring.message "topic.question" />
           </a>
       </li>
-      <li>
-          <a class="<#if selected = 'objective'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/objective' />">
-              <@spring.message "topic.objective" />
-          </a>
-      </li>
 </ul>
 
-<ul class="action">
-    <#if viewerAccount?? && (viewerActivePlansCount < 9) && !topic.isDeleted()>
-        <#if topic.activePlan??>
-            <#if isMember || topic.activePlan.isOwner(viewerAccount.id) >
-            <li>
-                <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
-                    <@spring.message "topic.createArticle" />
-                </a>
-            </li>
-            <li>
-                <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
-                    <@spring.message "topic.createQuestion" />
-                </a>
-            </li>
-            <#else>
-            <li>
-                <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
-                    <@spring.message "topic.joinPlan" />
-                </a>
-            </li>
-            </#if> 
-        <#else>
-            <li>
-                <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
-                    <@spring.message "topic.hostPlan" />
-                </a>
-            </li>
-        </#if>
+<ul class="plan-meta">
+    <#if topic.deleted>
+        <li>
+            Deleted
+        </li>
     </#if>
-</u>
+
+    <#if !topic.deleted && topic.activePlan??>
+    <#if isMember>
+
+    <li class="menu-action">
+            <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
+                <@spring.message "topic.createArticle" />
+            </a>
+            <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
+                <@spring.message "topic.createQuestion" />
+            </a>
+    </li>
+
+    <#elseif viewerAccount?? && (viewerActivePlansCount < 9)>
+
+    <li class="menu-action">
+            <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
+                <@spring.message "topic.joinPlan" />
+            </a>
+    </li>
+
+    </#if>
+
+    <li class="plan-active">
+        <a href="/group/plans/${topic.activePlan.id?replace("#", "")}/posts">
+            <@site.showTimeRemaining topic.activePlan.timeRemaining />
+        </a>
+        [<a href="/social/users/${topic.activePlan.account.user.id?replace("#", "")}/posts">
+            ${topic.activePlan.account.user.displayName}
+        </a>]
+    </li>
+
+    <#elseif viewerAccount?? && (viewerActivePlansCount <9) >
+    <li class="menu-action">
+            <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
+                <@spring.message "topic.hostPlan" />
+            </a>
+    </li>
+    </#if>
+</ul>
+
 </#macro>
 
 <#macro topicHeader>
@@ -129,41 +142,6 @@
             <@topicMenu />
         </div>
     </div>
-</#macro>
-
-<#macro showPlanSidebar>
-    <#if topic.deleted>
-       <div>closed</div>
-    <#else>
-        <@showPlanLive />
-        <@showPlansArchived />
-    </#if>
-</#macro>
-
-<#macro showPlanLive>
-    <#if topic.activePlan??>
-    <div class="active">
-        <h4>
-            <@spring.message "Live.topic.plan" />
-        </h4>
-
-        <div class="ts">
-            <a href="/group/plans/${topic.activePlan.id?replace("#", "")}/posts">
-                <@site.showTimeRemaining topic.activePlan.timeRemaining />
-            </a>
-        </div>
-
-        <div>
-            <a href="/social/users/${topic.activePlan.account.user.id?replace("#", "")}/posts">
-                ${topic.activePlan.account.user.displayName}
-            </a>
-        </div>
-
-        <div>
-            ${topic.activePlan.account.user.headline!""}
-        </div>
-    </div>
-    </#if>
 </#macro>
 
 <#macro showPlansArchived>

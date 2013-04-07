@@ -67,7 +67,7 @@
     </ul>
 
     <#if invitable>
-    <ul class="action">
+    <ul class="menu-action">
         <li>
             <a href="<@spring.url '/users/${owner.id?replace("#","")}/invitations/_create' />">
                 <@spring.message "user.invite" />
