@@ -8,38 +8,6 @@
    </h1>
 </#macro>
 
-<#--
-<#macro homeMenu>
-   <#if viewerAccount??>
-   <ul class="menu">
-       <li>
-           <a class="<#if selected = 'watchedFeeds'>current</#if>" href="<@spring.url '/dashboard' />">
-               <@spring.message "home.watchedFeeds" />
-           </a>
-       </li>
-       <li>
-           <a class="<#if selected = 'allFeeds'>current</#if>" href="<@spring.url '/allfeeds' />">
-               <@spring.message "home.allFeeds" />
-           </a>
-       </li>
-       <li>
-           <a class="<#if selected = 'friends'>current</#if>" href="<@spring.url '/friends' />">
-                <@spring.message "home.friends" />
-           </a>
-       </li>
-       <#if (invitationsReceived?size > 0)>
-       <li>
-           <a class="<#if selected = 'invitations'>current</#if>" href="/social/invitations">
-               <@spring.message "home.invitations" />
-               - ${invitationsReceived?size}
-           </a>
-       </li>
-       </#if>
-   </ul>
-   </#if>
-</#macro>
--->
-
 <#macro ownerLogo>
     <h1>
         <a href="<@spring.url '/users/${owner.id?replace("#","")}/posts' />">${owner.displayName}</a>

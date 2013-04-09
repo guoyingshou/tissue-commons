@@ -6,11 +6,11 @@
     <ul class="activities">
     <#list activities as activity>
         <#if activity.label = 'topic'>
-            <@activityItem activity "&#xe004;" "Activity.topic" />
+            <@activityItem activity "&#xe000;" "Activity.topic" />
         </#if>
 
         <#if activity.label = 'plan'>
-            <@activityItem activity "&#xe001;" "Activity.plan" />
+            <@activityItem activity "&#xe002;" "Activity.plan" />
         </#if>
 
         <#if activity.label = 'member'>
@@ -18,11 +18,11 @@
         </#if>
 
         <#if activity.label = 'concept'>
-            <@activityItem activity "&#xe005;" "Activity.concept" />
+            <@activityItem activity "&#xe003;" "Activity.concept" />
         </#if>
 
         <#if activity.label = 'note'>
-            <@activityItem activity "&#xe005;" "Activity.note" />
+            <@activityItem activity "&#xe004;" "Activity.note" />
         </#if>
 
         <#if activity.label = 'tutorial'>
@@ -30,27 +30,27 @@
         </#if>
 
         <#if activity.label = 'question'>
-            <@activityItem activity "&#xe005;" "Activity.question" />
+            <@activityItem activity "&#xe006;" "Activity.question" />
         </#if>
 
         <#if activity.label = 'message'>
-            <@activityItem activity "&#xe005;" "Activity.message" />
+            <@activityItem activity "&#xe007;" "Activity.message" />
         </#if>
 
         <#if activity.label = 'messageComment'>
-            <@activityItem activity "&#xe005;" "Activity.messageComment" />
+            <@activityItem activity "&#xe008;" "Activity.messageComment" />
         </#if>
 
         <#if activity.label = 'questionComment'>
-            <@activityItem activity "&#xe005;" "Activity.questionComment" />
+            <@activityItem activity "&#xe009;" "Activity.questionComment" />
         </#if>
 
         <#if activity.label = 'answer'>
-            <@activityItem activity "&#xe005;" "Activity.answer" />
+            <@activityItem activity "&#xe00a;" "Activity.answer" />
         </#if>
 
         <#if activity.label = 'answerComment'>
-            <@activityItem activity "&#xe005;" "Activity.answerComment" />
+            <@activityItem activity "&#xe00b;" "Activity.answerComment" />
         </#if>
      </#list>
     </ul>

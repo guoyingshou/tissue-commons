@@ -86,9 +86,9 @@
         <li>
             Deleted
         </li>
-    </#if>
 
-    <#if !topic.deleted && topic.activePlan??>
+    <#elseif topic.activePlan??>
+
     <#if isMember>
 
     <li class="menu-action">
@@ -148,7 +148,7 @@
     <#if topic.archivedPlans??>
     <div class="archived">
         <h4>
-            <@spring.message "Archived.topic.plans" />
+            <@spring.message "ArchivedPlans" />
         </h4>
         <#list topic.archivedPlans as plan>
         <div class="plan">
@@ -172,9 +172,9 @@
 </#macro>
 
 <#macro replyForm>
-<form id="replyForm" class="dialog pop-650" style="display:none" method="post">
+<form id="replyForm" class="dialog" style="display:none" method="post">
     <legend>
-        Reply
+        <@spring.message 'Reply' />
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <ul>
@@ -182,7 +182,7 @@
             <textarea id="reply-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="submit"/>
+            <input type="submit" value="<@spring.message 'Submit.button' />"/>
         </li>
     </ul>
 </form>
@@ -190,7 +190,7 @@
 </#macro>
 
 <#macro questionCommentForm>
-<form id="questionCommentForm" class="dialog pop-650" style="display:none" method="post">
+<form id="questionCommentForm" class="dialog" style="display:none" method="post">
     <legend>
         Question Comment
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
@@ -207,7 +207,7 @@
 </#macro>
 
 <#macro answerCommentForm>
-<form id="answerCommentForm" class="dialog pop-650" style="display:none" method="post">
+<form id="answerCommentForm" class="dialog" style="display:none" method="post">
     <legend>
         Answer comment
         <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
@@ -228,13 +228,13 @@
    <#list posts as post>
    <li class="icon-container">
        <#if post.type == 'concept'>
-       <span class="icon" data-icon="&#xe007;"></span>
+       <span class="icon" data-icon="&#xe003;"></span>
        <#elseif post.type = 'note'>
-       <span class="icon" data-icon="&#xe008;"></span>
-       <#elseif post.type = 'question'>
-       <span class="icon" data-icon="&#xe009;"></span>
+       <span class="icon" data-icon="&#xe004;"></span>
+       <#elseif post.type = 'tutorial'>
+       <span class="icon" data-icon="&#xe005;"></span>
        <#else>
-       <span class="icon" data-icon="&#xe01c;"></span>
+       <span class="icon" data-icon="&#xe006;"></span>
        </#if>
 
        <div class="ts">
