@@ -4,8 +4,8 @@ import com.tissue.core.User;
 import com.tissue.core.Account;
 import com.tissue.core.dao.AccountDao;
 import com.tissue.commons.util.SecurityUtil;
-import com.tissue.plan.Plan;
-import com.tissue.plan.dao.PlanDao;
+//import com.tissue.plan.Plan;
+//import com.tissue.plan.dao.PlanDao;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpEntity;
@@ -22,6 +22,7 @@ import com.orientechnologies.common.exception.OException;
 import java.util.Map;
 import java.util.Locale;
 import java.util.List;
+import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,8 +35,10 @@ public class ViewerAdvice {
     @Autowired
     private AccountDao accountDao;
 
-    @Autowired
+    /**
+    @Resource(name="planDaoImpl")
     private PlanDao planDao;
+    */
 
     @ModelAttribute("viewerAccount")
     public Account setupViewer(Map model) {

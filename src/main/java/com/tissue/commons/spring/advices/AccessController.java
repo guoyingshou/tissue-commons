@@ -1,7 +1,5 @@
 package com.tissue.commons.spring.advices;
 
-//import com.tissue.core.Account;
-
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

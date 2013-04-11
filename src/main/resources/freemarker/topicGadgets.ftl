@@ -175,7 +175,6 @@
 <form id="replyForm" class="dialog" style="display:none" method="post">
     <legend>
         <@spring.message 'Reply' />
-        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <ul>
         <li>
@@ -183,6 +182,7 @@
         </li>
         <li>
             <input type="submit" value="<@spring.message 'Submit.button' />"/>
+            <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
         </li>
     </ul>
 </form>
@@ -193,7 +193,6 @@
 <form id="questionCommentForm" class="dialog" style="display:none" method="post">
     <legend>
         Question Comment
-        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <ul>
         <li>
@@ -201,6 +200,7 @@
         </li>
         <li>
             <input type="submit" value="submit"/>
+            <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
         </li>
     </ul>
 </form>
@@ -210,7 +210,6 @@
 <form id="answerCommentForm" class="dialog" style="display:none" method="post">
     <legend>
         Answer comment
-        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <ul>
         <li>
@@ -218,6 +217,7 @@
         </li>
         <li>
             <input type="submit" value="submit"/>
+            <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
         </li>
     </ul>
 </form>

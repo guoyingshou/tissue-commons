@@ -238,13 +238,13 @@
 <form id="confirmForm" class="dialog pop-320" style="display:none" method="post">
     <legend>
         <@spring.message 'Warning' />
-        <a href="#" class="cancel"><span data-icon="&#xe008"></span></a>
     </legend>
     <div class="message">
-          Are you sure about what you're doing and would like to continue?
+         <@spring.message 'Warning.text' />
     </div>
     <div>
         <input type="submit" name="submit" value="<@spring.message 'Yes' />" />
+        <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
     </div>
 </form>
 </#macro>
