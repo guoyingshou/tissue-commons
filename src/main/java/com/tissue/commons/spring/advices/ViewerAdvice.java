@@ -35,11 +35,6 @@ public class ViewerAdvice {
     @Autowired
     private AccountDao accountDao;
 
-    /**
-    @Resource(name="planDaoImpl")
-    private PlanDao planDao;
-    */
-
     @ModelAttribute("viewerAccount")
     public Account setupViewer(Map model) {
         String viewerAccountId = SecurityUtil.getViewerAccountId();
@@ -48,6 +43,7 @@ public class ViewerAdvice {
         if(viewerAccountId == null) {
             return null;
         }
+
         return accountDao.getAccount(viewerAccountId);
     }
 

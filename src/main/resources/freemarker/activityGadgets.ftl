@@ -61,15 +61,13 @@
     <li class="icon-container">
         <span class="icon" data-icon="${iconCode}"></span>
         <div class="ts">
-            <em>
-                <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
-                    ${activity.who.displayName}
-                </a> 
-            </em>
+            <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
+                ${activity.who.displayName}
+            </a> 
             [ <@site.showTimeBefore activity.timeBefore /> ]
         </div>
 
-        <div>
+        <div class="activity">
             <@spring.messageArgs messageKey activity.messageArgs />
         </div>
     </li>
