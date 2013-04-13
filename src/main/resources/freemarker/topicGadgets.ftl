@@ -45,6 +45,20 @@
     </#if>
 </#macro>
 
+<#macro exploreHeader>
+    <div id="page-logo-wrapper">
+        <div id="page-logo">
+            <@topicGadgets.exploreLogo />
+        </div>
+    </div>
+
+    <div id="page-menu-wrapper">
+        <div id="page-menu">
+            <@topicGadgets.exploreMenu />
+        </div>
+    </div>
+</#macro>
+
 <#macro topicLogo>
   <h1>
       <a href="<@spring.url '/topics/${topic.id?replace("#","")}/objective' />">${topic.title}</a>

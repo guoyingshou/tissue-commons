@@ -1,11 +1,11 @@
 package com.tissue.commons.spring.advices;
 
+/**
 import com.tissue.core.User;
 import com.tissue.core.Account;
 import com.tissue.core.dao.AccountDao;
 import com.tissue.commons.util.SecurityUtil;
-//import com.tissue.plan.Plan;
-//import com.tissue.plan.dao.PlanDao;
+*/
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpEntity;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import org.springframework.security.access.AccessDeniedException;
 
 import com.orientechnologies.common.exception.OException;
 
@@ -32,6 +34,7 @@ public class ViewerAdvice {
 
     private static Logger logger = LoggerFactory.getLogger(ViewerAdvice.class);
 
+    /**
     @Autowired
     private AccountDao accountDao;
 
@@ -46,6 +49,7 @@ public class ViewerAdvice {
 
         return accountDao.getAccount(viewerAccountId);
     }
+    */
 
     @ModelAttribute("locale")
     public String setupLocale(Locale locale) {
@@ -59,18 +63,10 @@ public class ViewerAdvice {
     }
 
 
-    /**
-    @ExceptionHandler(OException.class)
-    public HttpEntity<?> handleOException(OException exc) {
+    @ExceptionHandler(AccessDeniedException.class)
+    public String handleAccessDeniedException(AccessDeniedException exc) {
         logger.warn(exc.getMessage());
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        return "redirect:/accessDenied";
     }
-
-    @ExceptionHandler(IllegalArgumentException.class)
-    public HttpEntity<?> handleIllegalArgumentException(IllegalArgumentException exc) {
-        logger.warn(exc.getMessage());
-        return new ResponseEntity(HttpStatus.BAD_REQUEST);
-    }
-    */
 
 }
