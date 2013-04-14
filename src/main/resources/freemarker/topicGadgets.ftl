@@ -103,7 +103,7 @@
 
     <#elseif topic.activePlan??>
 
-    <#if isMember>
+    <#if isMember?? && isMember>
 
     <li class="menu-action">
             <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
@@ -206,14 +206,14 @@
 <#macro questionCommentForm>
 <form id="questionCommentForm" class="dialog" style="display:none" method="post">
     <legend>
-        Question Comment
+        <@spring.message 'questionComment' />
     </legend>
     <ul>
         <li>
             <textarea id="questionComment-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="submit"/>
+            <input type="submit" value="<@spring.message 'Submit.button' />"/>
             <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
         </li>
     </ul>
@@ -223,14 +223,14 @@
 <#macro answerCommentForm>
 <form id="answerCommentForm" class="dialog" style="display:none" method="post">
     <legend>
-        Answer comment
+        <@spring.message 'answerComment' />
     </legend>
     <ul>
         <li>
             <textarea id="answerComment-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="submit"/>
+            <input type="submit" value="<@spring.message 'Submit.button' />"/>
             <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
         </li>
     </ul>

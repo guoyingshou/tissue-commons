@@ -2,6 +2,7 @@ package com.tissue.commons.services;
 
 import com.tissue.core.Account;
 import com.tissue.core.User;
+import com.tissue.core.UserGeneratedContent;
 import com.tissue.core.dao.UserDao;
 import com.tissue.core.command.UserCommand;
 import com.tissue.core.command.EmailCommand;
@@ -17,12 +18,18 @@ import com.tissue.plan.dao.PostDao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 
 import javax.annotation.Resource;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Component
 public class ViewerService {
+
+    private static Logger logger = LoggerFactory.getLogger(ViewerService.class);
 
     @Autowired
     private AccountDao accountDao;
@@ -39,8 +46,33 @@ public class ViewerService {
     @Resource(name="postDaoImpl")
     private PostDao postDao;
 
+    public void checkOwnership(UserGeneratedContent resource, Account account) {
+        if((account != null) && (resource.isOwner(account) || account.hasRole("ROLE_ADMIN"))) {
+            return;
+        }
+        throw new AccessDeniedException("Not owner of resource: " + resource + ", account: " + account);
+    }
+
+    public boolean isMember(Topic topic, Account account) {
+        Plan plan = topic.getActivePlan();
+        if((plan == null) || (account == null)) {
+            logger.debug("plan: " + plan + ", account: " + account);
+            return false;
+        }
+        return planDao.isMember(plan.getId(), account.getId());
+    }
+
+    public void checkMembership(Topic topic, Account account) {
+        if(!isMember(topic, account)) {
+            throw new AccessDeniedException("Not memeber of topic: " + topic + ", account: " + account);
+        }
+    }
+
     public Account getViewerAccount() {
-        return accountDao.getAccount(SecurityUtil.getViewerAccountId());
+        String viewerAccountId = SecurityUtil.getViewerAccountId();
+        if(viewerAccountId == null) 
+            return null;
+        return accountDao.getAccount(viewerAccountId);
     }
 
     public void updateHeadline(UserCommand command) {
@@ -77,15 +109,5 @@ public class ViewerService {
     public List<Plan> getViewerPlans() {
         return planDao.getPlansByAccount(SecurityUtil.getViewerAccountId());
     }
-
-    /**
-    public long getPostsCountByUser(String userId) {
-        return postDao.getPostsCountByUser(userId);
-    }
-
-    public List<Post> getPagedPostsByUser(String userId, int page, int size) {
-        return postDao.getPagedPostsByUser(userId, page, size);
-    }
-    */
  
 }
