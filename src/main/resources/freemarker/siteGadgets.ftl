@@ -26,7 +26,7 @@
     <body>
         <div id="page-nav-wrapper">
             <div id="page-nav">
-                <ul class="nav-left nav-item">
+                <ul class="nav-left">
                     <#if viewerAccount??>
                         <li><a href="/social/dashboard"><@spring.message "home" /></a></li>
                     <#else>
@@ -36,32 +36,47 @@
                     <li><a href="/social/about"><@spring.message "about" /></a></li>
                 </ul>
 
-                <#if viewerAccount??>
-                <ul class="nav-right nav-item">
+                <ul class="nav-right">
+                    <#-- reserved for future use
                     <#if locale == 'zh_CN'>
                     <li><a href="?locale=en_US">English</a></li>
                     <#else>
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
+                    -->
+
+                    <#if viewerAccount??>
                     <li>
                         <a href="/social/_setting">
                             <@spring.message "setting" />
                         </a>
                     </li>
-                    <li><a href="/social/users/${viewerAccount.user.id?replace("#", "")}/posts">${viewerAccount.user.displayName}</a></li>
-                    <li><a href="/social/signout"><@spring.message "signout" /></a></li>
-                </ul>
-                <#else>
-                <ul class="nav-right nav-item">
-                    <#if locale == 'zh_CN'>
-                    <li><a href="?locale=en_US">English</a></li>
+
+                    <li>
+                        <a href="/social/users/${viewerAccount.user.id?replace("#", "")}/posts">
+                            ${viewerAccount.user.displayName}
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/social/signout">
+                            <@spring.message "signout" />
+                        </a>
+                    </li>
                     <#else>
-                    <li><a href="?locale=zh_CN">中文</a></li>
+                    <li>
+                        <a href="/social/dashboard">
+                            <@spring.message "signin" />
+                        </a>
+                    </li>
+                    <li>
+                        <a class="signup" href="/social/signup">
+                            <@spring.message "signup" />
+                        </a>
+                    </li>
                     </#if>
-                    <li><a href="/social/dashboard"><@spring.message "signin" /></a></li>
-                    <li><a class="signup" href="/social/signup"><@spring.message "signup" /></a></li>
+ 
                 </ul>
-                </#if>
             </div>
         </div>
 
@@ -69,7 +84,7 @@
 
         <div id="page-footer-wrapper">
             <div id="page-footer">
-                <p>Copyritht @2012 Tissue | Powered by JinZhouLin</p>
+                <p>Copyritht @2013 Daronglu.com | Powered by JinZhouLin</p>
             </div>
         </div>
     </body>
@@ -81,7 +96,11 @@
     <#if (pages > 1)>
         <div class="pager">
            <#if (pager.current > 1)>
-              <a href="?page=${pager.current-1}&size=${pager.size}">prev</a>
+               <span>
+                   <a href="?page=${pager.current-1}&size=${pager.size}">
+                       <@spring.message 'prevPage' />
+                   </a>
+               </span>
            </#if>
 
            <#if (pages <= 6)>
@@ -129,7 +148,11 @@
            </#if>
 
            <#if (pager.current < pages)>
-              <a href="?page=${pager.current+1}&size=${pager.size}">next</a>
+               <span>
+                   <a href="?page=${pager.current+1}&size=${pager.size}">
+                       <@spring.message 'nextPage' />
+                   </a>
+               </span>
            </#if>
         </div>
     </#if>
@@ -253,7 +276,9 @@
 <div id="page-logo-wrapper">
     <div id="page-logo">
         <h1>
-            <@spring.message "Sitename" />
+            <em class="siteName">
+                <@spring.message "Sitename" />
+            </em>
             <span><@spring.message "Siteslogan" /></span>
         </h1>
     </div>

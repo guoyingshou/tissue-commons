@@ -61,7 +61,7 @@
     <li class="icon-container">
         <span class="icon" data-icon="${iconCode}"></span>
         <div class="ts">
-            <a href="/social/users/${activity.who.id?replace("#", "")}/posts">
+            <a class="username" href="/social/users/${activity.who.id?replace("#", "")}/posts">
                 ${activity.who.displayName}
             </a> 
             [ <@site.showTimeBefore activity.timeBefore /> ]

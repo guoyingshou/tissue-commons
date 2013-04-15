@@ -3,13 +3,57 @@
 
 <#assign sec=JspTaglibs["http://www.springframework.org/security/tags"] />
 
-<#macro exploreLogo>
-    <h1>
-        <@spring.message "Sitename" />
-        <span><@spring.message "Siteslogan" />
-    </h1>
+<#macro exploreHeader>
+    <div id="page-logo-wrapper">
+        <div id="page-logo">
+            <h1>
+                <em class="em"><@spring.message "Sitename" /></em>
+                <span><@spring.message "Siteslogan" /></span>
+            </h1>
+        </div>
+    </div>
+
+    <div id="page-menu-wrapper">
+        <div id="page-menu">
+        <#--
+            <@topicGadgets.exploreMenu />
+            -->
+            <ul class="menu">
+                <li>
+                    <a class="<#if selected = 'trending'>current</#if>" href="<@spring.url '/explore' />">
+                        <@spring.message "explore.trending" />
+                    </a>
+                </li>
+                <li>
+                    <a class="<#if selected = 'featured'>current</#if>" href="<@spring.url '/featured' />">
+                        <@spring.message "explore.featured" />
+                    </a>
+                </li>
+                <li>
+                    <a class="<#if selected = 'topics'>current</#if>" href="<@spring.url '/topics' />">
+                        <@spring.message "explore.topics" />
+                    </a>
+                </li>
+                <li>
+                    <a class="<#if selected = 'tags'>current</#if>" href="<@spring.url '/tags' />">
+                        <@spring.message "explore.tags" />
+                    </a>
+                </li>
+            </ul>
+            <#if viewerAccount?? && (viewerActivePlansCount < 9)>
+            <ul class="menu-action">
+                <li>
+                    <a class="create-topic" href="<@spring.url '/topics/_create' />">
+                        <@spring.message "explore.createTopic" />
+                    </a>
+                </li>
+            </ul>
+            </#if>
+        </div>
+    </div>
 </#macro>
 
+<#--
 <#macro exploreMenu>
     <ul class="menu">
         <li>
@@ -44,20 +88,7 @@
     </ul>
     </#if>
 </#macro>
-
-<#macro exploreHeader>
-    <div id="page-logo-wrapper">
-        <div id="page-logo">
-            <@topicGadgets.exploreLogo />
-        </div>
-    </div>
-
-    <div id="page-menu-wrapper">
-        <div id="page-menu">
-            <@topicGadgets.exploreMenu />
-        </div>
-    </div>
-</#macro>
+-->
 
 <#macro topicLogo>
   <h1>
@@ -114,7 +145,7 @@
             </a>
     </li>
 
-    <#elseif viewerAccount?? && (viewerActivePlansCount < 9)>
+    <#elseif viewerAccount?? && (viewerAccount.hasRole("ROLE_ADMIN") || viewerActivePlansCount < 9)>
 
     <li class="menu-action">
             <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
@@ -124,16 +155,16 @@
 
     </#if>
 
-    <li class="plan-active">
+    <li class="plan-info">
         <a href="/group/plans/${topic.activePlan.id?replace("#", "")}/posts">
             <@site.showTimeRemaining topic.activePlan.timeRemaining />
         </a>
-        [<a href="/social/users/${topic.activePlan.account.user.id?replace("#", "")}/posts">
+        [<a class="username" href="/social/users/${topic.activePlan.account.user.id?replace("#", "")}/posts">
             ${topic.activePlan.account.user.displayName}
         </a>]
     </li>
 
-    <#elseif viewerAccount?? && (viewerActivePlansCount <9) >
+    <#elseif viewerAccount?? && (viewerAccount.hasRole("ROLE_ADMIN") || viewerActivePlansCount <9) >
     <li class="menu-action">
             <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
                 <@spring.message "topic.hostPlan" />
@@ -160,27 +191,26 @@
 
 <#macro showPlansArchived>
     <#if topic.archivedPlans??>
-    <div class="archived">
-        <h4>
+    <div class="archived-plans">
+        <h2>
             <@spring.message "ArchivedPlans" />
-        </h4>
-        <#list topic.archivedPlans as plan>
-        <div class="plan">
-            <div class="ts">
-                <a href="/group/plans/${plan.id?replace("#", "")}/posts">
-                    ${plan.createTime?date} - ${plan.endTime?date}
-                </a>
-            </div>
-            <div>
-                <a href="/social/users/${plan.account.user.id?replace("#", "")}/posts">
-                    ${plan.account.user.displayName}
-                </a>
-            </div>
-            <div>
-                ${plan.account.user.headline!""}
-            </div>
-        </div>
-        </#list>
+        </h2>
+        <ul>
+            <#list topic.archivedPlans as plan>
+            <li class="plan">
+                <div class="ts">
+                    <a href="/group/plans/${plan.id?replace("#", "")}/posts">
+                        ${plan.createTime?date} - ${plan.endTime?date}
+                    </a>
+                </div>
+                <div>
+                    <a class="username" href="/social/users/${plan.account.user.id?replace("#", "")}/posts">
+                        ${plan.account.user.displayName}
+                    </a>
+                </div>
+            </li>
+            </#list>
+        </ul>
     </div>
     </#if>
 </#macro>
@@ -252,15 +282,31 @@
        </#if>
 
        <div class="ts">
-           <a href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
+           <a class="username" href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
            [ <@site.showTimeBefore post.timeBefore /> ]
        </div>
 
        <div>
        <#if post.type == 'question'>
-           <a href="/group/questions/${post.id?replace("#","")}" class="post">${post.title}</a>
+           <#if (post.title?length > 16)>
+           <a href="/group/questions/${post.id?replace("#","")}" class="post-title">
+               ${post.title?substring(0,16)} ...
+           </a>
+           <#else>
+           <a href="/group/questions/${post.id?replace("#","")}" class="post-title">
+               ${post.title}
+           </a>
+           </#if>
        <#else>
-           <a href="/group/articles/${post.id?replace("#","")}" class="post">${post.title}</a>
+           <#if (post.title?length > 16)>
+           <a href="/group/articles/${post.id?replace("#","")}" class="post-title">
+               ${post.title?substring(0,16)} ...
+           </a>
+           <#else>
+           <a href="/group/articles/${post.id?replace("#","")}" class="post-title">
+               ${post.title}
+           </a>
+           </#if>
        </#if>
        </div>
    </li>
