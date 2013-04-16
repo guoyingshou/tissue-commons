@@ -7,12 +7,13 @@
 
     <iframe src="/social/cleanup" style="display:none"></iframe>
     <iframe src="/group/cleanup" style="display:none"></iframe>
+    <iframe src="/media/cleanup" style="display:none"></iframe>
 
     <@site.siteLogo />
 
     <div id="page-main-wrapper">
         <div class="info">
-            Sign out!
+            <@spring.message 'Success.signout' />
         </div>
     </div>
 

@@ -9,7 +9,7 @@
 
     <div id="page-main-wrapper">
         <div class="info">
-            Error!
+            <@spring.message 'Error.operation' />
         </div>
     </div>
 

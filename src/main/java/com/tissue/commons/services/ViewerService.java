@@ -14,7 +14,6 @@ import com.tissue.plan.Plan;
 import com.tissue.plan.Post;
 import com.tissue.plan.dao.TopicDao;
 import com.tissue.plan.dao.PlanDao;
-import com.tissue.plan.dao.PostDao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,9 +41,6 @@ public class ViewerService {
 
     @Autowired
     private PlanDao planDao;
-
-    @Resource(name="postDaoImpl")
-    private PostDao postDao;
 
     public void checkOwnership(UserGeneratedContent resource, Account account) {
         if((account != null) && (resource.isOwner(account) || account.hasRole("ROLE_ADMIN"))) {

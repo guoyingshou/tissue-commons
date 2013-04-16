@@ -37,8 +37,8 @@
             <@activityItem activity "&#xe007;" "Activity.message" />
         </#if>
 
-        <#if activity.label = 'messageComment'>
-            <@activityItem activity "&#xe008;" "Activity.messageComment" />
+        <#if activity.label = 'messageReply'>
+            <@activityItem activity "&#xe008;" "Activity.messageReply" />
         </#if>
 
         <#if activity.label = 'questionComment'>
