@@ -36,9 +36,8 @@ public class AccessController {
     }
 
     @RequestMapping(value="/signin")
-    public String loginForm(@RequestParam(value="error", required=false) String error, @RequestParam(value="reset", required=false) String reset, Map model) {
-        model.put("error", error);
-        model.put("reset", reset);
+    public String loginForm(@RequestParam(value="t", required=false) String t, Map model) {
+        model.put("t", t);
         return "signin";
     }
  

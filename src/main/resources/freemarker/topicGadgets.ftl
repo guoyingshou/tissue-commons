@@ -282,31 +282,21 @@
        </#if>
 
        <div class="ts">
-           <a class="username" href="/social/users/${post.account.user.id?replace("#", "")}/posts">${post.account.user.displayName}</a>
+           <a class="username" href="/social/users/${post.account.user.id?replace("#", "")}/posts">
+               ${post.account.user.displayName}
+           </a>
            [ <@site.showTimeBefore post.timeBefore /> ]
        </div>
 
-       <div>
+       <div class="post-title">
        <#if post.type == 'question'>
-           <#if (post.title?length > 16)>
-           <a href="/group/questions/${post.id?replace("#","")}" class="post-title">
-               ${post.title?substring(0,16)} ...
-           </a>
-           <#else>
-           <a href="/group/questions/${post.id?replace("#","")}" class="post-title">
+           <a href="/group/questions/${post.id?replace("#","")}">
                ${post.title}
            </a>
-           </#if>
        <#else>
-           <#if (post.title?length > 16)>
-           <a href="/group/articles/${post.id?replace("#","")}" class="post-title">
-               ${post.title?substring(0,16)} ...
-           </a>
-           <#else>
-           <a href="/group/articles/${post.id?replace("#","")}" class="post-title">
+           <a href="/group/articles/${post.id?replace("#","")}">
                ${post.title}
            </a>
-           </#if>
        </#if>
        </div>
    </li>

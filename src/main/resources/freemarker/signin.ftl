@@ -9,20 +9,26 @@
 
     <div id="page-main-wrapper">
         <form id="signinForm" action="<@spring.url '/jsc'/>" method="post">
-            <#if error??>
+            <#if t??>
+            <#if t == 'e'>
             <div>
-                <span class="error">
+                <span class="alert">
                     <@spring.message "Fail.signinForm" />
                 </span>
             </div>
-            </#if>
-
-            <#if reset??>
+            <#elseif t == 'r'>
             <div>
-                <span class="error">
+                <span class="alert">
                     <@spring.message "Success.resetPassword" />
                 </span>
             </div>
+            <#elseif t == 'n'>
+            <div>
+                <span class="alert">
+                    <@spring.message "NewUser.signinForm" />
+                </span>
+            </div>
+            </#if>
             </#if>
 
             <legend>

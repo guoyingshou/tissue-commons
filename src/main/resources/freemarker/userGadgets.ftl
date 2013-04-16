@@ -133,8 +133,8 @@
             <#list plans as plan>
             <#if !plan.topic.deleted && plan.isActive()>
             <li>
-                <div>
-                    <a class="topic-title" href="/group/topics/${plan.topic.id?replace("#","")}/posts">
+                <div class="topic-title">
+                    <a href="/group/topics/${plan.topic.id?replace("#","")}/posts">
                        ${plan.topic.title}
                     </a>
                 </div>
@@ -163,8 +163,8 @@
             <#list plans as plan>
             <#if !plan.isActive()>
             <li>
-                <div>
-                    <a class="topic-title" href="/group/topics/${plan.topic.id?replace("#","")}/posts">
+                <div class="topic-title">
+                    <a href="/group/topics/${plan.topic.id?replace("#","")}/posts">
                         ${plan.topic.title}
                     </a>
                 </div>
@@ -185,16 +185,11 @@
     <ul class="users">
         <#list users as user>
         <li>
-            <div>
+            <div class="ts">
                 <a class="username" href="/social/users/${user.id?replace("#", "")}/posts">${user.displayName}</a>
             </div>
             <div class="headline">
-                <#if (user.headline?length > 32)>
-                ${user.headline?substring(0, 32)} ...
-                <#else>
                 ${user.headline}
-                </#if>
-
             </div>
         </li>
         </#list>

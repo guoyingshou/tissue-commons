@@ -1,12 +1,5 @@
 package com.tissue.commons.spring.advices;
 
-/**
-import com.tissue.core.User;
-import com.tissue.core.Account;
-import com.tissue.core.dao.AccountDao;
-import com.tissue.commons.util.SecurityUtil;
-*/
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -33,23 +26,6 @@ import org.slf4j.LoggerFactory;
 public class ViewerAdvice {
 
     private static Logger logger = LoggerFactory.getLogger(ViewerAdvice.class);
-
-    /**
-    @Autowired
-    private AccountDao accountDao;
-
-    @ModelAttribute("viewerAccount")
-    public Account setupViewer(Map model) {
-        String viewerAccountId = SecurityUtil.getViewerAccountId();
-        logger.debug("current viewer account id: " + viewerAccountId);
-
-        if(viewerAccountId == null) {
-            return null;
-        }
-
-        return accountDao.getAccount(viewerAccountId);
-    }
-    */
 
     @ModelAttribute("locale")
     public String setupLocale(Locale locale) {
