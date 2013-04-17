@@ -1,20 +1,25 @@
 package com.tissue.commons.spring.advices;
 
+import com.tissue.core.Account;
+import com.tissue.commons.services.ViewerService;
+
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
+//import org.springframework.validation.BindingResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+/**
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMethod;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
+*/
 
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -25,13 +30,20 @@ import javax.servlet.http.Cookie;
 @Controller
 public class AccessController {
 
+    @Autowired
+    private ViewerService viewerService;
+
     @RequestMapping(value="/accessDenied")
     public String denieAccess(Map model) {
+        Account viewerAccount = viewerService.getViewerAccount();
+        model.put("viewerAccount", viewerAccount);
         return "accessDenied";
     }
 
     @RequestMapping(value="/badOperation")
     public String badOperation(Map model) {
+        Account viewerAccount = viewerService.getViewerAccount();
+        model.put("viewerAccount", viewerAccount);
         return "badOperation";
     }
 

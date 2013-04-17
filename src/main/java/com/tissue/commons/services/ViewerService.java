@@ -98,9 +98,11 @@ public class ViewerService {
         return userDao.getFriends(userId);
     }
 
+    /**
     public List<Topic> getNewTopics(String excludingUserId, int limit) {
         return topicDao.getNewTopics(excludingUserId, limit);
     }
+    */
 
     public List<Plan> getViewerPlans() {
         return planDao.getPlansByAccount(SecurityUtil.getViewerAccountId());

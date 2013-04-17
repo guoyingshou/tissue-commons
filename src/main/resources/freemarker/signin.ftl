@@ -12,7 +12,7 @@
             <#if t??>
             <#if t == 'e'>
             <div>
-                <span class="alert">
+                <span class="error">
                     <@spring.message "Fail.signinForm" />
                 </span>
             </div>
