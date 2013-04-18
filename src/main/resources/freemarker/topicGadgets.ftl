@@ -37,7 +37,7 @@
                     </a>
                 </li>
             </ul>
-            <#if viewerAccount?? && viewerAccount.hasRole("ROLE_USER") && (viewerActivePlansCount < 9)>
+            <#if viewerAccount?? && !viewerAccount.hasRole("ROLE_EVIL") && (viewerActivePlansCount < 9)>
             <ul class="menu-action">
                 <li>
                     <a class="create-topic" href="<@spring.url '/topics/_create' />">

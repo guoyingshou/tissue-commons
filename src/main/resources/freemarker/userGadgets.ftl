@@ -79,9 +79,7 @@
 
     </div>
 </div>
-
 </#macro>
-
 
 <#macro settingMenu>
    <ul class="menu">
@@ -90,6 +88,7 @@
                <@spring.message "setting.profile" />
            </a>
        </li>
+       <#if viewerAccount?? && !viewerAccount.hasRole("ROLE_EVIL")>
        <li>
            <a class="<#if selected = 'headline'>current</#if>" href="<@spring.url '/_updateHeadline' />">
                <@spring.message "setting.headline" />
@@ -105,6 +104,7 @@
                <@spring.message "setting.password" />
            </a>
        </li>
+       </#if>
    </ul>
 </#macro>
 
