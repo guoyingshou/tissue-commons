@@ -43,21 +43,24 @@ public class ViewerService {
     @Autowired
     private PlanDao planDao;
 
-    /**
-    public void checkOwnership(UserGeneratedContent resource, Account account) {
-        if((account != null) && (resource.isOwner(account) || account.hasRole("ROLE_ADMIN"))) {
-            return;
-        }
-        throw new AccessDeniedException("Not owner of resource: " + resource + ", account: " + account);
-    }
-    */
-
     public boolean isMember(Topic topic, Account account) {
-        Plan plan = topic.getActivePlan();
-        if((plan == null) || (account == null)) {
-            logger.debug("plan: " + plan + ", account: " + account);
+
+        if(account == null) {
+            logger.debug("Null account");
             return false;
         }
+
+        if(!account.hasRole("ROLE_USER") || account.hasRole("ROLE_EVIL")) {
+            logger.debug("ROLE_EVIL or No role of name: 'ROLE_USER'");
+            return false;
+        }
+
+        Plan plan = topic.getActivePlan();
+        if(plan == null) {
+            logger.debug("Null plan");
+            return false;
+        }
+
         return planDao.isMember(plan.getId(), account.getId());
     }
 
