@@ -10,14 +10,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import org.springframework.security.access.AccessDeniedException;
+//import org.springframework.security.access.AccessDeniedException;
 
 import com.orientechnologies.common.exception.OException;
 
+import javax.annotation.Resource;
 import java.util.Map;
 import java.util.Locale;
 import java.util.List;
-import javax.annotation.Resource;
+import java.security.AccessControlException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +40,8 @@ public class ViewerAdvice {
     }
 
 
-    @ExceptionHandler(AccessDeniedException.class)
-    public String handleAccessDeniedException(AccessDeniedException exc) {
+    @ExceptionHandler(AccessControlException.class)
+    public String handleAccessControlException(AccessControlException exc) {
         logger.warn(exc.getMessage());
         return "redirect:/accessDenied";
     }

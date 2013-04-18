@@ -17,10 +17,11 @@ import com.tissue.plan.dao.PlanDao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
+//import org.springframework.security.access.AccessDeniedException;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.security.AccessControlException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,12 +43,14 @@ public class ViewerService {
     @Autowired
     private PlanDao planDao;
 
+    /**
     public void checkOwnership(UserGeneratedContent resource, Account account) {
         if((account != null) && (resource.isOwner(account) || account.hasRole("ROLE_ADMIN"))) {
             return;
         }
         throw new AccessDeniedException("Not owner of resource: " + resource + ", account: " + account);
     }
+    */
 
     public boolean isMember(Topic topic, Account account) {
         Plan plan = topic.getActivePlan();
@@ -60,7 +63,7 @@ public class ViewerService {
 
     public void checkMembership(Topic topic, Account account) {
         if(!isMember(topic, account)) {
-            throw new AccessDeniedException("Not memeber of topic: " + topic + ", account: " + account);
+            throw new AccessControlException(account + " is not memeber of the active plan in " + topic);
         }
     }
 
@@ -97,12 +100,6 @@ public class ViewerService {
     public List<User> getFriends(String userId) {
         return userDao.getFriends(userId);
     }
-
-    /**
-    public List<Topic> getNewTopics(String excludingUserId, int limit) {
-        return topicDao.getNewTopics(excludingUserId, limit);
-    }
-    */
 
     public List<Plan> getViewerPlans() {
         return planDao.getPlansByAccount(SecurityUtil.getViewerAccountId());
