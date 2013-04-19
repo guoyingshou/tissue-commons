@@ -59,7 +59,7 @@
                     </li>
 
                     <li>
-                        <a href="/social/signout">
+                        <a href="/group/signout">
                             <@spring.message "signout" />
                         </a>
                     </li>
