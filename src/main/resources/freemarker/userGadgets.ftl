@@ -66,7 +66,7 @@
                 <@spring.message "home.friends" />
            </a>
        </li>
-       <#if (invitationsReceived?size > 0)>
+       <#if !viewerAccount.hasRole('ROLE_EVIL') && (invitationsReceived?size > 0)>
        <li>
            <a class="<#if selected = 'invitations'>current</#if>" href="/social/invitations">
                <@spring.message "home.invitations" />
@@ -135,7 +135,7 @@
             <li>
                 <div class="topic-title">
                     <a href="/group/topics/${plan.topic.id?replace("#","")}/posts">
-                       ${plan.topic.title}
+                        <@site.trim plan.topic.title />
                     </a>
                 </div>
 
@@ -165,7 +165,7 @@
             <li>
                 <div class="topic-title">
                     <a href="/group/topics/${plan.topic.id?replace("#","")}/posts">
-                        ${plan.topic.title}
+                        <@site.trim plan.topic.title />
                     </a>
                 </div>
                 <div class="ts">
@@ -189,7 +189,11 @@
                 <a class="username" href="/social/users/${user.id?replace("#", "")}/posts">${user.displayName}</a>
             </div>
             <div class="headline">
-                ${user.headline}
+                <#if (user.headline?length > 36)>
+                    ${user.headline?substring(0,36)}...
+                <#else>
+                    ${user.headline}
+                </#if>
             </div>
         </li>
         </#list>

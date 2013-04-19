@@ -37,7 +37,7 @@
                     </a>
                 </li>
             </ul>
-            <#if viewerAccount?? && !viewerAccount.hasRole("ROLE_EVIL") && (viewerActivePlansCount < 9)>
+            <#if viewerAccount?? && !viewerAccount.hasRole('ROLE_EVIL') && (viewerActivePlansCount < 9)>
             <ul class="menu-action">
                 <li>
                     <a class="create-topic" href="<@spring.url '/topics/_create' />">
@@ -94,7 +94,7 @@
 
                 <#if topic.activePlan??> 
 
-                <#if isMember?? && (isMember || topic.isAllowed(viewerAccount, "ROLE_ADMIN"))>
+                <#if isMember?? && isMember>
                 <li class="menu-action">
                     <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
                         <@spring.message "topic.createArticle" />
@@ -103,7 +103,7 @@
                         <@spring.message "topic.createQuestion" />
                     </a>
                 </li>
-                <#elseif (viewerActivePlansCount < 9)>
+                <#elseif viewerAccount.hasRole('ROLE_ADMIN') || (viewerActivePlansCount < 9)>
                 <li class="menu-action">
                     <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
                         <@spring.message "topic.joinPlan" />
@@ -120,7 +120,7 @@
                     </a>
                 </li>
 
-                <#elseif (viewerActivePlansCount <9) >
+                <#elseif viewerAccount.hasRole('ROLE_ADMIN') || (viewerActivePlansCount <9) >
                 <li class="menu-action">
                     <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
                         <@spring.message "topic.hostPlan" />
@@ -133,92 +133,6 @@
         </div>
     </div>
 </#macro>
-
-<#--
-<#macro topicLogo>
-  <h1>
-      <a href="<@spring.url '/topics/${topic.id?replace("#","")}/objective' />">${topic.title}</a>
-  </h1>
-</#macro>
-
-<#macro topicMenu>
-  
-  <ul class="menu">
-      <li>
-          <a class="<#if selected = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
-              <@spring.message "topic.all" />
-          </a>
-      </li>
-      <li>
-          <a class="<#if selected = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concepts' />">
-              <@spring.message "topic.concept" />
-          </a>
-      </li>
-      <li>
-          <a class="<#if selected = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/notes' />">
-              <@spring.message "topic.note" />
-          </a>
-      </li>
-      <li>
-          <a class="<#if selected = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorials' />">
-              <@spring.message "topic.tutorial" />
-          </a>
-      </li>
-      <li>
-          <a class="<#if selected = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions' />">
-              <@spring.message "topic.question" />
-          </a>
-      </li>
-</ul>
-
-<ul class="plan-meta">
-    <#if topic.deleted>
-        <li>
-            Deleted
-        </li>
-
-    <#elseif topic.activePlan??>
-
-    <#if isMember?? && isMember>
-
-    <li class="menu-action">
-            <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
-                <@spring.message "topic.createArticle" />
-            </a>
-            <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
-                <@spring.message "topic.createQuestion" />
-            </a>
-    </li>
-
-    <#elseif viewerAccount?? && ((viewerAccount.hasRole("ROLE_USER") && viewerActivePlansCount < 9) || viewerAccount.hasRole("ROLE_ADMIN"))>
-
-    <li class="menu-action">
-            <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
-                <@spring.message "topic.joinPlan" />
-            </a>
-    </li>
-
-    </#if>
-
-    <li class="plan-info">
-        <a href="/group/plans/${topic.activePlan.id?replace("#", "")}/posts">
-            <@site.showTimeRemaining topic.activePlan.timeRemaining />
-        </a>
-        [<a class="username" href="/social/users/${topic.activePlan.account.user.id?replace("#", "")}/posts">
-            ${topic.activePlan.account.user.displayName}
-        </a>]
-    </li>
-
-    <#elseif viewerAccount?? && (viewerAccount.hasRole("ROLE_ADMIN") || viewerActivePlansCount <9) >
-    <li class="menu-action">
-            <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
-                <@spring.message "topic.hostPlan" />
-            </a>
-    </li>
-    </#if>
-</ul>
-</#macro>
--->
 
 <#macro showPlansArchived>
     <#if topic.archivedPlans??>
@@ -298,6 +212,29 @@
 </form>
 </#macro>
 
+<#macro showTopics>
+    <ul class="topics">
+        <#list topics as topic>
+        <li>
+            <div class="ts">
+                <a class="username" href="/social/users/${topic.account.user.id?replace("#", "")}/posts">
+                    ${topic.account.user.displayName}
+                </a>
+                [ <@site.showTimeBefore topic.timeBefore /> ]
+            </div>
+            <div class="topic-title">
+                <a href="/group/topics/${topic.id?replace("#", "")}/objective">
+                   <@site.trim topic.title />
+                </a>
+            </div>
+        </li>
+        </#list>
+    </ul>
+    <#if pager??>
+        <@site.showPager />
+    </#if>
+</#macro>
+
 <#macro showPosts>
 <ul class="posts">
    <#list posts as post>
@@ -322,11 +259,11 @@
        <div class="post-title">
        <#if post.type == 'question'>
            <a href="/group/questions/${post.id?replace("#","")}">
-               ${post.title}
+               <@site.trim post.title />
            </a>
        <#else>
            <a href="/group/articles/${post.id?replace("#","")}">
-               ${post.title}
+               <@site.trim post.title />
            </a>
        </#if>
        </div>

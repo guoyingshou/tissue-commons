@@ -300,3 +300,10 @@
    </ul>
 </#macro>
 
+<#macro trim content>
+    <#if (content?length > 32)>
+         ${content?substring(0, 32)}...
+    <#else>
+         ${content}
+    </#if>
+</#macro>
