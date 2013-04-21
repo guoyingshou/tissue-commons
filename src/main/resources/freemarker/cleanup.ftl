@@ -13,7 +13,7 @@
 
     <div id="page-main-wrapper">
         <div class="info">
-            <@spring.message 'Success.signout' />
+            <@spring.message 'Signout.alert' />
         </div>
     </div>
 

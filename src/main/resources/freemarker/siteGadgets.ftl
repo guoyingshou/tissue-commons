@@ -7,7 +7,7 @@
         <title>${title}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-        <script type="text/javascript" src="/jquery/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="/jquery/jquery-2.0.0.min.js"></script>
         <script type="text/javascript" src="/tissue/js/tissue.min.js"></script>
         <#if myscripts??>
         <#list myscripts as myscript>
@@ -44,6 +44,13 @@
                     <li><a href="?locale=zh_CN">中文</a></li>
                     </#if>
                     -->
+                    <#if invitations?? && (invitations?size >0)>
+                    <li>
+                        <a class="alert" href="/social/invitations">
+                            <@spring.message 'Invitation.alert' />
+                        </a>
+                    </li>
+                    </#if>
 
                     <#if viewerAccount??>
                     <li>

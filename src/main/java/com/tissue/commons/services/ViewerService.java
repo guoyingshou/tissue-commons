@@ -9,15 +9,16 @@ import com.tissue.core.command.EmailCommand;
 import com.tissue.core.command.PasswordCommand;
 import com.tissue.core.dao.AccountDao;
 import com.tissue.commons.util.SecurityUtil;
+import com.tissue.social.Invitation;
 import com.tissue.plan.Topic;
 import com.tissue.plan.Plan;
 import com.tissue.plan.Post;
+import com.tissue.social.dao.InvitationDao;
 import com.tissue.plan.dao.TopicDao;
 import com.tissue.plan.dao.PlanDao;
 
 import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.access.AccessDeniedException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -36,6 +37,9 @@ public class ViewerService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private InvitationDao invitationDao;
 
     @Autowired
     private TopicDao topicDao;
@@ -107,5 +111,9 @@ public class ViewerService {
     public List<Plan> getViewerPlans() {
         return planDao.getPlansByAccount(SecurityUtil.getViewerAccountId());
     }
- 
+
+    public List<Invitation> getReceivedInvitations() {
+        return invitationDao.getInvitationsReceived(SecurityUtil.getViewerAccountId());
+    }
+    
 }

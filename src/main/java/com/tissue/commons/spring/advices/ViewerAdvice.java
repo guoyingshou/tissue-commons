@@ -1,5 +1,8 @@
 package com.tissue.commons.spring.advices;
 
+import com.tissue.social.Invitation;
+import com.tissue.commons.services.ViewerService;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +27,9 @@ import org.slf4j.LoggerFactory;
 @ControllerAdvice
 public class ViewerAdvice {
 
+    @Autowired
+    private ViewerService viewerService;
+
     private static Logger logger = LoggerFactory.getLogger(ViewerAdvice.class);
 
     @ModelAttribute("locale")
@@ -31,12 +37,16 @@ public class ViewerAdvice {
         return locale.toString();
     }
 
+    @ModelAttribute("invitations")
+    public List<Invitation> getInvitations(Map model) {
+        return viewerService.getReceivedInvitations();
+    }
+
     @ExceptionHandler(RuntimeException.class)
     public String handleRuntimeException(RuntimeException exc) {
         logger.warn(exc.getMessage());
         return "redirect:/badOperation";
     }
-
 
     @ExceptionHandler(AccessControlException.class)
     public String handleAccessControlException(AccessControlException exc) {

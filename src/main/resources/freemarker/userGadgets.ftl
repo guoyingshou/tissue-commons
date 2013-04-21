@@ -66,14 +66,14 @@
                 <@spring.message "home.friends" />
            </a>
        </li>
-       <#if !viewerAccount.hasRole('ROLE_EVIL') && (invitationsReceived?size > 0)>
+       <#--
+       <#if !viewerAccount.hasRole('ROLE_EVIL') && (invitations?size > 0)>
+       -->
        <li>
            <a class="<#if selected = 'invitations'>current</#if>" href="/social/invitations">
                <@spring.message "home.invitations" />
-               - ${invitationsReceived?size}
            </a>
        </li>
-       </#if>
    </ul>
    </#if>
 
@@ -140,9 +140,7 @@
                 </div>
 
                 <div class="ts">
-                    <a href="/group/plans/${plan.id?replace("#", "")}/posts">
-                        <@site.showTimeRemaining plan.timeRemaining />
-                    </a>
+                    <@site.showTimeRemaining plan.timeRemaining />
                 </div>
             </li>
             </#if>
