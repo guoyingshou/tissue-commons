@@ -33,7 +33,7 @@
                         <li><a href="/social/home"><@spring.message "home" /></a></li>
                     </#if>
                     <li><a href="/group/explore"><@spring.message "explore" /></a></li>
-                    <li><a href="/social/about"><@spring.message "about" /></a></li>
+                    <li><a href="/social/praise"><@spring.message "about" /></a></li>
                 </ul>
 
                 <ul class="nav-right">
