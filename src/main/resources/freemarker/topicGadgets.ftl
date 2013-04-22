@@ -7,8 +7,8 @@
     <div id="page-logo-wrapper">
         <div id="page-logo">
             <h1>
-                <em class="em"><@spring.message "Sitename" /></em>
-                <span><@spring.message "Siteslogan" /></span>
+                <em class="em"><@spring.message "Name.site" /></em>
+                <span><@spring.message "Slogan.site" /></span>
             </h1>
         </div>
     </div>
@@ -37,7 +37,7 @@
                     </a>
                 </li>
             </ul>
-            <#if viewerAccount?? && !viewerAccount.hasRole('ROLE_EVIL') && (viewerActivePlansCount < 9)>
+            <#if !viewerAccount?? || (!viewerAccount.hasRole('ROLE_EVIL') && (viewerActivePlansCount < 9))>
             <ul class="menu-action">
                 <li>
                     <a class="create-topic" href="<@spring.url '/topics/_create' />">

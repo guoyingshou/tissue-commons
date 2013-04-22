@@ -284,9 +284,9 @@
     <div id="page-logo">
         <h1>
             <em class="siteName">
-                <@spring.message "Sitename" />
+                <@spring.message "Name.site" />
             </em>
-            <span><@spring.message "Siteslogan" /></span>
+            <span><@spring.message "Slogan.site" /></span>
         </h1>
     </div>
 </div>

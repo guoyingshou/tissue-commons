@@ -3,8 +3,8 @@
 
 <#macro homeLogo>
     <h1>
-       <@spring.message "Sitename" />
-       <span><@spring.message "Siteslogan" /></span>
+       <@spring.message "Name.site" />
+       <span><@spring.message "Slogan.site" /></span>
    </h1>
 </#macro>
 
