@@ -49,7 +49,7 @@ public class ViewerService {
 
     public boolean isMember(Topic topic, Account account) {
 
-        if(account == null) {
+        if(account == null || topic == null) {
             logger.debug("Null account");
             return false;
         }
