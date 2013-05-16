@@ -180,6 +180,7 @@
 </#macro>
 
 <#macro showUsers>
+    <#if users??>
     <ul class="users">
         <#list users as user>
         <li>
@@ -196,5 +197,6 @@
         </li>
         </#list>
     </ul>
+    </#if>
 </#macro>
 

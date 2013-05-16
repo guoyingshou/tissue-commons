@@ -113,7 +113,9 @@ public class ViewerService {
     }
 
     public List<Invitation> getReceivedInvitations() {
-        return invitationDao.getInvitationsReceived(SecurityUtil.getViewerAccountId());
+        String viewerAccountId = SecurityUtil.getViewerAccountId();
+        
+        return viewerAccountId == null ? null: invitationDao.getInvitationsReceived(viewerAccountId);
     }
     
 }

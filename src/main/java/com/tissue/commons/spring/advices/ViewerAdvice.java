@@ -37,6 +37,7 @@ public class ViewerAdvice {
         return locale.toString();
     }
 
+    /**
     @ModelAttribute("invitations")
     public List<Invitation> getInvitations(Map model) {
         return viewerService.getReceivedInvitations();
@@ -47,6 +48,7 @@ public class ViewerAdvice {
         logger.warn(exc.getMessage());
         return "redirect:/badOperation";
     }
+    */
 
     @ExceptionHandler(AccessControlException.class)
     public String handleAccessControlException(AccessControlException exc) {

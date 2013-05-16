@@ -213,6 +213,7 @@
 </#macro>
 
 <#macro showTopics>
+    <#if topics??>
     <ul class="topics">
         <#list topics as topic>
         <li>
@@ -233,9 +234,11 @@
     <#if pager??>
         <@site.showPager />
     </#if>
+    </#if>
 </#macro>
 
 <#macro showPosts>
+<#if posts??>
 <ul class="posts">
    <#list posts as post>
    <li class="icon-container">
@@ -270,5 +273,6 @@
    </li>
    </#list>
 </ul>
+</#if>
 </#macro>
 
