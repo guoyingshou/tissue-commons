@@ -37,22 +37,16 @@ public class ViewerAdvice {
         return locale.toString();
     }
 
-    /**
-    @ModelAttribute("invitations")
-    public List<Invitation> getInvitations(Map model) {
-        return viewerService.getReceivedInvitations();
+    @ExceptionHandler(AccessControlException.class)
+    public String handleAccessControlException(AccessControlException exc) {
+        logger.warn(exc.getMessage());
+        exc.printStackTrace();
+        return "redirect:/accessDenied";
     }
 
     @ExceptionHandler(RuntimeException.class)
     public String handleRuntimeException(RuntimeException exc) {
-        logger.warn(exc.getMessage());
-        return "redirect:/badOperation";
-    }
-    */
-
-    @ExceptionHandler(AccessControlException.class)
-    public String handleAccessControlException(AccessControlException exc) {
-        logger.warn(exc.getMessage());
+        exc.printStackTrace();
         return "redirect:/accessDenied";
     }
 

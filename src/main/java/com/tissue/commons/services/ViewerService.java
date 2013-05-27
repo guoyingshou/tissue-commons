@@ -89,9 +89,11 @@ public class ViewerService {
         return userDao.getUser(userId);
     }
 
+    /**
     public User getUserByAccount(String accountId) {
         return userDao.getUserByAccount(accountId);
     }
+    */
 
     public Boolean isFriend(String userId, Account viewerAccount) {
         if(viewerAccount == null) {
@@ -112,7 +114,7 @@ public class ViewerService {
         return planDao.getPlansByAccount(SecurityUtil.getViewerAccountId());
     }
 
-    public List<Invitation> getReceivedInvitations() {
+    public List<Invitation> getInvitationsReceived() {
         String viewerAccountId = SecurityUtil.getViewerAccountId();
         
         return viewerAccountId == null ? null: invitationDao.getInvitationsReceived(viewerAccountId);
