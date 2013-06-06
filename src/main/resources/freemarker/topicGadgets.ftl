@@ -18,22 +18,22 @@
             <ul class="menu">
                 <li>
                     <a class="<#if selected = 'trending'>current</#if>" href="<@spring.url '/explore' />">
-                        <@spring.message "explore.trending" />
+                        <@spring.message "TrendingText.menu.explore" />
                     </a>
                 </li>
                 <li>
                     <a class="<#if selected = 'featured'>current</#if>" href="<@spring.url '/featured' />">
-                        <@spring.message "explore.featured" />
+                        <@spring.message "FeaturedText.menu.explore" />
                     </a>
                 </li>
                 <li>
                     <a class="<#if selected = 'topics'>current</#if>" href="<@spring.url '/topics' />">
-                        <@spring.message "explore.topics" />
+                        <@spring.message "TopicsText.menu.explore" />
                     </a>
                 </li>
                 <li>
                     <a class="<#if selected = 'tags'>current</#if>" href="<@spring.url '/tags' />">
-                        <@spring.message "explore.tags" />
+                        <@spring.message "TagsText.menu.explore" />
                     </a>
                 </li>
             </ul>
@@ -41,7 +41,7 @@
             <ul class="menu-action">
                 <li>
                     <a class="create-topic" href="<@spring.url '/topics/_create' />">
-                        <@spring.message "explore.createTopic" />
+                        <@spring.message "CreateTopicText.menu.explore" />
                     </a>
                 </li>
             </ul>
@@ -64,27 +64,27 @@
             <ul class="menu">
                 <li>
                     <a class="<#if selected = 'all'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/posts' />">
-                        <@spring.message "topic.all" />
+                        <@spring.message "TopicsText.menu.topic" />
                     </a>
                 </li>
                 <li>
                     <a class="<#if selected = 'concept'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/concepts' />">
-                        <@spring.message "topic.concept" />
+                        <@spring.message "ConceptText.menu.topic" />
                     </a>
                 </li>
                 <li>
                     <a class="<#if selected = 'note'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#","")}/notes' />">
-                        <@spring.message "topic.note" />
+                        <@spring.message "NoteText.menu.topic" />
                     </a>
                 </li>
                 <li>
                     <a class="<#if selected = 'tutorial'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/tutorials' />">
-                        <@spring.message "topic.tutorial" />
+                        <@spring.message "TutorialText.menu.topic" />
                     </a>
                 </li>
                 <li>
                     <a class="<#if selected = 'question'>current</#if>" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions' />">
-                        <@spring.message "topic.question" />
+                        <@spring.message "QuestionText.menu.topic" />
                     </a>
                 </li>
             </ul>
@@ -97,16 +97,16 @@
                 <#if isMember?? && isMember>
                 <li class="menu-action">
                     <a id="create-article" href="<@spring.url '/topics/${topic.id?replace("#", "")}/articles/_create'/>">
-                        <@spring.message "topic.createArticle" />
+                        <@spring.message "CreateArticleText.menu.topic" />
                     </a>
                     <a id="create-question" href="<@spring.url '/topics/${topic.id?replace("#", "")}/questions/_create'/>">
-                        <@spring.message "topic.createQuestion" />
+                        <@spring.message "CreateQuestionText.menu.topic" />
                     </a>
                 </li>
                 <#elseif viewerAccount.hasRole('ROLE_ADMIN') || (viewerActivePlansCount < 9)>
                 <li class="menu-action">
                     <a href="<@spring.url '/plans/${topic.activePlan.id?replace("#", "")}/_join'/>">
-                        <@spring.message "topic.joinPlan" />
+                        <@spring.message "JoinPlanText.menu.topic" />
                     </a>
                 </li>
                 </#if>
@@ -123,7 +123,7 @@
                 <#elseif viewerAccount.hasRole('ROLE_ADMIN') || (viewerActivePlansCount <9) >
                 <li class="menu-action">
                     <a href="<@spring.url '/topics/${topic.id?replace("#","")}/plans/_create' />">
-                        <@spring.message "topic.hostPlan" />
+                        <@spring.message "HostPlanText.menu.topic" />
                     </a>
                 </li>
                 </#if>
@@ -138,7 +138,7 @@
     <#if topic.archivedPlans??>
     <div class="archived-plans">
         <h2>
-            <@spring.message "ArchivedPlans" />
+            <@spring.message "Text.plan.archivedPlans" />
         </h2>
         <ul>
             <#list topic.archivedPlans as plan>
@@ -163,15 +163,15 @@
 <#macro replyForm>
 <form id="replyForm" class="dialog" style="display:none" method="post">
     <legend>
-        <@spring.message 'Reply' />
+        <@spring.message 'Legend.replyForm' />
     </legend>
     <ul>
         <li>
             <textarea id="reply-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="<@spring.message 'Submit.button' />"/>
-            <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
+            <input type="submit" value="<@spring.message 'Text.formInput.submit' />"/>
+            <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
         </li>
     </ul>
 </form>
@@ -181,15 +181,15 @@
 <#macro questionCommentForm>
 <form id="questionCommentForm" class="dialog" style="display:none" method="post">
     <legend>
-        <@spring.message 'questionComment' />
+        <@spring.message 'Legend.questionCommentForm' />
     </legend>
     <ul>
         <li>
             <textarea id="questionComment-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="<@spring.message 'Submit.button' />"/>
-            <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
+            <input type="submit" value="<@spring.message 'Text.formInput.submit' />"/>
+            <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
         </li>
     </ul>
 </form>
@@ -198,15 +198,15 @@
 <#macro answerCommentForm>
 <form id="answerCommentForm" class="dialog" style="display:none" method="post">
     <legend>
-        <@spring.message 'answerComment' />
+        <@spring.message 'Legend.answerCommentForm' />
     </legend>
     <ul>
         <li>
             <textarea id="answerComment-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="<@spring.message 'Submit.button' />"/>
-            <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
+            <input type="submit" value="<@spring.message 'Text.formInput.submit' />"/>
+            <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
         </li>
     </ul>
 </form>

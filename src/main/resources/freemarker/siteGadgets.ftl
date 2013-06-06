@@ -28,12 +28,12 @@
             <div id="page-nav">
                 <ul class="nav-left">
                     <#if viewerAccount??>
-                        <li><a href="/social/dashboard"><@spring.message "home" /></a></li>
+                        <li><a href="/social/dashboard"><@spring.message "Text.nav.home" /></a></li>
                     <#else>
-                        <li><a href="/social/home"><@spring.message "home" /></a></li>
+                        <li><a href="/social/home"><@spring.message "Text.nav.home" /></a></li>
                     </#if>
-                    <li><a href="/group/explore"><@spring.message "explore" /></a></li>
-                    <li><a href="/social/praise"><@spring.message "about" /></a></li>
+                    <li><a href="/group/explore"><@spring.message "Text.nav.explore" /></a></li>
+                    <li><a href="/social/praise"><@spring.message "Text.nav.about" /></a></li>
                 </ul>
 
                 <ul class="nav-right">
@@ -47,7 +47,7 @@
                     <#if invitations?? && (invitations?size >0)>
                     <li>
                         <a class="alert" href="/social/invitations">
-                            <@spring.message 'Invitation.alert' />
+                            <@spring.message 'Alert.invitation' />
                         </a>
                     </li>
                     </#if>
@@ -55,7 +55,7 @@
                     <#if viewerAccount??>
                     <li>
                         <a href="/social/_setting">
-                            <@spring.message "setting" />
+                            <@spring.message "Text.nav.setting" />
                         </a>
                     </li>
 
@@ -67,18 +67,18 @@
 
                     <li>
                         <a href="/group/signout">
-                            <@spring.message "signout" />
+                            <@spring.message "Text.nav.signout" />
                         </a>
                     </li>
                     <#else>
                     <li>
                         <a href="/social/dashboard">
-                            <@spring.message "signin" />
+                            <@spring.message "Text.nav.signin" />
                         </a>
                     </li>
                     <li>
                         <a class="signup" href="/social/signup">
-                            <@spring.message "signup" />
+                            <@spring.message "Text.nav.signup" />
                         </a>
                     </li>
                     </#if>
@@ -267,14 +267,14 @@
 <#macro confirmForm>
 <form id="confirmForm" class="dialog pop-320" style="display:none" method="post">
     <legend>
-        <@spring.message 'Warning' />
+        <@spring.message 'Legend.confirmForm' />
     </legend>
     <div class="message">
-         <@spring.message 'Warning.text' />
+         <@spring.message 'ContentText.confirmForm' />
     </div>
     <div>
-        <input type="submit" name="submit" value="<@spring.message 'Yes' />" />
-        <a href="#" class="cancel"><@spring.message 'Cancel' /></a>
+        <input type="submit" name="submit" value="<@spring.message 'PositiveConfirmText.formInput.submit' />" />
+        <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
     </div>
 </form>
 </#macro>

@@ -9,7 +9,7 @@
 
     <div id="page-main-wrapper">
         <div class="info">
-            <@spring.message 'BadOperation.alert' />
+            <@spring.message 'Alert.badOperation' />
         </div>
     </div>
 

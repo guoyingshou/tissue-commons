@@ -25,30 +25,30 @@
             <#elseif t == 'n'>
             <div>
                 <span class="alert">
-                    <@spring.message "NewUser.signinForm" />
+                    <@spring.message "Success.signupForm" />
                 </span>
             </div>
             </#if>
             </#if>
 
             <legend>
-                <@spring.message "signinForm" />
+                <@spring.message "Legend.signinForm" />
             </legend>
             <ul>
                 <li>
                     <label for="sign-username">
-                        <@spring.message "Signin.usernameOrPassword" />
+                        <@spring.message "Label.formInput.usernameOrPassword" />
                     </label>
                     <input type="text" id="sign-username" name="j_username" size="20" maxlength="50" />
                 </li>
                 <li>
                     <label for="sign-password">
-                        <@spring.message "Signin.password" />
+                        <@spring.message "Label.formInput.password" />
                     </label>
                     <input type="password" id="sign-password" name="j_password" size="20" maxlength="50" />
                 </li>
                 <li>
-                    <input type="submit" value='<@spring.message "Signin.button" />'/>
+                    <input type="submit" value='<@spring.message "SigninText.formInput.submit" />'/>
                 </li>
             </ul>
          </form>
