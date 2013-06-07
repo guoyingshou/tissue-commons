@@ -105,7 +105,7 @@
            <#if (pager.current > 1)>
                <span>
                    <a href="?page=${pager.current-1}&size=${pager.size}">
-                       <@spring.message 'prevPage' />
+                       <@spring.message 'PrevPageText.link' />
                    </a>
                </span>
            </#if>
@@ -157,7 +157,7 @@
            <#if (pager.current < pages)>
                <span>
                    <a href="?page=${pager.current+1}&size=${pager.size}">
-                       <@spring.message 'nextPage' />
+                       <@spring.message 'NextPageText.link' />
                    </a>
                </span>
            </#if>
@@ -296,12 +296,12 @@
    <ul class="menu">
        <li>
            <a class="<#if selected = 'praise'>current</#if>" href="<@spring.url '/praise' />">
-               <@spring.message "about.praise" />
+               <@spring.message "PraiseText.menu.about" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'vision'>current</#if>" href="<@spring.url '/about' />">
-               <@spring.message "about.vision" />
+               <@spring.message "Text.menu.about" />
            </a>
        </li>
    </ul>

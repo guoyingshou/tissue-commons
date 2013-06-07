@@ -19,17 +19,17 @@
     <ul class="menu">
         <li>
             <a class="<#if selected='posts'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/posts' />">
-                <@spring.message "user.posts" />
+                <@spring.message "PostsText.menu.owner" />
             </a>
         </li>
         <li>
            <a class="<#if selected='status'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#","")}/status' />">
-                <@spring.message "user.status" />
+                <@spring.message "StatusText.menu.owner" />
             </a>
         </li>
         <li>
             <a class="<#if selected='impressions'>current</#if>" href="<@spring.url '/users/${owner.id?replace("#", "")}/impressions' />">
-                <@spring.message "user.impressions" />
+                <@spring.message "ImpressionsText.menu.owner" />
             </a>
         </li>
     </ul>
@@ -38,7 +38,7 @@
     <ul class="menu-action">
         <li>
             <a href="<@spring.url '/users/${owner.id?replace("#","")}/invitations/_create' />">
-                <@spring.message "user.invite" />
+                <@spring.message "InviteText.menu.owner" />
             </a>
         </li>
     </ul>
@@ -53,17 +53,17 @@
    <ul class="menu">
        <li>
            <a class="<#if selected = 'watchedFeeds'>current</#if>" href="<@spring.url '/dashboard' />">
-               <@spring.message "home.watchedFeeds" />
+               <@spring.message "WatchedFeedsText.menu.home" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'allFeeds'>current</#if>" href="<@spring.url '/allfeeds' />">
-               <@spring.message "home.allFeeds" />
+               <@spring.message "FeedsText.menu.home" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'friends'>current</#if>" href="<@spring.url '/friends' />">
-                <@spring.message "home.friends" />
+                <@spring.message "FriendsText.menu.home" />
            </a>
        </li>
        <#--
@@ -71,7 +71,7 @@
        -->
        <li>
            <a class="<#if selected = 'invitations'>current</#if>" href="/social/invitations">
-               <@spring.message "home.invitations" />
+               <@spring.message "InvitationsText.menu.home" />
            </a>
        </li>
    </ul>
@@ -85,41 +85,26 @@
    <ul class="menu">
        <li>
            <a class="<#if selected = 'profile'>current</#if>" href="<@spring.url '/_setting' />">
-               <@spring.message "setting.profile" />
+               <@spring.message "ProfileText.menu.setting" />
            </a>
        </li>
        <#if viewerAccount?? && !viewerAccount.hasRole("ROLE_EVIL")>
        <li>
            <a class="<#if selected = 'headline'>current</#if>" href="<@spring.url '/_updateHeadline' />">
-               <@spring.message "setting.headline" />
+               <@spring.message "HeadlineText.menu.setting" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'email'>current</#if>" href="<@spring.url '/_updateEmail' />">
-                <@spring.message "setting.email" />
+                <@spring.message "EmailText.menu.setting" />
            </a>
        </li>
        <li>
            <a class="<#if selected = 'password'>current</#if>" href="<@spring.url '/_updatePassword' />">
-               <@spring.message "setting.password" />
+               <@spring.message "PasswordText.menu.setting" />
            </a>
        </li>
        </#if>
-   </ul>
-</#macro>
-
-<#macro aboutMenu>
-   <ul class="menu">
-       <li>
-           <a class="<#if selected = 'praise'>current</#if>" href="<@spring.url '/praise' />">
-               <@spring.message "about.praise" />
-           </a>
-       </li>
-       <li>
-           <a class="<#if selected = 'vision'>current</#if>" href="<@spring.url '/about' />">
-               <@spring.message "about.vision" />
-           </a>
-       </li>
    </ul>
 </#macro>
 
@@ -127,7 +112,7 @@
     <#if plans??>
     <div class="active-plans">
         <h2>
-            <@spring.message "InProgress.topics" />
+            <@spring.message "InProgressTopicsText.owner" />
         </h2>
         <ul class="plan">
             <#list plans as plan>
@@ -154,7 +139,7 @@
     <#if plans??>
     <div class="archived-plans">
         <h2>
-            <@spring.message "Learned.topics" />
+            <@spring.message "LearnedTopicsText.owner" />
         </h2>
 
         <ul class="plan">
