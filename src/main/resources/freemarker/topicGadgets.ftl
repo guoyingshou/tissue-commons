@@ -170,7 +170,7 @@
             <textarea id="reply-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="<@spring.message 'Text.formInput.submit' />"/>
+            <input type="submit" value="<@spring.message 'Text.submit' />"/>
             <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
         </li>
     </ul>
@@ -188,7 +188,7 @@
             <textarea id="questionComment-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="<@spring.message 'Text.formInput.submit' />"/>
+            <input type="submit" value="<@spring.message 'Text.submit' />"/>
             <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
         </li>
     </ul>
@@ -205,7 +205,7 @@
             <textarea id="answerComment-editor" name="content"></textarea>
         </li>
         <li>
-            <input type="submit" value="<@spring.message 'Text.formInput.submit' />"/>
+            <input type="submit" value="<@spring.message 'Text.submit' />"/>
             <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
         </li>
     </ul>

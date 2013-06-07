@@ -37,18 +37,18 @@
             <ul>
                 <li>
                     <label for="sign-username">
-                        <@spring.message "Label.formInput.usernameOrPassword" />
+                        <@spring.message "Label.usernameOrPassword" />
                     </label>
                     <input type="text" id="sign-username" name="j_username" size="20" maxlength="50" />
                 </li>
                 <li>
                     <label for="sign-password">
-                        <@spring.message "Label.formInput.password" />
+                        <@spring.message "Label.password" />
                     </label>
                     <input type="password" id="sign-password" name="j_password" size="20" maxlength="50" />
                 </li>
                 <li>
-                    <input type="submit" value='<@spring.message "SigninText.formInput.submit" />'/>
+                    <input type="submit" value='<@spring.message "SigninText.submit" />'/>
                 </li>
             </ul>
          </form>

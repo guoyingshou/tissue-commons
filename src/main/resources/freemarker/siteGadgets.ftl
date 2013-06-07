@@ -273,7 +273,7 @@
          <@spring.message 'ContentText.confirmForm' />
     </div>
     <div>
-        <input type="submit" name="submit" value="<@spring.message 'PositiveConfirmText.formInput.submit' />" />
+        <input type="submit" name="submit" value="<@spring.message 'PositiveConfirmText.submit' />" />
         <a href="#" class="cancel"><@spring.message 'CancelText.link' /></a>
     </div>
 </form>
