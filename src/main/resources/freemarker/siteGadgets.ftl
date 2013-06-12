@@ -1,24 +1,27 @@
 <#import 'spring.ftl' as spring />
 
 <#macro layout>
+
+<#assign rhost = 'http://r.daronglu.com'>
+
 <!doctype html>
 <html>
     <head>
         <title>${title}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-        <script type="text/javascript" src="/jquery/jquery-2.0.0.min.js"></script>
-        <script type="text/javascript" src="/tissue/js/tissue.min.js"></script>
+        <script type="text/javascript" src="${rhost}/jquery/jquery-2.0.0.min.js"></script>
+        <script type="text/javascript" src="${rhost}/tissue/js/tissue.min.js"></script>
         <#if myscripts??>
         <#list myscripts as myscript>
-        <script type="text/javascript" src="${myscript}"></script>
+        <script type="text/javascript" src="${rhost}${myscript}"></script>
         </#list>
         </#if>
          
-        <link type="text/css" rel="stylesheet" href="/tissue/css/style.min.css"></link>
+        <link type="text/css" rel="stylesheet" href="${rhost}/tissue/css/style.min.css"></link>
         <#if mystyles??>
         <#list mystyles as style>
-        <link rel='stylesheet' type='text/css' media='screen' href='${style}' />
+        <link rel='stylesheet' type='text/css' media='screen' href='${rhost}${style}' />
         </#list>
         </#if>
     </head>
@@ -30,7 +33,7 @@
                     <#if viewerAccount??>
                         <li><a href="/social/dashboard"><@spring.message "Text.nav.home" /></a></li>
                     <#else>
-                        <li><a href="/social/home"><@spring.message "Text.nav.home" /></a></li>
+                        <li><a href="/"><@spring.message "Text.nav.home" /></a></li>
                     </#if>
                     <li><a href="/group/explore"><@spring.message "Text.nav.explore" /></a></li>
                     <li><a href="/social/praise"><@spring.message "Text.nav.about" /></a></li>
@@ -91,7 +94,7 @@
 
         <div id="page-footer-wrapper">
             <div id="page-footer">
-                <p>Copyritht @2013 Daronglu.com | Powered by JinZhouLin</p>
+                <p>Copyritht @2013 Daronglu.com | Powered by JinZhouLin | 京ICP备13019727号-1 </p>
             </div>
         </div>
     </body>

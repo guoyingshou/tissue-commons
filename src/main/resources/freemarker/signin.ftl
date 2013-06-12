@@ -44,6 +44,7 @@
                 <li>
                     <label for="sign-password">
                         <@spring.message "Label.password" />
+                        <a href="/social/resetRequest"><@spring.message "ForgetText.password" /></a>
                     </label>
                     <input type="password" id="sign-password" name="j_password" size="20" maxlength="50" />
                 </li>

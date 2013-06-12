@@ -9,6 +9,8 @@ import com.tissue.core.command.EmailCommand;
 import com.tissue.core.command.PasswordCommand;
 import com.tissue.core.dao.AccountDao;
 import com.tissue.commons.util.SecurityUtil;
+import com.tissue.social.Invitation;
+import com.tissue.social.dao.InvitationDao;
 import com.tissue.plan.Plan;
 import com.tissue.plan.dao.PlanDao;
 
@@ -31,6 +33,9 @@ public class ViewerService {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private InvitationDao invitationDao;
 
     @Autowired
     private PlanDao planDao;
@@ -85,4 +90,8 @@ public class ViewerService {
         return planDao.getPlansByAccount(SecurityUtil.getViewerAccountId());
     }
    
+    public List<Invitation> getViewerInvitationsReceived() {
+        String viewerAccountId = SecurityUtil.getViewerAccountId();
+        return viewerAccountId == null ? null: invitationDao.getInvitationsReceived(viewerAccountId);
+    }
 }

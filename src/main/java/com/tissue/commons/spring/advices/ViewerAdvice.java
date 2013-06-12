@@ -37,6 +37,11 @@ public class ViewerAdvice {
         return locale.toString();
     }
 
+    @ModelAttribute("invitations")
+    public List<Invitation> setupInvitations() {
+        return viewerService.getViewerInvitationsReceived();
+    }
+
     @ExceptionHandler(AccessControlException.class)
     public String handleAccessControlException(AccessControlException exc) {
         logger.warn(exc.getMessage());
