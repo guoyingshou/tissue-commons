@@ -9,6 +9,7 @@
     <head>
         <title>${title}</title>
         <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+        <link type="image/x-icon" href="/favicon.ico" rel="shortcut icon">
 
         <script type="text/javascript" src="${rhost}/jquery/jquery-2.0.0.min.js"></script>
         <script type="text/javascript" src="${rhost}/tissue/js/tissue.min.js"></script>
