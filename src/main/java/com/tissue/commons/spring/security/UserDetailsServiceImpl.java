@@ -1,4 +1,4 @@
-package com.tissue.commons.services;
+package com.tissue.commons.spring.security;
 
 import com.tissue.security.UserDetailsImpl;
 import com.tissue.security.dao.UserDetailsDao;
