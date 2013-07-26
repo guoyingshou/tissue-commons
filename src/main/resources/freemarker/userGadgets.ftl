@@ -124,9 +124,11 @@
                     </a>
                 </div>
 
+                <#--
                 <div class="ts">
                     <@site.showTimeRemaining plan.timeRemaining />
                 </div>
+                -->
             </li>
             </#if>
             </#list>
@@ -151,11 +153,13 @@
                         <@site.trim plan.topic.title />
                     </a>
                 </div>
+                <#--
                 <div class="ts">
                     <a href="/group/plans/${plan.id?replace("#", "")}/posts">
                         ${plan.createTime?date} - ${plan.endTime?date}
                     </a>
                 </div>
+                -->
             </li>
             </#if>
             </#list>
